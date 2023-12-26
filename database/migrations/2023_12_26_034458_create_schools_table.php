@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('schools', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->require();
+            $table->string('address')->nullable();
+            $table->string('contact_no')->unique()->nullable();
+            $table->string('email')->unique()->nullable();
+            $table->date('establishment_date')->nullable();
+            $table->foreignId(column:'school_type_id')
+                    ->constrained(table:'school_types')
+                    ->onDelete(action:'cascade');
+            $table->string('logo_image')->default(value:'/images/default_logo.png');
+
             $table->timestamps();
         });
     }
