@@ -17,7 +17,7 @@ class User extends Authenticatable
     /**
      * The attributes that are mass assignable.
      *
-     * @var array&lt;int, string&gt;
+     * @var array<int, string>;
      */
     protected $fillable = [
         'name',
@@ -31,7 +31,7 @@ class User extends Authenticatable
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var array&lt;int, string&gt;
+     * @var array<int, string>;
      */
     protected $hidden = [
         'password',
@@ -41,13 +41,15 @@ class User extends Authenticatable
     /**
      * The attributes that should be cast.
      *
-     * @var array&lt;string, string&gt;
+     * @var array<string, string>;
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
+    public function details(){
+        return $this->morphOne(UserDetail::class, 'userable');
+    }
     public function roles()
     {
         return $this->belongsToMany(Role::class);
