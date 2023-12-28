@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\User;
 use App\Http\Docs\AuthDoc;
+use App\Enums\UserTypeEnum;
 use Illuminate\Http\Request;
 use App\Services\AuthService;
 use App\Http\Requests\LoginRequest;
@@ -61,6 +62,7 @@ class AuthController extends Controller
      * )
      */
     public function login(LoginRequest $request){
+
         return $this->service->login($request);
     }
     public function signup(SignupRequest $request){

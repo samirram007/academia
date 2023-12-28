@@ -2,44 +2,39 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\User;
+use Illuminate\Http\Request;
+use App\Services\UserService;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
+use App\Http\Resources\UserCollection;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Http\Resources\UserCollection;
-use App\Http\Resources\UserResource;
-use App\Models\User;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    protected $userService;
+    function __construct(UserService $userService)
     {
-        return new UserCollection(
-            User::query()->orderBy('id', 'desc')->paginate(10)
-        );
+        $this->userService=$userService;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    public function index(Request $request)
+    {
+        return $this->userService->all($request);
+    }
+
     public function store(StoreUserRequest $request)
     {
-        $data = $request->validated();
-        $data['password'] = bcrypt($data['password']);
-        $user = User::create($data);
-        return response(new UserResource($user), 201);
+        return $this->userService->create($request);
+
     }
 
-    /**
-     * Display the specified resource.
-     * @param \App\Models\User $user
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(User $user)
     {
-        return new UserResource($user);
+        return $this->userService->single($user);
+
     }
 
     /**
