@@ -27,24 +27,24 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
-        // Schema::create('developers', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->foreignId('user_id');
-        //     $table->string('name');
-        //     $table->timestamps();
-        // });
-        // Schema::create('super_admins', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->foreignId('user_id');
-        //     $table->string('name');
-        //     $table->timestamps();
-        // });
-        // Schema::create('admins', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->foreignId('user_id');
-        //     $table->string('name');
-        //     $table->timestamps();
-        // });
+        Schema::create('developers', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id');
+            $table->string('name');
+            $table->timestamps();
+        });
+        Schema::create('super_admins', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id');
+            $table->string('name');
+            $table->timestamps();
+        });
+        Schema::create('admins', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id');
+            $table->string('name');
+            $table->timestamps();
+        });
 
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();

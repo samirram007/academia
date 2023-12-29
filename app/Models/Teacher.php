@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Teacher extends Model
 {
     use HasFactory;
-    protected $fillable=['id','name'];
+    protected $fillable=['id','user_id','name'];
     public function user():BelongsTo
     {
         return $this->belongsTo(User::class);

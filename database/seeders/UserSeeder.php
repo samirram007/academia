@@ -35,10 +35,19 @@ class UserSeeder extends Seeder
             'user_type' => UserTypeEnum::TEACHER,
             'email' => 'test@example.com',
         ]);
-        $user = \App\Models\Teacher::factory()->create([
+        $user = \App\Models\SuperAdmin::create([
+            'user_id'=>1,
+            'name' => 'Super Administrator',
+        ]);
+        $user = \App\Models\Admin::create([
+            'user_id'=>2,
+            'name' => 'Administrator',
+        ]);
+        $user = \App\Models\Teacher::create([
             'user_id'=>3,
             'name' => 'Teacher1',
         ]);
+
 
 
 

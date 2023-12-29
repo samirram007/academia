@@ -1,17 +1,17 @@
 <?php
 namespace App\Services;
 
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Resources\Users\UserCollection;
+
+use App\Http\Resources\Users\UserResource;
+
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Requests\LoginRequest;
-use App\Http\Requests\SignupRequest;
-use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Resources\UserCollection;
-use App\Http\Requests\StoreUserRequest;
 
 class UserService{
-    public function all($request)
+    public function all(Request $request)
     {
         $users= User::query()->orderBy('id', 'desc')->paginate();
         $users->transform(function ($user) {
@@ -31,7 +31,7 @@ class UserService{
     {
 
 
-         $user->load($user->user_type->value);
+       $user->load($user->user_type->value);
 
         return new UserResource($user);
     }

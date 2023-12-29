@@ -2,16 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Admin extends Model
 {
     use HasFactory;
-    protected $fillable=['id','name'];
+    protected $fillable=['id','user_id','name'];
 
-    protected $attributes = [
-        'id' => '1',
-        'name' => 'Admin',
-    ];
+    public function user():BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

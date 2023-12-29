@@ -8,10 +8,12 @@ use App\Models\User;
 use App\Http\Docs\AuthDoc;
 use App\Enums\UserTypeEnum;
 use Illuminate\Http\Request;
+
 use App\Services\AuthService;
 use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SignupRequest;
+
 
 /**
  * @group Authentication
