@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\GenderEnum;
 use App\Enums\UserTypeEnum;
 use App\Enums\UserStatusEnum;
 use Illuminate\Support\Facades\Schema;
@@ -50,6 +51,15 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->string('name');
+            $table->foreignId(column:'department_id')
+                    ->constrained(table:'departments')
+                    ->onDelete(action:'cascade');
+            $table->foreignId(column:'designation_id')
+                    ->constrained(table:'designations')
+                    ->onDelete(action:'cascade');
+             $table->date('doj')->nullable();
+             $table->date('dob')->nullable();
+             $table->enum('gender',array_keys(GenderEnum::labels()))->nullable();
             $table->timestamps();
         });
         Schema::create('students', function (Blueprint $table) {

@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('states', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->require();
+            $table->foreignId(column:'country_id')
+            ->constrained(table:'countries')
+            ->onDelete(action:'cascade')
+            ->onUpdate(action:'cascade')
+            ->default(1);
             $table->timestamps();
         });
     }

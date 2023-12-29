@@ -11,10 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('boards', function (Blueprint $table) {
+        Schema::create('campus_classes', function (Blueprint $table) {
             $table->id();
             $table->string('name')->require();
             $table->string('code')->nullable();
+            $table->foreignId(column:'campus_id')
+            ->constrained(table:'campuses');
+            $table->foreignId(column:'standard_id')
+            ->constrained(table:'standards');
+            $table->foreignId(column:'section_id')
+            ->constrained(table:'standards');
+            $table->integer('capacity')->default(50);
+
             $table->timestamps();
         });
     }
@@ -24,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('boards');
+        Schema::dropIfExists('school_classes');
     }
 };

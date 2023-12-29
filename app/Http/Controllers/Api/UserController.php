@@ -28,14 +28,11 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         return $this->userService->create($request);
-
     }
-
 
     public function show(User $user)
     {
         return $this->userService->single($user);
-
     }
 
     /**

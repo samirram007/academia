@@ -36,15 +36,24 @@ class UserResource extends JsonResource
         } elseif ($this->user_type->value  === 'guardian' && $this->guardian) {
             $details = new GurdianResource($this->guardian);
         }
-        return [
+        $data=[
             'id' => $this->id,
-            'name' => $this->name,
             'username' => $this->username,
             'user_type' => $this->user_type,
-            'email' => $this->email,
             // 'created_at' => $this->created_at->format('Y-m-d H:i:s'),
-            'details' => $details ?? null,
+             'details' => $details ?? null,
 
         ];
+       //dd((array)json_decode(json_encode($data['details'])));
+       $detailsArray=json_decode(json_encode($data['details']),true) ;
+    //    $detailsArray['details_id']= $detailsArray['id'];
+       unset($detailsArray['id']);
+       unset($data['details']);
+        $mergeData=array_merge($data, $detailsArray );
+       // ksort($mergeData);
+
+
+
+        return $mergeData;
     }
 }
