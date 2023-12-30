@@ -3,6 +3,8 @@
 use App\Enums\GenderEnum;
 use App\Enums\UserTypeEnum;
 use App\Enums\UserStatusEnum;
+use App\Models\Department;
+use App\Models\Designation;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -51,12 +53,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->string('name');
-            $table->foreignId(column:'department_id')
-                    ->constrained(table:'departments')
-                    ->onDelete(action:'cascade');
-            $table->foreignId(column:'designation_id')
-                    ->constrained(table:'designations')
-                    ->onDelete(action:'cascade');
+            $table->foreignIdFor(Department::class)->nullable();
+            $table->foreignIdFor(Designation::class)->nullable();
              $table->date('doj')->nullable();
              $table->date('dob')->nullable();
              $table->enum('gender',array_keys(GenderEnum::labels()))->nullable();

@@ -2,29 +2,28 @@
 namespace App\Enums;
 
 
-enum GurdianTypeEnum:string
+enum GenderEnum:string
 {
-    case FATHER='father';
-    case MOTHER='mother';
-    case OTHER='other';
 
+    case MALE='male';
+    case FEMALE = 'female';
+    case OTHER = 'other';
 
     public function label(): string
     {
         return match($this){
-            self::FATHER => 'Father',
-            self::MOTHER => 'Mother',
+            self::MALE => 'Male',
+            self::FEMALE => 'Female',
             self::OTHER => 'Other',
-
         };
     }
     public static function default(): string
     {
-        return  GurdianTypeEnum::FATHER->value;
+        return  GenderEnum::MALE->value;
     }
     public static function labels():array
     {
-        return array_reduce(self::cases(),function($items, GurdianTypeEnum $item){
+        return array_reduce(self::cases(),function($items, GenderEnum $item){
             $items[$item->value] = $item->label();
             return $items;
         },[]);
