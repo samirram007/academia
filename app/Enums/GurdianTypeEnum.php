@@ -30,5 +30,12 @@ enum GurdianTypeEnum:string
             return $items;
         },[]);
     }
+    public static function dataLabels():array
+    {
+        return array_reduce(self::cases(),function($items, GurdianTypeEnum $item){
+            $items[$item->value] = $item->name;
+            return $items;
+        },[]);
+    }
 }
 

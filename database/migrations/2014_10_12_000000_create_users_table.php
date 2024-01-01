@@ -1,10 +1,11 @@
 <?php
 
 use App\Enums\GenderEnum;
-use App\Enums\UserTypeEnum;
-use App\Enums\UserStatusEnum;
 use App\Models\Department;
+use App\Enums\UserTypeEnum;
 use App\Models\Designation;
+use App\Enums\UserStatusEnum;
+use App\Enums\GurdianTypeEnum;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -66,6 +67,16 @@ return new class extends Migration
             $table->string('name');
             $table->date('dob');
             $table->enum('gender',array_keys(GenderEnum::labels()))->nullable();
+            $table->text('address')->nullable();
+            $table->string('aadhaar_no')->nullable();
+            $table->timestamps();
+        });
+        Schema::create('gurdians', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id');
+            $table->enum('gender',array_keys(GenderEnum::labels()))->nullable();
+            $table->enum('gurdian_type',array_keys(GurdianTypeEnum::labels()));
+            $table->string('name');
             $table->text('address')->nullable();
             $table->string('aadhaar_no')->nullable();
             $table->timestamps();

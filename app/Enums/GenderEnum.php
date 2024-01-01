@@ -24,7 +24,14 @@ enum GenderEnum:string
     public static function labels():array
     {
         return array_reduce(self::cases(),function($items, GenderEnum $item){
-            $items[$item->value] = $item->label();
+            $items[$item->value] = $item->name;
+            return $items;
+        },[]);
+    }
+    public static function dataLabels():array
+    {
+        return array_reduce(self::cases(),function($items, GenderEnum $item){
+            $items[$item->label()] = $item->name;
             return $items;
         },[]);
     }

@@ -45,15 +45,12 @@ enum UserTypeEnum:string
             return $items;
         },[]);
     }
+    public static function dataLabels():array
+    {
+        return array_reduce(self::cases(),function($items, UserTypeEnum $item){
+            $items[$item->value] = $item->name;
+            return $items;
+        },[]);
+    }
 }
-enum GurdianType:string
-{
-    case FATHER = 'father';
-    case MOTHER = 'mother';
-    case BROTHER = 'brother';
-}
-enum AddressType:string
-{
-    case PARMENENT = 'parmanent';
-    case CURRENT = 'current';
-}
+

@@ -28,4 +28,11 @@ enum AddressTypeEnum:string
             return $items;
         },[]);
     }
+    public static function dataLabels():array
+    {
+        return array_reduce(self::cases(),function($items, AddressTypeEnum $item){
+            $items[$item->value] = $item->name;
+            return $items;
+        },[]);
+    }
 }
