@@ -6,11 +6,18 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\User;
 use App\Http\Docs\AuthDoc;
+use App\Enums\UserTypeEnum;
 use Illuminate\Http\Request;
+
 use App\Services\AuthService;
-use App\Http\Requests\LoginRequest;
+
+
 use App\Http\Controllers\Controller;
-use App\Http\Requests\SignupRequest;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\SignupRequest;
+
+
+
 
 /**
  * @group Authentication
@@ -32,13 +39,13 @@ class AuthController extends Controller
      *      path="/api/login",
      *      tags={"Authentication"},
      *      summary="Authenticate a user",
-     *      description="Authenticates a user by providing email and password.",
+     *      description="Authenticates a user by providing username and password.",
      *      @OA\RequestBody(
      *          required=true,
      *          description="User credentials",
      *          @OA\JsonContent(
-     *              required={"email","password"},
-     *              @OA\Property(property="email", type="string", format="email", example="user@example.com"),
+     *              required={"username","password"},
+     *              @OA\Property(property="username", type="string", example="admins2222"),
      *              @OA\Property(property="password", type="string", example="password"),
      *          ),
      *      ),
@@ -61,6 +68,7 @@ class AuthController extends Controller
      * )
      */
     public function login(LoginRequest $request){
+
         return $this->service->login($request);
     }
     public function signup(SignupRequest $request){

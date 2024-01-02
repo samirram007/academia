@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class School extends Model
+class Document extends Model
 {
     use HasFactory;
     protected $fillable = [
         'name',
-        'username',
-        'user_type',
-        'email',
-        'contact_no',
-        'password',
+        'user_id',
+        'document_type',
+        'path',
+        'mime_type',
+        'size',
+        'original_name',
     ];
 }

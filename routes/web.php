@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\Api\DocumentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect('api/documentation');
 });
+Route::get('/documents/{id}', [DocumentController::class,  'getFile']);
 Route::get('/swagger',function(){
     //artisan command
      Artisan::call('l5-swagger:generate');

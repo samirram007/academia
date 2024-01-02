@@ -3,9 +3,9 @@ namespace App\Services;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Requests\LoginRequest;
-use App\Http\Requests\SignupRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\SignupRequest;
 
 class AuthService{
     public function login(LoginRequest $request)
@@ -13,7 +13,7 @@ class AuthService{
         $credentials = $request->validated();
         if (!Auth::attempt($credentials)) {
             return response([
-                'message' => 'Provided email or password is incorrect',
+                'message' => 'Provided username or password is incorrect',
             ], 422);
 
         }
