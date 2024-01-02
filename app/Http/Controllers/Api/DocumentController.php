@@ -25,6 +25,8 @@ class DocumentController extends Controller
         $mimeToTypeMap = [
             'image/jpeg' => 'image',
             'image/png' => 'image',
+            'image/avif' => 'image',
+            'image/gif' => 'image',
             'application/pdf' => 'pdf',
             // Add more mime types and their respective document types as needed
         ];
