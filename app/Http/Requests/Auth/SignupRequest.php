@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Enums\UserTypeEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
 
@@ -24,7 +25,7 @@ class SignupRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'user_type' => 'required|string|max:255',
+            'user_type' => ['required', 'string', 'enum:' . UserTypeEnum::class],
             'email' => 'required|email|unique:users,email',
             'password' => [
                 'required',
