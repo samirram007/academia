@@ -34,27 +34,29 @@ return new class extends Migration
         Schema::create('designations', function (Blueprint $table) {
             $table->id();
             $table->string('name')->require();
-            $table->string('code')->nullable();
             $table->timestamps();
         });
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->nullable();
+            $table->enum('address_type',AddressTypeEnum::labels())->default(AddressTypeEnum::default());
             $table->string('address_line_1');
             $table->string('address_line_2')->nullable();
             $table->string('city')->nullable();
+            $table->string('post_office')->nullable();
+            $table->string('rail_station')->nullable();
+            $table->string('police_station')->nullable();
+            $table->string('district')->nullable();
             $table->foreignIdFor(State::class)->nullable();
             $table->foreignIdFor(Country::class)->nullable();
             $table->string('pincode')->nullable();
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
-            $table->enum('address_type',AddressTypeEnum::labels())->default(AddressTypeEnum::default());
             $table->timestamps();
         });
         Schema::create('departments', function (Blueprint $table) {
             $table->id();
             $table->string('name')->require();
-            $table->string('code')->nullable();
             $table->timestamps();
         });
 

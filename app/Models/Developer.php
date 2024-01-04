@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Developer extends Model
 {
     use HasFactory;
-    protected $fillable=['id','name'];
+    protected $fillable=['id','user_id','name'];
     protected $attributes = [
         'id' => '1',
         'name' => 'Developer',

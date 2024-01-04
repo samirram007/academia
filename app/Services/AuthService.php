@@ -27,6 +27,7 @@ class AuthService{
     }
     public function signup(SignupRequest $request)
     {
+        dd($request->all());
         $data = $request->validated();
         /** @var \App\Models\User $user */
         $user = User::create([
