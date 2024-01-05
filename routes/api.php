@@ -14,7 +14,7 @@ use App\Http\Controllers\Api\DriverController;
 use App\Http\Controllers\Api\SchoolController;
 use App\Http\Controllers\Api\AddressController;
 use App\Http\Controllers\Api\CountryController;
-use App\Http\Controllers\Api\GurdianController;
+use App\Http\Controllers\Api\GuardianController;
 use App\Http\Controllers\Api\SectionController;
 use App\Http\Controllers\Api\StudentController;
 use App\Http\Controllers\Api\TeacherController;
@@ -56,7 +56,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/developers', DeveloperController::class);
     Route::apiResource('/teachers', TeacherController::class);
     Route::apiResource('/employees', EmployeeController::class);
-    Route::apiResource('/gurdians', GurdianController::class);
+    Route::apiResource('/guardians', GuardianController::class);
     Route::apiResource('/students', StudentController::class);
     Route::apiResource('/drivers', DriverController::class);
     Route::apiResource('/boards', BoardController::class);
@@ -75,7 +75,7 @@ Route::middleware('auth:sanctum')->group(function () {
     //Enums
     Route::get('/address_type', [EnumController::class,  'address_type']);
     Route::get('/gender', [EnumController::class,  'gender']);
-    Route::get('/gurdian_type', [EnumController::class,  'gurdian_type']);
+    Route::get('/guardian_type', [EnumController::class,  'guardian_type']);
     Route::get('/room_type', [EnumController::class,  'room_type']);
     Route::get('/user_status', [EnumController::class,  'user_status']);
     Route::get('/user_type', [EnumController::class,  'user_type']);

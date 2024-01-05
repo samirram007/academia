@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('contact_no')->unique()->nullable();
             $table->string('email')->unique()->nullable();
+            $table->string('website')->unique()->nullable();
             $table->date('establishment_date')->nullable();
             $table->string('logo_image')->default(value:'/images/default_logo.png');
             $table->timestamps();
@@ -33,6 +34,7 @@ return new class extends Migration
             $table->foreignIdFor(Address::class)->nullable();
             $table->string('contact_no')->unique()->nullable();
             $table->string('email')->unique()->nullable();
+            $table->string('website')->nullable();
             $table->date('establishment_date')->nullable();
             $table->foreignId(column:'school_type_id')
                     ->constrained(table:'school_types')
@@ -48,6 +50,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('education_boards');
         Schema::dropIfExists('schools');
     }
 };

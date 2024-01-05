@@ -6,7 +6,7 @@ use App\Models\Department;
 use App\Enums\UserTypeEnum;
 use App\Models\Designation;
 use App\Enums\UserStatusEnum;
-use App\Enums\GurdianTypeEnum;
+use App\Enums\GuardianTypeEnum;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -76,7 +76,7 @@ return new class extends Migration
         Schema::create('guardians', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->enum('gurdian_type',array_keys(GurdianTypeEnum::labels()));
+            $table->enum('guardian_type',array_keys(GuardianTypeEnum::labels()));
             $table->string('name');
             $table->foreignIdFor(Address::class)->nullable();
             $table->enum('gender',array_keys(GenderEnum::labels()))->nullable();

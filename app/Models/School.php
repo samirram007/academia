@@ -11,10 +11,16 @@ class School extends Model
     use HasApiTokens,HasFactory;
     protected $fillable = [
         'name',
-        'username',
-        'user_type',
-        'email',
+        'code',
+        'education_board_id',
+        'address_id',
+        'description',
         'contact_no',
-        'password',
+        'email',
+        'website',
+        'establishment_date',
+        'logo_image',
+
+
     ];
 }

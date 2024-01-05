@@ -1,6 +1,8 @@
 <?php
 
 use App\Enums\RoomTypeEnum;
+use App\Models\EducationBoard;
+use App\Models\School;
 use Illuminate\Support\Facades\Schema;
 use Database\Factories\RoomTypeFactory;
 use Illuminate\Database\Schema\Blueprint;
@@ -15,12 +17,8 @@ return new class extends Migration
     {
         Schema::create('campuses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId(column:'school_id')
-            ->constrained(table:'schools')
-            ->onDelete(action:'cascade');
-            $table->foreignId(column:'education_board_id')
-            ->constrained(table:'education_boards')
-            ->onDelete(action:'cascade');
+            $table->foreignIdFor(School::class)->nullable();
+            $table->foreignIdFor(EducationBoard::class)->nullable();
             $table->string('name')->require();
             $table->string('address')->nullable();
             $table->string('contact_no')->unique()->nullable();

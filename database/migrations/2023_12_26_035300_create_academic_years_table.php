@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('academic_years', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Campus::class);
+            $table->foreignIdFor(Campus::class)->default(1);
             $table->string('year');
             $table->date('start_date');
             $table->date('end_date');

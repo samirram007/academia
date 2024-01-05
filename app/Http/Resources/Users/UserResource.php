@@ -6,7 +6,7 @@ namespace App\Http\Resources\Users;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Resources\Users\AdminResource;
-use App\Http\Resources\Users\GurdianResource;
+use App\Http\Resources\Users\GuardianResource;
 use App\Http\Resources\Users\StudentResource;
 use App\Http\Resources\Users\TeacherResource;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -34,7 +34,7 @@ class UserResource extends JsonResource
         } elseif ($this->user_type->value  === 'student' && $this->student) {
             $details = new StudentResource($this->student);
         } elseif ($this->user_type->value  === 'guardian' && $this->guardian) {
-            $details = new GurdianResource($this->guardian);
+            $details = new GuardianResource($this->guardian);
         }
         $data=[
             'id' => $this->id,
