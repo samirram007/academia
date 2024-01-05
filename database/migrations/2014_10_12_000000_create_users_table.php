@@ -73,7 +73,7 @@ return new class extends Migration
             $table->string('aadhaar_no')->nullable();
             $table->timestamps();
         });
-        Schema::create('gurdians', function (Blueprint $table) {
+        Schema::create('guardians', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
             $table->enum('gurdian_type',array_keys(GurdianTypeEnum::labels()));
@@ -84,6 +84,15 @@ return new class extends Migration
             $table->string('aadhaar_no')->nullable();
             $table->string('pan_no')->nullable();
             $table->timestamps();
+        });
+        Schema::create('guardian_student', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('guardian_id');
+            $table->unsignedBigInteger('student_id');
+            $table->timestamps();
+
+            $table->foreign('guardian_id')->references('id')->on('guardians')->onDelete('cascade');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
         });
         Schema::create('employees', function (Blueprint $table) {
             $table->id();

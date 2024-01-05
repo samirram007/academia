@@ -3,7 +3,7 @@
 namespace App\Enums;
 
 
-enum GurdianTypeEnum:string
+enum GuardianTypeEnum:string
 {
     case FATHER='father';
     case MOTHER='mother';
@@ -21,18 +21,18 @@ enum GurdianTypeEnum:string
     }
     public static function default(): string
     {
-        return  GurdianTypeEnum::FATHER->value;
+        return  GuardianTypeEnum::FATHER->value;
     }
     public static function labels():array
     {
-        return array_reduce(self::cases(),function($items, GurdianTypeEnum $item){
+        return array_reduce(self::cases(),function($items, GuardianTypeEnum $item){
             $items[$item->value] = $item->label();
             return $items;
         },[]);
     }
     public static function dataLabels():array
     {
-        return array_reduce(self::cases(),function($items, GurdianTypeEnum $item){
+        return array_reduce(self::cases(),function($items, GuardianTypeEnum $item){
             $items[$item->value] = $item->name;
             return $items;
         },[]);

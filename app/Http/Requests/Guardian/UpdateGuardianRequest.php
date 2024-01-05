@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Gurdian;
+namespace App\Http\Requests\Guardian;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateGurdianRequest extends FormRequest
+class UpdateGuardianRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

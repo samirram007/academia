@@ -8,7 +8,7 @@ enum UserTypeEnum:string
     case DEVELOPER = 'developer';
     case SUPER_ADMIN = 'super_admin';
     case STUDENT = 'student';
-    case GURDIAN = 'gurdian';
+    case GUARDIAN = 'guardian';
     case TEACHER = 'teacher';
     case EMPLOYEE = 'employee';
     case TRANSPORT_OWNER = 'transport_owner';
@@ -24,7 +24,7 @@ enum UserTypeEnum:string
             self::DEVELOPER => 'Developer',
             self::SUPER_ADMIN => 'Super Admin',
             self::STUDENT => 'Student',
-            self::GURDIAN => 'Gurdian',
+            self::GUARDIAN => 'Guardian',
             self::TEACHER => 'Teacher',
             self::EMPLOYEE => 'Employee',
             self::TRANSPORT_OWNER => 'Transport Owner',

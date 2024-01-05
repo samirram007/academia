@@ -3,9 +3,9 @@
 namespace App\Services;
 
 /**
- * Class GurdianService.
+ * Class GuardianService.
  */
-class GurdianService
+class GuardianService
 {
     public function all()
     {

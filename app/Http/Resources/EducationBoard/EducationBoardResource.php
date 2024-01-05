@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Gurdian;
+namespace App\Http\Resources\EducationBoard;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class GurdianResource extends JsonResource
+class EducationBoardResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

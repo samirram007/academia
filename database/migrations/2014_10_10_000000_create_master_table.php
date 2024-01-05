@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use App\Models\State;
+use App\Models\Address;
 use App\Models\Country;
 use App\Enums\GenderEnum;
 use App\Enums\UserTypeEnum;
@@ -19,6 +20,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+
         Schema::create('states', function (Blueprint $table) {
             $table->id();
             $table->string('name')->require();
@@ -59,6 +61,7 @@ return new class extends Migration
             $table->string('name')->require();
             $table->timestamps();
         });
+
 
     }
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Gurdian;
+namespace App\Http\Requests\EducationBoard;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreGurdianRequest extends FormRequest
+class StoreEducationBoard extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
