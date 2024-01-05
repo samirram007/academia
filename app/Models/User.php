@@ -111,6 +111,7 @@ class User extends Authenticatable
 
         // Listen for the 'creating' event to set default values before a user is created
         static::creating(function ($user) {
+//dd($user);
             $username = $user->username ?? Str::slug(static::setUsernameAttribute($user->attributes['name']));
             $user->attributes['username'] = $username;
             $user->attributes['user_type'] = $user->user_type ??'guest';

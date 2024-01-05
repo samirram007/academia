@@ -29,10 +29,7 @@ class UserService{
 
     public function single(User $user)
     {
-
-
-       $user->load($user->user_type->value);
-
+               $user->load($user->user_type->value);
         return new UserResource($user);
     }
 

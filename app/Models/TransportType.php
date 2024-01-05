@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class TransportType extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name',
+    ];
 }

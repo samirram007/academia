@@ -4,14 +4,8 @@ namespace App\Http\Controllers\Api;
 
 
 
-use App\Models\User;
-use App\Http\Docs\AuthDoc;
-use App\Enums\UserTypeEnum;
 use Illuminate\Http\Request;
-
 use App\Services\AuthService;
-
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\SignupRequest;
@@ -72,17 +66,8 @@ class AuthController extends Controller
         return $this->service->login($request);
     }
     public function signup(SignupRequest $request){
-        // return $this->service->signup($request);
-        $data = $request->validated();
-        /** @var \App\Models\User $user */
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'user_type' => $data['user_type'],
-            'password' => bcrypt($data['password']),
-        ]);
-        $token = $user->createToken('main')->plainTextToken;
-        return response(compact('user', 'token'));
+        return $this->service->signup($request);
+
     }
      public function logout(Request $request)
     {

@@ -21,17 +21,20 @@ class UserSeeder extends Seeder
         // create demo users
         $user = \App\Models\User::factory()->create([
             'name' => 'Super-Admin User',
+            'username' => 'SUPERADMIN',
             'user_type' => UserTypeEnum::SUPER_ADMIN,
             'email' => 'superadmin@example.com',
         ]);
 
         $user = \App\Models\User::factory()->create([
             'name' => 'Admin User',
+            'username' => 'ADMIN00000',
             'user_type' => UserTypeEnum::ADMIN,
             'email' => 'admin@example.com',
         ]);
         $user = \App\Models\User::factory()->create([
-            'name' => 'User User',
+            'name' => 'Teacher User',
+            'username' => 'TEACHER000',
             'user_type' => UserTypeEnum::TEACHER,
             'email' => 'test@example.com',
         ]);

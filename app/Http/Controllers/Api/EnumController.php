@@ -8,7 +8,7 @@ use App\Enums\UserTypeEnum;
 use Illuminate\Http\Request;
 use App\Enums\UserStatusEnum;
 use App\Enums\AddressTypeEnum;
-use App\Enums\GurdianTypeEnum;
+use App\Enums\GuardianTypeEnum;
 use App\Http\Controllers\Controller;
 
 class EnumController extends Controller
@@ -19,8 +19,8 @@ class EnumController extends Controller
    public function gender(){
     return response()->json(['data' =>GenderEnum::dataLabels()]);
    }
-   public function gurdian_type(){
-    return response()->json(['data' =>GurdianTypeEnum::dataLabels()]);
+   public function guardian_type(){
+    return response()->json(['data' =>GuardianTypeEnum::dataLabels()]);
    }
    public function room_type(){
     return response()->json(['data' =>RoomTypeEnum::dataLabels()]);
