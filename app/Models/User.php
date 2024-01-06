@@ -4,12 +4,14 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+
+
 use App\Models\Admin;
 use App\Models\Driver;
-use App\Models\Guardian;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\Employee;
+use App\Models\Guardian;
 use App\Models\Developer;
 use App\Models\SuperAdmin;
 use App\Enums\UserTypeEnum;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Users;
+namespace App\Http\Requests\User;
 
 use App\Enums\UserTypeEnum;
 use Illuminate\Validation\Rules\Enum;
