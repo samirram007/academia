@@ -5,11 +5,12 @@ namespace App\Http\Resources\Users;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Http\Resources\Users\AdminResource;
-use App\Http\Resources\Users\GuardianResource;
-use App\Http\Resources\Users\StudentResource;
-use App\Http\Resources\Users\TeacherResource;
+
+use App\Http\Resources\Admin\AdminResource;
+use App\Http\Resources\Student\StudentResource;
+use App\Http\Resources\Teacher\TeacherResource;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\Guardian\GuardianResource;
 
 class UserResource extends JsonResource
 {
