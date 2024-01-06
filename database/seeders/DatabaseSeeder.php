@@ -19,6 +19,21 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        \App\Models\Country::factory()->create([
+            'country_code' => 'IN',
+            'name'         => 'INDIA',
+        ]);
+        \App\Models\State::factory()->create([
+            'state_code' => 'WB',
+            'name'         => 'WEST BENGAL',
+            'country_id'   => 1,
+        ]);
+        \App\Models\Address::factory(10)->create([
+            'address_line_1'=> fake()->streetAddress,
+            'address_type'=>'permanent',
+            'state_id'=>1,
+            'country_id'   => 1,
+        ]);
          \App\Models\SchoolType::factory(1)->create([
             'name' => 'HINDI MEDIUM',]);
             \App\Models\EducationBoard::factory(1)->create([

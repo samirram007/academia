@@ -45,7 +45,8 @@ class AddressController extends Controller
      */
     public function update(UpdateAddressRequest $request, Address $address)
     {
-        return $this->addressService->update($request);
+        // dd($address);
+        return $this->addressService->update($request, $address);
     }
 
     /**

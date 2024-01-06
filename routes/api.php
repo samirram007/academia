@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AcademicYearController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
@@ -25,6 +26,7 @@ use App\Http\Controllers\Api\StandardController;
 use App\Http\Controllers\Api\DeveloperController;
 use App\Http\Controllers\Api\DepartmentController;
 use App\Http\Controllers\Api\DesignationController;
+use App\Models\AcademicYear;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,13 +47,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/documents/user', [DocumentController::class,  'userDocuments']);
     Route::get('/documents/{id}', [DocumentController::class,  'show']);
     Route::get('/documents/file/{id}', [DocumentController::class,  'getFile']);
-
+    Route::apiResource('/addresses', AddressController::class);
     Route::apiResource('/users', UserController::class);
     Route::apiResource('/schools', SchoolController::class);
     Route::apiResource('/campuses', CampusController::class);
     Route::apiResource('/departments', DepartmentController::class);
     Route::apiResource('/designations', DesignationController::class);
-    Route::apiResource('/addresses', AddressController::class);
+
     Route::apiResource('/admins', AdminController::class);
     Route::apiResource('/developers', DeveloperController::class);
     Route::apiResource('/teachers', TeacherController::class);
@@ -68,8 +70,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/terms', TermController::class);
 
 
-
-
     Route::post('/logout', [AuthController::class, 'logout']);
 
     //Enums
@@ -80,9 +80,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user_status', [EnumController::class,  'user_status']);
     Route::get('/user_type', [EnumController::class,  'user_type']);
 });
+Route::apiResource('/academic_years',AcademicYearController::class);
 
-
-
+// Route::controller(AcademicYearController::class)->group(function () {
+//     Route::apiResource('/academic_year',AcademicYearController::class);
+// });
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/signup', [AuthController::class, 'signup']);
 

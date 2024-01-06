@@ -11,5 +11,14 @@ class State extends Model
     use HasApiTokens,HasFactory;
     protected $fillable = [
         'name',
+        'state_code',
+        'country_id'
     ];
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+    public function country() {
+        return $this->belongsTo(Country::class);
+        }
 }
