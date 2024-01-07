@@ -11,7 +11,7 @@
                     "Authentication"
                 ],
                 "summary": "Authenticate a user",
-                "description": "Authenticates a user by providing email and password.",
+                "description": "Authenticates a user by providing username and password.",
                 "operationId": "222b2625838e3c57e017987f73598fda",
                 "requestBody": {
                     "description": "User credentials",
@@ -20,14 +20,13 @@
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "email",
+                                    "username",
                                     "password"
                                 ],
                                 "properties": {
-                                    "email": {
+                                    "username": {
                                         "type": "string",
-                                        "format": "email",
-                                        "example": "user@example.com"
+                                        "example": "admins2222"
                                     },
                                     "password": {
                                         "type": "string",

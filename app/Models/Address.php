@@ -37,4 +37,9 @@ class Address extends Model
     {
         return $this->belongsTo(Country::class);
     }
+    public static function display()
+    {
+        return "Full Address";
+    }
+
 }

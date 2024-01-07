@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Users;
+namespace App\Http\Requests\User;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Enums\UserTypeEnum;
+use Illuminate\Validation\Rules\Enum;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -25,6 +27,7 @@ class UpdateUserRequest extends FormRequest
         return [
 
             'name' => 'required|string|max:55',
+            'user_type'=> new Enum(UserTypeEnum::class),
             'email' => 'required|email|unique:users,email,' . $this->id,
             'password' => 'confirmed', Password::min(8)->letters()->symbols(),
         ];

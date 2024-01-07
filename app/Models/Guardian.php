@@ -3,13 +3,13 @@
 namespace App\Models;
 
 use App\Models\User;
-use Laravel\Sanctum\HasApiTokens;
+use App\Models\Student;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Guardian extends Model
 {
-    use HasApiTokens,HasFactory;
+    use HasFactory;
     protected $fillable=['user_id','name'];
 
     public function user(){

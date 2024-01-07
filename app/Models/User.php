@@ -4,12 +4,14 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+
+
 use App\Models\Admin;
 use App\Models\Driver;
-use App\Models\Gurdian;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\Employee;
+use App\Models\Guardian;
 use App\Models\Developer;
 use App\Models\SuperAdmin;
 use App\Enums\UserTypeEnum;
@@ -87,11 +89,11 @@ class User extends Authenticatable
     public function teacher(){
         return $this->hasOne(Teacher::class);
     }
-    public function gurdian(){
-        return $this->hasOne(Gurdian::class);
+    public function guardian(){
+        return $this->hasOne(Guardian::class);
     }
     public function parent(){
-        return $this->hasOne(Gurdian::class);
+        return $this->hasOne(Guardian::class);
     }
     public function student(){
         return $this->hasOne(Student::class);

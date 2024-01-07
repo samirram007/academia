@@ -20,19 +20,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-
-        Schema::create('states', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->require();
-            $table->foreignIdFor(Country::class)->default(1);
-            $table->timestamps();
-        });
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
             $table->string('name')->require();
-            $table->string('code')->require();
+            $table->string('country_code')->nullable();
             $table->timestamps();
         });
+        Schema::create('states', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->require();
+            $table->string('state_code')->nullable();
+            $table->foreignIdFor(Country::class)->default(1);
+            $table->timestamps();
+        });
+
         Schema::create('designations', function (Blueprint $table) {
             $table->id();
             $table->string('name')->require();

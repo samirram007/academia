@@ -11,5 +11,10 @@ class Country extends Model
     use HasApiTokens,HasFactory;
     protected $fillable = [
         'name',
+        'country_code'
+    ];
+    protected $hidden = [
+        'created_at',
+        'updated_at',
     ];
 }

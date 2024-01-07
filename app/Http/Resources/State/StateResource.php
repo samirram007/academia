@@ -14,6 +14,9 @@ class StateResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'name'=>$this->name,
+            'state_code'=>$this->state_code,
+        ];
     }
 }
