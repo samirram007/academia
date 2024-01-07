@@ -31,11 +31,7 @@ class User extends Authenticatable
     /**
      * The attributes that are mass assignable.
      *
-<<<<<<< HEAD
-     * @var array int, string&gt;
-=======
      * @var array<int, string>;
->>>>>>> 7102e2c79d3c956c3b3754df9430b985381f3a67
      */
     protected $fillable = [
         'name',
@@ -53,11 +49,7 @@ class User extends Authenticatable
      * @var array int, string&gt;
 =======
      * @var array<int, string>;
->>>>>>> 7102e2c79d3c956c3b3754df9430b985381f3a67
-     */
-    protected $hidden = [
         'password',
-        'remember_token',
     ];
 
     /**
