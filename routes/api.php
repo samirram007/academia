@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\GuardianController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
@@ -14,7 +15,6 @@ use App\Http\Controllers\Api\DriverController;
 use App\Http\Controllers\Api\SchoolController;
 use App\Http\Controllers\Api\AddressController;
 use App\Http\Controllers\Api\CountryController;
-use App\Http\Controllers\Api\GurdianController;
 use App\Http\Controllers\Api\SectionController;
 use App\Http\Controllers\Api\StudentController;
 use App\Http\Controllers\Api\TeacherController;
@@ -56,7 +56,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/developers', DeveloperController::class);
     Route::apiResource('/teachers', TeacherController::class);
     Route::apiResource('/employees', EmployeeController::class);
-    Route::apiResource('/gurdians', GurdianController::class);
+    Route::apiResource('/gurdians', GuardianController::class);
     Route::apiResource('/students', StudentController::class);
     Route::apiResource('/drivers', DriverController::class);
     Route::apiResource('/boards', BoardController::class);
