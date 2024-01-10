@@ -11,7 +11,7 @@ class StoreBookRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,19 @@ class StoreBookRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name'=>['required','string','max:255','unique:boards,name'],
+            'code' => ['sometimes','string','max:20','unique:books,code'],
+            'description'=>['sometimes','string'],
+            'standard_id'=>['sometimes','numeric','exists:standards,id'],
+            'subject_id'=>['sometimes','numeric','exists:subjects,id'],
+            'publication_year'=>['sometimes','numeric'],
+            'page_count'=>['sometimes','numeric'],
+            'price'=>['sometimes','numeric'],
+            'published_at'=>['sometimes','datetime'],
+            'publisher'=>['sometimes','string'],
+            'author'=>['sometimes','string'],
+            'illustrator'=>['sometimes','string'],
+            'translator'=>['sometimes','string'],
         ];
     }
 }

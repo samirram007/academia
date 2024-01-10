@@ -11,7 +11,7 @@ class StoreAcademicYearRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,14 @@ class StoreAcademicYearRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'campus_id'=>['required','numeric'],
+            'year' => ['required'],
+            'start_date' => ['nullable', 'date'],
+            'end_date' => ['nullable', 'date', 'after:start_date'],
+            'previous_academic_year_id' => ['nullable', 'numeric' ],
+            'next_academic_year_id' => ['nullable', 'numeric' ],
+            'is_current'=>['nullable','boolean']
+
         ];
     }
 }

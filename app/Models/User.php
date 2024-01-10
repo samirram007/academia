@@ -58,13 +58,16 @@ class User extends Authenticatable
      * @var array<string, string>;
      */
     protected $casts = [
+        'username'=>'string',
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
         'user_type'=>UserTypeEnum::class,
         'status'=>UserStatusEnum::class,
     ];
 
-
+public function addresses(){
+    return $this->hasMany(Address::class);
+}
     public function super_admin(){
         return $this->hasOne(SuperAdmin::class);
     }
@@ -100,9 +103,9 @@ class User extends Authenticatable
         parent::boot();
 
         // Listen for the 'creating' event to set default values before a user is created
-        static::creating(function ($user) {
-//dd($user);
-            $username = $user->username ?? Str::slug(static::setUsernameAttribute($user->attributes['name']));
+
+         static::creating(function ($user) {
+            $username = $user->username ?? Str::slug(static::setUnAttribute($user->attributes['name']));
             $user->attributes['username'] = $username;
             $user->attributes['user_type'] = $user->user_type ??'guest';
 
@@ -110,7 +113,8 @@ class User extends Authenticatable
     }
 
 
-    protected static function setUsernameAttribute($value)
+    // protected static function setUsernameAttribute($value)
+    protected static function setUnAttribute($value)
     {
 
         // Generate a 10-character username based on the user's name

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\SignupRequest;
+use App\Http\Resources\Users\UserResource;
 
 class AuthService{
     public function login(LoginRequest $request)
@@ -20,9 +21,9 @@ class AuthService{
 
         // $user = User::find($credentials);
         /** @var \App\Models\User $user */
-        $data = Auth::user();
+        $data = new UserResource(Auth::user());
         $token = $data->createToken('myApp')->plainTextToken;
-
+       // dd($data);
         return response(compact('data', 'token'));
     }
     public function signup(SignupRequest $request)

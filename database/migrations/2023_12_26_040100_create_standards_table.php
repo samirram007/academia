@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Models\Book;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -35,6 +36,7 @@ return new class extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('name')->require();
+            $table->string('code')->nullable();
             $table->text('description');
             $table->foreignId('standard_id')->constrained();
             $table->foreignId('subject_id')->constrained();
@@ -49,6 +51,22 @@ return new class extends Migration
 
             $table->timestamps();
         });
+        Schema::create('book_modules', function (Blueprint $table) {
+            $table->id();
+            $table->foreignIdFor(Book::class);
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->unique(['book_id','name']);
+        });
+        Schema::create('book_chapters', function (Blueprint $table) {
+            $table->id();
+            $table->foreignIdFor(Book::class);
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->unique(['book_id','name']);
+
+        });
+
     }
 
     /**

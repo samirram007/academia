@@ -19,12 +19,56 @@ class UserController extends Controller
     {
         $this->userService=$userService;
     }
-
+/**
+ * @OA\Get(
+ *     path="/api/users",
+ *     tags={"Users"},
+ *     summary="Get a list of users",
+ *     description="Returns a list of users",
+ *     security={{ "sanctum": {} }},
+ *     @OA\Parameter(name="page",in="query",description="Page number for pagination",
+ *         @OA\Schema(type="integer", default=1)
+ *     ),
+ *     @OA\Parameter(name="limit",in="query",description="Number of items per page",
+ *         @OA\Schema(type="integer", default=10)
+ *     ),
+ *     @OA\Parameter(name="filter",in="query",description="Filter criteria",
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Parameter(name="search",in="query",description="Search criteria",
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Response(response=200,description="Successful operation",
+ *         @OA\JsonContent(
+ *           type="array",
+ *           @OA\Items(ref="#/components/schemas/UserResource")
+ *         )
+ *     )
+ * )
+ */
     public function index(Request $request)
     {
         return $this->userService->all($request);
     }
-
+/**
+ * @OA\Post(
+ *     path="/api/users",
+ *     tags={"Users"},
+ *     summary="Create a new user",
+ *     description="Endpoint to create a new user",
+ *     @OA\RequestBody(
+ *         @OA\JsonContent(
+ *             @OA\Property(property="name", type="string", maxLength=255),
+ *             @OA\Property(property="user_type", type="string", enum={"student", "teacher","admin","driver"}),
+ *             @OA\Property(property="username", type="string", maxLength=10),
+ *             @OA\Property(property="email", type="string", format="email"),
+ *             @OA\Property(property="password", type="string"),
+ *             @OA\Property(property="password_confirmation", type="string")
+ *         )
+ *     ),
+ *     @OA\Response(response="200", description="User created successfully")
+ * )
+ */
     public function store(StoreUserRequest $request)
     {
         return $this->userService->create($request);

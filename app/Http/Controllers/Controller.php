@@ -7,16 +7,16 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 /**
  * @OA\Info(
- *    title="APIs For Academia",
+ *    title="Academia Rest API",
  *    version="1.0.0",
  * ),
  *   @OA\SecurityScheme(
- *       securityScheme="bearerAuth",
+ *       securityScheme="sanctum",
  *       in="header",
  *       name="bearerAuth",
  *       type="http",
  *       scheme="bearer",
- *       bearerFormat="SANCTUM",
+ *       bearerFormat="cookie",
  *    ),
  */
 class Controller extends BaseController

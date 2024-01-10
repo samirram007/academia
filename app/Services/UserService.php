@@ -1,14 +1,16 @@
 <?php
 namespace App\Services;
 
+use App\Models\User;
+use App\Models\Student;
+
+use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\Users\UserResource;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Resources\Users\UserCollection;
-
-use App\Http\Resources\Users\UserResource;
-
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class UserService{
     public function all(Request $request)
@@ -34,9 +36,27 @@ class UserService{
     }
 
     public function create(StoreUserRequest $request){
-        $data = $request->validated();
-        $data['password'] = bcrypt($data['password']);
-        $user = User::create($data);
-        return response(new UserResource($user), 201);
+        //db transaction
+        //   dd($request->all());
+        DB::transaction(function() use ($request) {
+
+            $data = $request->validated();
+            //dd($data);
+            $data['password'] = bcrypt($data['password']);
+
+            $user = User::create($data);
+            if($user!=null && $user->user_type->value=='student'){
+                Student::create([
+                    "user_id"=>$user["id"],
+                    "name"=>$user["name"],
+                    "email"=>$user["email"],
+                    "contact_no"=>$user["contact_no"],
+                    "gender"=>$user["gender"],
+                    ]);
+            }
+            return response(new UserResource($user), 201);
+        });
+
+
     }
 }

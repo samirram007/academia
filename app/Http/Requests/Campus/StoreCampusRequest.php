@@ -11,7 +11,7 @@ class StoreCampusRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreCampusRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required', 'max:255'],
+            'address' => ['nullable', 'max:2048'],
+            'latitude' => ['numeric'],
         ];
     }
 }

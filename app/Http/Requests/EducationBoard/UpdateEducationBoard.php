@@ -22,7 +22,8 @@ class UpdateEducationBoard extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name'=>['sometimes','string','max:255','unique:education_boards,name,'. $this->id],
+            'code' => ['sometimes','string','max:20','unique:education_boards,code,'. $this->id],
         ];
     }
 }

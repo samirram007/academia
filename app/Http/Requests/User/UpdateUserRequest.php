@@ -26,9 +26,10 @@ class UpdateUserRequest extends FormRequest
     {
         return [
 
-            'name' => 'required|string|max:55',
+            'name' => 'sometimes|string|max:255',
             'user_type'=> new Enum(UserTypeEnum::class),
-            'email' => 'required|email|unique:users,email,' . $this->id,
+            'username'=>'sometimes|string|unique:users,username,' . $this->id,
+            'email' => 'sometimes|email|unique:users,email,' . $this->id,
             'password' => 'confirmed', Password::min(8)->letters()->symbols(),
         ];
     }

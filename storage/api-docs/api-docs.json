@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "APIs For Academia",
+        "title": "Academia Rest API",
         "version": "1.0.0"
     },
     "paths": {
@@ -81,15 +81,193 @@
                     }
                 }
             }
+        },
+        "/api/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get a list of users",
+                "description": "Returns a list of users",
+                "operationId": "566aed8efb436ca506e0ef51a032ecd9",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number for pagination",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Number of items per page",
+                        "schema": {
+                            "type": "integer",
+                            "default": 10
+                        }
+                    },
+                    {
+                        "name": "filter",
+                        "in": "query",
+                        "description": "Filter criteria",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Search criteria",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/UserResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Create a new user",
+                "description": "Endpoint to create a new user",
+                "operationId": "be551c1d694a01c164966f58bfa77013",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "user_type": {
+                                        "type": "string",
+                                        "enum": [
+                                            "student",
+                                            "teacher",
+                                            "admin",
+                                            "driver"
+                                        ]
+                                    },
+                                    "username": {
+                                        "type": "string",
+                                        "maxLength": 10
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User created successfully"
+                    }
+                }
+            }
         }
     },
     "components": {
+        "schemas": {
+            "AddressResource": {
+                "title": "Address Data",
+                "description": "Data for address-related data",
+                "properties": {
+                    "user_id": {
+                        "description": "User ID associated with the address",
+                        "type": "integer"
+                    },
+                    "address_type": {
+                        "description": "Type of address (e.g., home, work)",
+                        "type": "string"
+                    },
+                    "address_line_1": {
+                        "description": "First line of address",
+                        "type": "string"
+                    },
+                    "address_line_2": {
+                        "description": "Second line of address",
+                        "type": "string"
+                    },
+                    "display": {
+                        "description": "Formatted display of the address",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "UserResource": {
+                "title": "User Data",
+                "description": "Schema for user-related data",
+                "properties": {
+                    "id": {
+                        "description": "User ID",
+                        "type": "integer"
+                    },
+                    "username": {
+                        "description": "User's username",
+                        "type": "string"
+                    },
+                    "user_type": {
+                        "description": "Type of user",
+                        "type": "string"
+                    },
+                    "addresses": {
+                        "description": "User's addresses",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/AddressResource"
+                        },
+                        "nullable": true
+                    },
+                    "details": {
+                        "description": "User's details",
+                        "type": "object",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            }
+        },
         "securitySchemes": {
-            "bearerAuth": {
+            "sanctum": {
                 "type": "http",
                 "name": "bearerAuth",
                 "in": "header",
-                "bearerFormat": "SANCTUM",
+                "bearerFormat": "cookie",
                 "scheme": "bearer"
             }
         }
