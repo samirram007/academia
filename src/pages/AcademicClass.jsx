@@ -1,0 +1,1 @@
+export {AcademicClasses,CreateAcademicClass, EditAcademicClass} from '../features/AcademicClass';

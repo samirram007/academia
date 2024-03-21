@@ -1,0 +1,1 @@
+export {Schools,CreateSchool,EditSchool} from '../features/School'

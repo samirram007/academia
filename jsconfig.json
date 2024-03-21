@@ -1,0 +1,5 @@
+{
+    "bin": {
+        "nrd": "npm run dev"
+      },
+}
