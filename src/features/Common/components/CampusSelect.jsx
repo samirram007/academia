@@ -1,14 +1,16 @@
-import { useCampuses } from '../../Campus/hooks/queries';
-import useCampusChange from '../hooks/useCampusChange'
+import { useCampuses } from '../../Campus/hooks/queries'
 
-export const CampusSelect = ({formik}) => {
+
+export const CampusSelect = ({formik,auto}) => {
     const CampusData = useCampuses()
     return (
 
             CampusData.data &&
                 <HandleSelect
                     formik={formik}
-                    name="campus_id" label={'Campus'}
+                    name="campus_id"
+                    label={'Campus'}
+                    auto={auto}
                     options={
                         CampusData.data.data &&
                         CampusData.data.data.map(({ id: key, name: value }, index) => (
@@ -18,20 +20,23 @@ export const CampusSelect = ({formik}) => {
          )
 
 }
+
+
 export const HandleSelect = (
     { formik, label, name, placeholder, type, ...props }
 ) => {
 
-    const campusFormik = useCampusChange(formik);
+
     const handleDropdownChange = (event) => {
         const { name, value } = event.target;
-        console.log(formik);
+        // console.log(formik);
         formik.setFieldValue(name, value); // Update the dropdown field that triggered the change
-
-        // If campus_id dropdown changes, reset academic_year_id and academic_class_id
+        props.auto && formik.handleSubmit()
+        // If campus_id dropdown changes, reset academic_session_id and academic_class_id
         if (name === 'campus_id') {
-            formik.setFieldValue('academic_year_id', ''); // Reset academic_year_id
-            formik.setFieldValue('academic_class_id', ''); // Reset academic_class_id
+          //  console.log('Hello',formik.values);
+            formik.values.academic_session_id && formik.setFieldValue('academic_session_id', ''); // Reset academic_session_id
+            formik.values.academic_class_id && formik.setFieldValue('academic_class_id', ''); // Reset academic_class_id
         }
     };
     return (
@@ -40,7 +45,7 @@ export const HandleSelect = (
             <select name={name} id={name}
                 onChange={handleDropdownChange}
                 onBlur={formik.handleBlur}
-                defaultValue={formik.values[name]}
+                value={formik.values[name]}
                 className={`select  w-full ${formik.errors[name] ? 'select-error' : 'select-primary'}`}
             >
                 <option value=''      >-- please select</option>

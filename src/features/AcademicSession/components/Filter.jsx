@@ -1,13 +1,12 @@
-import React, { memo, useEffect, useMemo } from 'react'
 
 import { useFormik } from 'formik'
-import { FormikSelect, FormikSubmit } from '../../../components/form-components'
+
 import * as Yup from "yup";
-
-import { CampusSelect } from '../../Common/components/CampusSelect'
-
+import { CampusSelect } from '../../Common/components/CampusSelect';
+import { FormikSubmit } from '../../../components/form-components';
 import { AcademicSessionSelect } from '../../Common/components/AcademicSessionSelect';
-import { AcademicClassSelect } from '../../Common/components/AcademicClassSelect';
+
+
 
 
 const validationSchema = Yup.object().shape({
@@ -23,17 +22,22 @@ const validationSchema = Yup.object().shape({
 })
 
 
-const FeeTemplateFilter = ({ FeeTemplateData, initialValues }) => {
+const Filter = ({ AcademicSessionData, initialValues }) => {
 
     const formik = useFormik({
         initialValues,
         validationSchema,
         enableReinitialize: true,
-        onSubmit: values => {
+        onSubmit:   values => {
+
             Object.assign(initialValues, values);
-            FeeTemplateData.refetch()
+
+                AcademicSessionData.refetch()
+
+
         }
     })
+
 
 
     return (
@@ -45,21 +49,16 @@ const FeeTemplateFilter = ({ FeeTemplateData, initialValues }) => {
                             <div className='grid gap-4 grid-cols-12   mb-2'>
                                 {/* <div className='col-span-1 text-md font-bold'>Filter</div> */}
                                 <div className='col-span-3 '>
-                                <CampusSelect formik={formik}/>
+                                <CampusSelect formik={formik} auto={true}/>
 
-                                </div>
-                                <div className='col-span-3 '>
-
-                                    <AcademicSessionSelect formik={formik} campus_id={formik.values.campus_id} />
-
-                                </div>
-                                <div className='col-span-3 '>
-
-                                    <AcademicClassSelect formik={formik} campus_id={formik.values.campus_id} />
 
 
                                 </div>
+                                <div className='col-span-3 hidden '>
 
+{/* <AcademicSessionSelect formik={formik} campus_id={formik.values.campus_id} /> */}
+
+</div>
                                 {formik.values &&
                                     <div className='col-span-2 flex flex-col justify-end '>
 
@@ -75,5 +74,5 @@ const FeeTemplateFilter = ({ FeeTemplateData, initialValues }) => {
     )
 }
 
-export default FeeTemplateFilter
+export default  Filter
 

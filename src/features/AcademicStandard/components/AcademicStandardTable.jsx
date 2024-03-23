@@ -12,7 +12,7 @@ const AcademicStandardTable = () => {
     const AcademicStandardData = useAcademicStandards();
 
 
-      const createRoute=`/academic_years/create`
+      const createRoute=`/academic_sessions/create`
 
       const mData = AcademicStandardData.data?.data ?? [];
 
@@ -72,7 +72,7 @@ const AcademicStandardTable = () => {
   return (
     <BasicTable
     data={data} columns={columns} createRoute={createRoute}
-    mobileHeaders={['id','year']}
+    mobileHeaders={['id','session']}
     />
   )
 }

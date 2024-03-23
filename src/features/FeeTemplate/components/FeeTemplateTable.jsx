@@ -13,7 +13,7 @@ import CreateFeeTemplate from './CreateFeeTemplate';
 
 
 const initialValues = {
-  academic_year_id: '',
+  academic_session_id: '',
   academic_class_id: '',
   campus_id: ''
 }
@@ -21,7 +21,7 @@ const FeeTemplateTable = () => {
 
   const FeeTemplateData = useFeeTemplates(initialValues)
   const navigate = useNavigate()
-  const createRoute = `/fee_templates/create`
+
   const mData = FeeTemplateData.data?.data ?? [];
   const data = useMemo(() => [...mData], [mData]);
 
@@ -41,13 +41,13 @@ const FeeTemplateTable = () => {
     },
     {
       header: "Campus",
-      accessorKey: "academic_year.campus.name",
+      accessorKey: "academic_session.campus.name",
       size: 200,
     },
 
     {
-      header: "Academic Year",
-      accessorKey: "academic_year.year",
+      header: "Academic Session",
+      accessorKey: "academic_session.session",
       size: 200,
     },
     {

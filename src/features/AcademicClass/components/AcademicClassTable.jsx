@@ -9,7 +9,7 @@ import { useAcademicClasses } from '../hooks/queries';
 const AcademicClassTable = () => {
     const AcademicClassData = useAcademicClasses();
 
-      const createRoute=`/academic_years/create`
+      const createRoute=`/academic_session/create`
 
       const mData = AcademicClassData.data?.data ?? [];
 
@@ -25,8 +25,8 @@ const AcademicClassTable = () => {
 
         },
         {
-          header: "Year",
-          accessorKey: "year",
+          header: "Session",
+          accessorKey: "session",
           size:300,
         },
         {
@@ -76,7 +76,7 @@ const AcademicClassTable = () => {
   return (
     <BasicTable
     data={data} columns={columns} createRoute={createRoute}
-    mobileHeaders={['id','year']}
+    mobileHeaders={['id','session']}
     />
   )
 }

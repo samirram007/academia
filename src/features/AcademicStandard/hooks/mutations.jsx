@@ -11,13 +11,13 @@ export function useStoreAcademicStandardMutation() {
       mutationFn: storeAcademicStandard,
       onSuccess: (data) => {
 
-       queryClient.invalidateQueries({ queryKey: ['academic_years'] })
+       queryClient.invalidateQueries({ queryKey: ['academic_sessions'] })
         toast.success(data.message, { transition: Flip });
-        navigate("/academic_years", { replace: true })
+        navigate("/academic_sessions", { replace: true })
       },
       onError: (error) => {
         toast.error(error.response.data.message, { transition: Flip })
-        navigate("/academic_years/create", { replace: true })
+        navigate("/academic_sessions/create", { replace: true })
 
 
       }

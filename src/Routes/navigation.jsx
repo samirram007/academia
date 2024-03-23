@@ -8,7 +8,7 @@ const NotFound =  lazy(() => import('../pages/NotFound'));
 
 
 import {icons} from './icons'
-import  {AcademicYears,CreateAcademicYear,EditAcademicYear}   from '../pages/AcademicYear';
+import  {AcademicSessions,CreateAcademicSession,EditAcademicSession}   from '../pages/AcademicSession';
 import {Users,CreateUser, EditUser}  from '../pages/User'
 import { Campuses, CreateCampus, EditCampus } from '../pages/Campus';
 import { Documents } from '../pages/Document';
@@ -97,10 +97,10 @@ export const page = [
        { path: 'edit/:id', name: 'Edit Fee Templates', element: <EditFeeTemplate /> ,   isMenu: false, isPrivate: false,},
       ]
     },
-    { path: 'academic_years',    name: 'Academic Years',    element:<AcademicYears/>,     isMenu: true,   menuGroup:'ACADEMICS', isPrivate: false, icon:icons.academic_years, role:['admin'],
+    { path: 'academic_sessions',    name: 'Academic Sessions',    element:<AcademicSessions/>,     isMenu: true,   menuGroup:'ACADEMICS', isPrivate: false, icon:icons.academic_sessions, role:['admin'],
       children: [
-       { path: 'create', name: 'New', element: <CreateAcademicYear /> ,   isMenu: false, isPrivate: false, icon:icons.create_academic_year},
-       { path: 'edit/:id', name: 'Edit Academic Year', element: <EditAcademicYear /> ,   isMenu: false, isPrivate: false,},
+       { path: 'create', name: 'New', element: <CreateAcademicSession /> ,   isMenu: false, isPrivate: false, icon:icons.create_academic_session},
+       { path: 'edit/:id', name: 'Edit Academic Session', element: <EditAcademicSession /> ,   isMenu: false, isPrivate: false,},
       ]
     },
     { path: 'education_boards',    name: 'Education Boards',    element:<EducationBoards/>,     isMenu: true,   menuGroup:'SETTINGS', isPrivate: false, icon:icons.education_boards, role:['admin'],

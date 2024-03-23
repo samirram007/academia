@@ -71,7 +71,7 @@ const DepartmentTable = () => {
   return (
     <BasicTable
     data={data} columns={columns} createRoute={createRoute}
-    mobileHeaders={['id','year']}
+    mobileHeaders={['id','session']}
     />
   )
 }

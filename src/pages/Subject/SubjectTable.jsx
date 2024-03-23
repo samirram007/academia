@@ -7,12 +7,12 @@ import { useSubjects } from '../../../hooks/queries';
 const SubjectTable = () => {
     const SubjectData = useSubjects();
     // const SubjectData = useQuery({
-    //     queryKey: ['academic_years'],
+    //     queryKey: ['academic_sessions'],
     //     queryFn: fetchSubjects,
     //     staleTime:Infinity
     //   })
 
-      const createRoute=`/academic_years/create`
+      const createRoute=`/academic_sessions/create`
 
       const mData = SubjectData.data?.data ?? [];
 
@@ -28,8 +28,8 @@ const SubjectTable = () => {
 
         },
         {
-          header: "Year",
-          accessorKey: "year",
+          header: "Session",
+          accessorKey: "session",
           size:300,
         },
         {
@@ -79,7 +79,7 @@ const SubjectTable = () => {
   return (
     <BasicTable
     data={data} columns={columns} createRoute={createRoute}
-    mobileHeaders={['id','year']}
+    mobileHeaders={['id','session']}
     />
   )
 }

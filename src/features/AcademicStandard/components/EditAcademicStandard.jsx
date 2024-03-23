@@ -1,11 +1,11 @@
 import React from 'react'
 
-const EditAcademicYear = () => {
+const EditAcademicStandard = () => {
   return (
     <div>
-      Edit Academic Year
+      Edit Academic Standard
     </div>
   )
 }
 
-export default EditAcademicYear
+export default EditAcademicStandard

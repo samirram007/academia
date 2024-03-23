@@ -2,9 +2,9 @@ import { useFormik } from 'formik'
 import React from 'react'
 import * as Yup from "yup";
 import { useStoreFeeTemplateMutation, useUpdateFeeTemplateMutation } from '../hooks/mutations';
-import { CampusSelect } from './CampusSelect';
-import { AcademicYearSelect } from './AcademicYearSelect';
-import { AcademicClassSelect } from './AcademicClassSelect';
+import { CampusSelect } from '../../Common/components/CampusSelect';
+import { AcademicSessionSelect } from '../../Common/components/AcademicSessionSelect';
+import { AcademicClassSelect } from '../../Common/components/AcademicClassSelect';
 const validationSchema = Yup.object().shape({
     name: Yup.string()
         .required("Name is required"),
@@ -50,7 +50,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
                                 </div>
                                 <div className='col-span-3 '>
 
-                                    <AcademicYearSelect formik={formik} campus_id={formik.values.campus_id} />
+                                    <AcademicSessionSelect formik={formik} campus_id={formik.values.campus_id} />
 
                                 </div>
                                 <div className='col-span-3 '>

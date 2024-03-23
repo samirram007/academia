@@ -3,7 +3,7 @@ import React from 'react'
 const EditSubject = () => {
   return (
     <div>
-      Edit Academic Year
+      Edit Subject
     </div>
   )
 }

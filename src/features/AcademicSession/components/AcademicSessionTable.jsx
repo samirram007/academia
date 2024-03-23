@@ -1,19 +1,30 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 
 import { useMemo } from 'react';
 import { DateTime } from 'luxon'
-import { useAcademicYears } from '../../../hooks/queries';
+
 import BasicTable from '../../../components/tables/BasicTable';
+import { useNavigate } from 'react-router-dom';
+import Filter from './Filter';
+import { useAcademicSessions } from '../hooks/quaries';
+import Loader from '../../../components/Loader';
+
+const initialValues = {
+  campus_id: 1
+}
+const AcademicSessionTable = () => {
+
+  const AcademicSessionData =  useAcademicSessions(initialValues)
 
 
-const AcademicYearTable = () => {
-    const AcademicYearData = useAcademicYears();
+  const navigate = useNavigate()
+//   if(AcademicSessionData.isFetching) return <Loader />
+//   if(AcademicSessionData.isError) return <Loader />
 
+      const createRoute=`/academic_sessions/create`
 
-      const createRoute=`/academic_years/create`
-
-      const mData = AcademicYearData.data?.data ?? [];
+      const mData = AcademicSessionData.data?.data ?? [];
 
       const data = useMemo(() => [...mData], [mData]);
 
@@ -27,8 +38,8 @@ const AcademicYearTable = () => {
 
         },
         {
-          header: "Year",
-          accessorKey: "year",
+          header: "Session",
+          accessorKey: "session",
           size:300,
         },
         {
@@ -55,11 +66,11 @@ const AcademicYearTable = () => {
             cell: ({row})=>{
                 return (
                     <div className="flex justify-start md:justify-center  items-center">
-                        <button onClick={()=>{ editAcademicYearData(row.original.id)}}
+                        <button onClick={()=>{ editAcademicSessionData(row.original.id)}}
                         className="btn btn-outline btn-primary btn-sm btn-rounded ">
                             Edit
                         </button>
-                        <button onClick={()=>{ deleteAcademicYearData(row.original.id)}}
+                        <button onClick={()=>{ deleteAcademicSessionData(row.original.id)}}
                         className="btn btn-outline btn-primary btn-sm btn-rounded ml-2">
                             Delete
                         </button>
@@ -69,18 +80,23 @@ const AcademicYearTable = () => {
         }
 
       ]
-      const editAcademicYearData=(id)=>{
+      const editAcademicSessionData=(id)=>{
         alert(id)
       }
-      const deleteAcademicYearData=(id)=>{
+      const deleteAcademicSessionData=(id)=>{
         alert(id)
       }
   return (
     <BasicTable
     data={data} columns={columns} createRoute={createRoute}
-    mobileHeaders={['id','year']}
+
+    filter={
+      <Filter AcademicSessionData={AcademicSessionData}
+        initialValues={initialValues} />
+    }
+    mobileHeaders={['id','session']}
     />
   )
 }
 
-export default AcademicYearTable
+export default AcademicSessionTable

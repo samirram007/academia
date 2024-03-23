@@ -38,7 +38,7 @@ export function useUpdateDocumentMutation() {
     },
     onError: (error) => {
       toast.error(error.response.data.message, { transition: Flip })
-     // navigate("/academic_years", { replace: true })
+     // navigate("/academic_sessions", { replace: true })
 
 
     }

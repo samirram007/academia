@@ -2,7 +2,7 @@ import React, {   useState } from 'react'
 import { FormikHiddenInput, FormikInputBox, FormikSelect, FormikSubmit, ImageBox } from '../../../components/form-components'
 import {useFormik } from 'formik'
 import * as Yup from "yup";
-import { useAcademicYears, useAddressType, useCampuses, useCaste, useGender,
+import { useAcademicSessions, useAddressType, useCampuses, useCaste, useGender,
     useLanguage, useNationality, useReligion } from '../../../hooks/queries'
 
 

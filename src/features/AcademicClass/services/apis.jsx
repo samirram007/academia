@@ -10,7 +10,7 @@ export function  fetchAcademicClass(id){
 }
 export function fetchAcademicClasses(payload) {
 
-    return axiosClient.get(`/academic_classes?campus_id=${payload}`)
+    return axiosClient.get(`/academic_classes?campus_id=${payload.campus_id}`)
         .then(response => {
             return response.data;
         })

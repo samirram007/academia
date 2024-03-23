@@ -7,8 +7,8 @@ import { useCampuses } from '../../../hooks/queries';
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import { useStoreAcademicStandardMutation } from '../hooks/mutations';
 const validationSchema = Yup.object().shape({
-    year: Yup.string()
-        .required("Year is required"),
+    session: Yup.string()
+        .required("Session is required"),
     start_date: Yup.date()
         .typeError('Invalid date format')
         .required('Start Date is required'),
@@ -31,7 +31,7 @@ const CreateAcademicStandard = () => {
     const [checked, setChecked] = useState(false)
 
     const editData = {
-        year: '2025-2026',
+        session: '2025-2026',
         start_date: new Date().toISOString().slice(0, 10),
         end_date: new Date().toISOString().slice(0, 10),
         is_current: false,
@@ -39,7 +39,7 @@ const CreateAcademicStandard = () => {
 
     }
     const initialValues = editData ?? {
-        year: '2024-2025',
+        session: '2024-2025',
         start_date: new Date().toISOString().slice(0, 10),
         end_date: new Date().toISOString().slice(0, 10),
         is_current: false,
@@ -71,7 +71,7 @@ const CreateAcademicStandard = () => {
         <div className='pb-10'>
             <div className='row  flex flex-col md:flex-row justify-between gap-2 border-b-2 border-blue-300/10 pb-2 mb-2 '>
                 <div className='flex flex-col gap-2 flex-1 text-3xl'>
-                    {'Create Academic Year'}
+                    {'Create Academic Session'}
                     <Breadcrumbs />
                 </div>
                 <div className='flex flex-row gap-2 flex-1'>
@@ -107,17 +107,17 @@ const CreateAcademicStandard = () => {
                             {formik.errors.campus_id ? <div className='text-error'>{formik.errors.campus_id}</div> : null}
                         </div>
                         <div>
-                            <label htmlFor="year">Year</label>
+                            <label htmlFor="session">Session</label>
                             <input
-                                id="year"
-                                name="year"
+                                id="session"
+                                name="session"
                                 type="text"
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                value={formik.values.year}
-                                className={`input input-bordered input-primary w-full max-w-xs ${formik.errors.year ? 'input-error' : ''}`}
+                                value={formik.values.session}
+                                className={`input input-bordered input-primary w-full max-w-xs ${formik.errors.session ? 'input-error' : ''}`}
                             />
-                            {formik.errors.year ? <div className='text-error'>{formik.errors.year}</div> : null}
+                            {formik.errors.session ? <div className='text-error'>{formik.errors.session}</div> : null}
                         </div>
                         <div>
                             <label htmlFor="start_date">Start Date</label>
