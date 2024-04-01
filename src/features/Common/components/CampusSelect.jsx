@@ -1,8 +1,12 @@
 import { useCampuses } from '../../Campus/hooks/queries'
 
 
-export const CampusSelect = ({formik,auto}) => {
+export const CampusSelect = ({formik,auto,isLoading,setIsLoading}) => {
     const CampusData = useCampuses()
+
+    // if (!CampusData.isLoading) return setIsLoading(true)
+    // else
+    if(CampusData.isLoading)  setIsLoading(false)
     return (
 
             CampusData.data &&

@@ -19,13 +19,14 @@ import { TbFilterSearch } from "react-icons/tb";
 import FormikFormModal from '../form-components/FormikFormModal'
 
 import { useFormModal } from '../../contexts/FormModalProvider'
-export default function BasicTable({ data, columns, pageSize = 10, createRoute, createForm,
+export default function BasicTable({ data, columns, pageSize = 10, createRoute,
+    createForm, createFormTitle,
     mobileHeaders = ['id', 'name'], filter }) {
 
     const thisRoute = useCustomRoutes()
 
     const [sorting, setSorting] = useState([])
-    const {isOpen, setOpen} = useFormModal()
+    const { isOpen, setOpen } = useFormModal()
 
     const [filtering, setFiltering] = useState('')
     const [searchParams, setSearchParams] = useSearchParams()
@@ -72,7 +73,7 @@ export default function BasicTable({ data, columns, pageSize = 10, createRoute, 
         <div className='container-flex md-container'>
             <div className='row   flex flex-col md:flex-row justify-between gap-2 border-b-2 border-blue-300/10 pb-2 '>
                 <div className='flex flex-col gap-2 flex-1 text-3xl'>
-                    {thisRoute}
+                    {/* {thisRoute} */}
                     <Breadcrumbs />
 
                 </div>
@@ -102,13 +103,13 @@ export default function BasicTable({ data, columns, pageSize = 10, createRoute, 
                             btn-rounded-symbol border-blue-300/10"><IoMdAdd /></button>
                         }
                         {
-                            isOpen   &&
+                            isOpen &&
                             <>
 
 
-                                    <FormikFormModal label={'New Fee Head'}>
-                                        {createForm}
-                                    </FormikFormModal>
+                                <FormikFormModal label={createFormTitle ?? 'Create new'}>
+                                    {createForm}
+                                </FormikFormModal>
 
 
 
@@ -124,7 +125,10 @@ export default function BasicTable({ data, columns, pageSize = 10, createRoute, 
 
                 </div>
             </div>
-            {filter && showFilter && filter}
+            <div className={`${showFilter? 'flex  ' : 'hidden'}`}>
+                {filter &&  filter}
+            </div>
+
 
             {isBrowser ?
                 <div className="overflow-x-auto">
@@ -219,12 +223,15 @@ export default function BasicTable({ data, columns, pageSize = 10, createRoute, 
 }
 
 export const FilterButton = ({ filter, showFilter, setShowFilter }) => {
-
+    const handleSwitchFilter = () => {
+        setShowFilter(!showFilter)
+        //console.log('showFilter',showFilter)
+    }
     return (
-        <span onClick={() => setShowFilter(!showFilter)}
+        <button onClick={handleSwitchFilter}
             className={`${filter ? '' : 'hidden'} btn btn-primary btn-sm text-xl     btn-rounded-symbol border-blue-300/10    `}>
             <TbFilterSearch />
-        </span>
+        </button>
 
 
     )

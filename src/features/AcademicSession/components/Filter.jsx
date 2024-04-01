@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { CampusSelect } from '../../Common/components/CampusSelect';
 import { FormikSubmit } from '../../../components/form-components';
 import { AcademicSessionSelect } from '../../Common/components/AcademicSessionSelect';
+import { useState } from 'react';
 
 
 
@@ -23,7 +24,7 @@ const validationSchema = Yup.object().shape({
 
 
 const Filter = ({ AcademicSessionData, initialValues }) => {
-
+    const [isLoading,setIsLoading]=useState(true)
     const formik = useFormik({
         initialValues,
         validationSchema,
@@ -39,28 +40,27 @@ const Filter = ({ AcademicSessionData, initialValues }) => {
     })
 
 
-
     return (
-        <div>
+        <div className={isLoading?'hidden':'flex-1 flex flex-col justify-end bg-slate-900/10 rounded-lg '}>
             <form onSubmit={formik.handleSubmit}>
                 <div className='grid grid-cols-1  '>
                     <div className='grid grid-flow-row md:grid-flow-col grid-cols-6 gap-5'>
                         <div className='grid gap-4 col-span-6 border-b-2   border-blue-300/30 pb-2 px-4 mb-2 '>
                             <div className='grid gap-4 grid-cols-12   mb-2'>
                                 {/* <div className='col-span-1 text-md font-bold'>Filter</div> */}
-                                <div className='col-span-3 '>
-                                <CampusSelect formik={formik} auto={true}/>
+                                <div className='col-span-12 md:col-span-3 '>
+                                <CampusSelect formik={formik} auto={true} isLoading={isLoading} setIsLoading={setIsLoading} />
 
 
 
                                 </div>
-                                <div className='col-span-3 hidden '>
+                                <div className='col-span-12 md:col-span-3 hidden '>
 
 {/* <AcademicSessionSelect formik={formik} campus_id={formik.values.campus_id} /> */}
 
 </div>
                                 {formik.values &&
-                                    <div className='col-span-2 flex flex-col justify-end '>
+                                    <div className={isLoading?'hidden':'  col-span-12 md:col-span-3 flex flex-col justify-end '}>
 
                                         <FormikSubmit formik={formik} label={'Filter'} />
                                     </div>

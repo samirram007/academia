@@ -3,9 +3,8 @@ import {
     fetchBuildings,   fetchFloor,  fetchFloors,  fetchRoom,
    fetchRooms,   fetchUser, fetchUsers } from '../services'
 
-import { fetchEducationBoard, fetchEducationBoards } from '../services/education_boards-api'
-import { fetchFee, fetchFees } from '../services/fees-api'
-import { fetchFeeTemplate, fetchFeeTemplates } from '../features/FeeTemplate/services/apis'
+
+
 import { fetchAddressType, fetchCaste, fetchGender, fetchGuardianType, fetchLanguage, fetchNationality, fetchReligion } from '../services/enums-api'
 
 
@@ -121,6 +120,13 @@ export function useGender() {
     return useQuery({
       queryKey: ['gender'],
       queryFn: fetchGender,
+      staleTime:Infinity
+    })
+}
+export function useSchoolType() {
+    return useQuery({
+      queryKey: ['school_type'],
+      queryFn: fetchSchoolType,
       staleTime:Infinity
     })
 }

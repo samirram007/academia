@@ -12,6 +12,6 @@ export function useCampuses() {
     return useQuery({
       queryKey: ['campuses'],
       queryFn: fetchCampuses,
-      staleTime: Infinity // keep data fresh for this period (1 min.)
+      staleTime: Infinity,
     })
   }

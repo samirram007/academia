@@ -3,7 +3,7 @@ export const FormikSubmit = (
 ) => {
     return (
         <>
-             <button type="submit" className='btn btn-primary btn-wide'>
+             <button type="submit" className='btn btn-primary '>
                         {label}
                         {formik.isSubmitting && (
                             <span

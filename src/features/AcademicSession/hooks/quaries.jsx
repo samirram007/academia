@@ -2,11 +2,12 @@ import { useQuery } from "@tanstack/react-query"
 import { fetchAcademicSession, fetchAcademicSessions } from "../services/apis"
 
 export function useAcademicSessions(payload) {
+
       return useQuery({
       queryKey: ['academic_sessions',payload],
       queryFn: ()=>fetchAcademicSessions(payload),
       staleTime:1000,
-      enabled:!!payload
+      enabled:!!payload.campus_id
     })
   }
   export function useAcademicSession(id) {

@@ -32,6 +32,7 @@ import { CreateSubject, EditSubject, Subjects } from '../pages/Subject';
 import { CreateStudent, EditStudent, Students } from '../pages/Student';
 import { CreateTeacher, EditTeacher, Teachers } from '../pages/Teacher';
 import { Dashboard } from '../pages/Dashboard';
+import { CreateSchoolType, EditSchoolType, SchoolTypes } from '../pages/SchoolType';
 
 
 export const common=(module) => {
@@ -97,16 +98,22 @@ export const page = [
        { path: 'edit/:id', name: 'Edit Fee Templates', element: <EditFeeTemplate /> ,   isMenu: false, isPrivate: false,},
       ]
     },
-    { path: 'academic_sessions',    name: 'Academic Sessions',    element:<AcademicSessions/>,     isMenu: true,   menuGroup:'ACADEMICS', isPrivate: false, icon:icons.academic_sessions, role:['admin'],
+    { path: 'academic_sessions',    name: 'Sessions',    element:<AcademicSessions/>,     isMenu: true,   menuGroup:'ACADEMICS', isPrivate: false, icon:icons.academic_sessions, role:['admin'],
       children: [
-       { path: 'create', name: 'New', element: <CreateAcademicSession /> ,   isMenu: false, isPrivate: false, icon:icons.create_academic_session},
-       { path: 'edit/:id', name: 'Edit Academic Session', element: <EditAcademicSession /> ,   isMenu: false, isPrivate: false,},
+       { path: 'create', name: 'New Session', element: <CreateAcademicSession /> ,   isMenu: false, isPrivate: false, icon:icons.create_academic_session},
+       { path: 'edit/:id', name: 'Edit Session', element: <EditAcademicSession /> ,   isMenu: false, isPrivate: false,},
       ]
     },
     { path: 'education_boards',    name: 'Education Boards',    element:<EducationBoards/>,     isMenu: true,   menuGroup:'SETTINGS', isPrivate: false, icon:icons.education_boards, role:['admin'],
       children: [
        { path: 'create', name: 'Create Education Board', element: <CreateEducationBoard /> ,   isMenu: false, isPrivate: false, icon:icons.create_education_board},
        { path: 'edit/:id', name: 'Edit Education Board', element: <EditEducationBoard /> ,   isMenu: false, isPrivate: false,},
+      ]
+    },
+    { path: 'school_types',    name: 'School Types',    element:<SchoolTypes/>,     isMenu: true,   menuGroup:'SETTINGS', isPrivate: false, icon:icons.school_types, role:['admin'],
+      children: [
+       { path: 'create', name: 'Create School Type', element: <CreateSchoolType /> ,   isMenu: false, isPrivate: false, icon:icons.create_school_type},
+       { path: 'edit/:id', name: 'Edit School Type', element: <EditSchoolType /> ,   isMenu: false, isPrivate: false,},
       ]
     },
     { path: 'schools',    name: 'Schools',    element:<Schools/>,     isMenu: true,   menuGroup:'SETTINGS', isPrivate: false, icon:icons.schools, role:['admin'],
@@ -127,7 +134,7 @@ export const page = [
        { path: 'edit/:id', name: 'Edit Designation', element: <EditDesignation /> ,   isMenu: false, isPrivate: false,},
       ]
     },
-    { path: 'academic_standard',    name: 'Academic Standard',    element:<AcademicStandards/>,     isMenu: true,   menuGroup:'ACADEMICS', isPrivate: false, icon:icons.academic_standards, role:['admin'],
+    { path: 'academic_standard',    name: 'Standard',    element:<AcademicStandards/>,     isMenu: true,   menuGroup:'ACADEMICS', isPrivate: false, icon:icons.academic_standards, role:['admin'],
       children: [
        { path: 'create', name: 'Create Standard', element: <CreateAcademicStandard /> ,   isMenu: false, isPrivate: false, icon:icons.create_academic_standard},
        { path: 'edit/:id', name: 'Edit Standard', element: <EditAcademicStandard /> ,   isMenu: false, isPrivate: false,},

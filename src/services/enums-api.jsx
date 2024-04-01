@@ -27,6 +27,7 @@ export function fetchGender() {
         });
 
 }
+
 export function  fetchGuardianType(){
     return axiosClient.get("/guardian_type")
         .then(response => {

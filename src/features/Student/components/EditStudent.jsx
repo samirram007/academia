@@ -64,7 +64,7 @@ const EditStudent = () => {
         <div className='pb-10 w-full'>
             <div className='row  flex flex-col md:flex-row justify-between gap-2 border-b-2 border-blue-300/10 pb-2 mb-2 '>
                 <div className='flex flex-col gap-2 flex-1 text-3xl'>
-                    {'Edit Student'}
+                    {/* {'Edit Student'} */}
                     <Breadcrumbs />
                 </div>
                 <div className='flex flex-row gap-2 flex-1'>

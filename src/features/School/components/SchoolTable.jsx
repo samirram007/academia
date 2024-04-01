@@ -6,6 +6,8 @@ import { useMemo } from 'react';
 import { DateTime } from 'luxon'
 import BasicTable from '../../../components/tables/BasicTable';
 import { useSchools } from '../hooks/queries';
+import CreateSchool from './CreateSchool';
+import EditSchool from './EditSchool';
 const SchoolTable = () => {
     const SchoolData = useSchools()
 
@@ -45,30 +47,23 @@ const SchoolTable = () => {
             accessorKey: 'action',
             align: 'center',
             cell: ({row})=>{
-                return (
-                    <div className="flex justify-start md:justify-center  items-center">
-                        <button onClick={()=>{ editSchoolData(row.original.id)}}
-                        className="btn btn-blue btn-sm btn-rounded ">
-                            Edit
-                        </button>
-                        <button onClick={()=>{ deleteSchoolData(row.original.id)}}
-                        className="btn btn-red btn-sm btn-rounded ml-2">
-                            Delete
-                        </button>
-                    </div>
-                )
+              return (
+                <div className="flex justify-start md:justify-center  items-center gap-2">
+                 <EditSchool initialValues={row.original} />
+                 <DeleteSchool initialValues={row.original} />
+
+                </div>
+              )
             }
         }
 
       ]
-      const editSchoolData=(id)=>{
-        alert(id)
-      }
-      const deleteSchoolData=(id)=>{
-        alert(id)
-      }
+
   return (
-    <BasicTable data={data} columns={columns} createRoute={createRoute} />
+    <BasicTable data={data} columns={columns}
+    createForm={<CreateSchool modal={true} />}
+    createFormTitle="Create School"
+     />
   )
 }
 
