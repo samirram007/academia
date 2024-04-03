@@ -19,11 +19,11 @@ const Breadcrumbs = () => {
                     pathnames.length >1 ?
                     <>
                     <li><Link to={`/${pathnames[0]}`}>{ToWordCase(pathnames[0])}</Link></li>
-                     <li className='active !text-blue-600'>{ToWordCase(pathnames[1])}</li>
+                     <li className='active !text-[#7480ff]'>{ToWordCase(pathnames[1])}</li>
                     </>
 
                       :
-                     <li className='active !text-blue-600'>{ToWordCase(pathnames[0])}</li>
+                     <li className='active !text-[#7480ff]'>{ToWordCase(pathnames[0])}</li>
                    : null
 
                 }

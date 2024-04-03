@@ -42,7 +42,7 @@ export function useUpdateAcademicSessionMutation() {
     })
   }
 export function useDeleteAcademicSessionMutation() {
-  console.log('hooks deleting...')
+
     const navigate = useNavigate()
     return useMutation({
       mutationFn: deleteAcademicSession,

@@ -25,19 +25,12 @@ const validationSchema = Yup.object().shape({
 
 
 
-const CreateAcademicSession = ({ modal }) => {
+const CreateAcademicSession = ({ initialValues,modal }) => {
 
 
     const [entryMode, setEntryMode] = useState('create');
 
-    const editData = {
-        name: '',
 
-    }
-
-    const initialValues = editData ?? {
-        name: '',
-    }
 
 
 

@@ -1,15 +1,19 @@
-import React, { useState } from 'react'
+import React from 'react'
 import * as Yup from "yup";
-import { useCampuses } from '../../Campus/hooks/queries';
-import { useDeleteSchoolTypeMutation, useStoreSchoolTypeMutation, useUpdateSchoolTypeMutation } from '../hooks/mutations';
+
+import {
+    useDeleteSchoolTypeMutation,
+    useStoreSchoolTypeMutation,
+    useUpdateSchoolTypeMutation
+} from '../hooks/mutations';
 import { useFormik } from 'formik';
-import { CampusSelect } from '../../Common/components/CampusSelect';
-import { FormikCheckBox, FormikInputBox } from '../../../components/form-components';
-import { SchoolTypeSelect } from '../../Common/components/SchoolTypeSelect';
+
+import { FormikInputBox } from '../../../components/form-components';
+
 
 const validationSchema = Yup.object().shape({
-    session: Yup.string()
-        .required("Session is required"),
+    name: Yup.string()
+        .required("School Type is required"),
 
 })
 
@@ -57,7 +61,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
 
                         <div>
-                            <FormikInputBox formik={formik} name="name" label="Session" />
+                            <FormikInputBox formik={formik} name="name" label="School Type" />
 
                         </div>
 

@@ -52,7 +52,7 @@ export const HandleSelect = (
                 value={formik.values[name]}
                 className={`select  w-full ${formik.errors[name] ? 'select-error' : 'select-primary'}`}
             >
-                <option value=''      >-- please select</option>
+                <option value='0'      >-- please select</option>
                 {props.options}
             </select>
             {formik.touched[name] && formik.errors[name] ? <div className='text-error text-sm pl-2'>{formik.errors[name]}</div> : null}

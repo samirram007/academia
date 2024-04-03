@@ -42,7 +42,7 @@ export function useUpdateEducationBoardMutation() {
     })
   }
 export function useDeleteEducationBoardMutation() {
-  console.log('hooks deleting...')
+
     const navigate = useNavigate()
     return useMutation({
       mutationFn: deleteEducationBoard,

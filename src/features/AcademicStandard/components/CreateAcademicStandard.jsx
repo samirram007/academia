@@ -2,10 +2,11 @@ import { Formik, Form, Field, useFormik, ErrorMessage } from 'formik'
 import React, { useEffect, useState } from 'react'
   import Select from 'react-select';
 import * as Yup from "yup";
-import { useCampuses } from '../../../hooks/queries';
+
 
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import { useStoreAcademicStandardMutation } from '../hooks/mutations';
+import { useCampuses } from '../../Campus/hooks/queries';
 const validationSchema = Yup.object().shape({
     session: Yup.string()
         .required("Session is required"),

@@ -21,15 +21,17 @@ const CreateSchool = ({ modal }) => {
 
     const editData = {
         name: '',
-        code:'',
-        education_board_id:'',
-        address_id:'',
-        contact_no:'',
+        code: '',
+        email: '',
+        address_id: null,
+        description:'',
+        contact_no: '',
         email:'',
         website:'',
-        establishment_date:'',
-        school_type_id:'',
-        logo_image_id:''
+        establishment_date:null,
+        logo_image_id:null,
+        school_type_id:null,
+        education_board_id:null,
 
 
 

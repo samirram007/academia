@@ -5,13 +5,10 @@ import * as Yup from "yup";
 import { CampusSelect } from '../../Common/components/CampusSelect';
 import { FormikSubmit } from '../../../components/form-components';
 import { AcademicSessionSelect } from '../../Common/components/AcademicSessionSelect';
-import { useState } from 'react';
-
-
-
+import {   useState } from 'react';
 
 const validationSchema = Yup.object().shape({
-    campus_id: Yup.number().integer()
+    // campus_id: Yup.number().integer()
     //     .min(1, "Please select Campus")
     //     .required("Please select Campus"),
     // academic_session_id: Yup.number().integer()
@@ -23,25 +20,39 @@ const validationSchema = Yup.object().shape({
 })
 
 
-const Filter = ({ AcademicSessionData, initialValues }) => {
-    const [isLoading,setIsLoading]=useState(true)
+const Filter = ({ AcademicSessionData,  initialFilterValues }) => {
+    // const { data:AcademicSessionData,refetch,isFetching} = useAcademicSessions({campus_id:initialValues.campus_id})
+    // const  AcademicSessionData  = useAcademicSessions(initialFilterValues)
+    const [isLoading, setIsLoading] = useState(AcademicSessionData.isLoading)
+
     const formik = useFormik({
-        initialValues,
-        validationSchema,
-        enableReinitialize: true,
-        onSubmit:   values => {
+        initialValues:initialFilterValues,
+         enableReinitialize: true,
 
-            Object.assign(initialValues, values);
+        onSubmit: (values,{setSubmitting}) => {
 
-                AcademicSessionData.refetch()
+            Object.assign(initialFilterValues, values);
+           AcademicSessionData.refetch()
+           setTimeout(() => {
 
+               setSubmitting(false)
+           }, 500);
+
+
+
+
+        },
+        onError: (errors, values,{setSubmitting}) => {
+            console.log(errors, values)
+            setSubmitting(false)
 
         }
     })
 
 
+
     return (
-        <div className={isLoading?'hidden':'flex-1 flex flex-col justify-end bg-slate-900/10 rounded-lg '}>
+        <div className={isLoading ? 'hidden' : 'flex-1 flex flex-col justify-end bg-slate-900/10 rounded-lg '}>
             <form onSubmit={formik.handleSubmit}>
                 <div className='grid grid-cols-1  '>
                     <div className='grid grid-flow-row md:grid-flow-col grid-cols-6 gap-5'>
@@ -49,18 +60,18 @@ const Filter = ({ AcademicSessionData, initialValues }) => {
                             <div className='grid gap-4 grid-cols-12   mb-2'>
                                 {/* <div className='col-span-1 text-md font-bold'>Filter</div> */}
                                 <div className='col-span-12 md:col-span-3 '>
-                                <CampusSelect formik={formik} auto={true} isLoading={isLoading} setIsLoading={setIsLoading} />
+                                    <CampusSelect formik={formik} auto={true} isLoading={isLoading} setIsLoading={setIsLoading} />
 
 
 
                                 </div>
                                 <div className='col-span-12 md:col-span-3 hidden '>
 
-{/* <AcademicSessionSelect formik={formik} campus_id={formik.values.campus_id} /> */}
+                                    <AcademicSessionSelect formik={formik} campus_id={formik.values.campus_id} />
 
-</div>
+                                </div>
                                 {formik.values &&
-                                    <div className={isLoading?'hidden':'  col-span-12 md:col-span-3 flex flex-col justify-end '}>
+                                    <div className={isLoading ? 'hidden' : '  col-span-12 md:col-span-3 flex flex-col justify-end '}>
 
                                         <FormikSubmit formik={formik} label={'Filter'} />
                                     </div>
@@ -74,5 +85,5 @@ const Filter = ({ AcademicSessionData, initialValues }) => {
     )
 }
 
-export default  Filter
+export default Filter
 

@@ -30,21 +30,25 @@ const EducationBoardTable = () => {
   /** @type {import('@tanstack/react-table').ColumnDef<any>} */
   const columns = [
     {
-      header: "ID",
-      accessorKey: "id",
-      visible: false,
-      size: 50,
-
+      header: "ID",      accessorKey: "id",      visible: false,      size: 50,
     },
     {
-      header: "Name",
-      accessorKey: "name",
-      size: 300,
+      header: "Name",      accessorKey: "name",      size: 300,
     },
     {
-      header: 'Establishment Date',
-      accessorKey: 'establishment_date',
-      cell: info =>
+      header: "Code",      accessorKey: "code",      size: 50,
+    },
+    {
+      header: "Email",      accessorKey: "email",      size: 50,
+    },
+    {
+      header: "Contact No",      accessorKey: "contact_no",      size: 50,
+    },
+    {
+      header: "Website",      accessorKey: "website",      size: 50,
+    },
+    {
+      header: 'Establishment Date',      accessorKey: 'establishment_date',      cell: info =>
         DateTime.fromISO(info.getValue()).toLocaleString(DateTime.DATE_MED),
     },
     {

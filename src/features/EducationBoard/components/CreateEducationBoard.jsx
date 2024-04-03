@@ -9,73 +9,28 @@ const [entryMode,setEntryMode]=useState('create');
 
     const editData = {
         name: '',
-        username: '',
         code: '',
-        password: '',
-        user_type: 'student',
         email: '',
+        address_id: null,
+        description:'',
         contact_no: '',
-        status: 'active',
-        emergency_contact_name: '',
-        emergency_contact_no: '',
-        birth_mark: '',
-        medical_conditions: '',
-        allergies: '',
-        language: 'hi',
-        nationality: 'indian',
-        religion: 'hindu',
-        caste: 'general',
-        gender: 'male',
-        dob: '',
-        doj: '',
-        aadhaar_no: '',
-        pan_no: '',
-        passport_no: '',
-        bank_name: '',
-        account_holder_name: '',
-        bank_account_no: '',
-        bank_ifsc: '',
-        bank_branch: '',
-        admission_no: '',
-        admission_date: '',
-        campus_id: 1,
-        profile_document_id: 1,
-        guardian:null
+        email:'',
+        website:'',
+        establishment_date: '',
+        logo_image_id:null,
 
     }
     const initialValues = editData ?? {
         name: '',
-        username: '',
         code: '',
-        password: '',
-        user_type: 'student',
         email: '',
+        address_id: null,
+        description:'',
         contact_no: '',
-        status: 'active',
-        emergency_contact_name: '',
-        emergency_contact_no: '',
-        birth_mark: '',
-        medical_conditions: '',
-        allergies: '',
-        language: 'Hindi',
-        nationality: 'Indian',
-        religion: 'Hindu',
-        caste: 'General',
-        gender: 'Male',
-        dob: '',
-        doj: '',
-        aadhaar_no: '',
-        pan_no: '',
-        passport_no: '',
-        bank_name: '',
-        account_holder_name: '',
-        bank_account_no: '',
-        bank_ifsc: '',
-        bank_branch: '',
-        admission_no: '',
-        admission_date: '',
-        campus_id: 1,
-        profile_document_id: 1
+        email:'',
+        website:'',
+        establishment_date: '',
+        logo_image_id:null,
     }
 
 
@@ -84,7 +39,7 @@ const [entryMode,setEntryMode]=useState('create');
         <div className='pb-10 w-full'>
             <div className='row  flex flex-col md:flex-row justify-between gap-2 border-b-2 border-blue-300/10 pb-2 mb-2 '>
                 <div className='flex flex-col gap-2 flex-1 text-3xl'>
-                    {/* {'New Student'} */}
+
                     <Breadcrumbs />
                 </div>
                 <div className='flex flex-row gap-2 flex-1'>

@@ -6,7 +6,7 @@ import {
     getSortedRowModel,
     useReactTable,
 } from '@tanstack/react-table'
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useState } from 'react'
 import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import { useCustomRoutes } from '../../hooks'
@@ -31,7 +31,7 @@ export default function BasicTable({ data, columns, pageSize = 10, createRoute,
     const [filtering, setFiltering] = useState('')
     const [searchParams, setSearchParams] = useSearchParams()
 
-    const [showFilter, setShowFilter] = useState(true)
+    const [showFilter, setShowFilter] = useState(false)
     const [pagination, setPagination] = useState({
         pageIndex: 0,
         pageSize: pageSize,
@@ -68,7 +68,13 @@ export default function BasicTable({ data, columns, pageSize = 10, createRoute,
         )
 
     }, [pagination]);
+useMemo(()=>{
+    if(filter){
 
+        setShowFilter(prev=>true)
+
+    }
+},[])
     return (
         <div className='container-flex md-container'>
             <div className='row   flex flex-col md:flex-row justify-between gap-2 border-b-2 border-blue-300/10 pb-2 '>
@@ -117,15 +123,16 @@ export default function BasicTable({ data, columns, pageSize = 10, createRoute,
 
 
                         }
-                        <FilterButton
+                        { <FilterButton
                             filter={filter}
                             showFilter={showFilter}
                             setShowFilter={setShowFilter} />
+                            }
                     </div>
 
                 </div>
             </div>
-            <div className={`${showFilter? 'flex  ' : 'hidden'}`}>
+            <div className={`${( !showFilter) ? 'hidden' : 'flex  '}`}>
                 {filter &&  filter}
             </div>
 
@@ -225,7 +232,6 @@ export default function BasicTable({ data, columns, pageSize = 10, createRoute,
 export const FilterButton = ({ filter, showFilter, setShowFilter }) => {
     const handleSwitchFilter = () => {
         setShowFilter(!showFilter)
-        //console.log('showFilter',showFilter)
     }
     return (
         <button onClick={handleSwitchFilter}

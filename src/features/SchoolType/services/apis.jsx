@@ -1,14 +1,14 @@
 import axiosClient from "../../../utils/axios-client";
 
 
-export function  fetchSchoolType(id){
+export function  fetchSchoolTypeService(id){
 
    return  axiosClient.get(`/school_types/${id}`)
     .then(({ data }) => {
         return data;
     })
 }
-export function fetchSchoolTypes(payload) {
+export function fetchSchoolTypesService(payload) {
 
        return axiosClient.get(`/school_types`)
         .then(response => {
@@ -20,18 +20,8 @@ export function fetchSchoolTypes(payload) {
         });
 
 }
-export function fetchSchoolTypeByCampusId(campusId) {
 
-    return axiosClient.get(`/school_types?campus_id=${campusId}`)
-        .then(response => {
-            return response.data;
-        })
-        .catch(err => {
-            throw err;
-        });
-
-}
-export function storeSchoolType(payload) {
+export function storeSchoolTypeService(payload) {
 
       return axiosClient.post("/school_types", payload)
       .then(response => {
@@ -39,7 +29,7 @@ export function storeSchoolType(payload) {
       })
 
 }
-export function updateSchoolType(payload) {
+export function updateSchoolTypeService(payload) {
     console.log("Axios",payload)
 const {id,...data}=payload
       return axiosClient.put(`/school_types/${id}`, data)
@@ -48,7 +38,7 @@ const {id,...data}=payload
       })
 
 }
-export function deleteSchoolType(payload) {
+export function deleteSchoolTypeService(payload) {
    // console.log("Axios Deleting",payload)
 const {id,...data}=payload
       return axiosClient.delete(`/school_types/${id}`)
