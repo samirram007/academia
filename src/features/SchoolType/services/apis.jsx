@@ -30,7 +30,7 @@ export function storeSchoolTypeService(payload) {
 
 }
 export function updateSchoolTypeService(payload) {
-    console.log("Axios",payload)
+
 const {id,...data}=payload
       return axiosClient.put(`/school_types/${id}`, data)
       .then(response => {

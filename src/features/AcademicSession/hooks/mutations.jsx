@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { deleteAcademicSession, storeAcademicSession, updateAcademicSession } from "../services/apis";
+import { deleteAcademicSessionService, storeAcademicSessionService, updateAcademicSessionService } from "../services/apis";
 import { queryClient } from "../../../utils/queryClient";
 import { Flip, toast } from "react-toastify";
 
@@ -8,7 +8,7 @@ import { Flip, toast } from "react-toastify";
 export function useStoreAcademicSessionMutation() {
     const navigate = useNavigate()
     return useMutation({
-      mutationFn: storeAcademicSession,
+      mutationFn: storeAcademicSessionService,
       onSuccess: (data) => {
 
        queryClient.invalidateQueries({ queryKey: ['academic_sessions'] })
@@ -26,7 +26,7 @@ export function useStoreAcademicSessionMutation() {
 export function useUpdateAcademicSessionMutation() {
     const navigate = useNavigate()
     return useMutation({
-      mutationFn: updateAcademicSession,
+      mutationFn: updateAcademicSessionService,
       onSuccess: (data) => {
 
        queryClient.invalidateQueries({ queryKey: ['academic_sessions'] })
@@ -45,7 +45,7 @@ export function useDeleteAcademicSessionMutation() {
 
     const navigate = useNavigate()
     return useMutation({
-      mutationFn: deleteAcademicSession,
+      mutationFn: deleteAcademicSessionService,
       onSuccess: (data) => {
 
        queryClient.invalidateQueries({ queryKey: ['academic_sessions'] })

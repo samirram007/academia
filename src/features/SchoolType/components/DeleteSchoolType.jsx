@@ -16,7 +16,7 @@ const DeleteSchoolType = ({ initialValues }) => {
         Delete
       </button>
       {isOpen &&
-        <FormikEditFormModal isOpen={isOpen} setOpen={setOpen} label="Delete Academic Session">
+        <FormikEditFormModal isOpen={isOpen} setOpen={setOpen} label="Delete School Type">
 
           <EntryForm
             initialValues={initialValues}

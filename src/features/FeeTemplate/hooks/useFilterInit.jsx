@@ -3,7 +3,7 @@ import { fetchFeeTemplates } from "../services/apis"
 import { useAcademicClasses } from "../../AcademicClass/hooks/queries"
 import { useAcademicSessions } from "../../AcademicSession/hooks/quaries"
 import { useCampuses } from "../../Campus/hooks/queries"
-import { fetchCampuses } from "../../Campus/services/apis"
+import { fetchCampusesService } from "../../Campus/services/apis"
 import { queryClient } from "../../../utils/queryClient"
 import { useMemo } from "react"
 

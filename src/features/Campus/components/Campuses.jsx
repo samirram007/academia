@@ -15,3 +15,4 @@ import CampusTable from './CampusTable'
     )
 }
 export default Campuses
+

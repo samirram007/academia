@@ -1,14 +1,14 @@
 import axiosClient from "../../../utils/axios-client";
 
 
-export function  fetchAcademicSession(id){
+export function  fetchAcademicSessionService(id){
 
    return  axiosClient.get(`/academic_sessions/${id}`)
     .then(({ data }) => {
         return data;
     })
 }
-export function fetchAcademicSessions(payload) {
+export function fetchAcademicSessionServices(payload) {
 
        return axiosClient.get(`/academic_sessions?campus_id=${payload.campus_id}`)
         .then(response => {
@@ -19,7 +19,7 @@ export function fetchAcademicSessions(payload) {
         });
 
 }
-export function fetchAcademicSessionByCampusId(campusId) {
+export function fetchAcademicSessionByCampusIdService(campusId) {
 
     return axiosClient.get(`/academic_sessions?campus_id=${campusId}`)
         .then(response => {
@@ -30,7 +30,7 @@ export function fetchAcademicSessionByCampusId(campusId) {
         });
 
 }
-export function storeAcademicSession(payload) {
+export function storeAcademicSessionService(payload) {
 
       return axiosClient.post("/academic_sessions", payload)
       .then(response => {
@@ -38,7 +38,7 @@ export function storeAcademicSession(payload) {
       })
 
 }
-export function updateAcademicSession(payload) {
+export function updateAcademicSessionService(payload) {
     console.log("Axios",payload)
 const {id,...data}=payload
       return axiosClient.put(`/academic_sessions/${id}`, data)
@@ -47,7 +47,7 @@ const {id,...data}=payload
       })
 
 }
-export function deleteAcademicSession(payload) {
+export function deleteAcademicSessionService(payload) {
    // console.log("Axios Deleting",payload)
 const {id,...data}=payload
       return axiosClient.delete(`/academic_sessions/${id}`)

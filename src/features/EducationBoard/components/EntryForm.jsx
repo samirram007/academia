@@ -11,6 +11,7 @@ import { useDeleteEducationBoardMutation, useStoreEducationBoardMutation, useUpd
 const validationSchema = Yup.object().shape({
     name: Yup.string()
         .required("Name is required"),
+        email: Yup.string(),
 
 })
 
@@ -24,7 +25,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
     const handleFormSubmit = (values) => {
         if (entryMode === 'create') {
             educationBoardStoreMutation.mutate(values)
-        } else if (entryMode === 'edit') {
+        } else if (entryMode ==='edit') {
             educationBoardUpdateMutation.mutate(values)
         } else if (entryMode === 'delete') {
             educationBoardDeleteMutation.mutate(values)
@@ -33,6 +34,8 @@ const EntryForm = ({ initialValues, entryMode }) => {
             console.log('Invalid entry mode')
         }
     }
+// use Continue extension
+
 
 
     const formik = useFormik({
@@ -40,7 +43,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
         validationSchema,
         enableReinitialize: true,
         onSubmit: values => {
-            console.log(values);
+
             handleFormSubmit(values)
         }
     })

@@ -1,17 +1,17 @@
 import { useQuery } from "@tanstack/react-query"
- import { fetchCampusById, fetchCampuses } from "../services/apis"
+ import { fetchCampusByIdService, fetchCampusesService } from "../services/apis"
 
  export function useCampus(id) {
     return useQuery({
       queryKey: ['campuses',{id}],
-      queryFn: ()=>fetchCampusById(id),
+      queryFn: ()=>fetchCampusByIdService(id),
       staleTime:Infinity
     })
   }
 export function useCampuses() {
     return useQuery({
       queryKey: ['campuses'],
-      queryFn: fetchCampuses,
+      queryFn: fetchCampusesService,
       staleTime: Infinity,
     })
   }

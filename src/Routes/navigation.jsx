@@ -15,6 +15,7 @@ import { Documents } from '../pages/Document';
 import { Login } from '../pages/Auth';
 
 import { CreateSchool, EditSchool, Schools } from '../pages/School';
+import { CreateSection, EditSection, Sections } from '../pages/Section';
 import { CreateDepartment, EditDepartment, Departments } from '../pages/Department';
 import { CreateDesignation, EditDesignation, Designations } from '../pages/Designation';
 import { Buildings, CreateBuilding, EditBuilding } from '../pages/Building';
@@ -144,6 +145,12 @@ export const page = [
       children: [
        { path: 'create', name: 'Create Class', element: <CreateAcademicClass /> ,   isMenu: false, isPrivate: false, icon:icons.create_academic_class},
        { path: 'edit/:id', name: 'Edit Class', element: <EditAcademicClass /> ,   isMenu: false, isPrivate: false,},
+      ]
+    },
+    { path: 'sections',    name: 'Sections',    element:<Sections/>,     isMenu: true,   menuGroup:'ACADEMICS', isPrivate: false, icon:icons.sections, role:['admin'],
+      children: [
+       { path: 'create', name: 'Create Section', element: <CreateSection /> ,   isMenu: false, isPrivate: false, icon:icons.create_section},
+       { path: 'edit/:id', name: 'Edit Section', element: <EditSection /> ,   isMenu: false, isPrivate: false,},
       ]
     },
     { path: 'subjects',    name: 'Subjects',    element:<Subjects/>,     isMenu: true,   menuGroup:'ACADEMICS', isPrivate: false, icon:icons.subjects, role:['admin'],
