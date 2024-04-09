@@ -5,7 +5,7 @@ import {
 
 
 
-import { fetchAddressType, fetchCaste, fetchGender, fetchGuardianType, fetchLanguage, fetchNationality, fetchReligion } from '../services/enums-api'
+import { fetchAddressType, fetchCaste, fetchGender, fetchGuardianType, fetchLanguage, fetchNationality, fetchReligion, fetchRoomType } from '../services/enums-api'
 
 
 
@@ -23,99 +23,6 @@ export function useUser() {
   })
 }
 
-export function useSubjects() {
-  return useQuery({
-    queryKey: ['subjects'],
-    queryFn: fetchSubjects,
-  })
-}
-export function useSubject(id) {
-  return useQuery({
-    queryKey: ['subjects',id],
-    queryFn: ()=>fetchSubject(id),
-  })
-}
-
-
-export function useDepartments() {
-  return useQuery({
-    queryKey: ['departments'],
-    queryFn: fetchDepartments,
-  })
-}
-export function useDepartment(id) {
-  return useQuery({
-    queryKey: ['department',id],
-    queryFn: ()=>fetchDepartment(id),
-  })
-}
-
-export function useDesignation(id) {
-  return useQuery({
-    queryKey: ['designation',id],
-    queryFn: ()=>fetchDesignation(id),
-  })
-}
-export function useDesignations() {
-    return useQuery({
-      queryKey: ['designations'],
-      queryFn: fetchDesignations,
-
-    })
-
-}
-export function useBuilding(id) {
-  return useQuery({
-    queryKey: ['building',id],
-    queryFn: ()=>fetchBuilding(id),
-  })
-}
-export function useBuildings() {
-    return useQuery({
-      queryKey: ['buildings'],
-      queryFn: fetchBuildings,
-
-    })
-
-}
-export function useFloor(id) {
-  return useQuery({
-    queryKey: ['floor',id],
-    queryFn: ()=>fetchFloor(id),
-  })
-}
-export function useFloors() {
-    return useQuery({
-      queryKey: ['floors'],
-      queryFn: fetchFloors,
-    })
-}
-export function useRoom(id) {
-  return useQuery({
-    queryKey: ['room',id],
-    queryFn: ()=>fetchRoom(id),
-  })
-}
-export function useRooms() {
-    return useQuery({
-      queryKey: ['rooms'],
-      queryFn: fetchRooms,
-    })
-}
-export function useEducationBoard(id) {
-  return useQuery({
-    queryKey: ['education_board',id],
-    queryFn: ()=>fetchEducationBoard(id),
-    staleTime:Infinity
-  })
-}
-export function useEducationBoards() {
-    return useQuery({
-      queryKey: ['education_boards'],
-      queryFn: fetchEducationBoards,
-      staleTime:Infinity
-    })
-}
 export function useGender() {
     return useQuery({
       queryKey: ['gender'],
@@ -148,6 +55,13 @@ export function useGuardianType() {
     return useQuery({
       queryKey: ['guardian_type'],
       queryFn: fetchGuardianType,
+      staleTime:Infinity
+    })
+}
+export function useRoomType() {
+    return useQuery({
+      queryKey: ['room_type'],
+      queryFn: fetchRoomType,
       staleTime:Infinity
     })
 }

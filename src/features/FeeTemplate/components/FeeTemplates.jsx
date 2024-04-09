@@ -1,5 +1,5 @@
 import React from 'react'
-import FeeTemplateTable from './FeeTemplateTable'
+import FeeTemplateTable from './DataTable'
  const FeeTemplates = () => {
     return (
         <>

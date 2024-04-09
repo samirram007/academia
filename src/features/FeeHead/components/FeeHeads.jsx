@@ -1,6 +1,6 @@
 import React from 'react'
 
-import FeeHeadTable from './FeeHeadTable'
+import FeeHeadTable from './DataTable'
 
  const FeeHeads = () => {
 

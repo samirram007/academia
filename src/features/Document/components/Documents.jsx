@@ -27,11 +27,8 @@ import { useDocumentDeleteMutation, useUpdateDocumentMutation } from '../hooks/m
 
 
 const Documents = ({setImageId,setImageSrc}) => {
-   // console.log(setImageId,setImageSrc);
-
-     const [showUploadPanel, setShowUploadPanel] = useState(false);
+    const [showUploadPanel, setShowUploadPanel] = useState(false);
     const docQuery = useDocumentQuery()
-
 
 
 

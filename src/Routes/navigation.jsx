@@ -135,7 +135,7 @@ export const page = [
        { path: 'edit/:id', name: 'Edit Designation', element: <EditDesignation /> ,   isMenu: false, isPrivate: false,},
       ]
     },
-    { path: 'academic_standard',    name: 'Standard',    element:<AcademicStandards/>,     isMenu: true,   menuGroup:'ACADEMICS', isPrivate: false, icon:icons.academic_standards, role:['admin'],
+    { path: 'academic_standards',    name: 'Standard',    element:<AcademicStandards/>,     isMenu: true,   menuGroup:'ACADEMICS', isPrivate: false, icon:icons.academic_standards, role:['admin'],
       children: [
        { path: 'create', name: 'Create Standard', element: <CreateAcademicStandard /> ,   isMenu: false, isPrivate: false, icon:icons.create_academic_standard},
        { path: 'edit/:id', name: 'Edit Standard', element: <EditAcademicStandard /> ,   isMenu: false, isPrivate: false,},

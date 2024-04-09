@@ -1,8 +1,8 @@
 import { lazy } from 'react';
 
 const FeeHeads =  lazy(() => import('./FeeHeads'));
-const CreateFeeHead =  lazy(() => import('./CreateFeeHead'));
-const EditFeeHead =  lazy(() => import('./EditFeeHead'));
+const CreateFeeHead =  lazy(() => import('./Create'));
+const EditFeeHead =  lazy(() => import('./Edit'));
 
 export {FeeHeads,CreateFeeHead, EditFeeHead};
 

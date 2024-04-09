@@ -1,15 +1,18 @@
 import { useQuery } from "@tanstack/react-query"
-import { fetchAcademicStandard, fetchAcademicStandards  } from "../services/apis"
+import { fetchAcademicStandardService, fetchAcademicStandardsService } from "../services/apis"
 
 export function useAcademicStandards() {
-    return useQuery({
+
+      return useQuery({
       queryKey: ['academic_standards'],
-      queryFn: fetchAcademicStandards,
+      queryFn:fetchAcademicStandardsService,
+      staleTime:1000,
     })
   }
   export function useAcademicStandard(id) {
     return useQuery({
       queryKey: ['academic_standards',id],
-      queryFn: ()=>fetchAcademicStandard(id),
+      queryFn: ()=>fetchAcademicStandardService(id),
     })
   }
+

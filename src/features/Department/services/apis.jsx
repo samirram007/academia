@@ -30,12 +30,17 @@ export function storeDepartmentService(payload) {
 
 }
 export function updateDepartmentService(payload) {
-    console.log("Axios",payload)
+
 const {id,...data}=payload
       return axiosClient.put(`/departments/${id}`, data)
       .then(response => {
+
           return response.data;
       })
+      .catch(err => {
+
+          throw err;
+       })
 
 }
 export function deleteDepartmentService(payload) {

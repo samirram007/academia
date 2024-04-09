@@ -41,6 +41,7 @@ export const HandleSelect = (
           //  console.log('Hello',formik.values);
             formik.values.academic_session_id && formik.setFieldValue('academic_session_id', ''); // Reset academic_session_id
             formik.values.academic_class_id && formik.setFieldValue('academic_class_id', ''); // Reset academic_class_id
+            formik.values.building_id && formik.setFieldValue('building_id', ''); // Reset academic_class_id
         }
     };
     return (

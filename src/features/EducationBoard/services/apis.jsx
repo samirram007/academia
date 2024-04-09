@@ -40,7 +40,7 @@ export function storeEducationBoard(payload) {
 
 }
 export function updateEducationBoard(payload) {
-    console.log("Axios",payload)
+
 const {id,...data}=payload
       return axiosClient.put(`/education_boards/${id}`, data)
       .then(response => {

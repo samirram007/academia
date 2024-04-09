@@ -9,6 +9,7 @@ export const FormModalProvider = ({ children }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const setOpen = (open) => {
+
         setIsOpen(open);
     };
 

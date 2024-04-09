@@ -68,6 +68,7 @@ export function  fetchReligion(){
 export function  fetchRoomType(){
     return axiosClient.get("/room_type")
         .then(response => {
+
             return response.data;
         })
         .catch(err => {
