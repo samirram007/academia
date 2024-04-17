@@ -11,9 +11,8 @@ export function  fetchSubjectService(id){
 }
 export function fetchSubjectsService(payload) {
 
-       return axiosClient.get(`/subjects`)
+       return axiosClient.get(`/subjects?academic_standard_id=${payload.academic_standard_id}&subject_group_id=${payload.subject_group_id}`)
         .then(response => {
-           // console.log('fetched',response.data)
             return response.data;
         })
         .catch(err => {
@@ -33,6 +32,7 @@ export function storeSubjectService(payload) {
 export function updateSubjectService(payload) {
 
 const {id,...data}=payload
+
       return axiosClient.put(`/subjects/${id}`, removeEmptyStrings(data))
       .then(response => {
           return response.data;

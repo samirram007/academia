@@ -26,20 +26,17 @@ const EntryForm = ({ initialValues, entryMode }) => {
     const buildingDeleteMutation = useDeleteBuildingMutation()
 
     const handleFormSubmit = (values) => {
-        //  console.log('values',values)
         if (entryMode === 'create') {
             buildingStoreMutation.mutate(values)
         } else if (entryMode === 'edit') {
-            console.log('edit', values)
             buildingUpdateMutation.mutate(values)
 
         } else if (entryMode === 'delete') {
-            console.log('delete', values)
             buildingDeleteMutation.mutate(values)
 
         }
         else {
-            console.log('Invalid entry mode')
+            console.info('Invalid entry mode')
         }
     }
 

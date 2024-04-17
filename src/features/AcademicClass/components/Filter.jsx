@@ -38,12 +38,9 @@ const Filter = ({ AcademicClassData,  initialFilterValues }) => {
                setSubmitting(false)
            }, 500);
 
-
-
-
         },
         onError: (errors, values,{setSubmitting}) => {
-            console.log(errors, values)
+
             setSubmitting(false)
 
         }

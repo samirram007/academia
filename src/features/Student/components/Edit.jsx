@@ -11,7 +11,7 @@ import { useStudent } from '../hooks/queries';
 
 
 
-const EditStudent = () => {
+const Edit = () => {
     const { id } = useParams();
     const [entryMode,setEntryMode]=useState('edit');
     const {data:editData,isError, isLoading}=useStudent(id)
@@ -82,5 +82,5 @@ const EditStudent = () => {
 }
 
 
-export default EditStudent
+export default Edit
 

@@ -13,7 +13,6 @@ export function useStoreFeeHeadMutation() {
   return useMutation({
     mutationFn: storeFeeHead,
     onSuccess: (data) => {
-      console.log(data)
      queryClient.invalidateQueries({ queryKey: ['fee_heads'] })
       toast.success(data.message, { transition: Flip });
       navigate("/fee_heads", { replace: true })

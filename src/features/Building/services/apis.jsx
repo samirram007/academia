@@ -13,7 +13,6 @@ export function fetchBuildingsService(payload) {
 
        return axiosClient.get(`/buildings?campus_id=${payload.campus_id}`)
         .then(response => {
-            console.log('fetched',response.data)
             return response.data;
         })
         .catch(err => {

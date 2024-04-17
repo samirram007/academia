@@ -24,20 +24,17 @@ const EntryForm = ({ initialValues, entryMode }) => {
     const departmentDeleteMutation = useDeleteDepartmentMutation()
 
     const handleFormSubmit = (values) => {
-        //  console.log('values',values)
         if (entryMode === 'create') {
             departmentStoreMutation.mutate(values)
         } else if (entryMode === 'edit') {
-            console.log('edit', values)
             departmentUpdateMutation.mutate(values)
 
         } else if (entryMode === 'delete') {
-            console.log('delete', values)
             departmentDeleteMutation.mutate(values)
 
         }
         else {
-            console.log('Invalid entry mode')
+            console.info('Invalid entry mode')))
         }
     }
 

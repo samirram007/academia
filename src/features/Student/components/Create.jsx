@@ -4,7 +4,7 @@ import Breadcrumbs from '../../../components/Breadcrumbs';
 import EntryForm from './EntryForm';
 
 
-const CreateStudent = () => {
+const Create = () => {
 const [entryMode,setEntryMode]=useState('create');
 
     const editData = {
@@ -102,7 +102,7 @@ const [entryMode,setEntryMode]=useState('create');
 }
 
 
-export default CreateStudent
+export default Create
 
 
 

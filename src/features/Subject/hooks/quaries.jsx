@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query"
 import { fetchSubjectService, fetchSubjectsService } from "../services/apis"
 
-export function useSubjects() {
+export function useSubjects(payload) {
 
       return useQuery({
-      queryKey: ['subjects'],
-      queryFn:fetchSubjectsService,
+      queryKey: ['subjects',payload],
+      queryFn:()=>fetchSubjectsService(payload),
       staleTime:1000,
     })
   }

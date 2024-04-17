@@ -3,7 +3,7 @@ import  {lazy} from 'react';
 
 
 
-const Stacked =  lazy(() => import('../pages/Stacked'));
+
 const NotFound =  lazy(() => import('../pages/NotFound'));
 
 
@@ -30,6 +30,7 @@ import { CreateFeeTemplate, EditFeeTemplate, FeeTemplates } from '../pages/FeeTe
 import { AcademicStandards, CreateAcademicStandard, EditAcademicStandard } from '../pages/AcademicStandard';
 import { AcademicClasses, CreateAcademicClass, EditAcademicClass } from '../pages/AcademicClass';
 import { CreateSubject, EditSubject, Subjects } from '../pages/Subject';
+import { CreateSubjectGroup, EditSubjectGroup, SubjectGroups } from '../pages/SubjectGroup';
 import { CreateStudent, EditStudent, Students } from '../pages/Student';
 import { CreateTeacher, EditTeacher, Teachers } from '../pages/Teacher';
 import { Dashboard } from '../pages/Dashboard';
@@ -50,8 +51,9 @@ export const menuGroup=[
   { name:'EMPLOYEE',visible:true, sort:5},
   { name:'FEES',visible:true, sort:6},
   { name:'REPORT INTERFACE',visible:true, sort:8},
-  { name:'SETTINGS',visible:true, sort:7},
-  { name:'LOGOUT',visible:false, sort:9},
+  { name:'STRUCTURE',visible:true, sort:7},
+  { name:'SETTINGS',visible:true, sort:9},
+  { name:'LOGOUT',visible:false, sort:10},
 ]
 export const page = [
 
@@ -153,6 +155,12 @@ export const page = [
        { path: 'edit/:id', name: 'Edit Section', element: <EditSection /> ,   isMenu: false, isPrivate: false,},
       ]
     },
+    { path: 'subject_groups',    name: 'Subject Groups',    element:<SubjectGroups/>,     isMenu: true,   menuGroup:'ACADEMICS', isPrivate: false, icon:icons.subject_groups, role:['admin'],
+      children: [
+       { path: 'create', name: 'Create Subject Group', element: <CreateSubjectGroup /> ,   isMenu: false, isPrivate: false, icon:icons.create_subject_group},
+       { path: 'edit/:id', name: 'Edit Subject Group', element: <EditSubjectGroup /> ,   isMenu: false, isPrivate: false,},
+      ]
+    },
     { path: 'subjects',    name: 'Subjects',    element:<Subjects/>,     isMenu: true,   menuGroup:'ACADEMICS', isPrivate: false, icon:icons.subjects, role:['admin'],
       children: [
        { path: 'create', name: 'Create Subject', element: <CreateSubject /> ,   isMenu: false, isPrivate: false, icon:icons.create_subject},
@@ -165,19 +173,19 @@ export const page = [
        { path: 'edit/:id', name: 'Edit Campus', element: <EditCampus /> ,   isMenu: false, isPrivate: false,},
       ]
     },
-    { path: 'buildings',    name: 'Buildings',    element:<Buildings/>,     isMenu: true,   menuGroup:'SETTINGS', isPrivate: false, icon:icons.buildings, role:['admin'],
+    { path: 'buildings',    name: 'Buildings',    element:<Buildings/>,     isMenu: true,   menuGroup:'STRUCTURE', isPrivate: false, icon:icons.buildings, role:['admin'],
     children: [
      { path: 'create', name: 'Create Building', element: <CreateBuilding /> ,   isMenu: false, isPrivate: false, icon:icons.create_building},
      { path: 'edit/:id', name: 'Edit Building', element: <EditBuilding /> ,   isMenu: false, isPrivate: false,},
     ]
     },
-    { path: 'floors',    name: 'Floors',    element:<Floors/>,     isMenu: true,   menuGroup:'SETTINGS', isPrivate: false, icon:icons.floors, role:['admin'],
+    { path: 'floors',    name: 'Floors',    element:<Floors/>,     isMenu: true,   menuGroup:'STRUCTURE', isPrivate: false, icon:icons.floors, role:['admin'],
     children: [
      { path: 'create', name: 'Create Floor', element: <CreateFloor /> ,   isMenu: false, isPrivate: false, icon:icons.create_floor},
      { path: 'edit/:id', name: 'Edit Floor', element: <EditFloor /> ,   isMenu: false, isPrivate: false,},
     ]
     },
-    { path: 'rooms',    name: 'Rooms',    element:<Rooms/>,     isMenu: true,   menuGroup:'SETTINGS', isPrivate: false, icon:icons.rooms, role:['admin'],
+    { path: 'rooms',    name: 'Rooms',    element:<Rooms/>,     isMenu: true,   menuGroup:'STRUCTURE', isPrivate: false, icon:icons.rooms, role:['admin'],
     children: [
      { path: 'create', name: 'Create Room', element: <CreateRoom /> ,   isMenu: false, isPrivate: false, icon:icons.create_room},
      { path: 'edit/:id', name: 'Edit Room', element: <EditRoom /> ,   isMenu: false, isPrivate: false,},
@@ -185,12 +193,7 @@ export const page = [
     },
     { path: 'documents',  name: 'Documents',  element: <Documents />,   isMenu: true,   menuGroup:'SETTINGS', isPrivate: false },
     { path: 'logout',  name: 'Logout',  element: <Logout/>,   isMenu: true,   menuGroup:'LOGOUT', isPrivate: false,icon:icons.logout },
-    // {
-    //   path: 'stacked',  name: 'Stacked',  element: <Stacked />,   isMenu: true,   menuGroup:'SETTINGS', isPrivate: false,
-    //   children: [
-    //     // { path: 's-dashboard', name: 'Dashboard', element: <Dashboard /> ,   isMenu: false, isPrivate: false,}
-    //   ]
-    // },
+
     { path: '*', name: 'NotFound', element: <NotFound />, isMenu: false, isPrivate: false },
 
   ]

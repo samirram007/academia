@@ -1,7 +1,7 @@
 export const FormikSubmit = (
     { formik, label }
 ) => {
-    //console.log(formik.isSubmitting);
+
     return (
         <>
              <button type="submit" className='btn btn-primary '>

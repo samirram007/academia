@@ -9,7 +9,6 @@ export const RoomTypeSelect = ({ formik,  name,label,exclude }) => {
 
     const RoomTypeData = useRoomType();
     if (RoomTypeData.isLoading) return <Loader />;
-    console.log(RoomTypeData)
     return (
 
         <CustomSelect formik={formik} name={name??"room_type"}

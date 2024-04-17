@@ -8,7 +8,7 @@
 * {
     @apply m-0 p-0;
     box-sizing: border-box;
-    font-size: 1.0rem;
+    font-size: 0.9rem;
 
 }
 ::-webkit-scrollbar{

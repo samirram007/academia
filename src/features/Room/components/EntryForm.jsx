@@ -30,7 +30,6 @@ const EntryForm = ({ initialValues, entryMode }) => {
     const roomDeleteMutation = useDeleteRoomMutation()
 
     const handleFormSubmit = (values) => {
-        //  console.log('values',values)
         if (entryMode === 'create') {
             roomStoreMutation.mutate(values)
         } else if (entryMode === 'edit') {
@@ -43,7 +42,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
 
         }
         else {
-            console.log('Invalid entry mode')
+            console.info('Invalid entry mode')
         }
     }
 

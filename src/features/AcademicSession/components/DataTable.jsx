@@ -24,7 +24,7 @@ const initialFilterValues = {
   campus_id: initialValues.campus_id
 }
 
-const AcademicSessionTable = () => {
+const DataTable = () => {
 
   const AcademicSessionData = useAcademicSessions(initialFilterValues)
 
@@ -83,4 +83,4 @@ const AcademicSessionTable = () => {
   )
 }
 
-export default AcademicSessionTable
+export default DataTable

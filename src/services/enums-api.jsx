@@ -37,6 +37,15 @@ export function  fetchGuardianType(){
             throw err;
         });
 }
+export function  fetchSubjectType(){
+    return axiosClient.get("/subject_type")
+        .then(response => {
+            return response.data;
+        })
+        .catch(err => {
+            throw err;
+        });
+}
 export function  fetchLanguage(){
     return axiosClient.get("/language")
         .then(response => {

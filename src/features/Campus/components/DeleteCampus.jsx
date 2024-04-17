@@ -6,7 +6,6 @@ import FormikEditFormModal from '../../../components/form-components/FormikEditF
 import EntryForm from './EntryForm';
 
 const DeleteCampus = ({ initialValues }) => {
-console.log("DELETE",initialValues);
   const [isOpen, setOpen] = useState(false)
 
   return (

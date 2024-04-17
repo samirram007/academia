@@ -23,6 +23,8 @@ export default function BasicTable({ data, columns, pageSize = 10, createRoute,
     createForm, createFormTitle,
     mobileHeaders = ['id', 'name'], filter }) {
 
+
+
     const thisRoute = useCustomRoutes()
 
     const [sorting, setSorting] = useState([])
@@ -31,7 +33,7 @@ export default function BasicTable({ data, columns, pageSize = 10, createRoute,
     const [filtering, setFiltering] = useState('')
     const [searchParams, setSearchParams] = useSearchParams()
 
-    const [showFilter, setShowFilter] = useState(false)
+    const [showFilter, setShowFilter] = useState(true)
     const [pagination, setPagination] = useState({
         pageIndex: 0,
         pageSize: pageSize,

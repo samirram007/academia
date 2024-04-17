@@ -20,20 +20,20 @@ const EntryForm = ({ initialValues, entryMode }) => {
     const academicClassDeleteMutation = useDeleteAcademicClassMutation()
 
     const handleFormSubmit = (values) => {
-        //  console.log('values',values)
+
         if (entryMode === 'create') {
             academicClassStoreMutation.mutate(values)
         } else if (entryMode === 'edit') {
-            console.log('edit', values)
+
             academicClassUpdateMutation.mutate(values)
 
         } else if (entryMode === 'delete') {
-            console.log('delete', values)
+
             academicClassDeleteMutation.mutate(values)
 
         }
         else {
-            console.log('Invalid entry mode')
+            console.info('Invalid entry mode')
         }
     }
 

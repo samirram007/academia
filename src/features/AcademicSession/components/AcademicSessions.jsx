@@ -1,5 +1,5 @@
 import React from 'react'
-import AcademicSessionTable from './AcademicSessionTable'
+import AcademicSessionTable from './DataTable'
 
 
  const AcademicSessions = () => {

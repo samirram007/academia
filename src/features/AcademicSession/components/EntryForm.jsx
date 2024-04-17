@@ -20,20 +20,20 @@ const EntryForm = ({ initialValues, entryMode }) => {
     const academicSessionDeleteMutation = useDeleteAcademicSessionMutation()
 
     const handleFormSubmit = (values) => {
-        //  console.log('values',values)
+
         if (entryMode === 'create') {
             academicSessionStoreMutation.mutate(values)
         } else if (entryMode === 'edit') {
-            console.log('edit', values)
+
             academicSessionUpdateMutation.mutate(values)
 
         } else if (entryMode === 'delete') {
-            console.log('delete', values)
+
             academicSessionDeleteMutation.mutate(values)
 
         }
         else {
-            console.log('Invalid entry mode')
+            console.info('Invalid entry mode')
         }
     }
 
@@ -67,45 +67,32 @@ const EntryForm = ({ initialValues, entryMode }) => {
                             <FormikInputBox type="date" formik={formik} name="start_date" label="Start Date" />
                         </div>
                         <div>
-                        <FormikInputBox type="date" formik={formik} name="end_date" label="End Date" />
+                            <FormikInputBox type="date" formik={formik} name="end_date" label="End Date" />
                         </div>
                         <div>
 
                             <AcademicSessionSelect formik={formik}
-                            name="previous_academic_session_id"
-                            label={"Previous Academic Session"}
-                            exclude={formik.values.id}
-                             />
+                                name="previous_academic_session_id"
+                                label={"Previous Academic Session"}
+                                exclude={formik.values.id}
+                            />
                         </div>
                         <div>
 
                             <AcademicSessionSelect
-                            formik={formik}
-                            name="next_academic_session_id"
-                            label={"Next Academic Session"}
-                            exclude={formik.values.id} />
+                                formik={formik}
+                                name="next_academic_session_id"
+                                label={"Next Academic Session"}
+                                exclude={formik.values.id} />
                         </div>
                     </div>
 
                     <div className='order-first'>
 
                         <div className="form-control ">
-                            {/* <label className="label cursor-pointer justify-end gap-4"> */}
+
 
                             <FormikCheckBox formik={formik} name="is_current" label="Is Current?" />
-                            {/* <span className="label-text">Is Current?</span>
-                                <input type="checkbox" id="is_current"
-                                    name="is_current"
-                                    onChange={formik.handleChange}
-
-
-                                    onBlur={formik.handleBlur}
-                                    value={formik.values.is_current}
-                                     defaultChecked={formik.values.is_current}
-                                    className={`checkbox  m-0 ${formik.errors.is_current ? 'checkbox-error' : 'checkbox-primary'}`} />
-
-                            </label>
-                            {formik.errors.is_current ? <div className='text-error'>{formik.errors.is_current}</div> : null} */}
                         </div>
 
 

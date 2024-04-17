@@ -39,7 +39,6 @@ const Documents = ({setImageId,setImageSrc}) => {
         </div>
     }
     if (docQuery.documents.isError) { return <p>An error occurred while fetching the data</p> }
-    console.log(docQuery);
     return (
         <>
             {showUploadPanel && <CreateDocument openPanel={() => setShowUploadPanel(!showUploadPanel)} />}

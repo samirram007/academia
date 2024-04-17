@@ -44,7 +44,6 @@ const GuardianForm = ({ mode, guardian, student_id, setMode, }) => {
         enableReinitialize: true,
         onSubmit: values => {
             const newValues = { ...initialValues, ...values }
-            console.log(newValues);
             handleFormSubmit(newValues)
         }
     })

@@ -13,7 +13,6 @@ export function fetchAcademicStandardsService(payload) {
 
        return axiosClient.get(`/academic_standards`)
         .then(response => {
-           // console.log('fetched',response.data)
             return response.data;
         })
         .catch(err => {

@@ -6,12 +6,20 @@ import EntryForm from './EntryForm';
   const [entryMode, setEntryMode] = useState('create');
 
   const editData = {
-      name: '',
+    academic_session_id: 1,
+    academic_class_id: 1,
+    campus_id: 1,
+    name:'',
+    is_active:false
 
   }
 
   const initialValues = editData ?? {
-      name: '',
+    academic_session_id: 1,
+    academic_class_id: 1,
+    campus_id: 1,
+    name:'',
+    is_active:false
   }
 
 

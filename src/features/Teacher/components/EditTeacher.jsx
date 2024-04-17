@@ -59,7 +59,6 @@ const EditTeacher = () => {
         profile_document_id: 1
     }
 
-//console.log(initialValues)
 
     return (
         <div className='pb-10 w-full'>

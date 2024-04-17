@@ -5,7 +5,6 @@ const SubForm = ({ handleSubmit, handleChange, values, submitSubForm }) => (
   <Formik
     initialValues={{ subformField: '' }}
     onSubmit={(values) => {
-      console.log('Subform submitted:', values);
       submitSubForm(values); // Pass subform values to the parent component's handler
     }}
   >
@@ -25,7 +24,6 @@ const CreateStudentMain = () => (
   <Formik
     initialValues={{ mainFormField: '', subform: { subformField: '' } }}
     onSubmit={(values) => {
-      console.log('Main form submitted:', values);
     }}
   >
     {({ handleSubmit, handleChange, values }) => (
@@ -40,7 +38,6 @@ const CreateStudentMain = () => (
           values={values.subform}
           submitSubForm={(subformValues) => {
             // Handle subform submit here or pass it to the parent's onSubmit
-            console.log('Handling subform submit in MainForm:', subformValues);
           }}
         />
         <button type="submit">Submit Main Form</button>

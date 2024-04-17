@@ -24,20 +24,19 @@ const EntryForm = ({ initialValues, entryMode }) => {
     const sectionDeleteMutation = useDeleteSectionMutation()
 
     const handleFormSubmit = (values) => {
-        //  console.log('values',values)
         if (entryMode === 'create') {
             sectionStoreMutation.mutate(values)
         } else if (entryMode === 'edit') {
-            console.log('edit', values)
+            
             sectionUpdateMutation.mutate(values)
 
         } else if (entryMode === 'delete') {
-            console.log('delete', values)
+            
             sectionDeleteMutation.mutate(values)
 
         }
         else {
-            console.log('Invalid entry mode')
+            console.info('Invalid entry mode')
         }
     }
 

@@ -26,7 +26,6 @@ const CreateSchool = ({ modal }) => {
         address_id: null,
         description:'',
         contact_no: '',
-        email:'',
         website:'',
         establishment_date:null,
         logo_image_id:null,

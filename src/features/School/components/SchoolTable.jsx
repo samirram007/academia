@@ -45,7 +45,6 @@ const SchoolTable = () => {
     {
       header: 'Action', accessorKey: 'action', align: 'center',
       cell: ({ row }) => {
-        // console.log(`/schools/edit/${row.original.id}`)
         return (
           <div className="flex justify-start md:justify-center  items-center gap-2">
             <div className="flex justify-start md:justify-center  items-center gap-2">

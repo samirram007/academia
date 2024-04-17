@@ -4,8 +4,7 @@ import { useCallback } from "react";
 export const FormikCheckBox = (
     { formik, error, label, name, placeholder, type, ...props }
 ) => {
-// alert("HEllo")
-// console.log(name,formik.values[name])
+
     return (
         <>
             <label className="label cursor-pointer justify-end gap-4">

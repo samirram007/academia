@@ -90,7 +90,7 @@ export const AddressView = ({ address,student_id }) => {
       return <div>{addressTypeData.error.message}</div>
   }
 
-  //console.log(address);
+
 
   return (
       <div className='col-span-6 flex flex-row items-center justify-between border-b-[1px] border-violet-200/20'>

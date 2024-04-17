@@ -5,7 +5,7 @@ import {
 
 
 
-import { fetchAddressType, fetchCaste, fetchGender, fetchGuardianType, fetchLanguage, fetchNationality, fetchReligion, fetchRoomType } from '../services/enums-api'
+import { fetchAddressType, fetchCaste, fetchGender, fetchGuardianType,fetchSubjectType, fetchLanguage, fetchNationality, fetchReligion, fetchRoomType } from '../services/enums-api'
 
 
 
@@ -55,6 +55,13 @@ export function useGuardianType() {
     return useQuery({
       queryKey: ['guardian_type'],
       queryFn: fetchGuardianType,
+      staleTime:Infinity
+    })
+}
+export function useSubjectType() {
+    return useQuery({
+      queryKey: ['subject_type'],
+      queryFn: fetchSubjectType,
       staleTime:Infinity
     })
 }

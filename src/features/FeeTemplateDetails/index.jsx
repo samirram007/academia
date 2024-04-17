@@ -1,0 +1,1 @@
+export {FeeTemplateDetails,CreateFeeTemplateDetails, EditFeeTemplateDetails} from './components';

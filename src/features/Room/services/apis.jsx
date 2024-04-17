@@ -10,10 +10,8 @@ export function fetchRoomService(id) {
         })
 }
 export function fetchRoomsService(payload) {
-    // console.log(`/rooms?floor_id=${payload.floor_id}`)
     return axiosClient.get(`/rooms?floor_id=${payload.floor_id}`)
         .then(response => {
-            // console.log('fetched',response.data)
             return response.data;
         })
         .catch(err => {
