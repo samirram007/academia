@@ -1,9 +1,10 @@
 import React from 'react'
-import BasicTable from '../../tables/BasicTable'
+
 import { useQuery } from '@tanstack/react-query';
 import { fetchFees  } from '../../../services';
 import { useMemo } from 'react';
 import { DateTime } from 'luxon'
+import BasicTable from '../../../components/tables/BasicTable';
 const FeeTable = () => {
     const FeeData = useQuery({
         queryKey: ['fees'],

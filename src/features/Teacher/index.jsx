@@ -1,9 +1,9 @@
 import { lazy } from 'react';
 
-const Teachers =  lazy(() => import('./components/Teachers'));
-const CreateTeacher =  lazy(() => import('./components/CreateTeacher'));
-const EditTeacher =  lazy(() => import('./components/EditTeacher'));
-const TeacherTable =  lazy(() => import('./components/TeacherTable'));
+const Teachers =  lazy(() => import('./components/DataList'));
+const CreateTeacher =  lazy(() => import('./components/Create'));
+const EditTeacher =  lazy(() => import('./components/Edit'));
+const TeacherTable =  lazy(() => import('./components/DataTable'));
 
 
 export {Teachers,CreateTeacher, EditTeacher,TeacherTable};

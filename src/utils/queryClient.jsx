@@ -17,15 +17,3 @@ export const queryClient = new QueryClient({
       },
     },
   })
-// export const queryClient = new QueryClient({
-//     queryCache: new QueryCache({
-//       onError: (error, query) => {
-//         // 🎉 only show error toasts if we already have data in the cache
-//         // which indicates a failed background update
-//         if (query.state.data !== undefined) {
-//           toast.error(`Something went wrong: ${error.message}`,{transition:Flip} )
-//         //   toast.error(error.response.data.message ,{transition:Flip}  )
-//         }
-//       },
-//     }),
-//   })

@@ -10,6 +10,10 @@ import { useFormik } from 'formik';
 
 import { FormikInputBox } from '../../../components/form-components';
 import { FormikTextBox } from '../../../components/form-components/FormikTextBox';
+import { SubjectTypeSelect } from '../../Common/components/SubjectTypeSelect';
+import {   SubjectGroupSelect } from '../../Common/components/SubjectGroupSelect';
+import { AcademicStandardSelect } from '../../Common/components/AcademicStandardSelect';
+
 
 
 const validationSchema = Yup.object().shape({
@@ -25,20 +29,19 @@ const EntryForm = ({ initialValues, entryMode }) => {
     const subjectDeleteMutation = useDeleteSubjectMutation()
 
     const handleFormSubmit = (values) => {
-        //  console.log('values',values)
         if (entryMode === 'create') {
             subjectStoreMutation.mutate(values)
         } else if (entryMode === 'edit') {
-            console.log('edit', values)
+
             subjectUpdateMutation.mutate(values)
 
         } else if (entryMode === 'delete') {
-            console.log('delete', values)
+
             subjectDeleteMutation.mutate(values)
 
         }
         else {
-            console.log('Invalid entry mode')
+            console.info('Invalid entry mode')
         }
     }
 
@@ -69,10 +72,17 @@ const EntryForm = ({ initialValues, entryMode }) => {
                             <FormikInputBox formik={formik} name="code" label="Code" />
 
                         </div>
-                        <div className='md:col-span-2'>
+                        <div>
                             <FormikTextBox formik={formik} name="description" label="Description" />
-
-
+                        </div>
+                        <div>
+                            <AcademicStandardSelect formik={formik}  />
+                        </div>
+                        <div>
+                            <SubjectTypeSelect formik={formik}  />
+                        </div>
+                        <div>
+                            <SubjectGroupSelect formik={formik}  />
                         </div>
 
                     </div>

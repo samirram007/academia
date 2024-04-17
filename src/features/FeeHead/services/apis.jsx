@@ -35,11 +35,9 @@ export function storeFeeHead(payload) {
 
 }
 export function updateFeeHead(payload) {
- //  console.log(payload);
       const {id,...data} = payload;
     return axiosClient.put(`/fee_heads/${id}`, removeEmptyStrings(data))
     .then(response => {
-        console.log(response.data);
         return response.data;
     })
     .catch(err => {

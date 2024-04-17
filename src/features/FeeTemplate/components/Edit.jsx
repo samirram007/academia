@@ -1,11 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const Edit = () => {
+import EntryForm from './EntryForm'
+
+import FormikEditFormModal from '../../../components/form-components/FormikEditFormModal'
+
+const Edit = ({ initialValues,setEntryId }) => {
+
+  const [isOpen, setOpen] = useState(false)
+
   return (
-    <div>
-      Edit FeeTemplate
-    </div>
+    <>
+
+      <button onClick={() => setOpen(true)}
+        className="btn btn-outline btn-primary btn-sm btn-rounded ">
+        Edit
+      </button>
+      {isOpen &&
+        <FormikEditFormModal isOpen={isOpen} setOpen={setOpen} label="Edit Department">
+
+          <EntryForm
+            initialValues={initialValues}
+            entryMode={'edit'} />
+        </FormikEditFormModal>
+      }
+    </>
+
   )
 }
 
 export default Edit
+

@@ -1,12 +1,13 @@
 import React from 'react'
 
 import FeeTable from './FeeReceiptTable'
+import { useDocumentTitle } from '../../../hooks'
 
- const Fees = () => {
-
+ const FeeReceipts = () => {
+    useDocumentTitle()
     return (
         <>
-            <div className="flex justify-stretch flex-col w-full px-4 overflow-y-auto">
+            <div className="flex justify-stretch flex-col w-full overflow-y-auto">
                 <div className="card  animated fadeInDown bg-zinc-600/20">
                     <FeeTable />
                 </div>
@@ -14,4 +15,4 @@ import FeeTable from './FeeReceiptTable'
         </>
     )
 }
-export default Fees
+export default FeesReceipts

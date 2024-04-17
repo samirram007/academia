@@ -43,7 +43,6 @@ const Filter = ({ RoomData,  initialFilterValues }) => {
 
         },
         onError: (errors, values,{setSubmitting}) => {
-            console.log(errors, values)
             setSubmitting(false)
 
         }

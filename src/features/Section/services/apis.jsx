@@ -13,7 +13,6 @@ export function fetchSectionsService(payload) {
 
        return axiosClient.get(`/sections`)
         .then(response => {
-           // console.log('fetched',response.data)
             return response.data;
         })
         .catch(err => {

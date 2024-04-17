@@ -10,12 +10,17 @@ import { useNavigate } from 'react-router-dom';
 
 import { useFeeTemplates } from '../hooks/quaries';
 import CreateFeeTemplate from './Create';
+import Edit from './Edit';
+import Delete from './Delete';
+import FeeTemplateDetails from '../../FeeTemplateDetails/components/FeeTemplateDetails';
 
 
 const initialValues = {
   academic_session_id: 1,
   academic_class_id: 1,
-  campus_id: 1
+  campus_id: 1,
+  name:'',
+  is_active:false
 }
 const initialFilterValues = {
   campus_id: initialValues.campus_id,
@@ -42,23 +47,23 @@ const DataTable = () => {
     {
       header: "Name",
       accessorKey: "name",
-      size: 300,
+
     },
     {
       header: "Campus",
-      accessorKey: "academic_session.campus.name",
-      size: 200,
+      accessorKey: "campus.name",
+
     },
 
     {
-      header: "Academic Session",
+      header: "Session",
       accessorKey: "academic_session.session",
-      size: 200,
+
     },
     {
-      header: "Academic Classes",
+      header: "Class",
       accessorKey: "academic_class.name",
-      size: 200,
+
     },
 
     {
@@ -67,32 +72,24 @@ const DataTable = () => {
       align: 'center',
       cell: ({ row }) => {
         return (
-          <div className="flex justify-start md:justify-center  items-center">
-            <button onClick={() => { editFeeTemplateData(row.original.id) }}
-              className="btn btn-outline btn-primary btn-sm btn-rounded">
-              Edit
-            </button>
-            <button onClick={() => { deleteFeeTemplateData(row.original.id) }}
-              className="btn btn-outline btn-primary btn-sm btn-rounded ml-2">
-              Delete
-            </button>
-          </div>
+          <div className="flex justify-start md:justify-center  items-center gap-2">
+          <FeeTemplateDetails  initialValues={row.original} />
+          <Edit  initialValues={row.original} />
+          <Delete initialValues={row.original} />
+
+         </div>
         )
       }
     }
 
   ]
-  const editFeeTemplateData = (id) => {
-    navigate(`/fee_templates/edit/${id}`)
-  }
-  const deleteFeeTemplateData = (id) => {
-    navigate(`/fee_templates/delete/${id}`)
-  }
+
   return (
     <BasicTable
     data={data}
     columns={columns}
     createForm={<CreateFeeTemplate modal={true}/>}
+    createFormTitle={'New Fee Template'}
     filter={
         <Filter FeeTemplateData={FeeTemplateData}
         initialFilterValues={initialFilterValues} />

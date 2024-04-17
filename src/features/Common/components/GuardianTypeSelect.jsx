@@ -9,7 +9,6 @@ export const GuardianTypeSelect = ({ formik,  name,label,exclude }) => {
 
     const GuardianTypeData = useGuardianType();
     if (GuardianTypeData.isLoading) return <Loader />;
-    console.log(GuardianTypeData)
     return (
 
         <CustomSelect formik={formik} name={name??"guardian_type"}

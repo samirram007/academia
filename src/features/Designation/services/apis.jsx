@@ -12,7 +12,6 @@ export function fetchDesignationsService(payload) {
 
        return axiosClient.get(`/designations`)
         .then(response => {
-           // console.log('fetched',response.data)
             return response.data;
         })
         .catch(err => {
@@ -30,7 +29,6 @@ export function storeDesignationService(payload) {
 
 }
 export function updateDesignationService(payload) {
-    console.log("Axios",payload)
 const {id,...data}=payload
       return axiosClient.put(`/designations/${id}`, data)
       .then(response => {
@@ -39,7 +37,6 @@ const {id,...data}=payload
 
 }
 export function deleteDesignationService(payload) {
-   // console.log("Axios Deleting",payload)
 const {id,...data}=payload
       return axiosClient.delete(`/designations/${id}`)
       .then(response => {

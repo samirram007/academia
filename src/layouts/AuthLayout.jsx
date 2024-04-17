@@ -22,7 +22,7 @@ const AuthLayout = () => {
     logout.mutate()
   }
   if (authUser.isLoading) {
-    return (<Loader />)
+    return (<Loader size={32} />)
   }
   if (authUser.isError) {
     return (<div className="w-full h-full flex justify-center items-center">

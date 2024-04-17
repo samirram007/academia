@@ -10,20 +10,27 @@ import Create from './Create';
 import Edit from './Edit';
 
 import Delete from './Delete';
+import Filter from './Filter';
 
 const initialValues = {
   code: '',
   name: '',
-  description:''
+  description:'',
+  academic_standard_id:'',
+  subject_group_id:'',
+
 
 }
-
+const initialFilterValues = {
+  academic_standard_id: initialValues.academic_standard_id,
+  subject_group_id: initialValues.subject_group_id,
+}
 const DataTable = () => {
 
-  const SubjectData = useSubjects(initialValues)
+  const SubjectsData = useSubjects(initialFilterValues)
 
 
-  const mData = SubjectData.data?.data ?? [];
+  const mData = SubjectsData.data?.data ?? [];
 
   const data = useMemo(() => [...mData], [mData]);
 
@@ -43,6 +50,18 @@ const DataTable = () => {
     {
       header: 'Code',
       accessorKey: 'code',
+    },
+    {
+      header: 'Type',
+      accessorKey: 'subject_type',
+    },
+    {
+      header: 'Group',
+      accessorKey: 'subject_group.name',
+    },
+    {
+      header: 'Standard',
+      accessorKey: 'academic_standard.name',
     },
     {
       header: 'Action',
@@ -67,6 +86,10 @@ const DataTable = () => {
       data={data} columns={columns}
       createForm={<Create modal={true} />}
       createFormTitle="Create Subject"
+      filter={
+        <Filter SubjectsData={SubjectsData}
+          initialFilterValues={initialFilterValues} />
+      }
 
     />
   )

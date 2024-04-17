@@ -3,7 +3,7 @@ import React from 'react'
 export const FormikHiddenInput = (
     { formik,     name,  ...props }
 ) => {
-    console.log(name)
+
     return (
         <>
             <input

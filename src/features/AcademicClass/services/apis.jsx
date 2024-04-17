@@ -39,7 +39,7 @@ export function storeAcademicClassService(payload) {
 
 }
 export function updateAcademicClassService(payload) {
-
+console.log(payload)
 const {id,...data}=payload
       return axiosClient.put(`/academic_classes/${id}`, data)
       .then(response => {
@@ -48,7 +48,7 @@ const {id,...data}=payload
 
 }
 export function deleteAcademicClassService(payload) {
-   // console.log("Axios Deleting",payload)
+
 const {id,...data}=payload
       return axiosClient.delete(`/academic_classes/${id}`)
       .then(response => {

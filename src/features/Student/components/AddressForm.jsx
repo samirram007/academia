@@ -31,7 +31,6 @@ const AddressForm = ({ mode, address, setMode, student_id }) => {
         enableReinitialize: true,
         onSubmit: values => {
             const newValues = { ...initialValues, ...values }
-            console.log(newValues);
             handleFormSubmit(newValues)
         }
     })

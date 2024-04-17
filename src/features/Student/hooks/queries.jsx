@@ -8,10 +8,10 @@ import { useQuery } from "@tanstack/react-query"
       staleTime:Infinity
     })
   }
-export function useStudents() {
+export function useStudents(payload) {
     return useQuery({
-      queryKey: ['students'],
-      queryFn: fetchStudents,
+      queryKey: ['students',payload],
+      queryFn: ()=>fetchStudents(payload),
       staleTime: Infinity // keep data fresh for this period (1 min.)
     })
   }

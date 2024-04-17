@@ -12,7 +12,6 @@ export function fetchDepartmentsService(payload) {
 
        return axiosClient.get(`/departments`)
         .then(response => {
-           // console.log('fetched',response.data)
             return response.data;
         })
         .catch(err => {
@@ -44,7 +43,6 @@ const {id,...data}=payload
 
 }
 export function deleteDepartmentService(payload) {
-   // console.log("Axios Deleting",payload)
 const {id,...data}=payload
       return axiosClient.delete(`/departments/${id}`)
       .then(response => {

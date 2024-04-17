@@ -20,10 +20,10 @@ const validationSchema = Yup.object().shape({
 })
 
 
-const Filter = ({ AcademicSessionData,  initialFilterValues }) => {
-    // const { data:AcademicSessionData,refetch,isFetching} = useAcademicSessions({campus_id:initialValues.campus_id})
-    // const  AcademicSessionData  = useAcademicSessions(initialFilterValues)
-    const [isLoading, setIsLoading] = useState(AcademicSessionData.isLoading)
+const Filter = ({ fetchedData,  initialFilterValues }) => {
+    // const { data:fetchedData,refetch,isFetching} = useAcademicSessions({campus_id:initialValues.campus_id})
+    // const  fetchedData  = useAcademicSessions(initialFilterValues)
+    const [isLoading, setIsLoading] = useState(fetchedData.isLoading)
 
     const formik = useFormik({
         initialValues:initialFilterValues,
@@ -32,7 +32,7 @@ const Filter = ({ AcademicSessionData,  initialFilterValues }) => {
         onSubmit: (values,{setSubmitting}) => {
 
             Object.assign(initialFilterValues, values);
-           AcademicSessionData.refetch()
+           fetchedData.refetch()
            setTimeout(() => {
 
                setSubmitting(false)
@@ -43,7 +43,7 @@ const Filter = ({ AcademicSessionData,  initialFilterValues }) => {
 
         },
         onError: (errors, values,{setSubmitting}) => {
-            console.log(errors, values)
+
             setSubmitting(false)
 
         }

@@ -13,7 +13,6 @@ export function fetchSchoolsService() {
 
     return axiosClient.get("/schools")
         .then(response => {
-            //console.log(response.data)
             return response.data;
         })
         .catch(err => {
@@ -49,7 +48,6 @@ export function updateSchoolService(payload) {
     });
 }
 export function deleteSchoolService(payload) {
-  // console.log(payload);
       const {id,...data} = payload;
     return axiosClient.delete(`/schools/${id}`)
     .then(response => {

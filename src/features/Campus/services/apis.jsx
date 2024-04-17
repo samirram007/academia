@@ -45,7 +45,6 @@ export function updateCampusService(payload) {
     });
 }
 export function deleteCampusService(payload) {
-  // console.log(payload);
       const {id,...data} = payload;
     return axiosClient.delete(`/campuses/${id}` )
     .then(response => {

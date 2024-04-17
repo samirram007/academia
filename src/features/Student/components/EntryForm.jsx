@@ -47,7 +47,6 @@ const EntryForm = ({ initialValues, entryMode }) => {
         validationSchema,
         enableReinitialize: true,
         onSubmit: values => {
-            console.log(values);
             handleFormSubmit(values)
         }
     })

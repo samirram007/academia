@@ -119,7 +119,8 @@ const Sidebar = ({ isOpen, setOpen }) => {
   return (
     <>
 
-      <aside className={`${menuClass} sidebar-menu fixed md:relative w-[350px] md:w-72  h-screen bg-[#272e48]
+      <aside className={`${menuClass} sidebar-menu fixed md:relative
+      min-w-[350px] md:min-w-48 lg:min-w-56  h-screen bg-[#272e48]
         z-20 transition ease-in-out duration-500 overflow-y-auto`} >
         <div className="flex-1 flex items-center gap-5   text-teal-500   px-5 py-[.53rem] text-lg min-h-[4rem]">
 

@@ -18,7 +18,6 @@ const validationSchema = Yup.object().shape({
 
 
 const EntryForm = ({ initialValues, entryMode }) => {
-    // console.log(initialValues)
     const campusStoreMutation = useStoreCampusMutation()
     const campusUpdateMutation = useUpdateCampusMutation()
     const campusDeleteMutation = useDeleteCampusMutation()
@@ -34,7 +33,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
             campusDeleteMutation.mutate(values)
         }
         else {
-            console.log('Invalid entry mode')
+            console.info('Invalid entry mode')
         }
     }
 
@@ -44,7 +43,6 @@ const EntryForm = ({ initialValues, entryMode }) => {
         validationSchema,
         enableReinitialize: true,
         onSubmit: (values) => {
-            //console.log(values);
             handleFormSubmit(values)
         }
     })

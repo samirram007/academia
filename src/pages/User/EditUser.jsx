@@ -1,7 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axiosClient from "../../../axios-client.js";
+
 import { toastr } from "react-redux-toastr";
+import axiosClient from "../../utils/axios-client";
 
 export default function EditUser(){
     const navigate = useNavigate();

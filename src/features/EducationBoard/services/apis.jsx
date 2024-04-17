@@ -12,7 +12,6 @@ export function fetchEducationBoards(payload) {
 
        return axiosClient.get(`/education_boards`)
         .then(response => {
-           // console.log('fetched',response.data)
             return response.data;
         })
         .catch(err => {
@@ -49,7 +48,6 @@ const {id,...data}=payload
 
 }
 export function deleteEducationBoard(payload) {
-   // console.log("Axios Deleting",payload)
 const {id,...data}=payload
       return axiosClient.delete(`/education_boards/${id}`)
       .then(response => {

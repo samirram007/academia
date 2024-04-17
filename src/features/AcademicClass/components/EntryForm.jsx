@@ -6,6 +6,8 @@ import { useFormik } from 'formik';
 import { CampusSelect } from '../../Common/components/CampusSelect';
 import { FormikCheckBox, FormikInputBox } from '../../../components/form-components';
 import { AcademicClassSelect } from '../../Common/components/AcademicClassSelect';
+import { AcademicStandardSelect } from '../../Common/components/AcademicStandardSelect';
+import { SectionSelect } from '../../Common/components/SectionSelect';
 
 const validationSchema = Yup.object().shape({
     name: Yup.string()
@@ -20,20 +22,20 @@ const EntryForm = ({ initialValues, entryMode }) => {
     const academicClassDeleteMutation = useDeleteAcademicClassMutation()
 
     const handleFormSubmit = (values) => {
-        //  console.log('values',values)
+
         if (entryMode === 'create') {
             academicClassStoreMutation.mutate(values)
         } else if (entryMode === 'edit') {
-            console.log('edit', values)
+
             academicClassUpdateMutation.mutate(values)
 
         } else if (entryMode === 'delete') {
-            console.log('delete', values)
+
             academicClassDeleteMutation.mutate(values)
 
         }
         else {
-            console.log('Invalid entry mode')
+            console.info('Invalid entry mode')
         }
     }
 
@@ -43,6 +45,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
         initialValues,
         validationSchema,
         onSubmit: values => {
+            console.log(values)
             handleFormSubmit(values)
         },
     });
@@ -56,18 +59,25 @@ const EntryForm = ({ initialValues, entryMode }) => {
 
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
                         <div>
-
                             <CampusSelect formik={formik} />
                         </div>
                         <div>
-                            <FormikInputBox formik={formik} name="name" label="Class" />
+                            <AcademicStandardSelect formik={formik} />
+                        </div>
+                        <div>
+                            <SectionSelect formik={formik} />
+                        </div>
+                        <div>
+                            <FormikInputBox formik={formik} name="name" label="Name" />
 
                         </div>
                         <div>
-                            <FormikInputBox type="date" formik={formik} name="start_date" label="Start Date" />
+                            <FormikInputBox formik={formik} name="code" label="Code" />
+
                         </div>
                         <div>
-                        <FormikInputBox type="date" formik={formik} name="end_date" label="End Date" />
+                            <FormikInputBox formik={formik} type="number" name="capacity" label="Capacity" />
+
                         </div>
 
                     </div>

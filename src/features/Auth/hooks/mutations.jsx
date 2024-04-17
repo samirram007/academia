@@ -7,28 +7,28 @@ import { authLogin, authLogout } from "../services/apis";
 
 export function useAuthLogin() {
 
-    const navigate = useNavigate()
-    const { setUser, setToken } = useAuth();
-    return useMutation({
-      mutationFn: authLogin,
-      onSuccess: (data) => {
-        setUser(data.data)
-        setToken(data.token)
-        queryClient.invalidateQueries({ queryKey: ['user'] })
-        toast.success("Login Successful", { transition: Flip });
-        navigate("/dashboard")
-      },
-      onError: (error) => {
+  const navigate = useNavigate()
+  const { setUser, setToken } = useAuth();
+  return useMutation({
+    mutationFn: authLogin,
+    onSuccess: (data) => {
+      setUser(data.data)
+      setToken(data.token)
+      queryClient.invalidateQueries({ queryKey: ['user'] })
+      toast.success("Login Successful", { transition: Flip });
+      navigate("/dashboard")
+    },
+    onError: (error) => {
 
-        toast.error(error.response.data.message, { transition: Flip })
-        navigate("/login")
-      }
-    })
-  }
+      toast.error(error.response.data.message, { transition: Flip })
+      navigate("/login")
+    }
+  })
+}
 
-  export function useAuthLogout() {
-    const navigate = useNavigate()
-    const { setUser, setToken } = useAuth();
+export function useAuthLogout() {
+  const navigate = useNavigate()
+  const { setUser, setToken } = useAuth();
   return useMutation({
     mutationFn: authLogout,
     onMutate: () => {

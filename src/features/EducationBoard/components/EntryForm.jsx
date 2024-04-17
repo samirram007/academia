@@ -31,7 +31,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
             educationBoardDeleteMutation.mutate(values)
         }
         else {
-            console.log('Invalid entry mode')
+            console.info('Invalid entry mode')
         }
     }
 // use Continue extension

@@ -27,7 +27,7 @@ export function useStoreAcademicStandardMutation() {
     })
   }
 export function useUpdateAcademicStandardMutation() {
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const {setOpen}=useFormModal()
     return useMutation({
       mutationFn: updateAcademicStandardService,
@@ -35,7 +35,7 @@ export function useUpdateAcademicStandardMutation() {
 
        queryClient.invalidateQueries({ queryKey: ['academic_standards'] })
         toast.success(data.message, { transition: Flip });
-        navigate("/academic_standards", { replace: true })
+        // navigate("/academic_standards", { replace: true })
         setOpen(false)
       },
       onError: (error) => {

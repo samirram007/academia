@@ -20,10 +20,10 @@ const initialValues = {
 
 const DataTable = () => {
 
-  const AcademicStandardData = useAcademicStandards(initialValues)
+  const fetchedData = useAcademicStandards(initialValues)
 
 
-  const mData = AcademicStandardData.data?.data ?? [];
+  const mData = fetchedData.data?.data ?? [];
 
   const data = useMemo(() => [...mData], [mData]);
 

@@ -5,7 +5,6 @@ const useDebouncedFormik = (formik, delay = 500) => {
 
   useEffect(() => {
     const handler = setTimeout(() => {
-      console.log(formik.values.name);
       setDebouncedFormik(formik);
     }, delay);
 

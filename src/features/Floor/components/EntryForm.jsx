@@ -27,7 +27,6 @@ const EntryForm = ({ initialValues, entryMode }) => {
     const floorDeleteMutation = useDeleteFloorMutation()
 
     const handleFormSubmit = (values) => {
-        //  console.log('values',values)
         if (entryMode === 'create') {
             floorStoreMutation.mutate(values)
         } else if (entryMode === 'edit') {
@@ -40,7 +39,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
 
         }
         else {
-            console.log('Invalid entry mode')
+            console.info('Invalid entry mode')
         }
     }
 

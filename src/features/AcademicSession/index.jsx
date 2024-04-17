@@ -1,8 +1,8 @@
 import { lazy } from 'react';
 
-const AcademicSessions =  lazy(() => import('./components/AcademicSessions'));
-const CreateAcademicSession =  lazy(() => import('./components/CreateAcademicSession'));
-const EditAcademicSession =  lazy(() => import('./components/EditAcademicSession'));
+const AcademicSessions =  lazy(() => import('./components/DataList'));
+const CreateAcademicSession =  lazy(() => import('./components/Create'));
+const EditAcademicSession =  lazy(() => import('./components/Edit'));
 
 export {AcademicSessions,CreateAcademicSession, EditAcademicSession};
 

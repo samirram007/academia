@@ -40,7 +40,7 @@ export default function Students () {
 
 
     return (
-        <div className="flex justify-stretch flex-col w-full px-4 overflow-y-auto">
+        <div className="flex justify-stretch flex-col w-full overflow-y-auto">
 
             <div
                 className="card  animated fadeInDown

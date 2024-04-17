@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useMemo } from 'react'
+import React, { memo, useEffect, useMemo, useState } from 'react'
 
 import { useFormik } from 'formik'
 import { FormikSelect, FormikSubmit } from '../../../components/form-components'
@@ -23,14 +23,15 @@ const validationSchema = Yup.object().shape({
 })
 
 
-const FeeTemplateFilter = ({ FeeTemplateData, initialValues }) => {
+const Filter = ({ FeeTemplateData, initialFilterValues }) => {
 
+const [isLoading, setIsLoading] = useState(FeeTemplateData.isLoading)
     const formik = useFormik({
-        initialValues,
+        initialValues:initialFilterValues,
         validationSchema,
         enableReinitialize: true,
         onSubmit: values => {
-            Object.assign(initialValues, values);
+            Object.assign(initialFilterValues, values);
             FeeTemplateData.refetch()
         }
     })
@@ -45,7 +46,7 @@ const FeeTemplateFilter = ({ FeeTemplateData, initialValues }) => {
                             <div className='grid gap-4 grid-cols-12   mb-2'>
                                 {/* <div className='col-span-1 text-md font-bold'>Filter</div> */}
                                 <div className='col-span-3 '>
-                                <CampusSelect formik={formik}/>
+                                <CampusSelect formik={formik} auto={true} isLoading={isLoading} setIsLoading={setIsLoading}/>
 
                                 </div>
                                 <div className='col-span-3 '>
@@ -75,5 +76,5 @@ const FeeTemplateFilter = ({ FeeTemplateData, initialValues }) => {
     )
 }
 
-export default FeeTemplateFilter
+export default Filter
 
