@@ -2,7 +2,7 @@ import { useTheme } from "../contexts/ThemeProvider.jsx";
 import { LuSunMedium } from "react-icons/lu";
 import { BsMoon } from "react-icons/bs";
 function ThemeController() {
-    const { theme, setTheme } = useTheme('dark');
+    const { theme, setTheme } = useTheme('light');
 
     return (
         <>

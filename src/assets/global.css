@@ -2,38 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 @layer base{
-    :root{
-       --color-primary:255deg 40% 98%;
-       --color-secondary: 217deg 32.6% 17.5%;
-       --color-accent1: 288deg 95.8% 90.6% ;
-       --color-accent2: 168deg 83.8% 78.2%;
-    }
-    @media (prefers-color-scheme:dark){
-        :root{
-            --color-primary: 217deg 32.6% 17.5%;
-            --color-secondary:255deg 40% 98%;
-            --color-accent1: 288deg 95.8% 60.6% ;
-            --color-accent2: 168deg 83.8% 48.2%;
-         }
-    }
-    :root[data-theme="dark"]{
-        --color-primary: 217deg 32.6% 17.5%;
-        --color-secondary:255deg 40% 98%;
-        --color-accent1: 288deg 95.8% 60.6% ;
-        --color-accent2: 168deg 83.8% 48.2%;
-    }
-    :root[class="dark"]{
-        --color-primary: 217deg 32.6% 17.5%;
-        --color-secondary:255deg 40% 98%;
-        --color-accent1: 288deg 95.8% 60.6% ;
-        --color-accent2: 168deg 83.8% 48.2%;
-    }
+
 }
 
 * {
     @apply m-0 p-0;
     box-sizing: border-box;
-    font-size: 1.15rem;
+    font-size: 0.9rem;
 
 }
 ::-webkit-scrollbar{
@@ -176,14 +151,18 @@ table > thead > tr > th,
 }
 
 table > tbody > tr > td {
-    border-bottom: 1px solid #3327273a;
+    border-bottom: 1px solid #7480ff;
+    border-top: 1px solid #7480ff;
     white-space: nowrap;
 }
 .dark table > tbody > tr > td {
     border-bottom: 1px solid #efefef3a;
     white-space: nowrap;
 }
-
+.breadcrumbs > ul > li + *:before, .breadcrumbs > ol > li + *:before{
+    color:#7480ff;
+    font-weight: bold;
+}
 
 .card {
     border-radius: 0.5rem;
@@ -379,27 +358,27 @@ table > tbody > tr > td {
     @apply min-w-full text-left text-sm font-light
   }
   .table>thead{
-    @apply border-b bg-slate-900 font-medium text-slate-400 dark:border-neutral-500 dark:bg-neutral-600 dark:text-slate-200
+    @apply border-b bg-slate-900 font-medium text-slate-200 dark:border-neutral-500 dark:bg-slate-600
   }
   .table>thead>tr>th:last-child{
     @apply text-center
   }
   .table>tbody>tr{
-    @apply border-b border-neutral-100 dark:border-neutral-100
+    @apply border-b border-neutral-100
   }
   .table tr.active, .table tr.active:nth-child(even), .table-zebra tbody tr:nth-child(even) {
-    --tw-bg-opacity: 0.1;
+    --tw-bg-opacity:0.5;
     background-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-bg-opacity)));
 }
 .table :where(thead, tbody) :where(tr:not(:last-child)), .table :where(thead, tbody) :where(tr:first-child:last-child) {
     border-bottom-width: 1px;
-    --tw-border-opacity: 0.3;
+    --tw-border-opacity: 1;
     border-bottom-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-border-opacity)));
 }
 .label-text {
     font-size: 0.875rem;
     line-height: 1.25rem;
-    --tw-text-opacity: 0.;
+    --tw-text-opacity: 0.5;
     color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity)));
 }
 .collapse-menu{

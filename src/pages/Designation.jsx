@@ -1,0 +1,1 @@
+export {Designations,CreateDesignation,EditDesignation} from '../features/Designation'

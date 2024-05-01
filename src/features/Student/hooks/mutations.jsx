@@ -44,7 +44,7 @@ export function useStoreStudentGuardianMutation() {
       queryClient.invalidateQueries({ queryKey: ['students',student_id] })
       toast.success(data.message, { transition: Flip });
       navigate(`/students/edit/${student_id.id}`, { replace: true })
-    
+
     },
     onError: (error) => {
       toast.error(error.response.data.message, { transition: Flip })

@@ -1,17 +1,16 @@
 export const FormikSubmit = (
     { formik, label }
 ) => {
+
     return (
         <>
-             <button type="submit" className='btn btn-primary btn-wide'>
-                        {label}
-                        {formik.isSubmitting && (
-                            <span
-                                className='spinner-border spinner-border-sm ms-2'
-                                role='status'
-                                aria-hidden='true'
-                            ></span>
+             <button type="submit" className='btn btn-primary '>
+             {formik.isSubmitting && (
+                             <span className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-slate-800"></span>
                         )}
+                {formik.isSubmitting? 'Submitting...' : label}
+
+
                     </button>
         </>
 

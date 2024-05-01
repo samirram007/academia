@@ -27,11 +27,8 @@ import { useDocumentDeleteMutation, useUpdateDocumentMutation } from '../hooks/m
 
 
 const Documents = ({setImageId,setImageSrc}) => {
-   // console.log(setImageId,setImageSrc);
-
-     const [showUploadPanel, setShowUploadPanel] = useState(false);
+    const [showUploadPanel, setShowUploadPanel] = useState(false);
     const docQuery = useDocumentQuery()
-
 
 
 
@@ -42,7 +39,6 @@ const Documents = ({setImageId,setImageSrc}) => {
         </div>
     }
     if (docQuery.documents.isError) { return <p>An error occurred while fetching the data</p> }
-    console.log(docQuery);
     return (
         <>
             {showUploadPanel && <CreateDocument openPanel={() => setShowUploadPanel(!showUploadPanel)} />}

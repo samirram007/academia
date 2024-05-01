@@ -1,10 +1,12 @@
 import React from 'react'
-import BasicTable from '../../tables/BasicTable'
+
 
 import { useMemo } from 'react';
 import { DateTime } from 'luxon'
-import { useUsers } from '../../../hooks/queries';
+
 import { useNavigate, useNavigation } from 'react-router-dom';
+import { useUsers } from '../../hooks/queries';
+import BasicTable from '../../components/tables/BasicTable';
 const UserTable = () => {
     const usersData =useUsers()
     const navigate = useNavigate()

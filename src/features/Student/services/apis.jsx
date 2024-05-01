@@ -23,7 +23,6 @@ export function storeStudent(payload) {
 
 }
 export function updateStudent(payload) {
-  // console.log(payload);
       const {id,...data} = payload;
     return axiosClient.put(`/users/${id}`, removeEmptyStrings(data))
     .then(response => {

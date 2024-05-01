@@ -103,7 +103,6 @@ export const GuardianView = ({ guardian, student_id }) => {
         return <div>{guardianTypeData.error.message}</div>
     }
 
-    //console.log(guardian);
 
     return (
         <div className='col-span-6 flex flex-row items-center justify-between border-b-[1px] border-violet-200/20'>

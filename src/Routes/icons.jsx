@@ -8,8 +8,8 @@ import { SiMicrosoftacademic } from 'react-icons/si';
 export const icons =
    { login:<AiOutlineUser/>,
      users:<FaUsers/>,
-     academic_years:<SiMicrosoftacademic />,
-     create_academic_year:<GoPlus />,
+     academic_sessions:<SiMicrosoftacademic />,
+     create_academic_session:<GoPlus />,
      dashboard:<MdOutlineDashboard/>,
      create_user:<GoPlus/>,
      campuses:<SiMicrosoftacademic />,
