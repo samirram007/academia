@@ -31,11 +31,7 @@ import { AcademicStandards, CreateAcademicStandard, EditAcademicStandard } from 
 import { AcademicClasses, CreateAcademicClass, EditAcademicClass } from '../pages/AcademicClass';
 import { CreateSubject, EditSubject, Subjects } from '../pages/Subject';
 import { CreateSubjectGroup, EditSubjectGroup, SubjectGroups } from '../pages/SubjectGroup';
-<<<<<<< HEAD
 import { CreateStudent, EditStudent, StudentInformation, Students } from '../pages/Student';
-=======
-import { CreateStudent, EditStudent, Students } from '../pages/Student';
->>>>>>> 38fe76ea24ea4a688945fbee42d4c859bab31c8f
 import { CreateTeacher, EditTeacher, Teachers } from '../pages/Teacher';
 import { Dashboard } from '../pages/Dashboard';
 import { CreateSchoolType, EditSchoolType, SchoolTypes } from '../pages/SchoolType';
