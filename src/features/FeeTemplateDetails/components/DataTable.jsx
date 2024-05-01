@@ -62,7 +62,7 @@ const DataTable = ({ fee_template_id, setEntryId }) => {
       align: 'center',
       cell: info => {
         return (
-          <div className='flex justify-start md:justify-center  items-center gap-2'>
+          <div className={`flex justify-start md:justify-center  items-center gap-2  ${info.getValue() ? 'text-green-400' : ''}`}>
             {info.getValue() ? 'Yes' : 'No'}
           </div>
         )
@@ -74,7 +74,7 @@ const DataTable = ({ fee_template_id, setEntryId }) => {
       align: 'center',
       cell: info => {
         return (
-          <div className='flex justify-start md:justify-center  items-center gap-2'>
+          <div className={`flex justify-start md:justify-center  items-center gap-2  ${info.getValue() ? 'text-green-400' : ''}`}>
             {info.getValue() ? 'Yes' : 'No'}
           </div>
         )
@@ -86,7 +86,7 @@ const DataTable = ({ fee_template_id, setEntryId }) => {
       align: 'center',
       cell: info => {
         return (
-          <div className='flex justify-start md:justify-center  items-center gap-2'>
+          <div className={`flex justify-start md:justify-center  items-center gap-2  ${info.getValue() ? 'text-green-400' : ''}`}>
             {info.getValue() ? 'Yes' : 'No'}
           </div>
         )

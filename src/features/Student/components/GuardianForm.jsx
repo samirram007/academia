@@ -8,19 +8,15 @@ import { MdClose, MdOutlineCloseFullscreen } from "react-icons/md";
 
 const GuardianForm = ({ mode, guardian, student_id, setMode, }) => {
 
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
     const guardianTypeData = useGuardianType();
     const studentGuardianStoreMutation = useStoreStudentGuardianMutation();
     const studentGuardianUpdateMutation = useUpdateStudentGuardianMutation();
-    if (guardianTypeData.isPending) {
-        return '<div>Loading..</div>'
-    }
-    if (guardianTypeData.isError) {
-        return <div>{guardianTypeData.error.message}</div>
-    }
+
 
 
     const initialValues = guardian
+
     const handleFormSubmit = (values) => {
         if (mode === 'add') {
             studentGuardianStoreMutation.mutate(values)

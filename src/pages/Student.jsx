@@ -1,3 +1,3 @@
-export {Students,CreateStudent, EditStudent} from '../features/Student';
+export {Students,CreateStudent, EditStudent,StudentInformation} from '../features/Student';
 
 

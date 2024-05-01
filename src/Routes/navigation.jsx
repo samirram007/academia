@@ -31,7 +31,7 @@ import { AcademicStandards, CreateAcademicStandard, EditAcademicStandard } from 
 import { AcademicClasses, CreateAcademicClass, EditAcademicClass } from '../pages/AcademicClass';
 import { CreateSubject, EditSubject, Subjects } from '../pages/Subject';
 import { CreateSubjectGroup, EditSubjectGroup, SubjectGroups } from '../pages/SubjectGroup';
-import { CreateStudent, EditStudent, Students } from '../pages/Student';
+import { CreateStudent, EditStudent, StudentInformation, Students } from '../pages/Student';
 import { CreateTeacher, EditTeacher, Teachers } from '../pages/Teacher';
 import { Dashboard } from '../pages/Dashboard';
 import { CreateSchoolType, EditSchoolType, SchoolTypes } from '../pages/SchoolType';
@@ -69,6 +69,7 @@ export const page = [
       children: [
        { path: 'create',  name: 'New',  element: <CreateStudent /> ,   isMenu: false,   isPrivate: false,   icon:icons.create_user},
        { path: 'edit/:id',    name: 'Edit Student',    element: <EditStudent /> ,     isMenu: false,  isPrivate: false,},
+       { path: 'info/:id',    name: 'User Information',    element: <StudentInformation /> ,     isMenu: false,  isPrivate: false,},
       ]
     },
     { path: 'teachers',      name: 'Teachers',        element:<Teachers />,           isMenu: true,  menuGroup:'TEACHER',   isPrivate: false,   icon:icons.users, role:['admin'],

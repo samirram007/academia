@@ -2,8 +2,9 @@ import { createPortal } from 'react-dom'
 import React from 'react'
 import { MdOutlineCloseFullscreen } from 'react-icons/md'
 import { FormModalProvider, useFormModal } from '../../contexts/FormModalProvider'
-const FormikFormModal = ({   label, children }) => {
-    const {isOpen,setOpen}=useFormModal()
+const FormikFormModal = ({ label, children }) => {
+    const { isOpen, setOpen } = useFormModal()
+
     const overlay = {
         position: "fixed",
         top: 0,
@@ -34,26 +35,26 @@ const FormikFormModal = ({   label, children }) => {
     return createPortal(
         <>
 
-                <div style={overlay}>
-                    <div style={modalStyle}>
-                        {
-                            label &&
-                            <div className='flex justify-between items-center
+            <div style={overlay}>
+                <div style={modalStyle}>
+                    {
+                        label &&
+                        <div className='flex justify-between items-center
                             border-b-2 border-slate-600/50 pb-2   ' >
-                                <div>{label}</div>
-                                <button onClick={()=>setOpen(false)} type="button"
-                                    className='rounded-full p-2
+                            <div>{label}</div>
+                            <button onClick={() => setOpen(false)} type="button"
+                                className='rounded-full p-2
  bg-slate-50/5 text-orange-500 cursor-pointer
   hover:text-yellow-500 hover:bg-slate-600
    active:text-orange-600 active:touch-pinch-zoom '>
-                                    <MdOutlineCloseFullscreen className='text-xl active:scale-90 transition delay-75 ease-in-out ' />
-                                </button>
-                            </div>
-                        }
+                                <MdOutlineCloseFullscreen className='text-xl active:scale-90 transition delay-75 ease-in-out ' />
+                            </button>
+                        </div>
+                    }
 
-                        {children}
-                    </div>
+                    {children}
                 </div>
+            </div>
 
         </>,
         document.getElementById('portal-form')
