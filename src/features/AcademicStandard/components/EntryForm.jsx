@@ -28,7 +28,10 @@ const EntryForm = ({ initialValues, entryMode }) => {
         if (entryMode === 'create') {
             academicStandardStoreMutation.mutate(values)
         } else if (entryMode === 'edit') {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 38fe76ea24ea4a688945fbee42d4c859bab31c8f
             academicStandardUpdateMutation.mutate(values)
 
         } else if (entryMode === 'delete') {

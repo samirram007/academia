@@ -69,9 +69,15 @@ const DataTable = () => {
       cell: ({ row }) => {
         return (
           <div className="flex justify-start md:justify-center  items-center gap-2">
+<<<<<<< HEAD
             <button onClick={() => { navigate(`/students/info/${row.original.id}`) }}
               className="btn btn-outline btn-primary btn-sm btn-rounded ">
               Info..
+=======
+            <button onClick={() => { navigate(`/students/edit/${row.original.id}`) }}
+              className="btn btn-outline btn-primary btn-sm btn-rounded ">
+              More..
+>>>>>>> 38fe76ea24ea4a688945fbee42d4c859bab31c8f
             </button>
             <button onClick={() => { navigate(`/students/edit/${row.original.id}`) }}
               className="btn btn-outline btn-primary btn-sm btn-rounded ">
