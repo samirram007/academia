@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 
-const Students =  lazy(() => import('./components/Students'));
+const Students =  lazy(() => import('./components/DataList'));
 const CreateStudent =  lazy(() => import('./components/Create'));
 const EditStudent =  lazy(() => import('./components/Edit'));
 const StudentInformation =  lazy(() => import('./components/Information'));

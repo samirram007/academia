@@ -34,7 +34,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
 
         }
         else {
-            console.info('Invalid entry mode')))
+            console.info('Invalid entry mode')
         }
     }
 

@@ -6,7 +6,7 @@ const FormModalContext = createContext({
 });
 
 export const FormModalProvider = ({ children }) => {
-    const [isOpen, setIsOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
 
     const setOpen = (open) => {
 

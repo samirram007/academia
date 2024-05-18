@@ -12,7 +12,7 @@ import { useFeeTemplates } from '../hooks/quaries';
 import CreateFeeTemplate from './Create';
 import Edit from './Edit';
 import Delete from './Delete';
-import FeeTemplateDetails from '../../FeeTemplateDetails/components/FeeTemplateDetails';
+import FeeTemplateItem from '../../FeeTemplateItem/components/FeeTemplateItem';
 
 
 const initialValues = {
@@ -73,7 +73,7 @@ const DataTable = () => {
       cell: ({ row }) => {
         return (
           <div className="flex justify-start md:justify-center  items-center gap-2">
-          <FeeTemplateDetails  initialValues={row.original} />
+          <FeeTemplateItem  initialValues={row.original} />
           <Edit  initialValues={row.original} />
           <Delete initialValues={row.original} />
 

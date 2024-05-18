@@ -24,11 +24,11 @@ const initialFilterValues = {
 }
 
 const DataTable = () => {
-  const StudentsData = useStudents(initialFilterValues)
+  const fetchedData = useStudents(initialFilterValues)
   const navigate = useNavigate()
   const createRoute = `/students/create`
 
-  const mData = StudentsData.data?.data ?? [];
+  const mData = fetchedData.data?.data ?? [];
 
   const data = useMemo(() => [...mData], [mData]);
 
@@ -43,22 +43,22 @@ const DataTable = () => {
     },
     {
       header: "Name",
-      accessorKey: "name",
+      accessorKey: "student.name",
       size: 300,
     },
     {
       header: "Type",
-      accessorKey: "user_type",
+      accessorKey: "student.user_type",
       size: 300,
     },
     {
       header: "Email",
-      accessorKey: "email",
+      accessorKey: "student.email",
       size: 200,
     },
     {
       header: 'DOB',
-      accessorKey: 'dob',
+      accessorKey: 'student.dob',
       cell: info =>
         DateTime.fromISO(info.getValue()).toLocaleString(DateTime.DATE_MED),
     },
@@ -69,7 +69,7 @@ const DataTable = () => {
       cell: ({ row }) => {
         return (
           <div className="flex justify-start md:justify-center  items-center gap-2">
-            <button onClick={() => { navigate(`/students/info/${row.original.id}`) }}
+            <button onClick={() => { navigate(`/students/info/${btoa(row.original.id)}`) }}
               className="btn btn-outline btn-primary btn-sm btn-rounded ">
               Info..
             </button>
@@ -77,7 +77,7 @@ const DataTable = () => {
               className="btn btn-outline btn-primary btn-sm btn-rounded ">
               Edit
             </button>
-            <button onClick={() => { deleteUserData(row.original.id) }}
+            <button onClick={() => { deleteUserData(row.original.student.id) }}
               className="btn btn-outline btn-primary btn-sm btn-rounded  ">
               Delete
             </button>
@@ -95,9 +95,10 @@ const DataTable = () => {
     <BasicTable data={data} columns={columns}
       createRoute={createRoute}
       filter={
-        <Filter StudentsData={StudentsData}
+        <Filter fetchedData={fetchedData}
           initialFilterValues={initialFilterValues} />
-      } />
+      }
+       />
   )
 }
 

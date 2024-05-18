@@ -37,8 +37,7 @@ const thumbsContainer = {
 };
 
 const thumb = {
-    display: 'flex',
-    justifyContent:'space-between',
+
     borderRadius: 5,
     border: '1px solid #eaeaea22',
     marginBottom: 8,

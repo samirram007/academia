@@ -35,6 +35,8 @@ import { CreateStudent, EditStudent, StudentInformation, Students } from '../pag
 import { CreateTeacher, EditTeacher, Teachers } from '../pages/Teacher';
 import { Dashboard } from '../pages/Dashboard';
 import { CreateSchoolType, EditSchoolType, SchoolTypes } from '../pages/SchoolType';
+import { CreateExpenseHead, EditExpenseHead, ExpenseHeads } from '../pages/ExpenseHead';
+import { CreateExpense, Expenses,EditExpense } from '../pages/Expense';
 
 
 export const common=(module) => {
@@ -50,10 +52,11 @@ export const menuGroup=[
   { name:'EXAMINATION',visible:true, sort:4},
   { name:'EMPLOYEE',visible:true, sort:5},
   { name:'FEES',visible:true, sort:6},
+  { name:'EXPENSE',visible:true, sort:7},
   { name:'REPORT INTERFACE',visible:true, sort:8},
-  { name:'STRUCTURE',visible:true, sort:7},
-  { name:'SETTINGS',visible:true, sort:9},
-  { name:'LOGOUT',visible:false, sort:10},
+  { name:'STRUCTURE',visible:true, sort:9},
+  { name:'SETTINGS',visible:true, sort:10},
+  { name:'LOGOUT',visible:false, sort:11},
 ]
 export const page = [
 
@@ -78,7 +81,7 @@ export const page = [
        { path: 'edit/:id',    name: 'Edit Teacher',    element: <EditTeacher /> ,     isMenu: false,  isPrivate: false,},
       ]
     },
-    { path: 'fees',      name: 'Fee',        element:<Fees />,           isMenu: true,  menuGroup:'FEES',   isPrivate: false,   icon:icons.feess, role:['admin'],
+    { path: 'fees',      name: 'Fee',        element:<Fees />,           isMenu: true,  menuGroup:'FEES',   isPrivate: false,   icon:icons.fees, role:['admin'],
       children: [
        { path: 'create',  name: 'New',  element: <CreateFee /> ,   isMenu: false,   isPrivate: false,   icon:icons.create_fee},
        { path: 'edit/:id',    name: 'Edit Fee',    element: <EditFee /> ,     isMenu: false,  isPrivate: false,},
@@ -102,6 +105,18 @@ export const page = [
        { path: 'edit/:id', name: 'Edit Fee Templates', element: <EditFeeTemplate /> ,   isMenu: false, isPrivate: false,},
       ]
     },
+    { path: 'expense_heads',    name: 'Expense Heads',    element:<ExpenseHeads/>,     isMenu: true,   menuGroup:'EXPENSE', isPrivate: false, icon:icons.expense_heads, role:['admin'],
+      children: [
+       { path: 'create', name: 'New', element: <CreateExpenseHead /> ,   isMenu: false, isPrivate: false, icon:icons.create_expense_head},
+       { path: 'edit/:id', name: 'Edit Expense Head', element: <EditExpenseHead /> ,   isMenu: false, isPrivate: false,},
+      ]
+    },
+    { path: 'expenses',      name: 'Expense',        element:<Expenses />,           isMenu: true,  menuGroup:'EXPENSE',   isPrivate: false,   icon:icons.expenses, role:['admin'],
+    children: [
+     { path: 'create',  name: 'New',  element: <CreateExpense /> ,   isMenu: false,   isPrivate: false,   icon:icons.create_expense},
+     { path: 'edit/:id',    name: 'Edit Expense',    element: <EditExpense /> ,     isMenu: false,  isPrivate: false,},
+    ]
+  },
     { path: 'academic_sessions',    name: 'Sessions',    element:<AcademicSessions/>,     isMenu: true,   menuGroup:'ACADEMICS', isPrivate: false, icon:icons.academic_sessions, role:['admin'],
       children: [
        { path: 'create', name: 'New Session', element: <CreateAcademicSession /> ,   isMenu: false, isPrivate: false, icon:icons.create_academic_session},

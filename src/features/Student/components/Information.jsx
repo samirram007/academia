@@ -8,9 +8,7 @@ const Information = () => {
 
   const { id } = useParams();
   const [entryMode,setEntryMode]=useState('edit');
-  const {data:editData,isError, isLoading}=useStudent(id)
-
-
+  const {data:editData,isError, isLoading}=useStudent(atob(id))
    if(isLoading){
       return <div>Loading...</div>
    }

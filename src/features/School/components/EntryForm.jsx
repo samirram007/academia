@@ -31,7 +31,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
             schoolDeleteMutation.mutate(values)
         }
         else {
-            console.info('Invalid entry mode'))
+            console.info('Invalid entry mode')
         }
     }
 

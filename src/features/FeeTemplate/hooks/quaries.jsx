@@ -6,7 +6,7 @@ import { fetchFeeTemplate, fetchFeeTemplates } from "../services/apis"
     return useQuery({
       queryKey: ['fee_templates','filter',payload],
       queryFn: ()=>fetchFeeTemplates(payload),
-      staleTime:1000,
+      staleTime:1000*60,
       enabled:!!payload
     })
   }
@@ -14,5 +14,11 @@ import { fetchFeeTemplate, fetchFeeTemplates } from "../services/apis"
     return useQuery({
       queryKey: ['fee_templates',id],
       queryFn: ()=>fetchFeeTemplate(id),
+    })
+  }
+  export function useFeeTemplatesBySessionNClass(payload) {
+    return useQuery({
+      queryKey: ['fee_templates',payload],
+      queryFn: ()=>fetchFeeTemplatesBySessionNClass(payload),
     })
   }

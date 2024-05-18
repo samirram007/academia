@@ -24,7 +24,7 @@ const Edit = () => {
         return <div>Error...</div>
      }
 
-    const initialValues = editData.data ?? {
+    const initialValues = editData.data.student ?? {
         name: '',
         username: '',
         code: '',

@@ -26,7 +26,6 @@ const {data:editData,isError, isLoading}=useSchool(id)
     const initialValues = editData.data ?? {
         name: '',
         code: '',
-        email: '',
         address_id: null,
         description:'',
         contact_no: '',

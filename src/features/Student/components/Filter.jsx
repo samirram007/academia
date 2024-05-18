@@ -23,16 +23,16 @@ const validationSchema = Yup.object().shape({
 })
 
 
-const Filter = ({ StudentsData, initialFilterValues }) => {
+const Filter = ({ fetchedData, initialFilterValues }) => {
 
-const [isLoading, setIsLoading] = useState(StudentsData.isLoading)
+const [isLoading, setIsLoading] = useState(fetchedData.isLoading)
     const formik = useFormik({
         initialValues:initialFilterValues,
         validationSchema,
         enableReinitialize: true,
         onSubmit: values => {
             Object.assign(initialFilterValues, values);
-            StudentsData.refetch()
+            fetchedData.refetch()
         }
     })
 
