@@ -1,9 +1,10 @@
 import { lazy } from 'react';
 
-const Fees =  lazy(() => import('./Fees'));
-const CreateFee =  lazy(() => import('./CreateFee'));
-const EditFee =  lazy(() => import('./EditFee'));
+const Fees =  lazy(() => import('./DataList'));
+const CreateFee =  lazy(() => import('./Create'));
+const EditFee =  lazy(() => import('./Edit'));
+const FeeFilter =  lazy(() => import('./Filter'));
 
-export {Fees,CreateFee, EditFee};
+export {Fees,CreateFee, EditFee,FeeFilter};
 
 

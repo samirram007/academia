@@ -3,7 +3,7 @@ import React from 'react'
 
 import { useMemo } from 'react';
 import { DateTime } from 'luxon'
-import BasicTable from '../../../components/tables/BasicTable';
+import FilterTable from '../../../components/tables/FilterTable';
 import Filter from './Filter';
 
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +13,7 @@ import CreateFeeTemplate from './Create';
 import Edit from './Edit';
 import Delete from './Delete';
 import FeeTemplateItem from '../../FeeTemplateItem/components/FeeTemplateItem';
+import Clone from './Clone';
 
 
 const initialValues = {
@@ -74,6 +75,7 @@ const DataTable = () => {
         return (
           <div className="flex justify-start md:justify-center  items-center gap-2">
           <FeeTemplateItem  initialValues={row.original} />
+          <Clone  initialValues={row.original} />
           <Edit  initialValues={row.original} />
           <Delete initialValues={row.original} />
 
@@ -85,7 +87,7 @@ const DataTable = () => {
   ]
 
   return (
-    <BasicTable
+    <FilterTable
     data={data}
     columns={columns}
     createForm={<CreateFeeTemplate modal={true}/>}

@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import React from 'react'
 import * as Yup from "yup";
-import { useDeleteFeeTemplateMutation, useStoreFeeTemplateMutation, useUpdateFeeTemplateMutation } from '../hooks/mutations';
+import { useCloneFeeTemplateMutation, useDeleteFeeTemplateMutation, useStoreFeeTemplateMutation, useUpdateFeeTemplateMutation } from '../hooks/mutations';
 import { CampusSelect } from '../../Common/components/CampusSelect';
 import { AcademicSessionSelect } from '../../Common/components/AcademicSessionSelect';
 import { AcademicClassSelect } from '../../Common/components/AcademicClassSelect';
@@ -16,13 +16,17 @@ const EntryForm = ({ initialValues, entryMode }) => {
 
     const feeTemplateStoreMutation = useStoreFeeTemplateMutation()
     const feeTemplateUpdateMutation = useUpdateFeeTemplateMutation()
+    const feeTemplateCloneMutation = useCloneFeeTemplateMutation()
     const feeTemplateDeleteMutation = useDeleteFeeTemplateMutation()
 
     const handleFormSubmit = (values) => {
+        console.log(values);
         if (entryMode === 'create') {
             feeTemplateStoreMutation.mutate(values)
         } else if (entryMode === 'edit') {
             feeTemplateUpdateMutation.mutate(values)
+        } else if (entryMode === 'clone') {
+            feeTemplateCloneMutation.mutate(values)
         } else if (entryMode === 'delete') {
             useDeleteFeeTemplateMutation.mutate(values)
         }

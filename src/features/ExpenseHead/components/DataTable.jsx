@@ -2,7 +2,7 @@ import React from 'react'
 
 import { useMemo } from 'react';
 import { DateTime } from 'luxon'
-import BasicTable from '../../../components/tables/BasicTable';
+import FilterTable from '../../../components/tables/FilterTable';
 
 import { useNavigate } from 'react-router-dom';
 import { useExpenseHeads } from '../hooks/queries';
@@ -15,7 +15,7 @@ const DataTable = () => {
 
       const createRoute=`/expense_heads/create`
 
-      const mData = FetchedData.data?.data ?? [];
+      const mData = fetchedData.data?.data ?? [];
 
       const data = useMemo(() => [...mData], [mData]);
 
@@ -52,7 +52,7 @@ const DataTable = () => {
       ]
 
   return (
-    <BasicTable data={data} columns={columns}
+    <FilterTable data={data} columns={columns}
     // createRoute={createRoute}
      createForm={<CreateExpenseHead modal={true} />}
      />

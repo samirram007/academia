@@ -1,25 +1,36 @@
 import { Breadcrumbs } from '@mui/material';
 import React, { useState } from 'react'
 import EntryForm from './EntryForm';
+import moment from 'moment';
 
  const Create = ({ modal }) => {
   const [entryMode, setEntryMode] = useState('create');
 
   const editData = {
+    expense_no:'new',
+    expense_date:    moment(new Date()).format('YYYY-MM-DD'),
     academic_session_id: 1,
-    academic_class_id: 1,
     campus_id: 1,
-    name:'',
-    is_active:false
+    user_id: null,
+    total_amount: 0,
+    paid_amount: 0,
+    balance_amount: 0,
+    payment_mode:'CASH',
+    expense_items:[]
 
   }
 
   const initialValues = editData ?? {
+    expense_no:'new',
+    expense_date:     moment(new Date()).format('YYYY-MM-DD'),
     academic_session_id: 1,
-    academic_class_id: 1,
     campus_id: 1,
-    name:'',
-    is_active:false
+    user_id: null,
+    total_amount: 0,
+    paid_amount: 0,
+    balance_amount: 0,
+    payment_mode:'CASH',
+    expense_items:[]
   }
 
 

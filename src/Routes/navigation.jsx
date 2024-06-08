@@ -37,6 +37,9 @@ import { Dashboard } from '../pages/Dashboard';
 import { CreateSchoolType, EditSchoolType, SchoolTypes } from '../pages/SchoolType';
 import { CreateExpenseHead, EditExpenseHead, ExpenseHeads } from '../pages/ExpenseHead';
 import { CreateExpense, Expenses,EditExpense } from '../pages/Expense';
+import { Admissions, CreateAdmission, EditAdmission } from '../pages/Admission';
+import { CreatePromotion, EditPromotion, Promotions } from '../features/Promotion';
+import { CreateStudentIdCard, EditStudentIdCard, StudentIdCards } from '../pages/StudentIdCard';
 
 
 export const common=(module) => {
@@ -73,6 +76,24 @@ export const page = [
        { path: 'create',  name: 'New',  element: <CreateStudent /> ,   isMenu: false,   isPrivate: false,   icon:icons.create_user},
        { path: 'edit/:id',    name: 'Edit Student',    element: <EditStudent /> ,     isMenu: false,  isPrivate: false,},
        { path: 'info/:id',    name: 'User Information',    element: <StudentInformation /> ,     isMenu: false,  isPrivate: false,},
+      ]
+    },
+    { path: 'admissions',      name: 'Admission',        element:<Admissions />,           isMenu: true,  menuGroup:'STUDENT',   isPrivate: false,   icon:icons.users, role:['admin'],
+      children: [
+       { path: 'create',  name: 'New',  element: <CreateAdmission /> ,   isMenu: false,   isPrivate: false,   icon:icons.create_admission},
+       { path: 'edit/:id',    name: 'Edit Admission',    element: <EditAdmission /> ,     isMenu: false,  isPrivate: false,},
+      ]
+    },
+    { path: 'promotions',      name: 'Promotion',        element:<Promotions />,           isMenu: true,  menuGroup:'STUDENT',   isPrivate: false,   icon:icons.users, role:['admin'],
+      children: [
+       { path: 'create',  name: 'New',  element: <CreatePromotion /> ,   isMenu: false,   isPrivate: false,   icon:icons.create_promotion},
+       { path: 'edit/:id',    name: 'Edit Promotion',    element: <EditPromotion /> ,     isMenu: false,  isPrivate: false,},
+      ]
+    },
+    { path: 'student_id_cards',      name: 'Id Card',        element:<StudentIdCards />,           isMenu: true,  menuGroup:'STUDENT',   isPrivate: false,   icon:icons.student_id_card, role:['admin'],
+      children: [
+       { path: 'create',  name: 'New',  element: <CreateStudentIdCard /> ,   isMenu: false,   isPrivate: false,   icon:icons.create_student_id_card},
+       { path: 'edit/:id',    name: 'Edit IdCard',    element: <EditStudentIdCard /> ,     isMenu: false,  isPrivate: false,},
       ]
     },
     { path: 'teachers',      name: 'Teachers',        element:<Teachers />,           isMenu: true,  menuGroup:'TEACHER',   isPrivate: false,   icon:icons.users, role:['admin'],

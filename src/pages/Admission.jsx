@@ -1,0 +1,1 @@
+export {Admissions,CreateAdmission, EditAdmission} from '../features/Admission';

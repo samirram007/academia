@@ -44,6 +44,17 @@ export function updateFeeTemplate(payload) {
             throw err;
         });
 }
+export function cloneFeeTemplate(payload) {
+    const { id, ...data } = payload;
+
+    return axiosClient.post(`/fee_templates/clone/${id}`, removeEmptyStrings(data))
+        .then(response => {
+            return response.data;
+        })
+        .catch(err => {
+            throw err;
+        });
+}
 export function deleteFeeTemplate(payload) {
     const { id, ...data } = payload;
     return axiosClient.delete(`/fee_templates/${id}`)

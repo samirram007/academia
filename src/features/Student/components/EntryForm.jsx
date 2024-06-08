@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { FormikHiddenInput, FormikInputBox, FormikSelect, FormikSubmit, ImageBox } from '../../../components/form-components'
 import { useFormik } from 'formik'
 import * as Yup from "yup";
-import {  useCaste, useGender,
+import {
+    useCaste, useGender,
     useLanguage, useNationality, useReligion
 } from '../../../hooks/queries'
 
@@ -11,6 +12,10 @@ import { useStoreStudentMutation, useUpdateStudentMutation } from '../hooks/muta
 import Guardians from './Guardians';
 import Addresses from './Addresses';
 import { useCampuses } from '../../Campus/hooks/queries';
+import { useAcademicSessions } from '../../AcademicSession/hooks/quaries';
+import { CampusSelect } from '../../Common/components/CampusSelect';
+import { AcademicSessionSelect } from '../../Common/components/AcademicSessionSelect';
+import { AcademicClassSelect } from '../../Common/components/AcademicClassSelect';
 const validationSchema = Yup.object().shape({
     name: Yup.string()
         .required("Name is required"),
@@ -18,13 +23,11 @@ const validationSchema = Yup.object().shape({
         .typeError('Invalid date format'),
     admission_date: Yup.date()
         .typeError('Invalid date format'),
-    campus_id: Yup.number().integer()
-        .min(1, "Please select Campus")
-        .required("Please select Campus")
 })
 
 const EntryForm = ({ initialValues, entryMode }) => {
-    const campuses = useCampuses()
+    // const campuses = useCampuses()
+    // const academic_sessions = useAcademicSessions()
     const genderData = useGender()
     const nationalityData = useNationality()
     const religionData = useReligion()
@@ -34,6 +37,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
     const studentStoreMutation = useStoreStudentMutation()
     const studentUpdateMutation = useUpdateStudentMutation()
     const [checked, setChecked] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
 
     const handleFormSubmit = (values) => {
         if (entryMode === 'create') {
@@ -47,12 +51,24 @@ const EntryForm = ({ initialValues, entryMode }) => {
         validationSchema,
         enableReinitialize: true,
         onSubmit: values => {
+          //  console.log(typeof values.academic_session_id);
+            if(typeof values.campus_id==='string' && values.campus_id!==''){
+                values.campus_id=parseInt(values.campus_id)
+            }
+            if(typeof values.academic_session_id==='string'  && values.academic_session_id!==''){
+                values.academic_session_id=parseInt(values.academic_session_id)
+            }
+            if(typeof values.academic_class_id==='string'  && values.academic_class_id!==''){
+                values.academic_class_id=parseInt(values.academic_class_id)
+            }
+
+          //  return
             handleFormSubmit(values)
         }
     })
-    if (campuses.isLoading) {
-        return (<div>Loading...</div>)
-    }
+    // if (campuses.isLoading) {
+    //     return (<div>Loading...</div>)
+    // }
     return (
         <form onSubmit={formik.handleSubmit}>
             <div className='grid grid-cols-1  '>
@@ -150,7 +166,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
                         </div>
                         {entryMode == 'edit' &&
                             <>
-                                <Guardians formik={formik}   name="guardians" label="Guardian" />
+                                <Guardians formik={formik} name="guardians" label="Guardian" />
                                 <Addresses formik={formik} name="addresses" label="Address" />
                             </>
                         }
@@ -158,26 +174,31 @@ const EntryForm = ({ initialValues, entryMode }) => {
 
 
                     </div>
-                    <div className='col-span-6 md:col-span-2'>
-                        <div className='col-span-6 md:col-span-4'>
-                            <ImageBox formik={formik} name="profile_document_id" editable={true} resource="profile_document" />
-                        </div>
-                        <div className='col-span-6 md:col-span-4'>
-                            {campuses.data &&
-                                <FormikSelect formik={formik} name="campus_id" label="Campus"
-                                    options={
-                                        campuses.data.data &&
-                                        campuses.data.data.map(({ id: key, name: value }, index) => (
-                                            <option key={index} value={key}>{value}</option>
-                                        ))
-                                    } />
-                            }
-                        </div>
-                        <div className='col-span-6 md:col-span-4 mt-2'>
-                            <FormikInputBox formik={formik} name="admission_no" label="Admission No" />
-                        </div>
-                        <div className='col-span-6 md:col-span-4'>
-                            <FormikInputBox formik={formik} name="admission_date" type={"date"} label="Admission Date" />
+                    <div className='col-span-6 md:col-span-2  '>
+                            <div className='col-span-6 md:col-span-4'>
+                                <ImageBox formik={formik} name="profile_document_id" editable={true} resource="profile_document" />
+                            </div>
+                        <div className='  grid grid-cols-4 gap-4'>
+                            <div className='col-span-6 md:col-span-2'>
+                                <CampusSelect formik={formik} auto={false} isLoading={isLoading} setIsLoading={setIsLoading} />
+
+                            </div>
+                            <div className='col-span-6 md:col-span-2'>
+
+                                <AcademicSessionSelect formik={formik} campus_id={formik.values.campus_id} label={'Admission Session'} />
+
+                            </div>
+                            <div className='col-span-6 md:col-span-2'>
+
+                                <AcademicClassSelect formik={formik} campus_id={formik.values.campus_id} label={'Admission Class'} />
+
+                            </div>
+                            <div className='col-span-6 md:col-span-2 '>
+                                <FormikInputBox formik={formik} name="admission_no" label="Admission No" />
+                            </div>
+                            <div className='col-span-6 md:col-span-2'>
+                                <FormikInputBox formik={formik} name="admission_date" type={"date"} label="Admission Date" />
+                            </div>
                         </div>
 
                         <div className='mx-auto flex justify-center items-center border-t-2 border-blue-300/10 mt-2 pt-6'>

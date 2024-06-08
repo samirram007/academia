@@ -7,7 +7,7 @@ import { CampusSelect } from '../../Common/components/CampusSelect';
 import { FormikCheckBox, FormikInputBox } from '../../../components/form-components';
 import { AcademicClassSelect } from '../../Common/components/AcademicClassSelect';
 import { AcademicStandardSelect } from '../../Common/components/AcademicStandardSelect';
-import { SectionSelect } from '../../Common/components/SectionSelect';
+
 
 const validationSchema = Yup.object().shape({
     name: Yup.string()
@@ -64,9 +64,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
                         <div>
                             <AcademicStandardSelect formik={formik} />
                         </div>
-                        <div>
-                            <SectionSelect formik={formik} />
-                        </div>
+
                         <div>
                             <FormikInputBox formik={formik} name="name" label="Name" />
 

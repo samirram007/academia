@@ -8,9 +8,10 @@ export function fetchExpense(id) {
         })
 }
 export function fetchExpenses(payload) {
-
+const filterString=`academic_session_id=${payload.academic_session_id}&campus_id=${payload.campus_id}&from=${payload.from}&to=${payload.to}`
+console.log(filterString);
     return axiosClient
-        .get(`/expenses?academic_session_id=${payload.academic_session_id}&academic_class_id=${payload.academic_class_id}&campus_id=${payload.campus_id}`)
+        .get(`/expenses?${filterString}`)
         .then(response => {
             return response.data;
         })
@@ -23,7 +24,7 @@ export function fetchExpenses(payload) {
 
 
 export function storeExpense(payload) {
-
+console.log(payload)
     return axiosClient.post("/expenses", removeEmptyStrings(payload))
         .then(response => {
             return response.data;
@@ -36,6 +37,7 @@ export function storeExpense(payload) {
 }
 export function updateExpense(payload) {
     const { id, ...data } = payload;
+    // console.log(id, removeEmptyStrings(data))
     return axiosClient.put(`/expenses/${id}`, removeEmptyStrings(data))
         .then(response => {
             return response.data;

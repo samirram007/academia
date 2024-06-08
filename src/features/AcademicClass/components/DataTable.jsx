@@ -4,7 +4,7 @@ import React from 'react'
 import { useMemo } from 'react';
 import { DateTime } from 'luxon'
 
-import BasicTable from '../../../components/tables/BasicTable';
+import FilterTable from '../../../components/tables/FilterTable';
 import Filter from './Filter';
 
 import Create from './Create';
@@ -16,7 +16,6 @@ import { useAcademicClasses } from '../hooks/queries';
 const initialValues = {
   campus_id: '1',
 academic_standard_id:1,
-section_id:1,
   name: '',
   code: '',
   capacity:50
@@ -25,7 +24,6 @@ section_id:1,
 const initialFilterValues = {
   campus_id: initialValues.campus_id,
   academic_standard_id: initialValues.academic_standard_id,
-  section_id: initialValues.section_id
 }
 
 const DataTable = () => {
@@ -51,9 +49,6 @@ const DataTable = () => {
       header: "Standard", accessorKey: "academic_standard.name",
     },
     {
-      header: "Section", accessorKey: "section.name",
-    },
-    {
       header: "Capacity", accessorKey: "capacity",
     },
 
@@ -72,7 +67,7 @@ const DataTable = () => {
   ]
 
   return (
-    <BasicTable
+    <FilterTable
       data={data} columns={columns}
       createForm={<Create initialValues={initialValues} modal={true} />}
       createFormTitle="Create Academic Class"

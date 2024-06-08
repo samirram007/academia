@@ -466,3 +466,7 @@ content:"";
     border: none ;
     border-bottom: 1px solid #00a762;
 }
+.select,.input,.btn{
+    min-height: 2rem;
+    height: 2rem;
+}

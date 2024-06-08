@@ -9,7 +9,9 @@ import { DocumentModal, Documents } from '../../features/Document'
 export const ImageBox = ({ formik, name, resource, editable, src = '' }) => {
 
     const [imageId, setImageId] = useState(formik.values[name])
-    const [defaultImage, setDefaultImage] = useState(`https://academia-api.local/storage/documents/2/jpeg/3dc018fc-cd8b-4139-85d0-7bd67f386072.jpeg`)
+
+
+    const [defaultImage, setDefaultImage] = useState(`${import.meta.env.VITE_API_BASE_URL}/storage/documents/student.png`)
     const [open, setOpen] = React.useState(false);
     const [imageSrc, setImageSrc] = useState(
         (formik.values[resource]) ?

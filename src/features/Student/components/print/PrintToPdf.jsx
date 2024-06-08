@@ -10,7 +10,8 @@ import { useReactToPrint } from 'react-to-print';
 
 import PdfModal from '../../../../components/form-components/PdfModal';
 import { useFeeTemplates } from '../../../FeeTemplate/hooks/quaries';
-import { MonthPanel } from '../ProfileHeader';
+import { MonthPanel } from '../profile/FeeProcess';
+
 
 
 const defaultFeeData = {
@@ -30,6 +31,7 @@ const defaultFeeData = {
 const PrintToPdf = ({ fees, session_id }) => {
   const [isOpen, setOpen] = useState(false)
 
+
   return (
     <>
       {
@@ -43,8 +45,8 @@ const PrintToPdf = ({ fees, session_id }) => {
     </>
   )
 }
-export const PrintModal = ({ fees, isOpen, setOpen, session_id }) => {
-  // console.log(fees);
+export const PrintModal = ({ fees, isOpen, setOpen, selectedStudentSession = fees.student_session, session_id }) => {
+
   const [selectedTemplate, setSelectedTemplate] = useState(null)
   const academic_session_id = fees.academic_session_id
   const academic_class_id = fees.academic_class_id
@@ -60,12 +62,13 @@ export const PrintModal = ({ fees, isOpen, setOpen, session_id }) => {
       <PrintFees fees={fees} isOpen={isOpen} setOpen={setOpen} session_id={session_id}
         payload={payload}
         selectedTemplate={selectedTemplate}
-        setSelectedTemplate={setSelectedTemplate} />
+        setSelectedTemplate={setSelectedTemplate}
+        selectedStudentSession={selectedStudentSession} />
     </PdfModal>
 
   )
 }
-export const PrintFees = ({ fees, isOpen, setOpen, session_id, payload, selectedTemplate, setSelectedTemplate }) => {
+export const PrintFees = ({ fees, isOpen, setOpen, session_id, payload, selectedTemplate, setSelectedTemplate, selectedStudentSession = fees.student_session }) => {
 
   const fetchedFeeTemplatesData = useFeeTemplates(payload)
   const [isMount, setIsMount] = useState(false);
@@ -91,7 +94,8 @@ export const PrintFees = ({ fees, isOpen, setOpen, session_id, payload, selected
 
   }
 
-
+  // console.log(selectedStudentSession)
+  // return
 
   return (<>
 
@@ -111,6 +115,8 @@ export const PrintFees = ({ fees, isOpen, setOpen, session_id, payload, selected
             isOpen={isOpen}
             setOpen={setOpen}
             session_id={session_id}
+            selectedStudentSession={selectedStudentSession}
+
           />}
       </div>
     </div>
@@ -120,7 +126,8 @@ export const PrintFees = ({ fees, isOpen, setOpen, session_id, payload, selected
 
 }
 
-export const SelectedPanelPrintMode = ({ selectedTemplate, isMount, setIsMount, feeData, setFeeData, student_id, isOpen, setOpen, session_id }) => {
+export const SelectedPanelPrintMode = ({ selectedTemplate, isMount, setIsMount, feeData,
+  setFeeData, student_id, isOpen, setOpen, session_id, selectedStudentSession }) => {
 
   const componentRef = useRef()
   const [total, setTotal] = useState(0)
@@ -204,66 +211,69 @@ export const SelectedPanelPrintMode = ({ selectedTemplate, isMount, setIsMount, 
         </div>
       </div>
 
-      <div ref={componentRef} className='relative overflow-y-auto text-slate-950   bg-white mx-auto rounded-md shadow-lg w-[750px]    h-svh max-h-[calc(100% - 200px)]'>
-
-        <div className=' grid grid-cols-10 px-2 py-1'>
-          <div className={' col-span-2 '}>No. 7672</div>
-          <div className={' col-span-6 '}></div>
-          <div className={' col-span-2 text-right '}>Date: 19-04-2024</div>
-        </div>
-        <div className='schoolHead grid grid-cols-10 p-2'>
-          <div className={' col-span-1 '}>
-            {feeData.campus.school.logo_image ?
-              <img src="" alt="" /> :
-              <img src={`${import.meta.env.VITE_API_BASE_URL}/storage/documents/logo.png`} style={{ width: '80px', height: '80px' }} alt="" />
-            }
+      <div ref={componentRef} className='relative overflow-y-auto text-slate-950
+       bg-white mx-auto rounded-md shadow-lg w-[750px]    h-svh max-h-[calc(100% - 200px)] p-4'>
+        <div className='border-2 border-slate-900  '>
+          <div className=' grid grid-cols-10 px-2 py-1'>
+            <div className={' col-span-2 '}>No. {feeData.fee_no}</div>
+            <div className={' col-span-6 '}></div>
+            <div className={' col-span-2 text-right '}>Date: {feeData.fee_date}</div>
           </div>
-          <div className='col-span-8 text-center'>
-            <div className='text-2xl uppercase font-bold '>{feeData.campus.school.name ?? 'NAVA JYOTI VIDYAPITH'}</div>
-            <div>{feeData.campus.school.address ?
-              feeData.campus.school.address.display :
-              '20/1 west, Captepara Road, Authpur, North 24 Parganas, 743128'}</div>
-            <div className='font-bold underline'>Money Receipt</div>
-            <div className='flex flex-col pl-4 '>
-              <div className='text-left'>Name</div>
-              <div className='flex flex-row gap-6'>
-                <div>Class: class10 </div>
-                <div>Sec: Sec A</div>
-                <div>RollNo: 30</div>
+          <div className='schoolHead grid grid-cols-10 p-2'>
+            <div className={' col-span-1 '}>
+              {feeData.campus.school.logo_image ?
+                <img src="" alt="" /> :
+                <img src={`${import.meta.env.VITE_API_BASE_URL}/storage/documents/logo.png`} style={{ width: '80px', height: '80px' }} alt="" />
+              }
+            </div>
+            <div className='col-span-8 text-center'>
+              <div className='text-2xl uppercase font-bold '>{feeData.campus.school.name ?? 'NAVA JYOTI VIDYAPITH'}</div>
+              <div>{feeData.campus.school.address ?
+                feeData.campus.school.address.display :
+                '20/1 west, Captepara Road, Authpur, North 24 Parganas, 743128'}</div>
+              <div className='font-bold underline'>Money Receipt</div>
+              <div className='flex flex-col pl-4 '>
+                <div className='text-left'>Name: {feeData.student.name}</div>
+                <div className='flex flex-row gap-6'>
+                  <div>Class: {feeData.student_session.academic_class.name} </div>
+                  <div>Sec: {feeData.student_session.section.name}</div>
+                  <div>RollNo: {feeData.student_session.roll_no}</div>
+                </div>
+
               </div>
 
             </div>
+            <div className='col-span-1'></div>
 
           </div>
-          <div className='col-span-1'></div>
 
-        </div>
+          <div className='px-2  '>
+            <div className='grid grid-cols-12 items-center gap-2 border-y-2 border-slate-800 font-bold   text-slate-800'>
 
-        <div className='px-2  '>
-          <div className='grid grid-cols-12 items-center gap-2 border-y-2 border-slate-800 font-bold   text-slate-800'>
+              <div className='col-span-10 '> <div className='py-1 pl-4'>Particulars</div></div>
+              <div className='col-span-2 text-right border-l-2 border-slate-800'> <div className='py-1 pr-4'>Amount</div></div>
+            </div>
+            <FeeEntryRowsPrint feeData={feeData} setChanges={setChanges} selectedStudentSession={selectedStudentSession} />
 
-            <div className='col-span-10 '> <div className='py-1 pl-4'>Particulars</div></div>
-            <div className='col-span-2 text-right border-l-2 border-slate-800'> <div className='py-1 pr-4'>Amount</div></div>
           </div>
-          <FeeEntryRowsPrint feeData={feeData} setChanges={setChanges} />
-
-        </div>
-        <div className='px-2'>
-          <div className=' w-full
+          <div className='px-2'>
+            <div className=' w-full
           text-slate-800 bottom-0 grid grid-cols-12 justify-end gap-2
           font-bold border-t-4 border-slate-800  '>
-            <div className='col-span-10 text-right '>{'Total'}:</div>
-            <div className='col-span-2 text-right border-l-2 border-slate-800  '>
-              <div className='py-1 pr-4'>
-                {Number(total).toFixed(2)}
+              <div className='col-span-10 text-right '>{'Total'}:</div>
+              <div className='col-span-2 text-right border-l-2 border-slate-800  '>
+                <div className='py-1 pr-4'>
+                  {Number(total).toFixed(2)}
+                </div>
               </div>
             </div>
           </div>
+
+          <div className='w-full py-1 pl-4'>
+            (in words) : Rupees. {convertNumberToWords(Number(Number(total).toFixed(2)))}
+          </div>
         </div>
 
-        <div className='w-full py-1 pl-4'>
-          (in words) : Rupees. {convertNumberToWords(Number(Number(total).toFixed(2)))}
-        </div>
       </div>
 
 
@@ -273,19 +283,20 @@ export const SelectedPanelPrintMode = ({ selectedTemplate, isMount, setIsMount, 
 }
 
 
-export const FeeEntryRowsPrint = ({ feeData, setChanges, }) => {
+export const FeeEntryRowsPrint = ({ feeData, setChanges, selectedStudentSession }) => {
 
   return (
     feeData.fee_items && feeData.fee_items.map((feeTemplateItem, index) => (
 
-      <FeeEntryRowPrint key={index} index={index} feeTemplateItem={feeTemplateItem} setChanges={setChanges} />
+      <FeeEntryRowPrint key={index} index={index} feeTemplateItem={feeTemplateItem}
+        selectedStudentSession={selectedStudentSession} setChanges={setChanges} />
 
     ))
   )
 }
 
 
-export const FeeEntryRowPrint = ({ feeTemplateItem, index, setChanges }) => {
+export const FeeEntryRowPrint = ({ feeTemplateItem, index, setChanges, selectedStudentSession }) => {
 
   const quantityRef = useRef()
   const amountRef = useRef()
@@ -306,9 +317,24 @@ export const FeeEntryRowPrint = ({ feeTemplateItem, index, setChanges }) => {
 
         <div className='col-span-10 flex flex-row items-center gap-2 pl-4'>
           <div className='py-1'>
-            <div className='flex flex-row flex-nowrap'>
+            <div className='flex flex-row flex-nowrap items-end '>
               {feeTemplateItem.fee_head.name}
-              {feeTemplateItem.keep_periodic_details ? <MonthPanel /> : ''}
+              {/* {JSON.stringify(feeTemplateItem.fee_item_months)} */}
+              <div className='flex flex-row gap-2 ml-2'>
+              {feeTemplateItem.keep_periodic_details ?
+
+                feeTemplateItem.fee_item_months &&
+                feeTemplateItem.fee_item_months.length > 0 &&
+                feeTemplateItem.fee_item_months.map((x, index) => (
+                  (<div className='
+                    border-2 border-slate-400
+                   text-slate-800 text-xs font-bold mb-[1px] px-2 rounded-md'>
+                    {x.month?.short_name}
+                    </div>)
+                ))
+
+                : ''}
+                </div>
             </div>
 
           </div>

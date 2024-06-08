@@ -3,7 +3,7 @@ import React from 'react'
 
 import { useMemo } from 'react';
 import { DateTime } from 'luxon'
-import BasicTable from '../../../components/tables/BasicTable';
+import FilterTable from '../../../components/tables/FilterTable';
 import Filter from '../../FeeTemplate/components/Filter';
 
 import { useNavigate } from 'react-router-dom';
@@ -11,11 +11,12 @@ import { useNavigate } from 'react-router-dom';
 import { useFeeTemplates } from '../../FeeTemplate/hooks/quaries';
 import CreateFeeTemplate from '../../FeeTemplate/components/Create';
 import Edit from '../../FeeTemplate/components/Edit';
-import Delete from '../../FeeTemplate/components/Delete';
+
 import FeeTemplateItem from './FeeTemplateItem';
 import { useFeeTemplateItems } from '../hooks/quaries';
 import ModalTable from '../../../components/tables/ModalTable';
 import Loader from '../../../components/Loader';
+// import Delete from './Delete';
 
 
 
@@ -106,7 +107,8 @@ const DataTable = ({ fee_template_id, setEntryId }) => {
               Edit
             </button>
 
-            <Delete initialValues={row.original} />
+
+            {/* <Delete initialValues={row.original} /> */}
 
           </div>
         )

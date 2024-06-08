@@ -1,6 +1,6 @@
 import React,{ useMemo } from 'react'
 
-import BasicTable from '../BasicTable'
+import FilterTable from '../FilterTable'
 import movies from './MOVIE_DATA.json'
 
 
@@ -82,6 +82,6 @@ export const MovieTable = () => {
     },
   ]
   return (
-    <BasicTable data={data} columns={movieColumns} />
+    <FilterTable data={data} columns={movieColumns} />
   )
 }

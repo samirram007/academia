@@ -1,5 +1,5 @@
 import React from 'react'
-import BasicTable from '../../../components/tables/BasicTable'
+import FilterTable from '../../../components/tables/FilterTable'
 
 import { useMemo } from 'react';
 import { DateTime } from 'luxon'
@@ -21,6 +21,7 @@ const initialFilterValues = {
   campus_id: initialValues.campus_id,
   academic_class_id: initialValues.academic_class_id,
   academic_session_id: initialValues.academic_session_id,
+  filter_option:'active'
 }
 
 const DataTable = () => {
@@ -43,22 +44,22 @@ const DataTable = () => {
     },
     {
       header: "Name",
-      accessorKey: "student.name",
+      accessorKey: "name",
       size: 300,
     },
     {
       header: "Type",
-      accessorKey: "student.user_type",
+      accessorKey: "user_type",
       size: 300,
     },
     {
       header: "Email",
-      accessorKey: "student.email",
+      accessorKey: "email",
       size: 200,
     },
     {
       header: 'DOB',
-      accessorKey: 'student.dob',
+      accessorKey: 'dob',
       cell: info =>
         DateTime.fromISO(info.getValue()).toLocaleString(DateTime.DATE_MED),
     },
@@ -69,7 +70,8 @@ const DataTable = () => {
       cell: ({ row }) => {
         return (
           <div className="flex justify-start md:justify-center  items-center gap-2">
-            <button onClick={() => { navigate(`/students/info/${btoa(row.original.id)}`) }}
+            {/* <button onClick={() => { navigate(`/students/info/${btoa(row.original.student_sessions.filter(x=>x.academic_session.is_current==1).id)}`) }} */}
+            <button onClick={() => { navigate(`/students/info/${row.original.id}`) }}
               className="btn btn-outline btn-primary btn-sm btn-rounded ">
               Info..
             </button>
@@ -77,7 +79,7 @@ const DataTable = () => {
               className="btn btn-outline btn-primary btn-sm btn-rounded ">
               Edit
             </button>
-            <button onClick={() => { deleteUserData(row.original.student.id) }}
+            <button onClick={() => { deleteUserData(row.original.id) }}
               className="btn btn-outline btn-primary btn-sm btn-rounded  ">
               Delete
             </button>
@@ -92,7 +94,7 @@ const DataTable = () => {
     navigate(`/students/delete/${id}`)
   }
   return (
-    <BasicTable data={data} columns={columns}
+    <FilterTable data={data} columns={columns}
       createRoute={createRoute}
       filter={
         <Filter fetchedData={fetchedData}

@@ -39,6 +39,8 @@ const [entryMode,setEntryMode]=useState('create');
         admission_no: '',
         admission_date: '',
         campus_id: 1,
+        academic_session_id: 1,
+        academic_class_id: 1,
         profile_document_id: 1,
         guardian:null
 
@@ -75,6 +77,8 @@ const [entryMode,setEntryMode]=useState('create');
         admission_no: '',
         admission_date: '',
         campus_id: 1,
+        academic_session_id: 1,
+        academic_class_id: 1,
         profile_document_id: 1
     }
 

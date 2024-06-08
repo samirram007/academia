@@ -7,10 +7,11 @@ import { useQuery } from "@tanstack/react-query"
   return useQuery({
     queryKey: ['students',payload],
     queryFn: ()=>fetchStudents(payload),
-    staleTime: Infinity // keep data fresh for this period (1 min.)
+    staleTime: Infinity
   })
 }
  export function useStudent(id) {
+
     return useQuery({
       queryKey: ['students',{id}],
       queryFn: ()=>fetchStudentById(id),

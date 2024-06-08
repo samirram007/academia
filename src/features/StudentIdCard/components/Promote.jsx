@@ -1,11 +1,11 @@
 import React from 'react'
 
-const EditFee = () => {
+const Promote = () => {
   return (
     <div>
-      Edit Fee
+
     </div>
   )
 }
 
-export default EditFee
+export default Promote

@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { useMemo } from 'react';
 import { DateTime } from 'luxon'
-import BasicTable from '../../../components/tables/BasicTable';
+import FilterTable from '../../../components/tables/FilterTable';
 
 
 import DeleteSchool from './DeleteSchool';
@@ -61,7 +61,7 @@ const SchoolTable = () => {
   ]
 
   return (
-    <BasicTable data={data} columns={columns}
+    <FilterTable data={data} columns={columns}
       createRoute={createRoute}
       createFormTitle="Create School"
     />

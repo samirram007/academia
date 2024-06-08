@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { fetchStudentSessionsByStudentId, fetchStudentSessionsFeesByStudentSessionId } from "../services/apis"
+import { fetchGenerateRollNo, fetchStudentSessionsByStudentId, fetchStudentSessionsFeesByStudentSessionId } from "../services/apis"
 
 
  export function useStudentSessions(payload) {
@@ -14,6 +14,17 @@ import { fetchStudentSessionsByStudentId, fetchStudentSessionsFeesByStudentSessi
     return useQuery({
       queryKey: ['student_session_fees',payload],
       queryFn: ()=>fetchStudentSessionsFeesByStudentSessionId(payload),
-      staleTime:Infinity
+      staleTime:1000*60*4,
+      refetchOnWindowFocus: false,
+      enabled:!!payload
     })
   }
+
+  export async function useGenerateRollNo(payload) {
+    console.log(payload)
+    const data=await fetchGenerateRollNo(payload)
+    //console.log(data);
+    if(!data){throw new Error('Error in generating roll no')}
+    return data
+  }
+

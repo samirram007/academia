@@ -1,11 +1,11 @@
 import useDebouncedFormik from "../../hooks/useDebouncedFormik";
 export const FormikInputBox = (
-    { formik,   label, name, placeholder, type, ...props }
+    { formik,   label, name, placeholder, type,extClass, ...props }
 ) => {
     const debouncedFormik = useDebouncedFormik(formik,1000);
     return (
         <>
-            <label htmlFor={name}>{label}</label>
+            <label htmlFor={name} className={extClass}>{label}</label>
             <input
                 id={name}
                 name={name}

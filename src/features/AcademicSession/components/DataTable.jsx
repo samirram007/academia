@@ -4,7 +4,7 @@ import React from 'react'
 import { useMemo } from 'react';
 import { DateTime } from 'luxon'
 
-import BasicTable from '../../../components/tables/BasicTable';
+import FilterTable from '../../../components/tables/FilterTable';
 import Filter from './Filter';
 import { useAcademicSessions } from '../hooks/quaries';
 import CreateAcademicSession from './Create';
@@ -71,7 +71,7 @@ const DataTable = () => {
   ]
 
   return (
-    <BasicTable
+    <FilterTable
       data={data} columns={columns}
       createForm={<CreateAcademicSession initialValues={initialValues} modal={true} />}
       createFormTitle="Create Academic Session"

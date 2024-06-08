@@ -16,7 +16,7 @@ const Edit = ({ initialValues,setEntryId }) => {
         Edit
       </button>
       {isOpen &&
-        <FormikEditFormModal isOpen={isOpen} setOpen={setOpen} label="Edit Department">
+        <FormikEditFormModal isOpen={isOpen} setOpen={setOpen} label="Edit Template">
 
           <EntryForm
             initialValues={initialValues}

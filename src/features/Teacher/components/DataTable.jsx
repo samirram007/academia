@@ -1,5 +1,5 @@
 import React from 'react'
-import BasicTable from '../../../components/tables/BasicTable'
+import FilterTable from '../../../components/tables/FilterTable'
 
 import { useMemo } from 'react';
 import { DateTime } from 'luxon'
@@ -73,7 +73,7 @@ const DataTable = () => {
         navigate(`/teachers/delete/${id}`)
       }
   return (
-    <BasicTable data={data} columns={columns} createRoute={createRoute} />
+    <FilterTable data={data} columns={columns} createRoute={createRoute} />
   )
 }
 

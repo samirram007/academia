@@ -8,6 +8,8 @@ import { CampusSelect } from '../../Common/components/CampusSelect'
 
 import { AcademicSessionSelect } from '../../Common/components/AcademicSessionSelect';
 import { AcademicClassSelect } from '../../Common/components/AcademicClassSelect';
+import { StudentFilterSelect } from '../../Common/components/StudentFilterSelect';
+import { queryClient } from '../../../utils/queryClient';
 
 
 const validationSchema = Yup.object().shape({
@@ -25,15 +27,31 @@ const validationSchema = Yup.object().shape({
 
 const Filter = ({ fetchedData, initialFilterValues }) => {
 
-const [isLoading, setIsLoading] = useState(fetchedData.isLoading)
+    const [isLoading, setIsLoading] = useState(fetchedData.isLoading)
     const formik = useFormik({
-        initialValues:initialFilterValues,
+        initialValues: initialFilterValues,
         validationSchema,
         enableReinitialize: true,
-        onSubmit: values => {
+        onSubmit: (values, { setSubmitting }) => {
             Object.assign(initialFilterValues, values);
-            fetchedData.refetch()
+             fetchedData.refetch()
+                  setTimeout(() => {
+                    setSubmitting(false)
+                }, 200);
+            // setSubmitting(false)
+          //  queryClient.invalidateQueries({ queryKey: ['students'] })
+            // if (fetchedData.isFetched) {
+            //     setTimeout(() => {
+            //         setSubmitting(false)
+            //     }, 200);
+            // }
+
+        },
+        onError: (errors, values, { setSubmitting }) => {
+            setSubmitting(false)
+
         }
+
     })
 
 
@@ -45,24 +63,34 @@ const [isLoading, setIsLoading] = useState(fetchedData.isLoading)
                         <div className='grid gap-4 col-span-6 border-b-2   border-blue-300/30 pb-2 px-4 mb-2 '>
                             <div className='grid gap-4 grid-cols-12   mb-2'>
                                 {/* <div className='col-span-1 text-md font-bold'>Filter</div> */}
-                                <div className='col-span-3 '>
-                                <CampusSelect formik={formik} auto={true} isLoading={isLoading} setIsLoading={setIsLoading}/>
+                                <div className='col-span-2 '>
+
+                                    <StudentFilterSelect formik={formik} />
+
 
                                 </div>
-                                <div className='col-span-3 '>
+                                <div className='col-span-2 '>
+                                    <CampusSelect formik={formik} auto={true} isLoading={isLoading} setIsLoading={setIsLoading} />
+
+                                </div>
+                                <div className='col-span-2 '>
 
                                     <AcademicSessionSelect formik={formik} campus_id={formik.values.campus_id} />
 
                                 </div>
-                                <div className='col-span-3 '>
+                                <div className='col-span-2 '>
 
                                     <AcademicClassSelect formik={formik} campus_id={formik.values.campus_id} />
 
 
                                 </div>
 
+
                                 {formik.values &&
-                                    <div className='col-span-2 flex flex-col justify-end '>
+                                    <div className='col-span-1 flex flex-col justify-end '>
+
+
+
 
                                         <FormikSubmit formik={formik} label={'Filter'} />
                                     </div>

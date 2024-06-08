@@ -21,6 +21,7 @@ export function fetchFeeTemplateItem(payload) {
 
 
 export function storeFeeTemplateItem(payload) {
+    console.log(payload)
     return axiosClient.post("/fee_template_items", removeEmptyStrings(payload))
     .then(response => {
 

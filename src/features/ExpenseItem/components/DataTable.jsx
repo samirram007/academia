@@ -3,7 +3,7 @@ import React from 'react'
 
 import { useMemo } from 'react';
 import { DateTime } from 'luxon'
-import BasicTable from '../../../components/tables/BasicTable';
+import FilterTable from '../../../components/tables/FilterTable';
 import Filter from '../../FeeTemplate/components/Filter';
 
 import { useNavigate } from 'react-router-dom';

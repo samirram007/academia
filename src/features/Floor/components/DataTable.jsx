@@ -3,7 +3,7 @@ import React from 'react'
 
 import { useMemo } from 'react';
 
-import BasicTable from '../../../components/tables/BasicTable';
+import FilterTable from '../../../components/tables/FilterTable';
 
 import { useFloors } from '../hooks/quaries';
 import Create from './Create';
@@ -82,7 +82,7 @@ const DataTable = () => {
   ]
 
   return (
-    <BasicTable
+    <FilterTable
       data={data} columns={columns}
       createForm={<Create modal={true} />}
       createFormTitle="Create Floor"

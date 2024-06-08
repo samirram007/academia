@@ -1,14 +1,19 @@
-import React, { useState } from 'react'
-import Breadcrumbs from '../../../components/Breadcrumbs'
-import ProfileHeader from './ProfileHeader'
+import React, { lazy, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import { useStudent } from '../hooks/queries';
+import { useStudent } from '../../hooks/queries';
+import { useAcademicSessions } from '../../../AcademicSession/hooks/quaries';
+const ProfileHeader=lazy(() => import('./ProfileHeader'));
+const Breadcrumbs=lazy(() => import('../../../../components/Breadcrumbs'));
+
 
 const Information = () => {
 
   const { id } = useParams();
-  const [entryMode,setEntryMode]=useState('edit');
-  const {data:editData,isError, isLoading}=useStudent(atob(id))
+  const [entryMode,setEntryMode]=useState('info');
+  const {data:infoData,isError, isLoading}=useStudent(id)
+  const mData = infoData?.data ?? [];
+  //console.log({...mData})
+    const memoData = useMemo(() => ({...mData}), [mData]);
    if(isLoading){
       return <div>Loading...</div>
    }
@@ -16,7 +21,7 @@ const Information = () => {
       return <div>Error...</div>
    }
 
-  const initialValues = editData.data ?? {
+  const initialValues = memoData ?? {
       name: '',
       username: '',
       code: '',
@@ -50,12 +55,12 @@ const Information = () => {
       campus_id: 1,
       profile_document_id: 1
   }
+
   return (
     <div className='pb-10 w-full'>
     <div className='row  flex flex-col md:flex-row justify-between gap-2 border-b-2 border-blue-300/10 pb-2 mb-2 '>
         <div className='flex flex-col gap-2 flex-1 text-3xl'>
-            {/* {'Edit Student'} */}
-            <Breadcrumbs />
+          <Breadcrumbs />
         </div>
         <div className='flex flex-row gap-2 flex-1'>
 
@@ -64,12 +69,25 @@ const Information = () => {
 
         </div>
     </div>
-    <ProfileHeader data={initialValues}  />
-    {/* <EntryForm initialValues={initialValues} entryMode={entryMode}/> */}
+
+    <AcademicSessionsCall data={initialValues}  />
+
 
 
 </div>
   )
 }
+export const AcademicSessionsCall=({data})=>{
+  const  fetchedData  = useAcademicSessions({ campus_id: data.campus_id })
+    const mData = fetchedData.data?.data ?? [];
+   const fetchedAcademicSessions = useMemo(() => [...mData], [mData]);
+  if (fetchedData.isFetching) return <div>Loading..</div>
+  console.log('data',data)
+  return(
 
+
+    <ProfileHeader data={data} fetchedAcademicSessions={fetchedAcademicSessions}/>
+
+  )
+}
 export default Information

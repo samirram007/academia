@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { CampusSelect } from '../../Common/components/CampusSelect';
 import { FormikSubmit } from '../../../components/form-components';
 import { AcademicStandardSelect } from '../../Common/components/AcademicStandardSelect';
-import {   useState } from 'react';
+import { useState } from 'react';
 
 const validationSchema = Yup.object().shape({
     // campus_id: Yup.number().integer()
@@ -20,27 +20,24 @@ const validationSchema = Yup.object().shape({
 })
 
 
-const Filter = ({ fetchedData,  initialFilterValues }) => {
+const Filter = ({ fetchedData, initialFilterValues }) => {
     // const { data:fetchedData,refetch,isFetching} = useAcademicClasses({campus_id:initialValues.campus_id})
     // const  fetchedData  = useAcademicClasses(initialFilterValues)
     const [isLoading, setIsLoading] = useState(fetchedData.isLoading)
 
     const formik = useFormik({
-        initialValues:initialFilterValues,
-         enableReinitialize: true,
-
-        onSubmit: (values,{setSubmitting}) => {
-
+        initialValues: initialFilterValues,
+        enableReinitialize: true,
+        onSubmit: (values, { setSubmitting }) => {
             Object.assign(initialFilterValues, values);
-           fetchedData.refetch()
-           setTimeout(() => {
-
-               setSubmitting(false)
-           }, 500);
-
+            fetchedData.refetch()
+            if(fetchedData.isFetched){
+                setTimeout(() => {
+                    setSubmitting(false)
+                }, 200);
+            }
         },
-        onError: (errors, values,{setSubmitting}) => {
-
+        onError: (errors, values, { setSubmitting }) => {
             setSubmitting(false)
 
         }
@@ -62,9 +59,9 @@ const Filter = ({ fetchedData,  initialFilterValues }) => {
 
 
                                 </div>
-                                <div className='col-span-12 md:col-span-3  '>
+                                <div className='col-span-12 md:col-span-3 hidden '>
 
-                                    <AcademicStandardSelect formik={formik}  />
+                                    <AcademicStandardSelect formik={formik} />
 
                                 </div>
                                 {formik.values &&

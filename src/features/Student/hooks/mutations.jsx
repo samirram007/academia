@@ -101,12 +101,17 @@ export function useUpdateStudentAddressMutation() {
 
 export function useStoreStudentFeeMutation() {
   const { setOpen } = useFormModal()
+ // console.log('aaa')
   return useMutation({
     mutationFn: storeStudentFee,
     onSuccess: (data) => {
-    setOpen(prev=>!prev)
-     queryClient.invalidateQueries({ queryKey: ['student_session_fees'] })
 
+     //queryClient.invalidateQueries()
+    //  queryClient.invalidateQueries({ queryKey: ['students'] })
+    //  queryClient.invalidateQueries({ queryKey: ['student_session_fees'] })
+     queryClient.refetchQueries({ queryKey: ['students'] })
+     queryClient.refetchQueries({ queryKey: ['student_session_fees'] })
+setOpen(prev=>!prev)
       toast.success(data.message, { transition: Flip });
     },
     onError: (error) => {
@@ -121,8 +126,10 @@ export function useUpdateStudentFeeMutation(param) {
     mutationFn: updateStudentFee,
     onSuccess: (data) => {
 
-
-     queryClient.invalidateQueries({ queryKey: ['student_session_fees',param] })
+      queryClient.invalidateQueries()
+    //  queryClient.invalidateQueries({ queryKey: ['student_session_fees',param] })
+    //  queryClient.invalidateQueries({ queryKey: ['student_session_fees'] })
+    //  queryClient.invalidateQueries({ queryKey: ['students'] })
       toast.success(data.message, { transition: Flip });
      // navigate(`/students/info/${btoa(student_id.id)}`, { replace: true })
     },

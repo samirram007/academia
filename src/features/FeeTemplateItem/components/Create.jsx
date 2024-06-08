@@ -8,14 +8,14 @@ const Create = ({ initialValues }) => {
   const initValues =   {
       name: '',
       sort_index: 1,
-      expense_id: initialValues.id,
+      fee_template_id: initialValues.id,
       fee_head_id: '',
       amount: 0,
       is_customizable: false,
       keep_periodic_details: false,
       is_active: true
     }
-
+    // console.log(initialValues)
   return (
     <>
  <div className='border-2 border-blue-400 rounded-lg  '>

@@ -3,7 +3,7 @@ import React from 'react'
 
 import { useMemo } from 'react';
 import { DateTime } from 'luxon'
-import BasicTable from '../../../components/tables/BasicTable';
+
 import Filter from './Filter';
 
 import { useNavigate } from 'react-router-dom';
@@ -12,23 +12,33 @@ import { useExpenses } from '../hooks/quaries';
 import CreateExpense from './Create';
 import Edit from './Edit';
 import Delete from './Delete';
-import ExpenseItem from '../../ExpenseItem/components/ExpenseItem';
+import ExpenseTable from './ExpenseTable';
+
 
 
 const initialValues = {
+  expense_no: '',
+  expense_date: new Date(),
   academic_session_id: 1,
-  academic_class_id: 1,
   campus_id: 1,
-  name:'',
-  is_active:false
+  user_id: null,
+  total_amount: 0,
+  paid_amount: 0,
+  balance_amount: 0,
+  payment_mode: 'CASH'
 }
 const initialFilterValues = {
   campus_id: initialValues.campus_id,
-  academic_class_id:initialValues.academic_class_id,
-  academic_session_id:initialValues.academic_session_id,
+  academic_session_id: initialValues.academic_session_id,
+   from:new Date().toISOString().split('T')[0],
+   to:new Date().toISOString().split('T')[0]
 }
+// console.log(initialFilterValues)
 const DataTable = () => {
 
+  // const formattedDate = new Date().toString('yyyy-MM-dd');
+
+  // console.log('Date',formattedDate);
   const ExpenseData = useExpenses(initialFilterValues)
   const navigate = useNavigate()
 
@@ -45,14 +55,20 @@ const DataTable = () => {
 
     },
     {
-      header: "Name",
-      accessorKey: "name",
+      header: "Expense No",
+      accessorKey: "expense_no",
+
+    },
+    {
+      header: "Date",
+      accessorKey: "expense_date",
+      cell: info =>
+        DateTime.fromISO(info.getValue()).toLocaleString(DateTime.DATE_MED),
 
     },
     {
       header: "Campus",
       accessorKey: "campus.name",
-
     },
 
     {
@@ -61,8 +77,8 @@ const DataTable = () => {
 
     },
     {
-      header: "Class",
-      accessorKey: "academic_class.name",
+      header: "Amount",
+      accessorKey: "total_amount",
 
     },
 
@@ -73,28 +89,29 @@ const DataTable = () => {
       cell: ({ row }) => {
         return (
           <div className="flex justify-start md:justify-center  items-center gap-2">
-          <ExpenseItem  initialValues={row.original} />
-          <Edit  initialValues={row.original} />
-          <Delete initialValues={row.original} />
+            {/* <Print initialValues={row.original} /> */}
+            <Edit initialValues={row.original} />
+            <Delete initialValues={row.original} />
 
-         </div>
+          </div>
         )
       }
     }
 
   ]
-
   return (
-    <BasicTable
-    data={data}
-    columns={columns}
-    createForm={<CreateExpense modal={true}/>}
-    createFormTitle={'New Fee Template'}
-    filter={
-        <Filter ExpenseData={ExpenseData}
-        initialFilterValues={initialFilterValues} />
-      }
+
+
+    <ExpenseTable
+      data={data}
+      columns={columns}
+      createForm={<CreateExpense modal={true} />}
+      createFormTitle={'Expense No: [new]'}
+      ExpenseData={ExpenseData}
+      initialFilterValues={initialFilterValues}
+
     />
+
   )
 }
 

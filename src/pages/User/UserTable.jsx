@@ -6,7 +6,7 @@ import { DateTime } from 'luxon'
 
 import { useNavigate, useNavigation } from 'react-router-dom';
 import { useUsers } from '../../hooks/queries';
-import BasicTable from '../../components/tables/BasicTable';
+import FilterTable from '../../components/tables/FilterTable';
 const UserTable = () => {
     const usersData =useUsers()
     const navigate = useNavigate()
@@ -69,7 +69,7 @@ const UserTable = () => {
         navigate(`/users/delete/${id}`)
       }
   return (
-    <BasicTable data={data} columns={columns} createRoute={createRoute} />
+    <FilterTable data={data} columns={columns} createRoute={createRoute} />
   )
 }
 

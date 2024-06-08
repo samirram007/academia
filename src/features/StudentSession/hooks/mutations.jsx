@@ -1,95 +1,44 @@
 import { useMutation } from "@tanstack/react-query";
 
 
-import { useNavigate, useParams } from "react-router-dom";
-import { storeStudent, updateStudent } from "../services/apis";
+import { useNavigate, useParams  } from "react-router-dom";
+import { storeEnrollment,  updateEnrollment  } from "../services/apis";
 import { queryClient } from "../../../utils/queryClient";
 
 import { Flip, toast } from "react-toastify";
-export function useStoreStudentMutation() {
+import { useFormModal } from "../../../contexts/FormModalProvider";
+export function useStoreEnrollmentMutation() {
   const navigate = useNavigate()
-  return useMutation({
-    mutationFn: storeStudent,
-    onSuccess: (data) => {
-     queryClient.invalidateQueries({ queryKey: ['students'] })
-      toast.success(data.message, { transition: Flip });
-      navigate("/students", { replace: true })
-    },
-    onError: (error) => {
-      toast.error(error.response.data.message, { transition: Flip })
-    }
-  })
-}
-export function useUpdateStudentMutation() {
-  const navigate = useNavigate()
-
-  return useMutation({
-    mutationFn: updateStudent,
-    onSuccess: (data) => {
-     queryClient.invalidateQueries({ queryKey: ['students'] })
-      toast.success(data.message, { transition: Flip });
-      navigate("/students", { replace: true })
-    },
-    onError: (error) => {
-      toast.error(error.response.data.message, { transition: Flip })
-    }
-  })
-}
-export function useStoreStudentGuardianMutation() {
   const student_id=useParams('id')
-  const navigate = useNavigate()
+  const {setOpen}=useFormModal()
   return useMutation({
-    mutationFn: storeStudent,
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ['students',student_id] })
-      toast.success(data.message, { transition: Flip });
-      navigate(`/students/edit/${student_id.id}`, { replace: true })
-
-    },
-    onError: (error) => {
-      toast.error(error.response.data.message, { transition: Flip })
-    }
-  })
-}
-export function useUpdateStudentGuardianMutation() {
-  const student_id=useParams('id')
-  const navigate = useNavigate()
-
-  return useMutation({
-    mutationFn: updateStudent,
-    onSuccess: (data) => {
-     queryClient.invalidateQueries({ queryKey: ['students',student_id] })
-      toast.success(data.message, { transition: Flip });
-      navigate(`/students/edit/${student_id.id}`, { replace: true })
-    },
-    onError: (error) => {
-      toast.error(error.response.data.message, { transition: Flip })
-    }
-  })
-}
-export function useStoreStudentAddressMutation() {
-  const navigate = useNavigate()
-  return useMutation({
-    mutationFn: storeStudent,
+    mutationFn: storeEnrollment,
     onSuccess: (data) => {
      queryClient.invalidateQueries({ queryKey: ['students'] })
+    // queryClient.invalidateQueries({ queryKey: ['students',student_id] })
       toast.success(data.message, { transition: Flip });
-      navigate("/students", { replace: true })
+      navigate(`/students`, { replace: true })
+      // navigate(`/students/info/${student_id.id}`, { replace: true })
+      setOpen(false)
+
     },
     onError: (error) => {
       toast.error(error.response.data.message, { transition: Flip })
     }
   })
 }
-export function useUpdateStudentAddressMutation() {
+export function useUpdateEnrollmentMutation() {
   const navigate = useNavigate()
-
+  const {setOpen}=useFormModal()
   return useMutation({
-    mutationFn: updateStudent,
+    mutationFn: updateEnrollment,
     onSuccess: (data) => {
      queryClient.invalidateQueries({ queryKey: ['students'] })
+    //  queryClient.invalidateQueries({ queryKey: ['student_sessions'] })
       toast.success(data.message, { transition: Flip });
       navigate("/students", { replace: true })
+      setOpen(false)
+
     },
     onError: (error) => {
       toast.error(error.response.data.message, { transition: Flip })

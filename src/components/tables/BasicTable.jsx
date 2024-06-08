@@ -21,24 +21,16 @@ import FormikFormModal from '../form-components/FormikFormModal'
 import { useFormModal } from '../../contexts/FormModalProvider'
 export default function BasicTable({ data, columns, pageSize = 10, createRoute,
     createForm, createFormTitle,
-    mobileHeaders = ['id', 'name'], filter }) {
-
-
-
+    mobileHeaders = ['id', 'name']  }) {
     const thisRoute = useCustomRoutes()
-
     const [sorting, setSorting] = useState([])
     const { isOpen, setOpen } = useFormModal()
-
     const [filtering, setFiltering] = useState('')
     const [searchParams, setSearchParams] = useSearchParams()
-
-    const [showFilter, setShowFilter] = useState(true)
     const [pagination, setPagination] = useState({
         pageIndex: 0,
-        pageSize: pageSize,
+        pageSize: data.length??pageSize,
     })
-
     const table = useReactTable({
         data,
         columns,
@@ -56,7 +48,6 @@ export default function BasicTable({ data, columns, pageSize = 10, createRoute,
         },
         manualPagination: false,
         onSortingChange: setSorting,
-        onGlobalFilterChange: setFiltering,
         onPaginationChange: setPagination,
     })
 
@@ -70,13 +61,7 @@ export default function BasicTable({ data, columns, pageSize = 10, createRoute,
         )
 
     }, [pagination]);
-useMemo(()=>{
-    if(filter){
 
-        setShowFilter(prev=>true)
-
-    }
-},[])
     return (
         <div className='container-flex md-container'>
             <div className='row   flex flex-col md:flex-row justify-between gap-2 border-b-2 border-blue-300/10 pb-2 '>
@@ -125,18 +110,12 @@ useMemo(()=>{
 
 
                         }
-                        { <FilterButton
-                            filter={filter}
-                            showFilter={showFilter}
-                            setShowFilter={setShowFilter} />
-                            }
+
                     </div>
 
                 </div>
             </div>
-            <div className={`${( !showFilter) ? 'hidden' : 'flex  '}`}>
-                {filter &&  filter}
-            </div>
+
 
 
             {isBrowser ?
@@ -231,19 +210,7 @@ useMemo(()=>{
     )
 }
 
-export const FilterButton = ({ filter, showFilter, setShowFilter }) => {
-    const handleSwitchFilter = () => {
-        setShowFilter(!showFilter)
-    }
-    return (
-        <button onClick={handleSwitchFilter}
-            className={`${filter ? '' : 'hidden'} btn btn-primary btn-sm text-xl     btn-rounded-symbol border-blue-300/10    `}>
-            <TbFilterSearch />
-        </button>
 
-
-    )
-}
 
 export const MobileRow = ({ row, index, mobileHeaders }) => {
     const [checked, setChecked] = useState(false);

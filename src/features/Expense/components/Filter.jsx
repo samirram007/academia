@@ -1,13 +1,14 @@
 import React, { memo, useEffect, useMemo, useState } from 'react'
 
 import { useFormik } from 'formik'
-import { FormikSelect, FormikSubmit } from '../../../components/form-components'
+
 import * as Yup from "yup";
-
-import { CampusSelect } from '../../Common/components/CampusSelect'
-
 import { AcademicSessionSelect } from '../../Common/components/AcademicSessionSelect';
-import { AcademicClassSelect } from '../../Common/components/AcademicClassSelect';
+import { CampusSelect } from '../../Common/components/CampusSelect';
+import { FormikInputBox, FormikSubmit } from '../../../components/form-components';
+import { DateTime } from 'luxon';
+
+
 
 
 const validationSchema = Yup.object().shape({
@@ -23,19 +24,29 @@ const validationSchema = Yup.object().shape({
 })
 
 
-const Filter = ({ ExpenseData, initialFilterValues }) => {
+const Filter = ({ ExpenseData,  initialFilterValues, setFilterReady  }) => {
 
-const [isLoading, setIsLoading] = useState(ExpenseData.isLoading)
+const [isLoading, setIsLoading] = useState(false)
+
+    //  console.log(initialFilterValues);
+    // console.log(DateTime.fromISO(new Date().toLocaleString(DateTime.DATE_MED) ));
+    //  const mData = ExpenseData.data?.data ?? [];
     const formik = useFormik({
         initialValues:initialFilterValues,
-        validationSchema,
+        // validationSchema,
         enableReinitialize: true,
-        onSubmit: values => {
-            Object.assign(initialFilterValues, values);
-            ExpenseData.refetch()
+        onSubmit: (values,{setSubmitting}) => {
+            Object.assign(initialFilterValues, values)
+             ExpenseData.refetch()
+              setSubmitting(false)
+             ExpenseData.data??setFilterReady(true)
+        },
+        onError: (errors, values,{setSubmitting}) => {
+            setSubmitting(false)
+
         }
     })
-
+    // if(ExpenseData.isFetching) return <div>Loading</div>
 
     return (
         <div>
@@ -46,27 +57,33 @@ const [isLoading, setIsLoading] = useState(ExpenseData.isLoading)
                             <div className='grid gap-4 grid-cols-12   mb-2'>
                                 {/* <div className='col-span-1 text-md font-bold'>Filter</div> */}
                                 <div className='col-span-3 '>
-                                <CampusSelect formik={formik} auto={true} isLoading={isLoading} setIsLoading={setIsLoading}/>
+                                <CampusSelect formik={formik} auto={false} isLoading={isLoading} setIsLoading={setIsLoading}/>
 
                                 </div>
-                                <div className='col-span-3 '>
+                                <div className='col-span-2 '>
 
                                     <AcademicSessionSelect formik={formik} campus_id={formik.values.campus_id} />
 
                                 </div>
                                 <div className='col-span-3 '>
 
-                                    <AcademicClassSelect formik={formik} campus_id={formik.values.campus_id} />
+                                    <FormikInputBox type={'date'} formik={formik} name={'from'} label={'From'}/>
 
+                                </div>
+                                <div className='col-span-3 '>
+
+                                    <FormikInputBox type={'date'} formik={formik} name={'to'} label={'To'}/>
 
                                 </div>
 
+
                                 {formik.values &&
-                                    <div className='col-span-2 flex flex-col justify-end '>
+                                    <div className='col-span-1 flex flex-col justify-end '>
 
                                         <FormikSubmit formik={formik} label={'Filter'} />
                                     </div>
                                 }
+                                 <div className='col-span-3 '>  </div>
                             </div>
                         </div>
                     </div>

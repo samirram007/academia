@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import { DateTime } from 'luxon'
 import { fetchFees } from '../../../services';
-import BasicTable from '../../../components/tables/BasicTable';
+import FilterTable from '../../../components/tables/FilterTable';
 const FeeReceiptTable = () => {
     const FeeReceiptData = useQuery({
         queryKey: ['fee_receipts'],
@@ -71,7 +71,7 @@ const FeeReceiptTable = () => {
         alert(id)
       }
   return (
-    <BasicTable data={data} columns={columns} createRoute={createRoute} />
+    <FilterTable data={data} columns={columns} createRoute={createRoute} />
   )
 }
 

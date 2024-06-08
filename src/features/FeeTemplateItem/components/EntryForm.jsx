@@ -24,6 +24,7 @@ const EntryForm = ({ initialValues, entryMode, setEntryId }) => {
 
     const handleFormSubmit = (values) => {
         if (entryMode === 'create') {
+
             feeTemplateItemStoreMutation.mutate(values)
         } else if (entryMode === 'edit') {
             feeTemplateItemUpdateMutation.mutate(values)

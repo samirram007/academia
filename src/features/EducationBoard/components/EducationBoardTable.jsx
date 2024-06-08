@@ -4,7 +4,7 @@ import React from 'react'
 import { useMemo } from 'react';
 import { DateTime } from 'luxon'
 
-import BasicTable from '../../../components/tables/BasicTable';
+import FilterTable from '../../../components/tables/FilterTable';
 import {   Link } from 'react-router-dom';
 
 import { useEducationBoards } from '../hooks/quaries';
@@ -70,7 +70,7 @@ const EducationBoardTable = () => {
   ]
 
   return (
-    <BasicTable
+    <FilterTable
       data={data} columns={columns}
       createRoute={createRoute}
     />
