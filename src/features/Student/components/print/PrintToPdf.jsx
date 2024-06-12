@@ -13,7 +13,7 @@ import { useFeeTemplates } from '../../../FeeTemplate/hooks/quaries';
 import { MonthPanel } from '../profile/FeeProcess';
 
 
-
+const apiDomain=import.meta.env.VITE_API_BASE_URL
 const defaultFeeData = {
   fee_no: 'NEW',
   fee_date: new Date(),
@@ -213,17 +213,23 @@ export const SelectedPanelPrintMode = ({ selectedTemplate, isMount, setIsMount, 
 
       <div ref={componentRef} className='relative overflow-y-auto text-slate-950
        bg-white mx-auto rounded-md shadow-lg w-[750px]    h-svh max-h-[calc(100% - 200px)] p-4'>
-        <div className='border-2 border-slate-900  '>
+        <div className='relative border-2 border-slate-900 mt-2 min-h-[400px]  '>
           <div className=' grid grid-cols-10 px-2 py-1'>
             <div className={' col-span-2 '}>No. {feeData.fee_no}</div>
             <div className={' col-span-6 '}></div>
-            <div className={' col-span-2 text-right '}>Date: {feeData.fee_date}</div>
+            <div className={' col-span-2 text-right '}>
+              Date: {DateTime.fromISO(feeData.fee_date).toLocaleString(DateTime.DATE_MED)}
+              </div>
           </div>
           <div className='schoolHead grid grid-cols-10 p-2'>
+            {/* {JSON.stringify(feeData.campus.school.logo_image)} */}
             <div className={' col-span-1 '}>
               {feeData.campus.school.logo_image ?
-                <img src="" alt="" /> :
-                <img src={`${import.meta.env.VITE_API_BASE_URL}/storage/documents/logo.png`} style={{ width: '80px', height: '80px' }} alt="" />
+              <img src={feeData.campus.school.logo_image.path.includes(apiDomain)
+                ?feeData.campus.school.logo_image.path
+              : (apiDomain+feeData.campus.school.logo_image.path)} alt="" />
+               :
+                <img src={`${apiDomain}/storage/documents/logo.png`} style={{ width: '80px', height: '80px' }} alt="" />
               }
             </div>
             <div className='col-span-8 text-center'>
@@ -262,16 +268,17 @@ export const SelectedPanelPrintMode = ({ selectedTemplate, isMount, setIsMount, 
           font-bold border-t-4 border-slate-800  '>
               <div className='col-span-10 text-right '>{'Total'}:</div>
               <div className='col-span-2 text-right border-l-2 border-slate-800  '>
-                <div className='py-1 pr-4'>
+                <div className='py-1 pr-4 font-semibold'>
                   {Number(total).toFixed(2)}
                 </div>
               </div>
             </div>
           </div>
 
-          <div className='w-full py-1 pl-4'>
+          <div className='w-full py-1 pl-4 text-[10px]'>
             (in words) : Rupees. {convertNumberToWords(Number(Number(total).toFixed(2)))}
           </div>
+          <div className='absolute bottom-0 pl-2 text-[8px]'>Print Time: {moment(new Date()).format('DD-MMM-YYYY hh:mm a')}</div>
         </div>
 
       </div>
