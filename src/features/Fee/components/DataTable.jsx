@@ -13,6 +13,7 @@ import CreateFee from './Create';
 import Edit from './Edit';
 import Delete from './Delete';
 import FeeTable from './FeeTable';
+import moment from 'moment';
 
 
 
@@ -27,12 +28,21 @@ const initialValues = {
   balance_amount: 0,
   payment_mode: 'CASH'
 }
+const currentDate = moment(new Date()).format('YYYY-MM-DD');
+ const firstDayOfYear = moment(new Date(new Date().getFullYear(), 0, 1)).format('YYYY-MM-DD'); // January 1st of the current year
+
 const initialFilterValues = {
   campus_id: initialValues.campus_id,
   academic_session_id: initialValues.academic_session_id,
-   from:new Date().toISOString().split('T')[0],
-   to:new Date().toISOString().split('T')[0]
-}
+  from: firstDayOfYear, // 'YYYY-MM-DD' format for first day of the year
+  to: currentDate  // 'YYYY-MM-DD' format for current date
+};
+// const initialFilterValues = {
+//   campus_id: initialValues.campus_id,
+//   academic_session_id: initialValues.academic_session_id,
+//    from:new Date().toISOString().split('T')[0],
+//    to:new Date().toISOString().split('T')[0]
+// }
 // console.log(initialFilterValues)
 const DataTable = () => {
 
@@ -44,7 +54,7 @@ const DataTable = () => {
 
   const mData = FeeData.data?.data ?? [];
   const data = useMemo(() => [...mData], [mData]);
-console.log(data);
+// console.log(data);
   /** @type {import('@tanstack/react-table').ColumnDef<any>} */
   const columns = [
     {
@@ -106,8 +116,8 @@ console.log(data);
     <FeeTable
       data={data}
       columns={columns}
-      createForm={<CreateFee modal={true} />}
-      createFormTitle={'Fee No: [new]'}
+      // createForm={<CreateFee modal={true} />}
+      // createFormTitle={'Fee No: [new]'}
       FeeData={FeeData}
       initialFilterValues={initialFilterValues}
 

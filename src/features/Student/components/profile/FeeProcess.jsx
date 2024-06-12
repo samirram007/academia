@@ -41,7 +41,7 @@ export const FeeProcess = ({
 
     const mData = fetchedSessionFeesData.data?.data ?? [];
     const StudentSessionFeesData = mData//useMemo(() => [...mData], [mData]);
-    //  console.log(StudentSessionFeesData)
+    // console.log(selectedStudentSession)
 
     if (!selectedStudentSession) {
         return (

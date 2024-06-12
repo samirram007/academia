@@ -40,6 +40,12 @@ import { CreateExpense, Expenses, EditExpense } from '../pages/Expense';
 import { Admissions, CreateAdmission, EditAdmission } from '../pages/Admission';
 import { CreatePromotion, EditPromotion, Promotions } from '../features/Promotion';
 import { CreateStudentIdCard, EditStudentIdCard, StudentIdCards } from '../pages/StudentIdCard';
+import { CreateTransport, EditTransport, Transports } from '../pages/Transport';
+import { CreateTransportTeam, EditTransportTeam, TransportTeams } from '../pages/TransportTeam';
+import { CreateTransportSlot, EditTransportSlot, TransportSlots } from '../pages/TransportSlot';
+import { CreateTransportUser, EditTransportUser, TransportUsers } from '../pages/TransportUser';
+import { CreateTransportFee, EditTransportFee, TransportFees } from '../pages/TransportFee';
+import { CreateTransportExpense, EditTransportExpense, TransportExpenses } from '../pages/TransportExpense';
 
 
 export const common = (module) => {
@@ -82,7 +88,7 @@ export const page = [
     ]
   },
   {
-    path: 'admissions', name: 'Admission', element: <Admissions />, isMenu: true, menuGroup: 'STUDENT', isPrivate: false, icon: icons.users, role: ['admin'],
+    path: 'admissions', name: 'Admission', element: <Admissions />, isMenu: false, menuGroup: 'STUDENT', isPrivate: false, icon: icons.users, role: ['admin'],
     children: [
       { path: 'create', name: 'New', element: <CreateAdmission />, isMenu: false, isPrivate: false, icon: icons.create_admission },
       { path: 'edit/:id', name: 'Edit Admission', element: <EditAdmission />, isMenu: false, isPrivate: false, },
@@ -117,7 +123,7 @@ export const page = [
     ]
   },
   {
-    path: 'fee_receipts', name: 'Fee Receipts', element: <FeeReceipts />, isMenu: true, menuGroup: 'FEES', isPrivate: false, icon: icons.fee_receipts, role: ['admin'],
+    path: 'fee_receipts', name: 'Fee Receipts', element: <FeeReceipts />, isMenu: false, menuGroup: 'FEES', isPrivate: false, icon: icons.fee_receipts, role: ['admin'],
     children: [
       { path: 'create', name: 'New', element: <CreateFeeReceipt />, isMenu: false, isPrivate: false, icon: icons.create_fee_receipt },
       { path: 'edit/:id', name: 'Edit Fee Receipt', element: <EditFeeReceipt />, isMenu: false, isPrivate: false, },
@@ -156,6 +162,63 @@ export const page = [
     children: [
       { path: 'create', name: 'New', element: <CreateTransport />, isMenu: false, isPrivate: false, icon: icons.create_transports },
       { path: 'edit/:id', name: 'Edit Transport', element: <EditTransport />, isMenu: false, isPrivate: false, },
+    ]
+  },
+
+  {
+    path: 'transport_teams', name: 'Working Team', element: <TransportTeams />,
+    isMenu: false, menuGroup: 'TRANSPORT', isPrivate: false, icon: icons.transport_teams,
+     role: ['admin'],
+    children: [
+      { path: 'create', name: 'New', element: <CreateTransportTeam />,
+        isMenu: false, isPrivate: false, icon: icons.create_transport_teams },
+      { path: 'edit/:id', name: 'Edit Transport Team', element: <EditTransportTeam />,
+        isMenu: false, isPrivate: false, },
+    ]
+  },
+  {
+    path: 'transport_slots', name: 'Journey Slot', element: <TransportSlots />,
+    isMenu: false, menuGroup: 'TRANSPORT', isPrivate: false, icon: icons.transport_slots,
+     role: ['admin'],
+    children: [
+      { path: 'create', name: 'New', element: <CreateTransportSlot />,
+        isMenu: false, isPrivate: false, icon: icons.create_transport_slots },
+      { path: 'edit/:id', name: 'Edit Journey Slot', element: <EditTransportSlot />,
+        isMenu: false, isPrivate: false, },
+    ]
+  },
+  {
+    path: 'transport_users', name: 'Traveler', element: <TransportUsers />,
+    isMenu: true, menuGroup: 'TRANSPORT', isPrivate: false, icon: icons.transport_users,
+     role: ['admin'],
+    children: [
+      { path: 'create', name: 'New', element: <CreateTransportUser />,
+        isMenu: false, isPrivate: false, icon: icons.create_transport_users },
+      { path: 'edit/:id', name: 'Edit Transport User', element: <EditTransportUser />,
+        isMenu: false, isPrivate: false, },
+    ]
+  },
+
+  {
+    path: 'transport_fees', name: 'Fee', element: <TransportFees />,
+    isMenu: true, menuGroup: 'TRANSPORT', isPrivate: false, icon: icons.transport_fees,
+     role: ['admin'],
+    children: [
+      { path: 'create', name: 'New', element: <CreateTransportFee />,
+        isMenu: false, isPrivate: false, icon: icons.create_transport_fees },
+      { path: 'edit/:id', name: 'Edit Transport Fee', element: <EditTransportFee />,
+        isMenu: false, isPrivate: false, },
+    ]
+  },
+  {
+    path: 'transport_expenses', name: 'Expense', element: <TransportExpenses />,
+    isMenu: true, menuGroup: 'TRANSPORT', isPrivate: false, icon: icons.transport_expenses,
+     role: ['admin'],
+    children: [
+      { path: 'create', name: 'New', element: <CreateTransportExpense />,
+        isMenu: false, isPrivate: false, icon: icons.create_transport_expenses },
+      { path: 'edit/:id', name: 'Edit Transport Expense', element: <EditTransportExpense />,
+        isMenu: false, isPrivate: false, },
     ]
   },
   {

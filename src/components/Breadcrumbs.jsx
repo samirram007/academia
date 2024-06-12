@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import {  ToWordCase } from '../libs/utils'
 import { TiHome } from "react-icons/ti";
-const Breadcrumbs = () => {
+const Breadcrumbs = ({title}) => {
     const location=useLocation()
 
     const pathnames = location.pathname.split('/')
@@ -18,12 +18,12 @@ const Breadcrumbs = () => {
                     pathnames ?
                     pathnames.length >1 ?
                     <>
-                    <li><Link to={`/${pathnames[0]}`}>{ToWordCase(pathnames[0])}</Link></li>
+                    <li><Link to={`/${pathnames[0]}`}>{title??ToWordCase(pathnames[0])}</Link></li>
                      <li className='active !text-[#7480ff]'>{ToWordCase(pathnames[1])}</li>
                     </>
 
                       :
-                     <li className='active !text-[#7480ff]'>{ToWordCase(pathnames[0])}</li>
+                     <li className='active !text-[#7480ff]'>{title??ToWordCase(pathnames[0])}</li>
                    : null
 
                 }

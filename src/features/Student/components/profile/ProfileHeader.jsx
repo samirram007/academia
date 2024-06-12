@@ -18,14 +18,14 @@ const ProfileHeader = ({ data, fetchedAcademicSessions }) => {
       ? (studentSessions.find(x => x.academic_session.is_current == 1).academic_session ?? studentSessions[0].academic_session)
       : null
   )
-  const [selectedStudentSession,setSelectedStudentSession] = useState(null)
+  const [selectedStudentSession, setSelectedStudentSession] = useState(null)
   const [activeView, setActiveView] = useState('fee')
   // const selectedStudentSession = useMemo(() => {
   //   return studentSessions.find(x => x.academic_session_id === selectedSession.id)
   // }, [selectedSession])
-useEffect(()=>{
-  setSelectedStudentSession(prev=>data?.student_sessions.find(x => x.academic_session_id === selectedSession.id))
-},[data])
+  useEffect(() => {
+    setSelectedStudentSession(prev => data?.student_sessions.find(x => x.academic_session_id === selectedSession.id))
+  }, [data, selectedSession])
 
 
 
@@ -72,18 +72,17 @@ useEffect(()=>{
       {activeView === 'profile' && <Profile data={data} />}
       {activeView === 'address' && <Address data={data.addresses} />}
       {activeView === 'guardian' && <Guardian data={data.guardians} />}
-      {activeView === 'fee' && selectedSession && selectedStudentSession &&
-  <FeeProcess
-              data={data}
-              academicSessions={academicSessions}
-              selectedSession={selectedSession}
-              selectedStudentSession={selectedStudentSession}
-            />
-
-
-
-
-
+      {activeView === 'fee' && selectedSession &&
+        selectedStudentSession ?
+        <FeeProcess
+          data={data}
+          academicSessions={academicSessions}
+          selectedSession={selectedSession}
+          selectedStudentSession={selectedStudentSession}
+        />
+        : <div className='p-4 flex justify-center items-center text-2xl bg-slate-600 mt-4 rounded-lg h-40'>
+          {'Student Session Not Initialize'}
+        </div>
       }
       {activeView === 'class_work' && <ClassWork data={data} />}
       {activeView === 'activity' && <Activity data={data} />}

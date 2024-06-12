@@ -11,21 +11,21 @@ const FormikFormModal = ({ label, children }) => {
         left: 0,
         width: "100vw",
         height: "100vh",
-        background: "rgba(20, 20, 20, 0.8)",
-        padding: "20px 40px",
+        background: "rgba(10, 10, 20, 0.6)",
+        padding: "0",
         display: "flex",
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "end",
     }
     const modalStyle = {
+        right:"0",
         background: "#0f172a",
-        margin: "auto",
-        padding: "20px",
-        border: "5px solid #00000011",
-        borderRadius: "10px",
-        boxShadow: "0 0 5px 2px #ddaaaa66",
-        overflowY: "scroll",
-        maxHeight: "90vh"
+        margin: "0",
+        padding: "0",
+        border: "2px solid #00000011",
+        borderRadius: "5px",
+        boxShadow: "0 0 2px 1px #ddaaaa66",
+
     }
 
     if (!isOpen) return null;
@@ -36,12 +36,13 @@ const FormikFormModal = ({ label, children }) => {
         <>
 
             <div style={overlay}>
-                <div style={modalStyle}>
+                <div style={modalStyle} className='h-screen max-h-screen min-w-[50%]'>
                     {
                         label &&
-                        <div className='flex justify-between items-center
-                            border-b-2 border-slate-600/50 pb-2   ' >
-                            <div>{label}</div>
+                        <div className=' py-1 px-2   '>
+                            <div className='flex justify-between items-center
+                            border-b-2 border-slate-600/50 pb-1' >
+                            <div className='text-xl font-bold' >{label}</div>
                             <button onClick={() => setOpen(false)} type="button"
                                 className='rounded-full p-2
  bg-slate-50/5 text-orange-500 cursor-pointer
@@ -50,6 +51,8 @@ const FormikFormModal = ({ label, children }) => {
                                 <MdOutlineCloseFullscreen className='text-xl active:scale-90 transition delay-75 ease-in-out ' />
                             </button>
                         </div>
+                        </div>
+
                     }
 
                     {children}

@@ -34,6 +34,7 @@ const Filter = ({ fetchedData, initialFilterValues }) => {
         enableReinitialize: true,
         onSubmit: (values, { setSubmitting }) => {
             Object.assign(initialFilterValues, values);
+           // setSubmitting(false)
              fetchedData.refetch()
                   setTimeout(() => {
                     setSubmitting(false)

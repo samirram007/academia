@@ -19,7 +19,7 @@ import { TbFilterSearch } from "react-icons/tb";
 import FormikFormModal from '../form-components/FormikFormModal'
 
 import { useFormModal } from '../../contexts/FormModalProvider'
-export default function BasicTable({ data, columns, pageSize = 10, createRoute,
+export default function BasicTable({ data, columns, pageSize = 100, createRoute,
     createForm, createFormTitle,
     mobileHeaders = ['id', 'name']  }) {
     const thisRoute = useCustomRoutes()
@@ -29,7 +29,7 @@ export default function BasicTable({ data, columns, pageSize = 10, createRoute,
     const [searchParams, setSearchParams] = useSearchParams()
     const [pagination, setPagination] = useState({
         pageIndex: 0,
-        pageSize: data.length??pageSize,
+        pageSize:  pageSize,
     })
     const table = useReactTable({
         data,

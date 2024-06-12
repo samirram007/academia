@@ -137,6 +137,7 @@ export default StudentSession
 export const SessionsDropdown = ({ data, session_id, student_id, selectedStudentSession, academicSessions, selectedSession,
     setSelectedSession }) => {
     const [isOpen, setOpen] = useState(false)
+
     // console.log("ac",selectedSession,academicSessions, academicSessions.data.find(x => x.id === selectedSession.id).session);
     return (
         <>
