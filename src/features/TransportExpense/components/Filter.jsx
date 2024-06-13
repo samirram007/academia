@@ -62,7 +62,7 @@ const [isLoading, setIsLoading] = useState(false)
                                 </div>
                                 {/* <div className='col-span-2 hidden'>
 
-                                    <AcademicSessionSelect formik={formik} campus_id={formik.values.campus_id} />
+                                    <AcademicSessionSelect formik={formik} />
 
                                 </div> */}
                                 <div className='col-span-3 '>

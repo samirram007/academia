@@ -55,10 +55,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
 
 
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
-                        <div>
 
-                            <CampusSelect formik={formik} />
-                        </div>
                         <div>
                             <FormikInputBox formik={formik} name="session" label="Session" />
 

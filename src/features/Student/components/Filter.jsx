@@ -71,12 +71,12 @@ const Filter = ({ fetchedData, initialFilterValues }) => {
 
                                 </div>
                                 <div className='col-span-2 '>
-                                    <CampusSelect formik={formik} auto={true} isLoading={isLoading} setIsLoading={setIsLoading} />
+                                    <CampusSelect formik={formik} auto={false} isLoading={isLoading} setIsLoading={setIsLoading} />
 
                                 </div>
                                 <div className='col-span-2 '>
 
-                                    <AcademicSessionSelect formik={formik} campus_id={formik.values.campus_id} />
+                                    <AcademicSessionSelect formik={formik}   />
 
                                 </div>
                                 <div className='col-span-2 '>

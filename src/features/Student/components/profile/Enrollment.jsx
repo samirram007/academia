@@ -112,8 +112,8 @@ const Enrollment = ({ data, entryMode, enrollmentType, selectedStudentSession })
                     </div>
                     <div className='col-span-3'>
                         {enrollmentType == 1
-                            ? <AcademicSessionSelect formik={formik} campus_id={formik.values.campus_id} label={'Admission Session'} />
-                            : <AcademicSessionSelect formik={formik} campus_id={formik.values.campus_id} label={'Registration Session'} />
+                            ? <AcademicSessionSelect formik={formik}   label={'Admission Session'} />
+                            : <AcademicSessionSelect formik={formik}  label={'Registration Session'} />
                         }
 
                     </div>

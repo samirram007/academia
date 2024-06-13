@@ -4,29 +4,26 @@ import React from 'react'
 import { useMemo } from 'react';
 import { DateTime } from 'luxon'
 
-import FilterTable from '../../../components/tables/FilterTable';
-import Filter from './Filter';
 import { useAcademicSessions } from '../hooks/quaries';
 import CreateAcademicSession from './Create';
 import EditAcademicSession from './Edit';
 import DeleteAcademicSession from './Delete';
+import moment from 'moment';
+import BasicTable from '../../../components/tables/BasicTable';
 
 
+// session: '2024', //current Year
 
 const initialValues = {
-  campus_id: '1',
-  session: '2024',
-  start_date: new Date().toISOString().slice(0, 10),
-  end_date: new Date().toISOString().slice(0, 10),
+  session: moment(new Date()).format('YYYY'),
+  start_date: moment(new Date()).format('YYYY-MM-DD'),
+  end_date: moment(new Date()).format('YYYY-MM-DD'),
   is_current: false,
-}
-const initialFilterValues = {
-  campus_id: initialValues.campus_id
 }
 
 const DataTable = () => {
 
-  const fetchedData = useAcademicSessions(initialFilterValues)
+  const fetchedData = useAcademicSessions()
 
   const mData = fetchedData.data?.data ?? [];
 
@@ -44,9 +41,6 @@ const DataTable = () => {
           {info.row.original.is_current ? <span className="text-green-600 text-sm">[CURRENT]</span> : ''}
         </div>
       )
-    },
-    {
-      header: "Campus", accessorKey: "campus.name", size: 200,
     },
     {
       header: 'Start Date', accessorKey: 'start_date', cell: info =>
@@ -71,13 +65,10 @@ const DataTable = () => {
   ]
 
   return (
-    <FilterTable
+    <BasicTable
       data={data} columns={columns}
       createForm={<CreateAcademicSession initialValues={initialValues} modal={true} />}
       createFormTitle="Create Academic Session"
-      filter={
-        <Filter fetchedData={fetchedData} initialFilterValues={initialFilterValues} />
-      }
       mobileHeaders={['id', 'session']}
     />
   )

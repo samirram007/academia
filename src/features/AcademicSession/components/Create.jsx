@@ -18,9 +18,6 @@ const validationSchema = Yup.object().shape({
         .when('start_date', (start_date, schema) => {
             return (start_date ? schema.min(start_date, 'End date must be later than the start date') : schema)
         }),
-    campus_id: Yup.number().integer()
-        .min(1, "Please select Campus")
-        .required("Please select Campus")
 })
 
 

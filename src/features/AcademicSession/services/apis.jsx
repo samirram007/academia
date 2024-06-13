@@ -10,7 +10,7 @@ export function fetchAcademicSessionService(id) {
 }
 export function fetchAcademicSessionServices(payload) {
 
-    return axiosClient.get(`/academic_sessions?campus_id=${payload.campus_id}`)
+    return axiosClient.get(`/academic_sessions`)
         .then(response => {
             return response.data;
         })

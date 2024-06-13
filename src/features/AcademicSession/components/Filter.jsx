@@ -67,7 +67,7 @@ const Filter = ({ fetchedData,  initialFilterValues }) => {
                                 </div>
                                 <div className='col-span-12 md:col-span-3 hidden '>
 
-                                    <AcademicSessionSelect formik={formik} campus_id={formik.values.campus_id} />
+                                    <AcademicSessionSelect formik={formik} />
 
                                 </div>
                                 {formik.values &&

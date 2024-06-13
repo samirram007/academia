@@ -149,7 +149,7 @@ const Promote = ({ PromotionData, table, initialFilterValues }) => {
                                 </div>
                                 <div className='col-span-10 md:col-span-2 '>
 
-                                    <AcademicSessionSelect formik={formik} campus_id={formik.values.campus_id} />
+                                    <AcademicSessionSelect formik={formik}   />
 
                                 </div>
                                 <div className='col-span-10 md:col-span-2 '>

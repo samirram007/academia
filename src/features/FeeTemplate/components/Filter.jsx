@@ -51,7 +51,7 @@ const [isLoading, setIsLoading] = useState(FeeTemplateData.isLoading)
                                 </div>
                                 <div className='col-span-3 '>
 
-                                    <AcademicSessionSelect formik={formik} campus_id={formik.values.campus_id} />
+                                    <AcademicSessionSelect formik={formik}   />
 
                                 </div>
                                 <div className='col-span-3 '>

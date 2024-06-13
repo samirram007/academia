@@ -1,6 +1,6 @@
 
 export const CustomSelect = (
-    { formik, label, name, placeholder, type, ...props }
+    { formik, label, name, placeholder, type, defaultValue='', ...props }
 ) => {
     return (
         <>
@@ -8,7 +8,7 @@ export const CustomSelect = (
             <select name={name} id={name}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values[name]}
+                value={formik.values[name] ?? defaultValue}
                 className={`select  w-full ${formik.errors[name] ? 'select-error' : 'select-primary'}`}
             >
                 <option value=''>-- please select</option>

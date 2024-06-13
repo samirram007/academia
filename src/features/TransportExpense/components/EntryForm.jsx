@@ -64,7 +64,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
                                 </div>
                                 <div className='col-span-6  md:col-span-2 '>
 
-                                    <AcademicSessionSelect formik={formik} campus_id={formik.values.campus_id} />
+                                    <AcademicSessionSelect formik={formik}   />
 
                                 </div>
                                 <div className=' md:col-span-5 '></div>
