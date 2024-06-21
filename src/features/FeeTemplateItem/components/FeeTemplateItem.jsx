@@ -16,7 +16,7 @@ const feeTemplateName = <span className='text-blue-400 '> <b>Fee Template</b>: {
     <>
 
       <button onClick={() => setOpen(true)}
-        className="btn btn-outline btn-primary btn-sm btn-rounded ">
+        className="btn  btn-primary btn-sm btn-rounded py-1 ">
         Details
       </button>
       {isOpen &&

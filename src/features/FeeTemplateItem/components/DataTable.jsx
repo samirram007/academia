@@ -48,6 +48,7 @@ const DataTable = ({ fee_template_id, setEntryId }) => {
     {
       header: "Sl No",
       accessorKey: "sort_index",
+
     },
     {
       header: "Name",

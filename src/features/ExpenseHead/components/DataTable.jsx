@@ -9,8 +9,11 @@ import { useExpenseHeads } from '../hooks/queries';
 import CreateExpenseHead from './Create';
 import Delete from './Delete';
 import Edit from './Edit';
+
+
 const DataTable = () => {
-    const fetchedData = useExpenseHeads()
+
+    const fetchedData = useExpenseHeads({})
       const navigate = useNavigate()
 
       const createRoute=`/expense_heads/create`
@@ -54,7 +57,7 @@ const DataTable = () => {
   return (
     <FilterTable data={data} columns={columns}
     // createRoute={createRoute}
-     createForm={<CreateExpenseHead modal={true} />}
+    //  createForm={<CreateExpenseHead modal={true} />}
      />
   )
 }

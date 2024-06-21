@@ -8,7 +8,7 @@ import { useAddressType } from '../../../hooks/queries';
 export const AddressTypeSelect = ({ formik,  name,label,exclude }) => {
 
     const AddressTypeData = useAddressType();
-    if (AddressTypeData.isLoading) return <Loader />;
+    if (AddressTypeData.isLoading) return <Loader size={6} label={'Address Type'} />;
 
     return (
 

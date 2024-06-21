@@ -15,18 +15,18 @@ const filterOption=[
         label: 'Admission',
         value: 'admission',
     },
-    {
-        label: 'Promoted',
-        value: 'promoted',
-    },
-    {
-        label: 'Transferred',
-        value: 'transferred',
-    },
-    {
-        label: 'Inactive',
-        value: 'inactive',
-    },
+    // {
+    //     label: 'Promoted',
+    //     value: 'promoted',
+    // },
+    // {
+    //     label: 'Transferred',
+    //     value: 'transferred',
+    // },
+    // {
+    //     label: 'Inactive',
+    //     value: 'inactive',
+    // },
 ]
 
     return (

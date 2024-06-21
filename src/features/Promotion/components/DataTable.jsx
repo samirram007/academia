@@ -16,12 +16,13 @@ import { Checkbox } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import FormikEnrollmentFormModal from '../../../components/form-components/FormikEnrollmentFormModal';
 import Enrollment from '../../Student/components/profile/Enrollment';
+import moment from 'moment';
 
 const initialValues = {
   name: '',
   code: '',
   campus_id: 1,
-  academic_session_id: 1,
+  academic_session_id: moment(new Date()).format('YYYY'),
   academic_class_id: 1,
   section_id: 1
 

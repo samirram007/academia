@@ -4,7 +4,7 @@ import EntryForm from './EntryForm'
 
 import FormikEditFormModal from '../../../components/form-components/FormikEditFormModal'
 
-const Edit = ({ initialValues }) => {
+const Edit = ({ initialValues,setEntryId }) => {
 
   const [isOpen, setOpen] = useState(false)
 
@@ -16,7 +16,7 @@ const Edit = ({ initialValues }) => {
         Edit
       </button>
       {isOpen &&
-        <FormikEditFormModal isOpen={isOpen} setOpen={setOpen} label="Edit Department">
+        <FormikEditFormModal isOpen={isOpen} setOpen={setOpen} label={`Fee No: ${initialValues.fee_no}`}>
 
           <EntryForm
             initialValues={initialValues}

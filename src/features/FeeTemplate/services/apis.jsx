@@ -10,7 +10,7 @@ export function fetchFeeTemplate(id) {
 export function fetchFeeTemplates(payload) {
 
     return axiosClient
-        .get(`/fee_templates?academic_session_id=${payload.academic_session_id}&academic_class_id=${payload.academic_class_id}&campus_id=${payload.campus_id}`)
+        .get(`/fee_templates?academic_class_id=${payload.academic_class_id}`)
         .then(response => {
             return response.data;
         })

@@ -1,10 +1,13 @@
+import Loader from '../../../components/Loader'
 import { useCampuses } from '../../Campus/hooks/queries'
 
 
 export const CampusSelect = ({formik,auto,isLoading,setIsLoading}) => {
     const CampusData = useCampuses()
 
-    if(CampusData.isLoading)  setIsLoading(false)
+    if(CampusData.isLoading)   return <Loader size={6} label={'Campus'} />
+
+   // console.log(CampusData.isLoading);
     return (
 
             CampusData.data &&
@@ -35,7 +38,7 @@ export const HandleSelect = (
         props.auto && formik.handleSubmit()
         // If campus_id dropdown changes, reset academic_session_id and academic_class_id
         if (name === 'campus_id') {
-            formik.values.academic_session_id && formik.setFieldValue('academic_session_id', ''); // Reset academic_session_id
+            // formik.values.academic_session_id && formik.setFieldValue('academic_session_id', ''); // Reset academic_session_id
             formik.values.academic_class_id && formik.setFieldValue('academic_class_id', ''); // Reset academic_class_id
             formik.values.building_id && formik.setFieldValue('building_id', ''); // Reset academic_class_id
         }

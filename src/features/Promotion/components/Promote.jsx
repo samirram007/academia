@@ -12,6 +12,7 @@ import { SectionSelect } from '../../Common/components/SectionSelect';
 import { useStorePromotionMutation } from '../hooks/mutations';
 
 import { Flip, toast } from "react-toastify";
+import moment from 'moment';
 const validationSchema = Yup.object().shape({
     // campus_id: Yup.number().integer()
     //     .min(1, "Please select Campus")
@@ -28,18 +29,14 @@ const initialValues = {
     name: '',
     code: '',
     campus_id: 1,
-    academic_session_id: 1,
+    academic_session_id: moment(new Date()).format('YYYY')    ,
     academic_class_id: 1,
     is_available: true,
     capacity: 0,
     promotion_type: 'class_promotion'
 
 }
-// const initialPromotionValues = {
-//     campus_id: initialValues.campus_id,
-//     academic_session_id: initialValues.academic_session_id,
-//     academic_class_id: initialValues.academic_class_id,
-// }
+
 
 const Promote = ({ PromotionData, table, initialFilterValues }) => {
     const promotionMutate = useStorePromotionMutation()

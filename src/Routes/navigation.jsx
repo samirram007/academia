@@ -26,6 +26,8 @@ import Logout from '../pages/Logout';
 import { CreateFee, EditFee, Fees } from '../pages/Fee';
 import { CreateFeeReceipt, EditFeeReceipt, FeeReceipts } from '../pages/FeeReceipt';
 import { CreateFeeHead, EditFeeHead, FeeHeads } from '../pages/FeeHead';
+import { CreateIncomeGroup, EditIncomeGroup, IncomeGroups } from '../pages/IncomeGroup';
+import { CreateExpenseGroup, EditExpenseGroup, ExpenseGroups } from '../pages/ExpenseGroup';
 import { CreateFeeTemplate, EditFeeTemplate, FeeTemplates } from '../pages/FeeTemplate';
 import { AcademicStandards, CreateAcademicStandard, EditAcademicStandard } from '../pages/AcademicStandard';
 import { AcademicClasses, CreateAcademicClass, EditAcademicClass } from '../pages/AcademicClass';
@@ -137,6 +139,13 @@ export const page = [
     ]
   },
   {
+    path: 'income_groups', name: 'Income Groups', element: <IncomeGroups />, isMenu: true, menuGroup: 'FEES', isPrivate: false, icon: icons.income_groups, role: ['admin'],
+    children: [
+      { path: 'create', name: 'New', element: <CreateIncomeGroup/>, isMenu: false, isPrivate: false, icon: icons.create_income_group },
+      { path: 'edit/:id', name: 'Edit Income Group', element: <EditIncomeGroup />, isMenu: false, isPrivate: false, },
+    ]
+  },
+  {
     path: 'fee_templates', name: 'Fee Templates', element: <FeeTemplates />, isMenu: true, menuGroup: 'FEES', isPrivate: false, icon: icons.fee_templates, role: ['admin'],
     children: [
       { path: 'create', name: 'New', element: <CreateFeeTemplate />, isMenu: false, isPrivate: false, icon: icons.create_fee_template },
@@ -148,6 +157,13 @@ export const page = [
     children: [
       { path: 'create', name: 'New', element: <CreateExpenseHead />, isMenu: false, isPrivate: false, icon: icons.create_expense_head },
       { path: 'edit/:id', name: 'Edit Expense Head', element: <EditExpenseHead />, isMenu: false, isPrivate: false, },
+    ]
+  },
+  {
+    path: 'expense_groups', name: 'Expense Groups', element: <ExpenseGroups />, isMenu: true, menuGroup: 'EXPENSE', isPrivate: false, icon: icons.expense_groups, role: ['admin'],
+    children: [
+      { path: 'create', name: 'New', element: <CreateExpenseGroup/>, isMenu: false, isPrivate: false, icon: icons.create_expense_group },
+      { path: 'edit/:id', name: 'Edit Expense Group', element: <EditExpenseGroup />, isMenu: false, isPrivate: false, },
     ]
   },
   {

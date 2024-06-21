@@ -41,12 +41,12 @@ export const FeeProcess = ({
 
     const mData = fetchedSessionFeesData.data?.data ?? [];
     const StudentSessionFeesData = mData//useMemo(() => [...mData], [mData]);
-    // console.log(selectedStudentSession)
+   //  console.log('sss',selectedStudentSession)
 
     if (!selectedStudentSession) {
         return (
             <div className='p-4 flex justify-center items-center text-2xl bg-slate-600 mt-4 rounded-lg h-40'>
-                {'Student Session Not Initialize'}
+                {'Student Session Not Initialize.....'}
             </div>
         )
     }
@@ -324,10 +324,11 @@ export const EditFees = ({ fees, isOpen, setOpen, selectedStudentSession=fees.st
     const academic_session_id = fees.academic_session_id
     const academic_class_id = fees.academic_class_id
     const campus_id = fees.academic_class.campus_id
+    const is_active = true
 
 
     const payload = {
-        academic_session_id, academic_class_id, campus_id
+        academic_class_id, campus_id
     }
     const fetchedFeeTemplatesData = useFeeTemplates(payload)
     const mData = fetchedFeeTemplatesData.data?.data ?? [];
@@ -581,7 +582,7 @@ const SelectedPanelEditMode = ({ selectedTemplate, isMount, setIsMount, feeData,
 }
 
 const FeeEntryRows = ({ feeData, setChanges, selectedStudentSession }) => {
-    console.log("fdata", feeData);
+
     return (
         feeData.fee_items && feeData.fee_items.map((feeTemplateItem, index) => (
 
@@ -610,7 +611,7 @@ export const CreateFees = ({ data, selectedStudentSession }) => {
     const student_id = data.id
 
     const payload = {
-        academic_session_id, academic_class_id, campus_id
+        academic_class_id, campus_id, is_active:1
     }
 
     const fetchedFeeTemplatesData = useFeeTemplates(payload)
@@ -633,20 +634,24 @@ export const CreateFees = ({ data, selectedStudentSession }) => {
         return
     }
 
-    // console.log('sel',selectedStudentSession);
     return (
         <>
-            <div className='flex flex-row w-[80dvw] max-w-full   h-[70dvh] max-h-full'>
-                <div className={`${!panelToggle ? 'relative flex flex-col min-w-full gap-2' : 'hidden'} `}>
+            <div className='relative flex flex-row w-[80dvw] max-w-full   h-[90dvh] max-h-full'>
+                <div className={`${!panelToggle ? 'flex overflow-y-auto flex-col w-full min-w-80 gap-2' : 'hidden'} `}>
+                   <div className=' px-32 flex flex-col  gap-2 pb-16'>
                     {
                         fetchedFeeTemplatesData.data.data.map((feeTemplate, index) => (
-                            <div key={index} className='btn btn-primary btn-sm text-sm'
+                            <div key={index} className='w-full  btn btn-primary btn-sm text-sm'
                                 onClick={() => handleToggle(feeTemplate)}>
                                 {feeTemplate.name}
                             </div>
                         ))
                     }
-                    <div className='b-0 w-full  p-2 bg-rose-600/30 flex items-center justify-center text-xl rounded-[20px] bottom-0 absolute'>
+                   </div>
+
+                    <div className='b-0 w-full  p-2 bg-rose-600/90 flex
+                    items-center justify-center text-xl
+                    rounded-[20px] bottom-0 absolute'>
                         Choose your Template</div>
                 </div>
                 <div className={`${panelToggle ? 'flex flex-col gap-2 relative min-w-full' : 'hidden'}`}>

@@ -2,6 +2,7 @@
 export const CustomSelect = (
     { formik, label, name, placeholder, type, defaultValue='', ...props }
 ) => {
+
     return (
         <>
             <label htmlFor={name}>{label}</label>

@@ -20,7 +20,7 @@ import moment from 'moment';
 const initialValues = {
   fee_no: '',
   fee_date: new Date(),
-  academic_session_id: 1,
+  academic_session_id:  moment(new Date()).format('YYYY'),
   campus_id: 1,
   user_id: null,
   total_amount: 0,
@@ -30,11 +30,11 @@ const initialValues = {
 }
 const currentDate = moment(new Date()).format('YYYY-MM-DD');
  const firstDayOfYear = moment(new Date(new Date().getFullYear(), 0, 1)).format('YYYY-MM-DD'); // January 1st of the current year
-
+ const firstDayOfMonth = moment().startOf('month').format('YYYY-MM-DD');
 const initialFilterValues = {
   campus_id: initialValues.campus_id,
   academic_session_id: initialValues.academic_session_id,
-  from: firstDayOfYear, // 'YYYY-MM-DD' format for first day of the year
+  from: firstDayOfMonth, // 'YYYY-MM-DD' format for first day of the year
   to: currentDate  // 'YYYY-MM-DD' format for current date
 };
 // const initialFilterValues = {
@@ -46,9 +46,6 @@ const initialFilterValues = {
 // console.log(initialFilterValues)
 const DataTable = () => {
 
-  // const formattedDate = new Date().toString('yyyy-MM-dd');
-
-  // console.log('Date',formattedDate);
   const FeeData = useFees(initialFilterValues)
   const navigate = useNavigate()
 
@@ -90,6 +87,16 @@ const DataTable = () => {
     {
       header: "Amount",
       accessorKey: "total_amount",
+
+    },
+    {
+      header: "Student",
+      accessorKey: "student.name",
+
+    },
+    {
+      header: "Class",
+      accessorKey: "student_session.academic_class.name",
 
     },
 

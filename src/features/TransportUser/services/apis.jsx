@@ -33,6 +33,18 @@ export function fetchUserSearchService(payload) {
         });
 
 }
+export function fetchTransportUserSearchService(payload) {
+    const filterString=payload.searchText?`?search_text=${payload.searchText}`:``
+   //  console.log(filterString)
+    return axiosClient.get(`/search_transport_users_for_fees${filterString}`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(err => {
+            throw err;
+        });
+
+}
 
 export function storeTransportUserService(payload) {
 console.log('api',payload)

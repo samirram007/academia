@@ -56,7 +56,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
                 <div className='grid grid-cols-1  '>
 
 
-                    <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
+                    <div className='grid grid-cols-1 md:grid-cols-2 gap-5 p-2'>
 
                         <div>
                             <FormikInputBox formik={formik} name="name" label="Academic Standard" />

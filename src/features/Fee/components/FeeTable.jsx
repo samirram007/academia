@@ -267,7 +267,7 @@ export const FeeCard = ({ row, index }) => {
     )
 }
 export const FeeDetails = ({ data }) => {
-    console.log('ddddda', data);
+
     return (
         <div className='p-2 text-[8px]'>
             <div className='flex flex-row flex-nowrap justify-between items-center
@@ -295,7 +295,7 @@ export const FeeDetails = ({ data }) => {
                             item.fee_item_months &&
                             item.fee_item_months.length > 0 &&
                             item.fee_item_months.map((x,index)=>(
-                                 (<div className='underline decoration-blue-400 text-green-600 text-xs'>{x.month?.short_name}</div>)
+                                  <div key={index} className='underline decoration-blue-400 text-green-600 text-xs'>{x.month?.short_name}</div>
                             ))
                             }
                         {/* ( item.fee_item_months.length>0 && item.fee_item_months.map(x=>x.month.short_name))} */}

@@ -9,11 +9,13 @@ const Create = ({ modal }) => {
 
     const editData = {
         name: '',
+        income_group_id:1
 
     }
 
     const initialValues = editData ?? {
         name: '',
+        income_group_id:1
     }
 
 

@@ -5,12 +5,13 @@ import { DateTime } from 'luxon'
 import FilterTable from '../../../components/tables/FilterTable';
 
 import { useNavigate } from 'react-router-dom';
-import { useFeeHeads } from '../hooks/queries';
+import {   useFeeHeads } from '../hooks/queries';
 import CreateFeeHead from './Create';
 import Delete from './Delete';
 import Edit from './Edit';
 const DataTable = () => {
-    const FeeHeadData = useFeeHeads()
+    const FeeHeadData = useFeeHeads({})
+
       const navigate = useNavigate()
 
       const createRoute=`/fee_heads/create`
@@ -31,6 +32,11 @@ const DataTable = () => {
         {
           header: "Name",
           accessorKey: "name",
+          size:300,
+        },
+        {
+          header: "Group",
+          accessorKey: "income_group.name",
           size:300,
         },
 

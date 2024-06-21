@@ -2,42 +2,57 @@ import React from 'react'
 
 
 import { useMemo } from 'react';
+import { DateTime } from 'luxon'
 
-import FilterTable from '../../../components/tables/FilterTable';
+import { useNavigate } from 'react-router-dom';
 
-import { useRooms } from '../hooks/quaries';
+import {   useTransportFees } from '../hooks/quaries';
 import Create from './Create';
 import Edit from './Edit';
-
 import Delete from './Delete';
-import Filter from './Filter';
+import TransportFeeTable from './TransportFeeTable';
+import moment from 'moment';
+
+
 
 const initialValues = {
-  name: '',
-  code: '',
+  fee_no: '',
+  fee_date: new Date(),
+  academic_session_id: moment(new Date()).format('YYYY'),
   campus_id: 1,
-  floor_id: 1,
-  building_id: 1,
-  is_available:true,
-  capacity:0,
-  room_type:'class_room'
-
+  user_id: null,
+  total_amount: 0,
+  paid_amount: 0,
+  balance_amount: 0,
+  payment_mode: 'CASH'
 }
+const currentDate = moment(new Date()).format('YYYY-MM-DD');
+ const firstDayOfYear = moment(new Date(new Date().getFullYear(), 0, 1)).format('YYYY-MM-DD'); // January 1st of the current year
+
 const initialFilterValues = {
   campus_id: initialValues.campus_id,
-  floor_id: initialValues.floor_id,
-  building_id: initialValues.building_id,
-}
-
+  academic_session_id: initialValues.academic_session_id,
+  from: firstDayOfYear, // 'YYYY-MM-DD' format for first day of the year
+  to: currentDate  // 'YYYY-MM-DD' format for current date
+};
+// const initialFilterValues = {
+//   campus_id: initialValues.campus_id,
+//   academic_session_id: initialValues.academic_session_id,
+//    from:new Date().toISOString().split('T')[0],
+//    to:new Date().toISOString().split('T')[0]
+// }
+// console.log(initialFilterValues)
 const DataTable = () => {
 
-  const RoomData = useRooms(initialValues)
+  // const formattedDate = new Date().toString('yyyy-MM-dd');
 
+  // console.log('Date',formattedDate);
+  const TransportFeeData = useTransportFees(initialFilterValues)
+  const navigate = useNavigate()
 
-  const mData = RoomData.data?.data ?? [];
-
+  const mData = TransportFeeData.data?.data ?? [];
   const data = useMemo(() => [...mData], [mData]);
-
+// console.log(data);
   /** @type {import('@tanstack/react-table').ColumnDef<any>} */
   const columns = [
     {
@@ -48,31 +63,49 @@ const DataTable = () => {
 
     },
     {
-      header: 'Name',
-      accessorKey: 'name',
+      header: "Fee No",
+      accessorKey: "fee_no",
+
     },
     {
-      header: 'Code',
-      accessorKey: 'code',
+      header: "Traveler",
+      accessorKey: "user.name",
+
     },
     {
-      header: 'Campus',
-      accessorKey: 'campus.name',
+      header: "Date",
+      accessorKey: "fee_date",
+      cell: info =>
+        DateTime.fromISO(info.getValue()).toLocaleString(DateTime.DATE_MED),
+
     },
     {
-      header: 'Capacity',
-      accessorKey: 'capacity',
+      header: "Campus",
+      accessorKey: "campus.name",
     },
+
+    {
+      header: "Session",
+      accessorKey: "academic_session.session",
+
+    },
+
+    {
+      header: "Amount",
+      accessorKey: "total_amount",
+
+    },
+
     {
       header: 'Action',
       accessorKey: 'action',
       align: 'center',
       cell: ({ row }) => {
-
         return (
           <div className="flex justify-start md:justify-center  items-center gap-2">
-           <Edit initialValues={row.original} />
-           <Delete initialValues={row.original} />
+            {/* <Print initialValues={row.original} /> */}
+            <Edit initialValues={row.original} />
+            <Delete initialValues={row.original} />
 
           </div>
         )
@@ -80,16 +113,20 @@ const DataTable = () => {
     }
 
   ]
-
+  // return <div>Hello</div>
   return (
-    <FilterTable
-      data={data} columns={columns}
+
+
+    <TransportFeeTable
+      data={data}
+      columns={columns}
       createForm={<Create modal={true} />}
-      createFormTitle="Create Room"
-      filter={
-        <Filter RoomData={RoomData} initialFilterValues={initialFilterValues} />
-      }
+      createFormTitle={'TransportFee No: [new]'}
+      TransportFeeData={TransportFeeData}
+      initialFilterValues={initialFilterValues}
+
     />
+
   )
 }
 

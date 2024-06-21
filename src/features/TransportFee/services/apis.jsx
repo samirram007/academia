@@ -2,16 +2,20 @@ import axiosClient from "../../../utils/axios-client";
 import { removeEmptyStrings } from "../../../utils/removeEmptyStrings";
 
 
-export function fetchRoomService(id) {
+export function fetchTransportFeeService(id) {
 
-    return axiosClient.get(`/rooms/${id}`)
+    return axiosClient.get(`/transport_fees/${id}`)
         .then(({ data }) => {
             return data;
         })
 }
-export function fetchRoomsService(payload) {
-    return axiosClient.get(`/rooms?floor_id=${payload.floor_id}`)
+export function fetchTransportFeesService(payload) {
+    const filterString=`academic_session_id=${payload.academic_session_id}&from=${payload.from}&to=${payload.to}`
+console.log(filterString);
+
+    return axiosClient.get(`/transport_fees?${filterString}`)
         .then(response => {
+            console.log(response)
             return response.data;
         })
         .catch(err => {
@@ -20,27 +24,27 @@ export function fetchRoomsService(payload) {
 
 }
 
-export function storeRoomService(payload) {
+export function storeTransportFeeService(payload) {
 
-    return axiosClient.post("/rooms", removeEmptyStrings(payload))
+    return axiosClient.post("/transport_fees", removeEmptyStrings(payload))
         .then(response => {
             return response.data;
         })
 
 }
-export function updateRoomService(payload) {
+export function updateTransportFeeService(payload) {
 
     const { id, ...data } = payload
-    return axiosClient.put(`/rooms/${id}`, removeEmptyStrings(data))
+    return axiosClient.put(`/transport_fees/${id}`, removeEmptyStrings(data))
         .then(response => {
             return response.data;
         })
 
 }
-export function deleteRoomService(payload) {
+export function deleteTransportFeeService(payload) {
 
     const { id, ...data } = payload
-    return axiosClient.delete(`/rooms/${id}`)
+    return axiosClient.delete(`/transport_fees/${id}`)
         .then(response => {
             return response.data;
         })

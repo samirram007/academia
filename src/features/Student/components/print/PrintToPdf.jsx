@@ -13,7 +13,7 @@ import { useFeeTemplates } from '../../../FeeTemplate/hooks/quaries';
 import { MonthPanel } from '../profile/FeeProcess';
 
 
-const apiDomain=import.meta.env.VITE_API_BASE_URL
+const apiDomain = import.meta.env.VITE_API_BASE_URL
 const defaultFeeData = {
   fee_no: 'NEW',
   fee_date: new Date(),
@@ -212,23 +212,23 @@ export const SelectedPanelPrintMode = ({ selectedTemplate, isMount, setIsMount, 
       </div>
 
       <div ref={componentRef} className='relative overflow-y-auto text-slate-950
-       bg-white mx-auto rounded-md shadow-lg w-[750px]    h-svh max-h-[calc(100% - 200px)] p-4'>
+       bg-white mx-auto rounded-md shadow-lg w-[750px]      max-h-[calc(100% - 180px)] p-4'>
         <div className='relative border-2 border-slate-900 mt-2 min-h-[400px]  '>
           <div className=' grid grid-cols-10 px-2 py-1'>
             <div className={' col-span-2 '}>No. {feeData.fee_no}</div>
             <div className={' col-span-6 '}></div>
             <div className={' col-span-2 text-right '}>
               Date: {DateTime.fromISO(feeData.fee_date).toLocaleString(DateTime.DATE_MED)}
-              </div>
+            </div>
           </div>
           <div className='schoolHead grid grid-cols-10 p-2'>
             {/* {JSON.stringify(feeData.campus.school.logo_image)} */}
             <div className={' col-span-1 '}>
               {feeData.campus.school.logo_image ?
-              <img src={feeData.campus.school.logo_image.path.includes(apiDomain)
-                ?feeData.campus.school.logo_image.path
-              : (apiDomain+feeData.campus.school.logo_image.path)} alt="" />
-               :
+                <img src={feeData.campus.school.logo_image.path.includes(apiDomain)
+                  ? feeData.campus.school.logo_image.path
+                  : (apiDomain + feeData.campus.school.logo_image.path)} alt="" />
+                :
                 <img src={`${apiDomain}/storage/documents/logo.png`} style={{ width: '80px', height: '80px' }} alt="" />
               }
             </div>
@@ -275,10 +275,10 @@ export const SelectedPanelPrintMode = ({ selectedTemplate, isMount, setIsMount, 
             </div>
           </div>
 
-          <div className='w-full py-1 pl-4 text-[10px]'>
+          <div className='w-full py-1 pl-4 text-[10px] -mt-2'>
             (in words) : Rupees. {convertNumberToWords(Number(Number(total).toFixed(2)))}
           </div>
-          <div className='absolute bottom-0 pl-2 text-[8px]'>Print Time: {moment(new Date()).format('DD-MMM-YYYY hh:mm a')}</div>
+          <div className='absolute bottom-0 right-0 pr-2 text-[8px]'>Print Time: {moment(new Date()).format('DD-MMM-YYYY hh:mm a')}</div>
         </div>
 
       </div>
@@ -320,28 +320,27 @@ export const FeeEntryRowPrint = ({ feeTemplateItem, index, setChanges, selectedS
   return (
     <>
 
-      <div className={` grid grid-cols-12  items-center gap-2    `}>
+      <div className={` grid grid-cols-12  items-center gap-2 text-xs    `}>
 
         <div className='col-span-10 flex flex-row items-center gap-2 pl-4'>
           <div className='py-1'>
             <div className='flex flex-row flex-nowrap items-end '>
               {feeTemplateItem.fee_head.name}
-              {/* {JSON.stringify(feeTemplateItem.fee_item_months)} */}
               <div className='flex flex-row gap-2 ml-2'>
-              {feeTemplateItem.keep_periodic_details ?
+                {feeTemplateItem.keep_periodic_details ?
 
-                feeTemplateItem.fee_item_months &&
-                feeTemplateItem.fee_item_months.length > 0 &&
-                feeTemplateItem.fee_item_months.map((x, index) => (
-                  (<div className='
+                  feeTemplateItem.fee_item_months &&
+                  feeTemplateItem.fee_item_months.length > 0 &&
+                  feeTemplateItem.fee_item_months.map((x, index) => (
+                    (<div key={index} className='
                     border-2 border-slate-400
                    text-slate-800 text-xs font-bold mb-[1px] px-2 rounded-md'>
-                    {x.month?.short_name}
+                      {x.month?.short_name}
                     </div>)
-                ))
+                  ))
 
-                : ''}
-                </div>
+                  : ''}
+              </div>
             </div>
 
           </div>

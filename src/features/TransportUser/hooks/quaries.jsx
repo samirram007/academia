@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { fetchTransportUserService, fetchTransportUsersService, fetchUserSearchService } from "../services/apis"
+import { fetchTransportUserSearchService, fetchTransportUserService, fetchTransportUsersService, fetchUserSearchService } from "../services/apis"
 
 export function useTransportUsers(payload) {
 
@@ -9,6 +9,14 @@ export function useTransportUsers(payload) {
       staleTime:1000,
     })
   }
+  export function useTransportUserSearch(payload) {
+
+    return useQuery({
+    queryKey: ['search_transport_users',{searchText:payload.searchText}],
+    queryFn:()=>fetchTransportUserSearchService(payload),
+    staleTime:1000,
+  })
+}
 export function useUserSearch(payload) {
 // console.log(payload)
       return useQuery({

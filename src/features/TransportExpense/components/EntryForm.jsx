@@ -1,8 +1,10 @@
 import { useFormik } from 'formik'
 import React, { useEffect, useRef, useState } from 'react'
 import * as Yup from "yup";
-import { useDeleteTransportExpenseMutation, useStoreTransportExpenseMutation,
-     useUpdateTransportExpenseMutation } from '../hooks/mutations';
+import {
+    useDeleteTransportExpenseMutation, useStoreTransportExpenseMutation,
+    useUpdateTransportExpenseMutation
+} from '../hooks/mutations';
 import { CampusSelect } from '../../Common/components/CampusSelect';
 import { AcademicSessionSelect } from '../../Common/components/AcademicSessionSelect';
 import { AcademicClassSelect } from '../../Common/components/AcademicClassSelect';
@@ -37,7 +39,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
         enableReinitialize: true,
         onSubmit: values => {
             const total_amount = values.transport_expense_items
-            .reduce((x, i) => x + parseFloat(i.total_amount), 0)
+                .reduce((x, i) => x + parseFloat(i.total_amount), 0)
             if (total_amount == 0) {
                 toast.info(<HTMLContent htmlString={'Please add some item'} />, { transition: Flip })
                 return
@@ -50,66 +52,72 @@ const EntryForm = ({ initialValues, entryMode }) => {
     })
 
     return (
-        <div className='w-100 mx-auto'>
-            <form onSubmit={formik.handleSubmit}>
-                <div className='grid grid-cols-1  '>
-                    <div className='grid grid-flow-row md:grid-flow-col grid-cols-6 gap-5'>
-                        <div className='grid gap-4 col-span-6   pb-2 px-4 mb-2 '>
-                            <div className='grid gap-4 grid-cols-12   mb-2'>
-                                {/* <div className='col-span-1 text-md font-bold'>Filter</div> */}
-                                <div className='col-span-6 md:col-span-3 '>
-                                    <CampusSelect formik={formik} />
+            <div className='pb-10  '>
+        <div className='relative h-[91vh] w-full'>
+                <div className='flex flex-row justify-center -mt-4'>
+                    <div className='badge badge-success'>Transport Expenses</div>
+                </div>
+                <form onSubmit={formik.handleSubmit}>
+                    <div className='grid grid-cols-1  '>
+                        <div className='grid grid-flow-row
+                    md:grid-flow-col grid-cols-6 gap-5'>
+                            <div className='grid gap-4 col-span-6   pb-2 px-4 mb-2 '>
+                                <div className='grid gap-4 grid-cols-12   mb-2'>
+                                    <div className='col-span-6 md:col-span-3 '>
+                                        <CampusSelect formik={formik} />
+
+
+                                    </div>
+                                    <div className='col-span-6  md:col-span-2 '>
+
+                                        <AcademicSessionSelect formik={formik} is_current={true} />
+
+                                    </div>
+                                    <div className=' md:col-span-5 '></div>
+                                    <div className='col-span-6  md:col-span-2 flex flex-col justify-end items-center '>
+
+                                        <FormikInputBox formik={formik} type={"date"} extClass={'align-self-right'} name="expense_date" label="Date" />
+
+
+                                    </div>
 
 
                                 </div>
-                                <div className='col-span-6  md:col-span-2 '>
-
-                                    <AcademicSessionSelect formik={formik}   />
-
-                                </div>
-                                <div className=' md:col-span-5 '></div>
-                                <div className='col-span-6  md:col-span-2 flex flex-col justify-end items-center '>
-
-                                    <FormikInputBox formik={formik} type={"date"} extClass={'align-self-right'} name="expense_date" label="Date" />
-
-
-                                </div>
-
 
                             </div>
-
                         </div>
-                    </div>
-                    <div className='flex flex-row justify-center'>
-                        <div className='badge badge-success'>Transport Expenses</div>
-                    </div>
-                    <div className='grid grid-cols-6 gap-5 border-b-2   border-blue-300/30 pb-2 px-4 mb-2'>
-                        <div className='col-span-4'>Particulars</div>
-                        <div className='text-right'>Amount</div>
-                        <div className='text-center'>Action</div>
-                    </div>
-                    <TransportExpenseItemNew formik={formik} changes={changes} setChanges={setChanges} />
 
-                    <TransportExpenseItems formik={formik} changes={changes} setChanges={setChanges} />
+                        <div className='grid grid-cols-6 gap-5 border-b-2   border-blue-300/30 pb-2 px-4 mb-2'>
+                            <div className='col-span-4'>Particulars</div>
+                            <div className='text-right'>Amount</div>
+                            <div className='text-center'>Action</div>
+                        </div>
+                        <TransportExpenseItemNew formik={formik} changes={changes} setChanges={setChanges} />
 
-                </div>
-                <div className='mx-auto flex flex-col justify-center items-center border-t-2 border-blue-300/10 mt-2 pt-6'>
-                    <div className='flex gap-2 items-center text-red-600'>
+                        <TransportExpenseItems formik={formik} changes={changes} setChanges={setChanges} />
 
-                        {entryMode === 'delete' && "Are your sure you want to delete this entry?"}
                     </div>
-                    <button type="submit" className='btn btn-primary btn-wide'>
-                        {entryMode === 'delete' ? 'Delete' : 'Confirm'}
-                        {formik.isSubmitting && (
-                            <span
-                                className='spinner-border spinner-border-sm ms-2'
-                                role='status'
-                                aria-hidden='true'
-                            ></span>
-                        )}
-                    </button>
-                </div>
-            </form>
+                    <div className='absolute bottom-0  w-full
+bg-blue-400/5
+mx-auto flex flex-col justify-center items-center border-t-2
+ border-blue-300/10 mt-2 py-3'>
+                        <div className='flex gap-2 items-center text-red-600'>
+
+                            {entryMode === 'delete' && "Are your sure you want to delete this entry?"}
+                        </div>
+                        <button type="submit" className='btn btn-primary btn-wide'>
+                            {entryMode === 'delete' ? 'Delete' : 'Confirm'}
+                            {formik.isSubmitting && (
+                                <span
+                                    className='spinner-border spinner-border-sm ms-2'
+                                    role='status'
+                                    aria-hidden='true'
+                                ></span>
+                            )}
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }
@@ -158,7 +166,7 @@ const HTMLContent = ({ htmlString }) => (
 export const TransportExpenseItemNew = ({ formik, changes, setChanges }) => {
     const totalAmountRef = useRef()
     const expenseHeadRef = useRef()
-    const ExpenseHeadData = useExpenseHeads();
+    const ExpenseHeadData = useExpenseHeads({expense_group_id:[5]});
     if (ExpenseHeadData.isLoading) return <LuLoader />;
     // const initData={...formik.initialValues.transport_expense_items[0], expense_head_id: '', amount: ''}
 
@@ -166,7 +174,7 @@ export const TransportExpenseItemNew = ({ formik, changes, setChanges }) => {
 
     const addTransportExpense = () => {
         const existingHead = formik.values.transport_expense_items
-        .find(x => x.expense_head_id == expenseHeadRef.current.value)
+            .find(x => x.expense_head_id == expenseHeadRef.current.value)
 
         let errorString = ""
         if (existingHead) {

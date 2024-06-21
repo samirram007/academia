@@ -7,12 +7,13 @@ import { DateTime } from 'luxon'
 import { useNavigate } from 'react-router-dom';
 import { useStudents } from '../hooks/queries';
 import Filter from './Filter';
+import moment from 'moment';
 
 
 
 const initialValues = {
-  academic_session_id: 1,
-  academic_class_id: 1,
+  academic_session_id: moment(new Date()).format('YYYY'),
+  academic_class_id: 10399,
   campus_id: 1,
   name: '',
   is_active: false
@@ -21,7 +22,7 @@ const initialFilterValues = {
   campus_id: initialValues.campus_id,
   academic_class_id: initialValues.academic_class_id,
   academic_session_id: initialValues.academic_session_id,
-  filter_option:'active'
+  filter_option: 'active'
 }
 
 const DataTable = () => {
@@ -46,17 +47,45 @@ const DataTable = () => {
       header: "Name",
       accessorKey: "name",
       size: 300,
+      cell: ({ row }) => {
+        const thisRow = row.original.student_sessions
+          .find(x => x.academic_session_id == initialFilterValues.academic_session_id)
+        return (
+          <>
+          <div className='text-blue-200 font-bold text-md'>{row.original.name}</div>
+          { thisRow &&
+          <div className='flex flex-row gap-2  text-[8px]'>
+            <span>
+              <span className='text-blue-400 font-bold'>{thisRow.academic_class.name}</span>
+            </span>
+            <span>
+              Section:
+              <span className='text-red-400 font-bold'>{thisRow.section.name}</span>
+            </span>
+            <span>
+              Roll:
+              <span className='text-green-400 font-bold'>{thisRow.roll_no}</span>
+            </span>
+
+          </div>}
+          </>
+
+
+        )
+      }
     },
     {
       header: "Type",
       accessorKey: "user_type",
       size: 300,
+      visible: false
     },
     {
       header: "Email",
       accessorKey: "email",
       size: 200,
     },
+
     {
       header: 'DOB',
       accessorKey: 'dob',
@@ -79,10 +108,10 @@ const DataTable = () => {
               className="btn btn-outline btn-primary btn-sm btn-rounded ">
               Edit
             </button>
-            <button onClick={() => { deleteUserData(row.original.id) }}
+            {/* <button onClick={() => { deleteUserData(row.original.id) }}
               className="btn btn-outline btn-primary btn-sm btn-rounded  ">
               Delete
-            </button>
+            </button> */}
           </div>
         )
       }
@@ -95,12 +124,13 @@ const DataTable = () => {
   }
   return (
     <FilterTable data={data} columns={columns}
+
       createRoute={createRoute}
       filter={
         <Filter fetchedData={fetchedData}
           initialFilterValues={initialFilterValues} />
       }
-       />
+    />
   )
 }
 

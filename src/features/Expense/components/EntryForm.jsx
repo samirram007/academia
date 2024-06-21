@@ -62,7 +62,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
                                 </div>
                                 <div className='col-span-6  md:col-span-2 '>
 
-                                    <AcademicSessionSelect formik={formik}   />
+                                    <AcademicSessionSelect formik={formik} is_current={true}   />
 
                                 </div>
                                 <div className=' md:col-span-5 '></div>
@@ -156,7 +156,7 @@ const HTMLContent = ({ htmlString }) => (
 export const ExpenseItemNew = ({ formik, changes, setChanges }) => {
     const totalAmountRef = useRef()
     const expenseHeadRef = useRef()
-    const ExpenseHeadData = useExpenseHeads();
+    const ExpenseHeadData = useExpenseHeads({expense_group_id:[4]});
     if (ExpenseHeadData.isLoading) return <LuLoader />;
     // const initData={...formik.initialValues.expense_items[0], expense_head_id: '', amount: ''}
 

@@ -1,13 +1,16 @@
 import { useQuery } from "@tanstack/react-query"
  import { fetchStudentById, fetchStudents } from "../services/apis"
+import { useCallback } from "react"
 
 
  export function useStudents(payload) {
-  // console.log(payload)
+
   return useQuery({
     queryKey: ['students',payload],
     queryFn: ()=>fetchStudents(payload),
-    staleTime: Infinity
+    enabled:!!payload,
+    staleTime: Infinity,
+
   })
 }
  export function useStudent(id) {

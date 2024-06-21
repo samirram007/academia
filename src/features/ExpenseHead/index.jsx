@@ -1,1 +1,2 @@
-export {ExpenseHeads,CreateExpenseHead, EditExpenseHead} from './components';
+export { ExpenseHeads,CreateExpenseHead, EditExpenseHead} from './components';
+

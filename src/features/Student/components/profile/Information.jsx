@@ -2,7 +2,10 @@ import React, { lazy, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { useStudent } from '../../hooks/queries';
 import { useAcademicSessions } from '../../../AcademicSession/hooks/quaries';
-const ProfileHeader=lazy(() => import('./ProfileHeader'));
+
+// import ProfileHeader from './ProfileHeader';
+import TestProfileHeader from './TestProfileHeader';
+ const ProfileHeader=lazy(() => import('./ProfileHeader'));
 const Breadcrumbs=lazy(() => import('../../../../components/Breadcrumbs'));
 
 
@@ -70,24 +73,36 @@ const Information = () => {
         </div>
     </div>
 
-    <AcademicSessionsCall data={initialValues}  />
-
+    <TestAcademicSessionsCall data={initialValues}  />
+    {/* <AcademicSessionsCall data={initialValues}  /> */}
+    {/* <div>Hello</div> */}
 
 
 </div>
   )
 }
-export const AcademicSessionsCall=({data})=>{
-  const  fetchedData  = useAcademicSessions({ campus_id: data.campus_id })
-    const mData = fetchedData.data?.data ?? [];
-   const fetchedAcademicSessions = useMemo(() => [...mData], [mData]);
-  if (fetchedData.isFetching) return <div>Loading..</div>
-  console.log('data',data)
+export const TestAcademicSessionsCall=({data})=>{
+  const  fetchedData  = useAcademicSessions({})
+  const mData = fetchedData.data?.data ?? [];
+  const fetchedAcademicSessions = useMemo(() => [...mData], [mData]);
+  if (fetchedData.isLoading) return <div>Loading..</div>
   return(
-
-
     <ProfileHeader data={data} fetchedAcademicSessions={fetchedAcademicSessions}/>
-
+    // <TestProfileHeader data={data} fetchedAcademicSessions={fetchedAcademicSessions}/>
+    // <div>OK</div>
+  )
+  return <div>Hello 2{JSON.stringify(data)}</div>
+}
+// export const TestProfileHeader=({data,fetchedAcademicSessions})=>{
+//   return <div>Hello3{JSON.stringify(fetchedAcademicSessions)}</div>
+// }
+export const AcademicSessionsCall=({data})=>{
+  const  fetchedData  = useAcademicSessions({})
+  const mData = fetchedData.data?.data ?? [];
+  const fetchedAcademicSessions = useMemo(() => [...mData], [mData]);
+  if (fetchedData.isFetching) return <div>Loading..</div>
+  return(
+    <ProfileHeader data={data} fetchedAcademicSessions={fetchedAcademicSessions}/>
   )
 }
 export default Information

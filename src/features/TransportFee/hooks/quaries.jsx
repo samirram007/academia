@@ -1,18 +1,18 @@
 import { useQuery } from "@tanstack/react-query"
-import { fetchRoomService, fetchRoomsService } from "../services/apis"
+import { fetchTransportFeeService, fetchTransportFeesService } from "../services/apis"
 
-export function useRooms(payload) {
+export function useTransportFees(payload) {
 
       return useQuery({
-      queryKey: ['rooms',{floor_id:payload.floor_id}],
-      queryFn:()=>fetchRoomsService(payload),
+      queryKey: ['transport_fees',{academic_session_id:payload.academic_session_id}],
+      queryFn:()=>fetchTransportFeesService(payload),
       staleTime:1000,
     })
   }
-  export function useRoom(id) {
+  export function useTransportFee(id) {
     return useQuery({
-      queryKey: ['rooms',id],
-      queryFn: ()=>fetchRoomService(id),
+      queryKey: ['transport_fees',id],
+      queryFn: ()=>fetchTransportFeeService(id),
     })
   }
 

@@ -14,11 +14,11 @@ import Edit from './Edit';
 import Delete from './Delete';
 import FeeTemplateItem from '../../FeeTemplateItem/components/FeeTemplateItem';
 import Clone from './Clone';
+import moment from 'moment';
 
 
 const initialValues = {
-  academic_session_id: 1,
-  academic_class_id: 1,
+  academic_class_id: 10399,
   campus_id: 1,
   name:'',
   is_active:false
@@ -26,7 +26,7 @@ const initialValues = {
 const initialFilterValues = {
   campus_id: initialValues.campus_id,
   academic_class_id:initialValues.academic_class_id,
-  academic_session_id:initialValues.academic_session_id,
+  is_active:false
 }
 const DataTable = () => {
 
@@ -35,7 +35,6 @@ const DataTable = () => {
 
   const mData = FeeTemplateData.data?.data ?? [];
   const data = useMemo(() => [...mData], [mData]);
-
   /** @type {import('@tanstack/react-table').ColumnDef<any>} */
   const columns = [
     {
@@ -48,6 +47,18 @@ const DataTable = () => {
     {
       header: "Name",
       accessorKey: "name",
+      cell: ({row})=>{
+
+        return <>
+        <p title={row.original.is_active ?'active':'de-active'}
+        className={`text-sm font-semibold
+          ${row.original.is_active ? 'text-blue-500':'text-red-500'}
+          `}>{row.getValue('name')} </p>
+          <div className='text-xs text-violet-400 font-semibold'>Use Count : {row.original.fees_count}</div>
+        </>
+      }
+
+
 
     },
     {
@@ -56,11 +67,6 @@ const DataTable = () => {
 
     },
 
-    {
-      header: "Session",
-      accessorKey: "academic_session.session",
-
-    },
     {
       header: "Class",
       accessorKey: "academic_class.name",
@@ -77,7 +83,7 @@ const DataTable = () => {
           <FeeTemplateItem  initialValues={row.original} />
           <Clone  initialValues={row.original} />
           <Edit  initialValues={row.original} />
-          <Delete initialValues={row.original} />
+          {/* <Delete initialValues={row.original} /> */}
 
          </div>
         )

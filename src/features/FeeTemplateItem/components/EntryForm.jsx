@@ -59,7 +59,7 @@ const EntryForm = ({ initialValues, entryMode, setEntryId }) => {
                                     <FormikInputBox formik={formik} type={'number'} name="sort_index" label="SL NO" />
                                 </div>
                                 <div className='col-span-12 md:col-span-3 '>
-                                    <FeeHeadSelect formik={formik} auto={false} />
+                                    <FeeHeadSelect formik={formik} auto={false} income_group_ids={[1,2]} />
                                 </div>
                                 <div className='col-span-12  md:col-span-3 '>
                                     <FormikInputBox formik={formik} name="name" label="Printable Name" />

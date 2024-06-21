@@ -103,28 +103,20 @@ export default function PromotionTable({ data, columns, pageSize = 100, createRo
 
 
                         }
-                        {
+                        {/* {
                             createForm &&
                             <button onClick={() => setOpen(true)} title='Create new'
                                 className="btn btn-primary btn-sm text-xl
                             btn-rounded-symbol border-blue-300/10"><IoMdAdd /></button>
-                        }
-                        {
+                        } */}
+                        {/* {
                             isOpen &&
                             <>
-
-
                                 <FormikFormModal label={createFormTitle ?? 'Create new'}>
                                     {createForm}
                                 </FormikFormModal>
-
-
-
                             </>
-
-
-                        }
-
+                        } */}
                     </div>
 
                 </div>
@@ -133,10 +125,10 @@ export default function PromotionTable({ data, columns, pageSize = 100, createRo
                 <Filter PromotionData={PromotionData} initialFilterValues={initialFilterValues} />
                 {
                     <Promote PromotionData={data} table={table} initialFilterValues={{ ...initialFilterValues }} />
-                // table.getSelectedRowModel().flatRows.length ?
-                //      <Promote PromotionData={data} table={table} />:''
-                //
-            }
+                    // table.getSelectedRowModel().flatRows.length ?
+                    //      <Promote PromotionData={data} table={table} />:''
+                    //
+                }
             </div>
             {/* <div>
 

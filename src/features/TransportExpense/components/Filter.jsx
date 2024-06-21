@@ -56,15 +56,16 @@ const [isLoading, setIsLoading] = useState(false)
                         <div className='grid gap-4 col-span-6 border-b-2   border-blue-300/30 pb-2 px-4 mb-2 '>
                             <div className='grid gap-4 grid-cols-12   mb-2'>
                                 {/* <div className='col-span-1 text-md font-bold'>Filter</div> */}
+                                <div className='col-span-2 '>
+
+                                    <AcademicSessionSelect formik={formik} is_current={true} label={'Session'} />
+
+                                </div>
                                 <div className='col-span-3 '>
                                 <CampusSelect formik={formik} auto={false} isLoading={isLoading} setIsLoading={setIsLoading}/>
 
                                 </div>
-                                {/* <div className='col-span-2 hidden'>
 
-                                    <AcademicSessionSelect formik={formik} />
-
-                                </div> */}
                                 <div className='col-span-3 '>
 
                                     <FormikInputBox type={'date'} formik={formik} name={'from'} label={'From'}/>

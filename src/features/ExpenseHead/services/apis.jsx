@@ -37,7 +37,7 @@ export function storeExpenseHead(payload) {
 }
 export function updateExpenseHead(payload) {
       const {id,...data} = payload;
-    return axiosClient.put(`/expense_heads/${id}`, removeEmptyStrings(data))
+    return axiosClient.put(`/expense_heads/${id}`, removeEmptyStrings(payload))
     .then(response => {
         return response.data;
     })

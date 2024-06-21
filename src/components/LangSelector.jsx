@@ -13,7 +13,7 @@ export default function LangSelector() {
     useEffect(() => {
         localStorage.setItem('language', lang)
         i18next.changeLanguage(lang)
-        console.clear()
+        // console.clear()
     }, [lang])
 
     const subMenuAnimate = {

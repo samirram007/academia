@@ -9,7 +9,7 @@ import moment from 'moment';
   const editData = {
     expense_no:'new',
     expense_date:    moment(new Date()).format('YYYY-MM-DD'),
-    academic_session_id: 1,
+    academic_session_id: moment(new Date()).format('YYYY'),
     campus_id: 1,
     user_id: null,
     total_amount: 0,
@@ -36,7 +36,7 @@ import moment from 'moment';
 
 
   return (
-      <div className='pb-10 w-full'>
+      <div className=' '>
           {
               !modal &&
 

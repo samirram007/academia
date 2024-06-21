@@ -23,7 +23,7 @@ const initialValues = {
 
 const DataTable = () => {
 
-  const fetchedData = useAcademicSessions()
+  const fetchedData = useAcademicSessions({is_current:false})
 
   const mData = fetchedData.data?.data ?? [];
 

@@ -10,6 +10,7 @@ import { AcademicSessionSelect } from '../../Common/components/AcademicSessionSe
 import { AcademicClassSelect } from '../../Common/components/AcademicClassSelect';
 import { StudentFilterSelect } from '../../Common/components/StudentFilterSelect';
 import { queryClient } from '../../../utils/queryClient';
+import { CampusAcademicClassSelect } from '../../Common/components/CampusAcademicClassSelect';
 
 
 const validationSchema = Yup.object().shape({
@@ -34,13 +35,12 @@ const Filter = ({ fetchedData, initialFilterValues }) => {
         enableReinitialize: true,
         onSubmit: (values, { setSubmitting }) => {
             Object.assign(initialFilterValues, values);
-           // setSubmitting(false)
-             fetchedData.refetch()
-                  setTimeout(() => {
-                    setSubmitting(false)
-                }, 200);
+            console.log('ib', initialFilterValues);
             // setSubmitting(false)
-          //  queryClient.invalidateQueries({ queryKey: ['students'] })
+            fetchedData.refetch()
+            setSubmitting(false)
+            // setSubmitting(false)
+            //  queryClient.invalidateQueries({ queryKey: ['students'] })
             // if (fetchedData.isFetched) {
             //     setTimeout(() => {
             //         setSubmitting(false)
@@ -71,20 +71,24 @@ const Filter = ({ fetchedData, initialFilterValues }) => {
 
                                 </div>
                                 <div className='col-span-2 '>
-                                    <CampusSelect formik={formik} auto={false} isLoading={isLoading} setIsLoading={setIsLoading} />
+
+                                    <AcademicSessionSelect formik={formik} />
 
                                 </div>
-                                <div className='col-span-2 '>
-
-                                    <AcademicSessionSelect formik={formik}   />
+                                {/* <div className='col-span-2 '>
+                                    <CampusSelect formik={formik} auto={false} isLoading={isLoading} setIsLoading={setIsLoading} />
 
                                 </div>
                                 <div className='col-span-2 '>
 
                                     <AcademicClassSelect formik={formik} campus_id={formik.values.campus_id} />
 
+                                </div> */}
+                                <div className='col-span-2 '>
 
-                                </div>
+<CampusAcademicClassSelect formik={formik} name='academic_class_id' label={'Class'} />
+
+</div>
 
 
                                 {formik.values &&

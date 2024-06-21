@@ -1,9 +1,10 @@
 import { lazy } from 'react';
 
-const ExpenseHeads =  lazy(() => import('./DataList'));
-const CreateExpenseHead =  lazy(() => import('./Create'));
-const EditExpenseHead =  lazy(() => import('./Edit'));
 
-export {ExpenseHeads,CreateExpenseHead, EditExpenseHead};
+export const ExpenseHeads =  lazy(() => import('./DataList'));
+export const CreateExpenseHead =  lazy(() => import('./Create'));
+export const EditExpenseHead =  lazy(() => import('./Edit'));
+
+
 
 

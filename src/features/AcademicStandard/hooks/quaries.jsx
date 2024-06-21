@@ -6,7 +6,7 @@ export function useAcademicStandards() {
       return useQuery({
       queryKey: ['academic_standards'],
       queryFn:fetchAcademicStandardsService,
-      staleTime:1000,
+      staleTime:Infinity,
     })
   }
   export function useAcademicStandard(id) {

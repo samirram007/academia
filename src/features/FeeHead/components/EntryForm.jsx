@@ -4,6 +4,7 @@ import { useFormik } from 'formik'
 import * as Yup from "yup";
 
 import { useStoreFeeHeadMutation, useUpdateFeeHeadMutation } from '../hooks/mutations';
+import { IncomeGroupSelect } from '../../Common/components/IncomeGroupSelect';
 
 
 const validationSchema = Yup.object().shape({
@@ -46,7 +47,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
 
                                 <FormikInputBox formik={formik} name="name" label="Name" />
 
-
+<IncomeGroupSelect formik={formik} name="income_group_id" label="Income Group"/>
 
                                 <div className='mx-auto flex justify-center items-center border-t-2 border-blue-300/10 mt-2 pt-6'>
                                     <FormikSubmit formik={formik} label="Save" />

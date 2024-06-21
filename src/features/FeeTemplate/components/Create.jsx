@@ -1,13 +1,13 @@
 import { Breadcrumbs } from '@mui/material';
 import React, { useState } from 'react'
 import EntryForm from './EntryForm';
+import moment from 'moment';
 
  const Create = ({ modal }) => {
   const [entryMode, setEntryMode] = useState('create');
 
   const editData = {
-    academic_session_id: 1,
-    academic_class_id: 1,
+    academic_class_id: 10399,
     campus_id: 1,
     name:'',
     is_active:false
@@ -15,8 +15,7 @@ import EntryForm from './EntryForm';
   }
 
   const initialValues = editData ?? {
-    academic_session_id: 1,
-    academic_class_id: 1,
+    academic_class_id: 10399,
     campus_id: 1,
     name:'',
     is_active:false

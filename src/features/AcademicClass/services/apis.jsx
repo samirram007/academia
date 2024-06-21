@@ -8,9 +8,9 @@ export function  fetchAcademicClassService(id){
         return data;
     })
 }
-export function fetchAcademicClassServices(payload) {
+export function fetchAcademicClassServices() {
 
-       return axiosClient.get(`/academic_classes?campus_id=${payload.campus_id}`)
+       return axiosClient.get(`/academic_classes`)
         .then(response => {
             return response.data;
         })

@@ -8,7 +8,7 @@ export const queryClient = new QueryClient({
         retry:2,
         retryDelay: (attempt) => Math.pow(2, attempt)*1000, // exponential backoff
         onError: (e, key, context) => {
-          console.error(`[Query Error]: ${key}`, e);
+         // console.error(`[Query Error]: ${key}`, e);
           if (!context?.pause) {
             toast.error("An error occurred while fetching data");
           }

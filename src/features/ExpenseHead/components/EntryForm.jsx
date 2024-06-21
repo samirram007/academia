@@ -4,6 +4,7 @@ import { useFormik } from 'formik'
 import * as Yup from "yup";
 
 import { useStoreExpenseHeadMutation, useUpdateExpenseHeadMutation } from '../hooks/mutations';
+import { ExpenseGroupSelect } from '../../Common/components/ExpenseGroupSelect';
 
 
 const validationSchema = Yup.object().shape({
@@ -46,7 +47,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
 
                                 <FormikInputBox formik={formik} name="name" label="Name" />
 
-
+                                <ExpenseGroupSelect formik={formik} name="expense_group_id" label="Expense Group"/>
 
                                 <div className='mx-auto flex justify-center items-center border-t-2 border-blue-300/10 mt-2 pt-6'>
                                     <FormikSubmit formik={formik} label="Save" />

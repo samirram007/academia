@@ -6,7 +6,7 @@ export function fetchStudents(payload) {
     // console.log(`/student_sessions?${payload}`)
     payload = removeEmptyStrings(payload)
     //console.log(payload)
-    let filterString = `campus_id=${payload.campus_id}`
+    let filterString = `?`
     if (payload.filter_option) {
         filterString += `&filter_option=${payload.filter_option}`
     }
@@ -17,8 +17,8 @@ export function fetchStudents(payload) {
         filterString += `&academic_class_id=${payload.academic_class_id}`
     }
 
-    console.log(filterString);
-    return (axiosClient.get(`/students?${filterString}`))
+    console.log('fs',filterString);
+    return (axiosClient.get(`/students${filterString}`))
         .then(response => {
 
             return response.data;
@@ -44,11 +44,13 @@ export function storeStudent(payload) {
 }
 export function updateStudent(payload) {
     const { id, ...data } = payload;
+    console.log('student update',data)
     return axiosClient.put(`/students/${id}`, removeEmptyStrings(data))
         .then(response => {
             return response.data;
         })
         .catch(err => {
+            console.log(err);
             throw err;
         });
 }

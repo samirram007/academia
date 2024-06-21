@@ -17,7 +17,7 @@ export  function fetchStudentSessionsFeesByStudentSessionId(payload) {
 
     return (  axiosClient.get(`/fees_by_student_session/${payload.student_session_id}`))
     .then(response => {
-        console.log(response.data);
+
         return response.data;
     })
     .catch(err => {

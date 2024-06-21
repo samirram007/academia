@@ -1,21 +1,21 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { deleteRoomService, storeRoomService, updateRoomService } from "../services/apis";
+import { deleteTransportFeeService, storeTransportFeeService, updateTransportFeeService } from "../services/apis";
 import { queryClient } from "../../../utils/queryClient";
 import { Flip, toast } from "react-toastify";
 import { useFormModal } from "../../../contexts/FormModalProvider";
 
 
-export function useStoreRoomMutation() {
+export function useStoreTransportFeeMutation() {
     const navigate = useNavigate()
     const {setOpen}=useFormModal()
     return useMutation({
-      mutationFn: storeRoomService,
+      mutationFn: storeTransportFeeService,
       onSuccess: (data) => {
 
-       queryClient.invalidateQueries({ queryKey: ['rooms'] })
+       queryClient.invalidateQueries({ queryKey: ['transport_fees'] })
         toast.success(data.message, { transition: Flip });
-       navigate("/rooms", { replace: true })
+       navigate("/transport_fees", { replace: true })
        setOpen(false)
       },
       onError: (error) => {
@@ -26,42 +26,42 @@ export function useStoreRoomMutation() {
       }
     })
   }
-export function useUpdateRoomMutation() {
+export function useUpdateTransportFeeMutation() {
     const navigate = useNavigate()
     const {setOpen}=useFormModal()
     return useMutation({
-      mutationFn: updateRoomService,
+      mutationFn: updateTransportFeeService,
       onSuccess: (data) => {
 
-       queryClient.invalidateQueries({ queryKey: ['rooms'] })
+       queryClient.invalidateQueries({ queryKey: ['transport_fees'] })
         toast.success(data.message, { transition: Flip });
-        navigate("/rooms", { replace: true })
+        navigate("/transport_fees", { replace: true })
         setOpen(false)
       },
       onError: (error) => {
         toast.error(error.response.data.message, { transition: Flip })
-        // navigate("/rooms/create", { replace: true })
+        // navigate("/transport_fees/create", { replace: true })
 
 
       }
     })
   }
-export function useDeleteRoomMutation() {
+export function useDeleteTransportFeeMutation() {
 
     const navigate = useNavigate()
     const {setOpen}=useFormModal()
     return useMutation({
-      mutationFn: deleteRoomService,
+      mutationFn: deleteTransportFeeService,
       onSuccess: (data) => {
 
-       queryClient.invalidateQueries({ queryKey: ['rooms'] })
+       queryClient.invalidateQueries({ queryKey: ['transport_fees'] })
         toast.success(data.message, { transition: Flip });
-        navigate("/rooms", { replace: true })
+        navigate("/transport_fees", { replace: true })
         setOpen(false)
       },
       onError: (error) => {
         toast.error(error.response.data.message, { transition: Flip })
-       // navigate("/rooms/create", { replace: true })
+       // navigate("/transport_fees/create", { replace: true })
 
 
       }

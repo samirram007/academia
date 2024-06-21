@@ -58,7 +58,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
 
 
     return (
-        <div>
+        <div className='p-2'>
             <form onSubmit={formik.handleSubmit}>
                 <div className='grid grid-cols-1  '>
 

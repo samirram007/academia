@@ -1,75 +1,73 @@
-
+import { Breadcrumbs } from '@mui/material';
 import React, { useState } from 'react'
-
-import * as Yup from "yup";
-
-
-import Breadcrumbs from '../../../components/Breadcrumbs';
-
 import EntryForm from './EntryForm';
-const validationSchema = Yup.object().shape({
-    name: Yup.string()
-        .required("Name is required"),
+import moment from 'moment';
 
-})
+ const Create = ({ modal }) => {
+  const [entryMode, setEntryMode] = useState('create');
+const [selectedUser,setSelectedUser]=useState(null)
+  const editData = {
+    fee_no:'new',
+    fee_date:    moment(new Date()).format('YYYY-MM-DD'),
+    academic_session_id: moment(new Date()).format('YYYY'),
+    transport_user_id:null,
+    transport_id:null,
+    student_session_id:null,
+    campus_id: 1,
+    user_id: null,
+    total_amount: 0,
+    paid_amount: 0,
+    balance_amount: 0,
+    payment_mode:'CASH',
+    transport_fee_items:[]
+
+  }
+
+  const initialValues = editData ?? {
+    fee_no:'new',
+    fee_date:     moment(new Date()).format('YYYY-MM-DD'),
+    academic_session_id:  moment(new Date()).format('YYYY'),
+    transport_user_id:null,
+    transport_id:null,
+    student_session_id:null,
+    campus_id: 1,
+    user_id: null,
+    total_amount: 0,
+    paid_amount: 0,
+    balance_amount: 0,
+    payment_mode:'CASH',
+    transport_fee_items:[]
+  }
 
 
 
-const Create = ({ modal }) => {
+  return (
+      <div className='pb-10 w-full'>
+          {
+              !modal &&
+
+              <div className='row  flex flex-col md:flex-row justify-between gap-2 border-b-2 border-blue-300/10 pb-2 mb-2 '>
+                  <div className='flex flex-col gap-2 flex-1 text-3xl'>
+                      {/* {'New FeeHead'} */}
+                      <Breadcrumbs />
+                  </div>
+                  <div className='flex flex-row gap-2 flex-1'>
+
+                  </div>
+                  <div className='flex flex-row gap-2 justify-center flex-1 items-center'>
+
+                  </div>
+              </div>
+          }
+
+          <EntryForm
+          initialValues={initialValues}
+          entryMode={entryMode}
+           />
 
 
-    const [entryMode, setEntryMode] = useState('create');
-
-    const editData = {
-        name: '',
-        code: '',
-        campus_id: 1,
-        floor_id: 1,
-        building_id: 1,
-        is_available: true,
-        capacity: 0,
-        room_type: 'class_room'
-
-    }
-
-    const initialValues = editData ?? {
-        name: '',
-        code: '',
-        campus_id: 1,
-        floor_id: 1,
-        building_id: 1,
-        is_available: true,
-        capacity: 0,
-        room_type: 'class_room'
-    }
-
-
-
-    return (
-        <div className='pb-10'>
-            {
-                !modal &&
-                <div className='row  flex flex-col md:flex-row justify-between gap-2 border-b-2 border-blue-300/10 pb-2 mb-2 '>
-                    <div className='flex flex-col gap-2 flex-1 text-3xl'>
-
-                        <Breadcrumbs />
-                    </div>
-                    <div className='flex flex-row gap-2 flex-1'>
-
-                    </div>
-                    <div className='flex flex-row gap-2 justify-center flex-1 items-center'>
-
-                    </div>
-
-                </div>
-            }
-            <EntryForm
-                initialValues={initialValues}
-                entryMode={entryMode}
-            />
-
-        </div>
-    )
+      </div>
+  )
 }
 
 

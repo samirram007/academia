@@ -1,27 +1,67 @@
 import { useQuery } from "@tanstack/react-query"
 import { fetchAcademicClassByCampusIdService, fetchAcademicClassService, fetchAcademicClassServices } from "../services/apis"
+import { useCallback } from "react";
 
 
-export  function useAcademicClasses(payload) {
+export function useAcademicClasses(payload) {
 
-      return   useQuery  ({
-      queryKey: ['academic_classes',payload],
-      queryFn: ()=> fetchAcademicClassServices(payload),
-      staleTime:1000*60,
-      retry:false,
-      enabled:!!payload.campus_id
-    })
-  }
-  export function useAcademicClass(id) {
-    return useQuery({
-      queryKey: ['academic_classes',id],
-      queryFn: ()=>fetchAcademicClassService(id),
-    })
-  }
+  const filterCallbackFn = useCallback((data) => {
+    // console.log('Data before filtering:', data);
 
-  export function useAcademicClassesByCampusId(campusId) {
-    return useQuery({
-      queryKey: ['academic_classes','campus',campusId],
-      queryFn: ()=>fetchAcademicClassByCampusIdService(campusId),
-    })
-  }
+    return { data: data.data.filter(x => x.campus_id === parseInt(payload.campus_id)) }
+  }, [payload.campus_id]);
+
+  return useQuery({
+    queryKey: ['academic_classes'],
+    queryFn: fetchAcademicClassServices,
+    staleTime: Infinity,
+    enabled: !!payload.campus_id,
+    select: filterCallbackFn,
+    onSuccess: (data) => {
+      console.log('Query success:', data);
+    },
+    onError: (error) => {
+      console.log('Query error:', error);
+    }
+  })
+  // console.log('fetchedData', fetchedData.data);
+
+  // return fetchedData
+}
+export function useCampusAcademicClasses() {
+
+  const filterCallbackFn = useCallback((data) => {
+    // console.log('Data before filtering:', data);
+
+    return { data: data.data}
+  }, []);
+
+  return useQuery({
+    queryKey: ['academic_classes'],
+    queryFn: fetchAcademicClassServices,
+    staleTime: Infinity,
+    select: filterCallbackFn,
+    onSuccess: (data) => {
+      console.log('Query success:', data);
+    },
+    onError: (error) => {
+      console.log('Query error:', error);
+    }
+  })
+  // console.log('fetchedData', fetchedData.data);
+
+  // return fetchedData
+}
+export function useAcademicClass(id) {
+  return useQuery({
+    queryKey: ['academic_classes', id],
+    queryFn: () => fetchAcademicClassService(id),
+  })
+}
+
+export function useAcademicClassesByCampusId(campusId) {
+  return useQuery({
+    queryKey: ['academic_classes', 'campus', campusId],
+    queryFn: () => fetchAcademicClassByCampusIdService(campusId),
+  })
+}

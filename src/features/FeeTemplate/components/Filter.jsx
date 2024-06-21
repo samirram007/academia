@@ -8,6 +8,7 @@ import { CampusSelect } from '../../Common/components/CampusSelect'
 
 import { AcademicSessionSelect } from '../../Common/components/AcademicSessionSelect';
 import { AcademicClassSelect } from '../../Common/components/AcademicClassSelect';
+import Loader from '../../../components/Loader';
 
 
 const validationSchema = Yup.object().shape({
@@ -23,16 +24,20 @@ const validationSchema = Yup.object().shape({
 })
 
 
-const Filter = ({ FeeTemplateData, initialFilterValues }) => {
+const Filter = ({ FeeTemplateData, initialFilterValues: initialValues }) => {
 
-const [isLoading, setIsLoading] = useState(FeeTemplateData.isLoading)
+    const [isLoading, setIsLoading] = useState(FeeTemplateData.isLoading)
     const formik = useFormik({
-        initialValues:initialFilterValues,
+        initialValues,
         validationSchema,
-        enableReinitialize: true,
-        onSubmit: values => {
-            Object.assign(initialFilterValues, values);
+        // enableReinitialize: true,
+        onSubmit: (values, { setSubmitting, isFetching }) => {
+            Object.assign(initialValues, values);
             FeeTemplateData.refetch()
+            if (!isFetching) {
+                setSubmitting(false)
+                setIsLoading(false)
+            }
         }
     })
 
@@ -46,12 +51,7 @@ const [isLoading, setIsLoading] = useState(FeeTemplateData.isLoading)
                             <div className='grid gap-4 grid-cols-12   mb-2'>
                                 {/* <div className='col-span-1 text-md font-bold'>Filter</div> */}
                                 <div className='col-span-3 '>
-                                <CampusSelect formik={formik} auto={true} isLoading={isLoading} setIsLoading={setIsLoading}/>
-
-                                </div>
-                                <div className='col-span-3 '>
-
-                                    <AcademicSessionSelect formik={formik}   />
+                                    <CampusSelect formik={formik} auto={false} isLoading={isLoading} setIsLoading={setIsLoading} />
 
                                 </div>
                                 <div className='col-span-3 '>
@@ -61,10 +61,12 @@ const [isLoading, setIsLoading] = useState(FeeTemplateData.isLoading)
 
                                 </div>
 
+
                                 {formik.values &&
                                     <div className='col-span-2 flex flex-col justify-end '>
-
-                                        <FormikSubmit formik={formik} label={'Filter'} />
+                                        {formik.isSubmitting ? <Loader size={6} /> :
+                                            <FormikSubmit formik={formik} label={'Filter'} />
+                                        }
                                     </div>
                                 }
                             </div>
