@@ -93,7 +93,7 @@ export default function PromotionTable({ data, columns, pageSize = 100, createRo
                             type='text'
                             value={filtering}
                             onChange={e => setFiltering(e.target.value)}
-                            className='rounded-full py-2 px-4 m-0 border-blue-300/10  bg-transparent'
+                            className='rounded-full py-0 text-sm px-4 m-0 border-blue-300/10  bg-transparent'
                             placeholder='Enter our search'
                         />
                         {

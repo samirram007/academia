@@ -1,15 +1,12 @@
-import React, { useState } from 'react'
+import React, { lazy, useState } from 'react'
 import { useGuardianType } from '../../../hooks/queries'
-import { FormikInputBox, FormikSelect } from '../../../components/form-components'
-import { useFormik } from 'formik'
 
 import { AiOutlineEdit } from "react-icons/ai";
 
 import { IoMdAddCircle } from 'react-icons/io'
-import { useStoreStudentGuardianMutation, useUpdateStudentGuardianMutation } from '../hooks/mutations';
-import { createPortal } from 'react-dom';
-import GuardianForm from './GuardianForm';
-import FormikFormModal from '../../../components/form-components/FormikFormModal';
+
+
+const GuardianForm=lazy(()=>import('./GuardianForm'))
 
 const Guardians = ({ formik }) => {
 

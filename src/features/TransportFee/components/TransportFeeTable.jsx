@@ -6,32 +6,31 @@ import {
     getSortedRowModel,
     useReactTable,
 } from '@tanstack/react-table'
-import { useEffect, useMemo } from 'react'
+import { lazy, useEffect  } from 'react'
 import { useState } from 'react'
-import { Link, useLocation, useSearchParams } from 'react-router-dom'
+import { Link,   useSearchParams } from 'react-router-dom'
 
-import { isBrowser, isMobile } from 'react-device-detect';
+
 
 
 import { IoMdAdd } from "react-icons/io";
 
-import { TbFilterSearch } from "react-icons/tb";
-
-
 
 import { useCustomRoutes } from '../../../hooks';
 
-import Breadcrumbs from '../../../components/Breadcrumbs';
-import FormikFormModal from '../../../components/form-components/FormikFormModal';
-import Filter from './Filter';
 import { useFormModal } from '../../../contexts/FormModalProvider';
 import { DateTime } from 'luxon';
 import { MdOutlineModeEditOutline } from 'react-icons/md';
-import FormikEditFormModal from '../../../components/form-components/FormikEditFormModal';
-import { EditFees } from '../../Student/components/profile/FeeProcess';
-import { PrintModal } from '../../Student/components/print/PrintToPdf';
+
+import { PrintModal } from '../../Fee/FeeProcess/print/PrintToPdf';
 import { RiPrinterLine } from 'react-icons/ri';
 import { Capitalize } from '../../../libs/utils';
+
+const EditFees=lazy(()=>import('../../Fee/FeeProcess/EditFees'))
+const FormikFormModal=lazy(()=>import('../../../components/form-components/FormikFormModal'))
+const FormikEditFormModal=lazy(()=>import('../../../components/form-components/FormikEditFormModal'))
+const Breadcrumbs=lazy(()=>import('../../../components/Breadcrumbs'))
+const Filter=lazy(()=>import('./Filter'))
 
 export default function TransportFeeTable({ data, columns, pageSize = 100, createRoute,
     createForm, createFormTitle,
@@ -98,7 +97,7 @@ export default function TransportFeeTable({ data, columns, pageSize = 100, creat
                             type='text'
                             value={filtering}
                             onChange={e => setFiltering(e.target.value)}
-                            className='rounded-full py-2 px-4 m-0 border-blue-300/10  bg-transparent'
+                            className='rounded-full py-0 text-sm px-4 m-0 border-blue-300/10  bg-transparent'
                             placeholder='Enter our search'
                         />
                         {

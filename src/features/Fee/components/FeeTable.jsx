@@ -6,33 +6,25 @@ import {
     getSortedRowModel,
     useReactTable,
 } from '@tanstack/react-table'
-import { useEffect, useMemo } from 'react'
+import { lazy, useEffect,  } from 'react'
 import { useState } from 'react'
-import { Link, useLocation, useSearchParams } from 'react-router-dom'
-
-import { isBrowser, isMobile } from 'react-device-detect';
-
-
+import { Link,useSearchParams } from 'react-router-dom'
 import { IoMdAdd } from "react-icons/io";
-
-import { TbFilterSearch } from "react-icons/tb";
-
-
-
 import { useCustomRoutes } from '../../../hooks';
-
-import Breadcrumbs from '../../../components/Breadcrumbs';
-import FormikFormModal from '../../../components/form-components/FormikFormModal';
-import Filter from './Filter';
 import { useFormModal } from '../../../contexts/FormModalProvider';
 import { DateTime } from 'luxon';
 import { MdOutlineModeEditOutline } from 'react-icons/md';
-import FormikEditFormModal from '../../../components/form-components/FormikEditFormModal';
-import { EditFees } from '../../Student/components/profile/FeeProcess';
-import { PrintModal } from '../../Student/components/print/PrintToPdf';
+import { PrintModal } from '../FeeProcess/print/PrintToPdf';
 import { RiPrinterLine } from 'react-icons/ri';
 
-export default function FeeTable({ data, columns, pageSize = 100, createRoute,
+
+const Filter=lazy(()=>import('./Filter'))
+const EditFees=lazy(()=>import('../FeeProcess/EditFees'))
+// const PrintToPdf=lazy(()=>import('./print/PrintToPdf'))
+const FormikEditFormModal=lazy(()=>import('../../../components/form-components/FormikEditFormModal'))
+const FormikFormModal=lazy(()=>import('../../../components/form-components/FormikFormModal'))
+const Breadcrumbs=lazy(()=>import('../../../components/Breadcrumbs'))
+export default function FeeTable({ data, columns, pageSize =2000, createRoute,
     createForm, createFormTitle,
     mobileHeaders = ['id', 'name'], FeeData, initialFilterValues }) {
     const thisRoute = useCustomRoutes()
@@ -96,7 +88,7 @@ export default function FeeTable({ data, columns, pageSize = 100, createRoute,
                             type='text'
                             value={filtering}
                             onChange={e => setFiltering(e.target.value)}
-                            className='rounded-full py-2 px-4 m-0 border-blue-300/10  bg-transparent'
+                            className='rounded-full py-0 text-sm px-4 m-0 border-blue-300/10  bg-transparent'
                             placeholder='Enter our search'
                         />
                         {
@@ -188,13 +180,16 @@ export default function FeeTable({ data, columns, pageSize = 100, createRoute,
                                     <div className='flex flex-row gap-1 items-center  '>
 
                                     </div>
-                                    <div className='w-[750px] flex gap-2 flex-col flex-nowrap justify-between my-2'>
+                                    <div className='relative w-[750px] max-h-[60dvh] overflow-y-auto flex gap-2 flex-col flex-nowrap justify-between my-2'>
                                         {table.getRowModel().rows.map((row, index) => (
                                             <FeeCard row={row} index={row.id} key={index} />
                                         ))}
-                                        <div className='flex flex-row flex-nowrap text-4xl/[12px]
-                                        py-2 bg-red-500 rounded-lg px-4'>
-                                            <div className='flex-1 text-right pr-4'>Total</div>
+                                        <div className="fixed bottom-0 left-0 right-0 bg-red-500  rounded-lg flex flex-row justify-center ">
+                                            <div className='flex flex-row flex-nowrap text-4xl/[12px]
+                                        py-2 px-4  w-[750px]'>
+                                            <div className="">No. of Record(s): </div>
+                                            <div>{table.getRowModel().rows.length}</div>
+                                            <div className='flex-1 text-right pr-4'>Total: </div>
                                             <div className='pr-2'>
                                                 {
 
@@ -202,6 +197,8 @@ export default function FeeTable({ data, columns, pageSize = 100, createRoute,
                                                 }
                                             </div>
                                         </div>
+                                        </div>
+
                                     </div>
 
                                 </div>

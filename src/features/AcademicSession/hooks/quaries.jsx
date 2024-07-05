@@ -4,6 +4,7 @@ import { useCallback } from "react"
 
 
 export  function useAcademicSessions(payload) {
+
    const filterCallbackFn= useCallback((data)=>{
      if(payload.is_current)
     {

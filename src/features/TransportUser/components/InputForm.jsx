@@ -37,13 +37,12 @@ const InputForm = ({ initialValues,   entryMode,defaultMonthlyCharge,setDefaultM
         initialValues,
         validationSchema,
         onSubmit: values => {
-            console.log('form',entryMode,values)
 
             handleFormSubmit(values)
         },
     });
     useEffect(()=>{
-        console.log(formik.values)
+
         if(formik.values.is_free)
             {
                 setDefaultMonthlyCharge(prev=>formik.values.monthly_charge)

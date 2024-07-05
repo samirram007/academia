@@ -1,11 +1,16 @@
 import React, { Suspense, lazy, useEffect, useMemo, useState } from 'react'
 
-import Profile from './Profile';
-import StudentSession from './StudentSession';
-import ProfileImage from './ProfileImage';
+
 import { useAcademicSessions } from '../../../AcademicSession/hooks/quaries';
 import { ErrorBoundary } from 'react-error-boundary';
-import { FeeProcess } from './FeeProcess';
+// import   FeeProcess  from '../../../Fee/FeeProcess/FeeProcess';
+// import Profile from './Profile';
+// import StudentSession from './StudentSession';
+// import ProfileImage from './ProfileImage';
+const Profile =lazy(()=>import('./Profile'))
+const StudentSession =lazy(()=>import('./StudentSession'))
+const ProfileImage =lazy(()=>import('./ProfileImage'))
+const FeeProcess =lazy(()=>import('../../../Fee/FeeProcess/FeeProcess'))
 
 
 

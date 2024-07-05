@@ -55,7 +55,8 @@ export function updateStudent(payload) {
         });
 }
 export function storeStudentFee(payload) {
-    //   console.log(removeEmptyStrings(payload));
+    // console.log('payload',removeEmptyStrings(payload));
+     //return
     return axiosClient.post("/fees", removeEmptyStrings(payload))
         .then(response => {
             return response.data;
@@ -68,7 +69,7 @@ export function storeStudentFee(payload) {
 }
 export function updateStudentFee(payload) {
     const { id, ...data } = payload;
-     console.log(removeEmptyStrings(data));
+  //  console.log(removeEmptyStrings(payload));
     return axiosClient.put(`/fees/${id}`, removeEmptyStrings(data))
         .then(response => {
             console.log("Response", response.data);

@@ -38,7 +38,7 @@ const PdfModal =  ({ isOpen, setOpen, label, children } ) => {
                     {
                         label &&
                         <div className='flex justify-between items-center
-                            border-b-2 border-slate-600/50 pb-2   ' >
+                            border-b-2 border-slate-600/50    ' >
                             <div>{label}</div>
 
                             <button onClick={() => setOpen(false)} type="button"

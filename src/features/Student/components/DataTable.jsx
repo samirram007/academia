@@ -1,14 +1,15 @@
-import React from 'react'
-import FilterTable from '../../../components/tables/FilterTable'
+import React, { lazy } from 'react'
+
 
 import { useMemo } from 'react';
 import { DateTime } from 'luxon'
 
 import { useNavigate } from 'react-router-dom';
 import { useStudents } from '../hooks/queries';
-import Filter from './Filter';
-import moment from 'moment';
 
+import moment from 'moment';
+const Filter=lazy(()=>import('./Filter'))
+const FilterTable=lazy(()=>import('../../../components/tables/FilterTable'))
 
 
 const initialValues = {
@@ -32,6 +33,7 @@ const DataTable = () => {
 
   const mData = fetchedData.data?.data ?? [];
 
+
   const data = useMemo(() => [...mData], [mData]);
 
   /** @type {import('@tanstack/react-table').ColumnDef<any>} */
@@ -42,6 +44,11 @@ const DataTable = () => {
       visible: false,
       size: 50,
 
+    },
+    {
+      header: "Roll",
+      accessorKey: "student_session.roll_no",
+      visible:false
     },
     {
       header: "Name",
@@ -80,11 +87,13 @@ const DataTable = () => {
       size: 300,
       visible: false
     },
+
     {
       header: "Email",
       accessorKey: "email",
       size: 200,
     },
+
 
     {
       header: 'DOB',
@@ -124,7 +133,6 @@ const DataTable = () => {
   }
   return (
     <FilterTable data={data} columns={columns}
-
       createRoute={createRoute}
       filter={
         <Filter fetchedData={fetchedData}

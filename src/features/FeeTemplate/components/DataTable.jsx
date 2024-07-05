@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { useFeeTemplates } from '../hooks/quaries';
 import CreateFeeTemplate from './Create';
 import Edit from './Edit';
-import Delete from './Delete';
+
 import FeeTemplateItem from '../../FeeTemplateItem/components/FeeTemplateItem';
 import Clone from './Clone';
 import moment from 'moment';

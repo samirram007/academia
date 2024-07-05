@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { lazy, useState } from 'react'
 import { FormikHiddenInput, FormikInputBox, FormikSelect, FormikSubmit, ImageBox } from '../../../components/form-components'
 import { useFormik } from 'formik'
 import * as Yup from "yup";
@@ -9,13 +9,14 @@ import {
 
 
 import { useStoreStudentMutation, useUpdateStudentMutation } from '../hooks/mutations';
-import Guardians from './Guardians';
-import Addresses from './Addresses';
-import { useCampuses } from '../../Campus/hooks/queries';
-import { useAcademicSessions } from '../../AcademicSession/hooks/quaries';
+
+
 import { CampusSelect } from '../../Common/components/CampusSelect';
 import { AcademicSessionSelect } from '../../Common/components/AcademicSessionSelect';
 import { AcademicClassSelect } from '../../Common/components/AcademicClassSelect';
+
+const Guardians=lazy(()=>import('./Guardians'))
+const Addresses=lazy(()=>import('./Addresses'))
 const validationSchema = Yup.object().shape({
     name: Yup.string()
         .required("Name is required"),

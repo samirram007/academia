@@ -1,6 +1,8 @@
-import React, { useState,useEffect, useRef } from 'react'
-import { useDeleteTransportFeeMutation,
-     useStoreTransportFeeMutation,  useUpdateTransportFeeMutation  } from '../hooks/mutations'
+import React, { useState, useEffect, useRef } from 'react'
+import {
+    useDeleteTransportFeeMutation,
+    useStoreTransportFeeMutation, useUpdateTransportFeeMutation
+} from '../hooks/mutations'
 import * as Yup from "yup";
 import { useFormik } from 'formik';
 import { TransportSelect } from '../../Common/components/TransportSelect';
@@ -10,15 +12,15 @@ import { AcademicSessionSelect } from '../../Common/components/AcademicSessionSe
 import { CampusSelect } from '../../Common/components/CampusSelect';
 import { useFeeHeads } from '../../FeeHead/hooks/queries';
 import { Flip, toast } from 'react-toastify';
-import { LuLoader } from 'react-icons/lu';
+import { LuLoader, LuLoader2 } from 'react-icons/lu';
 const validationSchema = Yup.object().shape({
     user_id: Yup.number()
         .required("User is required"),
 
 })
-const InputForm = ({ initialValues,   entryMode,
-    selectedTransportUser,defaultMonthlyCharge,setDefaultMonthlyCharge }) => {
-        console.log(selectedTransportUser.fees);
+const InputForm = ({ initialValues, entryMode, selectedTransportUserPanel,
+    selectedTransportUser, defaultMonthlyCharge, setDefaultMonthlyCharge }) => {
+    console.log('iv', initialValues);
     const transportFeeStoreMutation = useStoreTransportFeeMutation()
     const transportFeeUpdateMutation = useUpdateTransportFeeMutation()
     const transportFeeDeleteMutation = useDeleteTransportFeeMutation()
@@ -33,10 +35,11 @@ const InputForm = ({ initialValues,   entryMode,
         }
     }
     const formik = useFormik({
-        initialValues:{...initialValues,
-            user_id:selectedTransportUser.user_id,
-            transport_id:selectedTransportUser.transport_id,
-            transport_user_id:selectedTransportUser.id,
+        initialValues: {
+            ...initialValues,
+            user_id: selectedTransportUser.user_id,
+            transport_id: selectedTransportUser.transport_id,
+            transport_user_id: selectedTransportUser.id,
         },
         validationSchema,
         enableReinitialize: true,
@@ -58,39 +61,38 @@ const InputForm = ({ initialValues,   entryMode,
             <div className='flex flex-row justify-center -mt-4'>
                 <div className='badge badge-success'>Transport Fees</div>
             </div>
-            <div className='overflow-scroll'>
-                {JSON.stringify(formik.values)}
-                {JSON.stringify(formik.values.user_id)}
+            <div className='flex flex-row justify-between'>
+                <div>
+                    {selectedTransportUserPanel}
+                </div>
+                <div className='hidden overflow-scroll flex-1 text-wrap '>
+                    {JSON.stringify(initialValues)}
+                    {JSON.stringify(formik.values.user_id)}
+                </div>
+                <div className='grid grid-cols-4 justify-end items-end'>
+                    <div className='col-span-4 flex flex-col gap-2 pr-4 '>
+                        <div className='flex flex-row items-center gap-2'>
+                            <AcademicSessionSelect formik={formik}
+                                label={'Session'} is_current={true} />
+                        </div>
+                        <div className='flex flex-row items-center gap-2'>
+                            <CampusSelect formik={formik} />
+                        </div>
+                        <div className='flex flex-row items-center  gap-2'>
+                            <FormikInputBox formik={formik}
+                                type={"date"} extClass={'align-self-right'}
+                                name="fee_date" label="Date" />
+                        </div>
+                    </div>
+                </div>
             </div>
+
             <form onSubmit={formik.handleSubmit}>
                 <div className='grid grid-cols-1  '>
 
-                    <div className='grid grid-flow-row md:grid-flow-col grid-cols-6 gap-5'>
-                        <div className='grid gap-4 col-span-6   pb-2 px-4 mb-2 '>
-                            <div className='grid gap-4 grid-cols-12   mb-2'>
-                                <div className='col-span-6  md:col-span-2 '>
-
-                                    <AcademicSessionSelect formik={formik} label={'Session'} is_current={true} />
-
-                                </div>
-                                <div className='col-span-6 md:col-span-2 '>
-                                    <CampusSelect formik={formik} />
 
 
-                                </div>
-
-                                <div className=' md:col-span-6 '></div>
-                                <div className='col-span-6  md:col-span-2 flex flex-col justify-end items-center '>
-                                    <FormikInputBox formik={formik} type={"date"} extClass={'align-self-right'} name="fee_date" label="Date" />
-                                </div>
-
-
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div className='grid grid-cols-6 gap-5 border-b-2   border-blue-300/30 pb-2 px-4 mb-2'>
+                    <div className='grid grid-cols-6 gap-5 border-b-2   border-blue-300/30 pb-2 px-4 my-2'>
                         <div className='col-span-4'>Particulars</div>
                         <div className='text-right'>Amount</div>
                         <div className='text-center'>Action</div>
@@ -168,14 +170,14 @@ const HTMLContent = ({ htmlString }) => (
 export const TransportFeeItemNew = ({ formik, changes, setChanges }) => {
     const totalAmountRef = useRef()
     const feeHeadRef = useRef()
-    const FeeHeadData = useFeeHeads();
-    if (FeeHeadData.isLoading) return <LuLoader />;
+    const FeeHeadData = useFeeHeads({ income_group_ids: [3] });
+    if (FeeHeadData.isLoading) return <LuLoader2 />;
     // const initData={...formik.initialValues.transport_fee_items[0], fee_head_id: '', amount: ''}
 
 
 
     const addTransportFee = () => {
-        const [quantity,setQuantity]=useState(1)
+        const [quantity, setQuantity] = useState(1)
         const existingHead = formik.values.transport_fee_items.find(x => x.fee_head_id == feeHeadRef.current.value)
 
         let errorString = ""
@@ -198,7 +200,7 @@ export const TransportFeeItemNew = ({ formik, changes, setChanges }) => {
             fee_head: FeeHeadData.data.data.find(x => x.id == feeHeadRef.current.value),
             quantity: quantity,
             amount: parseFloat(totalAmountRef.current.value),
-            total_amount: quantity*parseFloat(totalAmountRef.current.value)
+            total_amount: quantity * parseFloat(totalAmountRef.current.value)
         }
 
         formik.values.transport_fee_items.push(initData)

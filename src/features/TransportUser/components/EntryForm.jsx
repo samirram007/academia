@@ -96,7 +96,7 @@ export const SearchUser = ({ initialValues, entryMode, setSearching, setSelected
 
     return (
         <div className='h-90 flex flex-col md:max-h-[26rem] lg:max-h-[40rem] justify-between gap-4 '>
-            {/* <div class="row-span-3 ...">01</div> */}
+
             <div class="   ">
 
                 <form  >
@@ -204,7 +204,8 @@ const UserPanel = ({ user, initialValues, entryMode, setSearching, setSelectedUs
                             {user.transport_user.is_free ? 'Free' : user.transport_user.monthly_charge}
                         </span>
                         </span>
-                        <span>Status: <span className='text-green-400'>{user.transport_user.is_active?'active':'in-active'}</span></span>
+                        <span>Status: <span className='text-green-400'>{user.transport_user.is_active?'active':'in-active'}</span>
+                        </span>
 
                     </div>
 

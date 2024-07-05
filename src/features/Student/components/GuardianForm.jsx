@@ -3,9 +3,8 @@ import { useGuardianType } from "../../../hooks/queries";
 import { useStoreStudentGuardianMutation, useUpdateStudentGuardianMutation } from "../hooks/mutations";
 import { FormikInputBox, FormikSelect, FormikSubmit } from "../../../components/form-components";
 import { useState } from "react";
-import FormikFormModal from "../../../components/form-components/FormikFormModal";
-import { MdClose, MdOutlineCloseFullscreen } from "react-icons/md";
-
+import {  MdOutlineCloseFullscreen } from "react-icons/md";
+const FormikFormModal=lazy(()=>import('../../../components/form-components/FormikFormModal'))
 const GuardianForm = ({ mode, guardian, student_id, setMode, }) => {
 
     const [open, setOpen] = useState(false);

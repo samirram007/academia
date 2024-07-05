@@ -34,7 +34,7 @@ const currentDate = moment(new Date()).format('YYYY-MM-DD');
 const initialFilterValues = {
   campus_id: initialValues.campus_id,
   academic_session_id: initialValues.academic_session_id,
-  from: firstDayOfMonth, // 'YYYY-MM-DD' format for first day of the year
+  from: currentDate, // 'YYYY-MM-DD' format for first day of the year
   to: currentDate  // 'YYYY-MM-DD' format for current date
 };
 // const initialFilterValues = {
@@ -47,11 +47,11 @@ const initialFilterValues = {
 const DataTable = () => {
 
   const FeeData = useFees(initialFilterValues)
-  const navigate = useNavigate()
+
 
   const mData = FeeData.data?.data ?? [];
   const data = useMemo(() => [...mData], [mData]);
-// console.log(data);
+  // console.log(data);
   /** @type {import('@tanstack/react-table').ColumnDef<any>} */
   const columns = [
     {
@@ -123,6 +123,7 @@ const DataTable = () => {
     <FeeTable
       data={data}
       columns={columns}
+      // pageSize={data?data.length:0}
       // createForm={<CreateFee modal={true} />}
       // createFormTitle={'Fee No: [new]'}
       FeeData={FeeData}

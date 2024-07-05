@@ -1,22 +1,21 @@
-import React from 'react'
+import React, { lazy } from 'react'
 
 import { useMemo } from 'react';
 import { DateTime } from 'luxon'
-import FilterTable from '../../../components/tables/FilterTable';
 
 import { useNavigate } from 'react-router-dom';
 import { useExpenseHeads } from '../hooks/queries';
-import CreateExpenseHead from './Create';
-import Delete from './Delete';
-import Edit from './Edit';
+
+// import FilterTable from '../../../components/tables/FilterTable';
+const FilterTable =lazy(()=>import('../../../components/tables/FilterTable'));
+const CreateExpenseHead =lazy(()=>import('./Create'));
+const Edit =lazy(()=>import('./Edit'));
 
 
 const DataTable = () => {
 
     const fetchedData = useExpenseHeads({})
-      const navigate = useNavigate()
 
-      const createRoute=`/expense_heads/create`
 
       const mData = fetchedData.data?.data ?? [];
 
@@ -36,7 +35,11 @@ const DataTable = () => {
           accessorKey: "name",
           size:300,
         },
-
+        {
+          header: "Group",
+          accessorKey: "expense_group.name",
+          size:300,
+        },
         {
             header: 'Action',
             accessorKey: 'action',
@@ -45,7 +48,6 @@ const DataTable = () => {
                 return (
                   <div className="flex justify-start md:justify-center  items-center gap-2">
                   <Edit initialValues={row.original} />
-                  <Delete initialValues={row.original} />
 
                  </div>
                 )
@@ -56,8 +58,7 @@ const DataTable = () => {
 
   return (
     <FilterTable data={data} columns={columns}
-    // createRoute={createRoute}
-    //  createForm={<CreateExpenseHead modal={true} />}
+     createForm={<CreateExpenseHead modal={true} />}
      />
   )
 }

@@ -56,7 +56,7 @@ const DataTable = () => {
         return (
           <div className="flex justify-start md:justify-center  items-center gap-2">
             <EditAcademicSession initialValues={row.original} />
-            <DeleteAcademicSession initialValues={row.original} />
+            {/* <DeleteAcademicSession initialValues={row.original} /> */}
           </div>
         )
       }

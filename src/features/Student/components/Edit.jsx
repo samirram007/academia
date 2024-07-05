@@ -2,12 +2,12 @@
 import { useParams } from 'react-router-dom';
 
 
-import EntryForm from './EntryForm';
+import { lazy, useState } from 'react';
 
-import { useState } from 'react';
-import Breadcrumbs from '../../../components/Breadcrumbs';
 import { useStudent } from '../hooks/queries';
+const Breadcrumbs=lazy(()=>import('../../../components/Breadcrumbs'))
 
+const EntryForm=lazy(()=>import('./EntryForm'))
 
 
 

@@ -1,9 +1,9 @@
 
-import { useState } from 'react';
-import Breadcrumbs from '../../../components/Breadcrumbs';
-import EntryForm from './EntryForm';
+import { lazy, useState } from 'react';
 
+const Breadcrumbs=lazy(()=>import('../../../components/Breadcrumbs'))
 
+const EntryForm=lazy(()=>import('./EntryForm'))
 const Create = () => {
 const [entryMode,setEntryMode]=useState('create');
 

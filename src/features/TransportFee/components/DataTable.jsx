@@ -13,7 +13,7 @@ import Delete from './Delete';
 import TransportFeeTable from './TransportFeeTable';
 import moment from 'moment';
 
-
+// const Edit =lazy(()=>import('./Edit'));
 
 const initialValues = {
   fee_no: '',

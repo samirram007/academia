@@ -4,7 +4,7 @@ import { useAcademicSessions } from '../../AcademicSession/hooks/quaries';
 import { CustomSelect } from './CustomSelect';
 
 
-export const AcademicSessionSelect = ({ formik,   name, label, exclude,is_current }) => {
+export const AcademicSessionSelect = ({ formik,   name, label, exclude, is_current,...props }) => {
 
 // const [defaultValue,setDefaultValue]=useState(formik.values.academic_session_id)
 // console.log('ic',is_current)
@@ -12,7 +12,7 @@ export const AcademicSessionSelect = ({ formik,   name, label, exclude,is_curren
     if (AcademicSessionData.isPending) return <Loader size={6} label={'Academic Session'} />
     return (
 
-        <CustomSelect formik={formik}
+        <CustomSelect formik={formik} props={props}
             name={name ?? "academic_session_id"} label={label ?? 'Academic Session'}
             options={AcademicSessionData.data && AcademicSessionData.data.data &&
 

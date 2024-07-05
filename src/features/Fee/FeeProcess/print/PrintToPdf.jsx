@@ -10,7 +10,8 @@ import { useReactToPrint } from 'react-to-print';
 
 import PdfModal from '../../../../components/form-components/PdfModal';
 import { useFeeTemplates } from '../../../FeeTemplate/hooks/quaries';
-import { MonthPanel } from '../profile/FeeProcess';
+import { MonthPanel } from '../FeeProcess';
+import { Capitalize } from '../../../../libs/utils';
 
 
 const apiDomain = import.meta.env.VITE_API_BASE_URL
@@ -36,7 +37,8 @@ const PrintToPdf = ({ fees, session_id }) => {
     <>
       {
 
-        <button onClick={() => setOpen(true)} className={`${isOpen ? 'btn-error' : 'btn-primary'} btn btn-outline text-xs  btn-sm btn-rounded  py-0 `}>{'Print'}</button>
+        <button onClick={() => setOpen(true)}
+          className={`${isOpen ? 'btn-error' : 'btn-outline'} badge badge-error      py-0 text-xs     `}>{'Print'}</button>
       }
       {
         isOpen &&
@@ -54,7 +56,7 @@ export const PrintModal = ({ fees, isOpen, setOpen, selectedStudentSession = fee
   const student_id = fees.student.id
 
   const [payload, setPayload] = useState({
-    academic_session_id, academic_class_id, campus_id
+    academic_class_id, campus_id
   })
   return (
 
@@ -68,62 +70,87 @@ export const PrintModal = ({ fees, isOpen, setOpen, selectedStudentSession = fee
 
   )
 }
-export const PrintFees = ({ fees, isOpen, setOpen, session_id, payload, selectedTemplate, setSelectedTemplate, selectedStudentSession = fees.student_session }) => {
+export const PrintFees = ({ fees, isOpen, setOpen, session_id, payload,
+  selectedTemplate, setSelectedTemplate, selectedStudentSession = fees.student_session }) => {
+
 
   const fetchedFeeTemplatesData = useFeeTemplates(payload)
-  const [isMount, setIsMount] = useState(false);
-  const [feeData, setFeeData] = useState(fees)
+  const mData = fetchedFeeTemplatesData.data?.data ?? [];
+  const FeeTemplatesData = mData;//useMemo(() => [...mData], [mData]);
 
 
-
-  useEffect(() => {
-    setFeeData(prev => ({
-      ...prev, ...fees,
-      campus_id: payload.campus_id
-    }))
-
-  }, []);
   if (fetchedFeeTemplatesData.isPending) {
-    return (<div className='bg-red-500'>Loading...</div>)
-  }
-  if (fetchedFeeTemplatesData.isFetched) {
-
-
-    const tempTemplate = fetchedFeeTemplatesData.data && fetchedFeeTemplatesData.data.data.find(x => x.id === fees.fee_template_id)
-    setSelectedTemplate(prev => tempTemplate)
-
+    return <div>Loading...</div>
   }
 
-  // console.log(selectedStudentSession)
-  // return
 
   return (<>
-
-
-    <div className='flex flex-row bg-slate-800/20 rounded-md shadow-inner w-[80dvw] max-w-full   h-[70dvh] max-h-full pb-2'>
-      <div className={`relative flex flex-col min-w-full gap-2`}>
-        {
-          selectedTemplate &&
-          <SelectedPanelPrintMode
-            selectedTemplate={selectedTemplate}
-            setSelectedTemplate={setSelectedTemplate}
-            student_id={payload.student_id}
-            isMount={isMount}
-            setIsMount={setIsMount}
-            feeData={feeData}
-            setFeeData={setFeeData}
-            isOpen={isOpen}
-            setOpen={setOpen}
-            session_id={session_id}
-            selectedStudentSession={selectedStudentSession}
-
-          />}
-      </div>
-    </div>
+    {fetchedFeeTemplatesData.data &&
+      <PrintFeesReadyMode
+        FeeTemplatesData={FeeTemplatesData}
+        selectedStudentSession={selectedStudentSession}
+        fees={fees}
+        isOpen={isOpen}
+        setOpen={setOpen}
+        session_id={session_id}
+      />
+    }
   </>)
 
 
 
+}
+
+export const PrintFeesReadyMode = ({ FeeTemplatesData, fees, isOpen, setOpen, session_id, selectedStudentSession }) => {
+  const [selectedTemplate, setSelectedTemplate] = useState(null)
+  const [panelToggle, setPanelToggle] = useState(false)
+  const [isMount, setIsMount] = useState(false);
+  const [feeData, setFeeData] = useState(defaultFeeData)
+  const academic_session_id = fees.academic_session_id
+  const academic_class_id = fees.academic_class_id
+  const campus_id = fees.academic_class.campus_id
+  const student_id = fees.student.id
+  useEffect(() => {
+    setFeeData(prev => ({
+      ...prev, ...fees,
+      campus_id: campus_id
+    }))
+    const tempTemplate = FeeTemplatesData.find(x => x.id === fees.fee_template_id)
+
+    const updatedTemplate = {
+      ...tempTemplate,
+      fee_template_items: tempTemplate.fee_template_items.map(item => ({
+        ...item,
+        amount: "0.00"
+      }))
+    };
+    setSelectedTemplate(prev => updatedTemplate)
+
+  }, []);
+  return (
+    <>
+      <div className=' flex flex-row bg-slate-800/20 rounded-md shadow-inner w-[95dvw] max-w-full    h-[70dvh] max-h-full  overflow-hidden'>
+        <div className={`relative flex flex-col min-w-full `}>
+          {
+            selectedTemplate &&
+            <SelectedPanelPrintMode
+              selectedTemplate={selectedTemplate}
+              setSelectedTemplate={setSelectedTemplate}
+              student_id={student_id}
+              isMount={isMount}
+              setIsMount={setIsMount}
+              feeData={feeData}
+              setFeeData={setFeeData}
+              isOpen={isOpen}
+              setOpen={setOpen}
+              session_id={session_id}
+              selectedStudentSession={selectedStudentSession}
+
+            />}
+        </div>
+      </div>
+    </>
+  )
 }
 
 export const SelectedPanelPrintMode = ({ selectedTemplate, isMount, setIsMount, feeData,
@@ -206,13 +233,16 @@ export const SelectedPanelPrintMode = ({ selectedTemplate, isMount, setIsMount, 
       </div>
       <div className='relative'>
 
-        <div className='mb-3 mr-10 absolute bottom-0   right-0'>
-          <button className='btn btn-outline btn-error btn-sm btn-rounded' onClick={handlePrint}>Print</button>
+        <div className='mb-3 mr-10  bottom-0     right-0 flex justify-end'>
+          <button className='badge badge-error btn-outline bg-error text-slate-50    '
+            onClick={handlePrint}>Print</button>
         </div>
+
       </div>
 
-      <div ref={componentRef} className='relative overflow-y-auto text-slate-950
-       bg-white mx-auto rounded-md shadow-lg w-[750px]      max-h-[calc(100% - 180px)] p-4'>
+      <div ref={componentRef} className='print relative overflow-y-auto   text-slate-950
+       bg-white mx-auto rounded-md shadow-lg w-[750px]      max-h-[calc(100% - 180px)
+        p-4 '>
         <div className='relative border-2 border-slate-900 mt-2 min-h-[400px]  '>
           <div className=' grid grid-cols-10 px-2 py-1'>
             <div className={' col-span-2 '}>No. {feeData.fee_no}</div>
@@ -233,7 +263,7 @@ export const SelectedPanelPrintMode = ({ selectedTemplate, isMount, setIsMount, 
               }
             </div>
             <div className='col-span-8 text-center'>
-              <div className='text-2xl uppercase font-bold '>{feeData.campus.school.name ?? 'NAVA JYOTI VIDYAPITH'}</div>
+              <div className='!text-2xl uppercase font-bold '>{feeData.campus.school.name ?? 'NAVA JYOTI VIDYAPITH'}</div>
               <div>{feeData.campus.school.address ?
                 feeData.campus.school.address.display :
                 '20/1 west, Captepara Road, Authpur, North 24 Parganas, 743128'}</div>
@@ -256,18 +286,16 @@ export const SelectedPanelPrintMode = ({ selectedTemplate, isMount, setIsMount, 
           <div className='px-2  '>
             <div className='grid grid-cols-12 items-center gap-2 border-y-2 border-slate-800 font-bold   text-slate-800'>
 
-              <div className='col-span-10 '> <div className='py-1 pl-4'>Particulars</div></div>
-              <div className='col-span-2 text-right border-l-2 border-slate-800'> <div className='py-1 pr-4'>Amount</div></div>
+              <div className='col-span-10 border-r-2 border-slate-800'> <div className='py-1 pl-4'>Particulars</div></div>
+              <div className='col-span-2 text-right '> <div className='py-1 pr-4'>Amount</div></div>
             </div>
             <FeeEntryRowsPrint feeData={feeData} setChanges={setChanges} selectedStudentSession={selectedStudentSession} />
 
           </div>
           <div className='px-2'>
-            <div className=' w-full
-          text-slate-800 bottom-0 grid grid-cols-12 justify-end gap-2
-          font-bold border-t-4 border-slate-800  '>
-              <div className='col-span-10 text-right '>{'Total'}:</div>
-              <div className='col-span-2 text-right border-l-2 border-slate-800  '>
+            <div className=' w-full           text-slate-800 bottom-0 grid grid-cols-12 justify-end gap-2           font-bold border-t-4 border-slate-800  '>
+              <div className='col-span-10 text-right border-r-2 border-slate-800  '>{'Total'}:</div>
+              <div className='col-span-2 text-right '>
                 <div className='py-1 pr-4 font-semibold'>
                   {Number(total).toFixed(2)}
                 </div>
@@ -278,7 +306,7 @@ export const SelectedPanelPrintMode = ({ selectedTemplate, isMount, setIsMount, 
           <div className='w-full py-1 pl-4 text-[10px] -mt-2'>
             (in words) : Rupees. {convertNumberToWords(Number(Number(total).toFixed(2)))}
           </div>
-          <div className='absolute bottom-0 right-0 pr-2 text-[8px]'>Print Time: {moment(new Date()).format('DD-MMM-YYYY hh:mm a')}</div>
+          <div className='absolute bottom-0 right-0 pr-2 !text-[8px]'>Print Time: {moment(new Date()).format('DD-MMM-YYYY hh:mm a')}</div>
         </div>
 
       </div>
@@ -307,52 +335,47 @@ export const FeeEntryRowPrint = ({ feeTemplateItem, index, setChanges, selectedS
 
   const quantityRef = useRef()
   const amountRef = useRef()
-  const handleChange = (e) => {
 
-
-    setTimeout(() => {
-      feeTemplateItem.amount = amountRef.current.value
-      feeTemplateItem.quantity = quantityRef.current.value
-      feeTemplateItem.total_amount = parseInt(quantityRef.current.value) * parseFloat(amountRef.current.value)
-      setChanges(true)
-    }, 700);
-  }
   return (
     <>
 
-      <div className={` grid grid-cols-12  items-center gap-2 text-xs    `}>
+      <div className={` grid grid-cols-12  items-center  text-xs    `}>
 
-        <div className='col-span-10 flex flex-row items-center gap-2 pl-4'>
-          <div className='py-1'>
-            <div className='flex flex-row flex-nowrap items-end '>
-              {feeTemplateItem.fee_head.name}
-              <div className='flex flex-row gap-2 ml-2'>
-                {feeTemplateItem.keep_periodic_details ?
+        <div className='col-span-10 flex flex-row items-center gap-2 pl-4 border-r-2 border-slate-800'>
+          <div className='py-2'>
+            <div className='flex flex-row flex-nowrap items-center  '>
+              {Capitalize(feeTemplateItem.fee_head.name)}
 
-                  feeTemplateItem.fee_item_months &&
-                  feeTemplateItem.fee_item_months.length > 0 &&
-                  feeTemplateItem.fee_item_months.map((x, index) => (
-                    (<div key={index} className='
-                    border-2 border-slate-400
-                   text-slate-800 text-xs font-bold mb-[1px] px-2 rounded-md'>
+              {feeTemplateItem.keep_periodic_details ?
+
+                feeTemplateItem.fee_item_months &&
+                feeTemplateItem.fee_item_months.length > 0 &&
+
+                <div className={`flex flex-row ${feeTemplateItem.fee_item_months.length > 6 ? 'gap-1 ml-1' : 'gap-2 ml-2'}`}>
+                  {feeTemplateItem.fee_item_months.map((x, index) => (
+                    (<div key={index} className={`
+                     border-slate-400  text-slate-800
+                   ${feeTemplateItem.fee_item_months.length > 6 ? 'text-xs px-1 border-b-2' : 'text-xs border-2 px-2 rounded-md'}
+                    font-bold mb-[1px]  `}>
                       {x.month?.short_name}
                     </div>)
-                  ))
+                  ))}
+                </div>
 
-                  : ''}
-              </div>
+
+
+                : ''}
+
             </div>
 
           </div>
 
         </div>
 
-        <div className='col-span-2 text-right border-l-2 border-slate-800'>
-          <div className='py-1 pr-4'>
-            {Number(parseFloat(feeTemplateItem.total_amount)).toFixed(2)}
+        <div className='col-span-2 text-right '>
+          <div className='py-1 pr-4 flex flex-row items-center justify-end'>
+            {feeTemplateItem.amount > 0 ? Number(parseFloat(feeTemplateItem.total_amount)).toFixed(2) : ''}
           </div>
-
-
         </div>
       </div>
     </>

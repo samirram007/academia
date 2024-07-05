@@ -9,7 +9,7 @@ export function fetchFee(id) {
 }
 export function fetchFees(payload) {
 const filterString=`academic_session_id=${payload.academic_session_id}&campus_id=${payload.campus_id}&from=${payload.from}&to=${payload.to}`
-console.log(filterString);
+
     return axiosClient
         .get(`/fees?${filterString}`)
         .then(response => {
@@ -24,7 +24,7 @@ console.log(filterString);
 
 
 export function storeFee(payload) {
-console.log(payload)
+
     return axiosClient.post("/fees", removeEmptyStrings(payload))
         .then(response => {
             return response.data;

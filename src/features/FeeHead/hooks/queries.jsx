@@ -29,10 +29,10 @@ export function useFeeHeads(payload) {
     return { data: data.data.filter(x => payload.income_group_ids.includes(x.income_group_id)) }
 
 
-  }, [payload.is_current])
+  }, [payload])
 
   return useQuery({
-    queryKey: ['fee_heads'],
+    queryKey: ['fee_heads',payload],
     queryFn: fetchFeeHeads,
     staleTime: Infinity,
     enabled: !!payload,
