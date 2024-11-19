@@ -10,7 +10,7 @@ export function fetchRoomService(id) {
         })
 }
 export function fetchRoomsService(payload) {
-    return axiosClient.get(`/rooms?floor_id=${payload.floor_id}`)
+    return axiosC = lient.get(`/rooms?floor_id=${payload.floor_id}`)
         .then(response => {
             return response.data;
         })

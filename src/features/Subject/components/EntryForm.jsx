@@ -1,18 +1,18 @@
-import React from 'react'
 import * as Yup from "yup";
 
+import { useFormik } from 'formik';
 import {
     useDeleteSubjectMutation,
     useStoreSubjectMutation,
     useUpdateSubjectMutation
 } from '../hooks/mutations';
-import { useFormik } from 'formik';
 
-import { FormikInputBox } from '../../../components/form-components';
-import { FormikTextBox } from '../../../components/form-components/FormikTextBox';
-import { SubjectTypeSelect } from '../../Common/components/SubjectTypeSelect';
-import {   SubjectGroupSelect } from '../../Common/components/SubjectGroupSelect';
+
+import { FormikInputBox } from "@/components/form-components/FormikInputBox";
+import { FormikTextBox } from "@/components/form-components/FormikTextBox";
 import { AcademicStandardSelect } from '../../Common/components/AcademicStandardSelect';
+import { SubjectGroupSelect } from '../../Common/components/SubjectGroupSelect';
+import { SubjectTypeSelect } from '../../Common/components/SubjectTypeSelect';
 
 
 

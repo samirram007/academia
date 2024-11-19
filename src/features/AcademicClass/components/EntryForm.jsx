@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
-import * as Yup from "yup";
-import { useCampuses } from '../../Campus/hooks/queries';
-import { useDeleteAcademicClassMutation, useStoreAcademicClassMutation, useUpdateAcademicClassMutation } from '../hooks/mutations';
 import { useFormik } from 'formik';
+import * as Yup from "yup";
 import { CampusSelect } from '../../Common/components/CampusSelect';
-import { FormikCheckBox, FormikInputBox } from '../../../components/form-components';
-import { AcademicClassSelect } from '../../Common/components/AcademicClassSelect';
+import { useDeleteAcademicClassMutation, useStoreAcademicClassMutation, useUpdateAcademicClassMutation } from '../hooks/mutations';
+
+import { FormikInputBox } from '@/components/form-components/FormikInputBox';
 import { AcademicStandardSelect } from '../../Common/components/AcademicStandardSelect';
 
 

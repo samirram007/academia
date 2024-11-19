@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { MdOutlineModeEditOutline } from 'react-icons/md'
-import Admission from './Admission'
+import FormikEnrollmentFormModal from '@/components/form-components/FormikEnrollmentFormModal'
+import { useEffect, useState } from 'react'
 import { CgArrowsExchangeAltV } from 'react-icons/cg'
+import { MdOutlineModeEditOutline } from 'react-icons/md'
 import { TiTick } from 'react-icons/ti'
+import Admission from './Admission'
 import Enrollment from './Enrollment'
-import FormikEnrollmentFormModal from '../../../../components/form-components/FormikEnrollmentFormModal'
-import { useAcademicSessions } from '../../../AcademicSession/hooks/quaries'
 import Promotion from './Promotion'
 const combine = (a, b, prop) =>
     Object.values(

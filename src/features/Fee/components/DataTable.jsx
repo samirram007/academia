@@ -32,18 +32,11 @@ const currentDate = moment(new Date()).format('YYYY-MM-DD');
  const firstDayOfYear = moment(new Date(new Date().getFullYear(), 0, 1)).format('YYYY-MM-DD'); // January 1st of the current year
  const firstDayOfMonth = moment().startOf('month').format('YYYY-MM-DD');
 const initialFilterValues = {
-  campus_id: initialValues.campus_id,
   academic_session_id: initialValues.academic_session_id,
   from: currentDate, // 'YYYY-MM-DD' format for first day of the year
   to: currentDate  // 'YYYY-MM-DD' format for current date
 };
-// const initialFilterValues = {
-//   campus_id: initialValues.campus_id,
-//   academic_session_id: initialValues.academic_session_id,
-//    from:new Date().toISOString().split('T')[0],
-//    to:new Date().toISOString().split('T')[0]
-// }
-// console.log(initialFilterValues)
+
 const DataTable = () => {
 
   const FeeData = useFees(initialFilterValues)

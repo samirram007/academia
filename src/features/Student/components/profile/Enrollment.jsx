@@ -1,16 +1,17 @@
-import { useFormik } from 'formik'
-import React, { useEffect, useState } from 'react'
-import { CampusSelect } from '../../../Common/components/CampusSelect';
-import { AcademicSessionSelect } from '../../../Common/components/AcademicSessionSelect';
+import { useFormik } from 'formik';
+import { useEffect, useState } from 'react';
 import { AcademicClassSelect } from '../../../Common/components/AcademicClassSelect';
-import { FormikInputBox, FormikSubmit } from '../../../../components/form-components';
-import { SectionSelect } from '../../../Common/components/SectionSelect';
+import { AcademicSessionSelect } from '../../../Common/components/AcademicSessionSelect';
+import { CampusSelect } from '../../../Common/components/CampusSelect';
+
+import { FormikInputBox } from '@/components/form-components/FormikInputBox';
+import { FormikSubmit } from '@/components/form-components/FormikSubmit';
 import { RiAiGenerate } from "react-icons/ri";
-import * as Yup from "yup";
-import { fetchGenerateRollNo } from '../../../StudentSession/services/apis';
-import { useGenerateRollNo } from '../../../StudentSession/hooks/queries';
 import { Flip, toast } from 'react-toastify';
+import * as Yup from "yup";
+import { SectionSelect } from '../../../Common/components/SectionSelect';
 import { useStoreEnrollmentMutation, useUpdateEnrollmentMutation } from '../../../StudentSession/hooks/mutations';
+import { useGenerateRollNo } from '../../../StudentSession/hooks/queries';
 
 
 

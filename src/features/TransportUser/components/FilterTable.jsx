@@ -5,22 +5,21 @@ import {
     getPaginationRowModel,
     getSortedRowModel,
     useReactTable,
-} from '@tanstack/react-table'
-import { useEffect, useMemo } from 'react'
-import { useState } from 'react'
-import { Link, useLocation, useSearchParams } from 'react-router-dom'
+} from '@tanstack/react-table';
+import { useEffect, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 
-import { isBrowser, isMobile } from 'react-device-detect';
+import { isBrowser } from 'react-device-detect';
 
 
 import { IoMdAdd } from "react-icons/io";
 
+import FormikFormModal from '@/components/form-components/FormikFormModal';
 import { TbFilterSearch } from "react-icons/tb";
-import { useCustomRoutes } from '../../../hooks';
-import { useFormModal } from '../../../contexts/FormModalProvider';
 import Breadcrumbs from '../../../components/Breadcrumbs';
+import { useFormModal } from '../../../contexts/FormModalProvider';
+import { useCustomRoutes } from '../../../hooks';
 import Filter from './Filter';
-import FormikFormModal from '../../../components/form-components/FormikFormModal';
 
 
 

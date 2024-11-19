@@ -2,8 +2,8 @@ import { useMutation } from "@tanstack/react-query";
 
 
 import { useNavigate, useParams } from "react-router-dom";
-import { storeStudent, storeStudentFee, updateStudent, updateStudentFee } from "../services/apis";
 import { queryClient } from "../../../utils/queryClient";
+import { storeStudent, storeStudentFee, updateStudent, updateStudentFee } from "../services/apis";
 
 import { Flip, toast } from "react-toastify";
 import { useFormModal } from "../../../contexts/FormModalProvider";
@@ -12,7 +12,7 @@ export function useStoreStudentMutation() {
   return useMutation({
     mutationFn: storeStudent,
     onSuccess: (data) => {
-     queryClient.invalidateQueries({ queryKey: ['students'] })
+     queryClient.invalidateQueries({ queryKey: ['students',data.data.id] })
       toast.success(data.message, { transition: Flip });
       navigate("/students", { replace: true })
     },

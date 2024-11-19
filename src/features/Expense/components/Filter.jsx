@@ -1,12 +1,13 @@
-import React, { memo, useEffect, useMemo, useState } from 'react'
+import { useState } from 'react';
 
-import { useFormik } from 'formik'
+import { useFormik } from 'formik';
 
 import * as Yup from "yup";
+
+import { FormikInputBox } from '@/components/form-components/FormikInputBox';
+import { FormikSubmit } from '@/components/form-components/FormikSubmit';
 import { AcademicSessionSelect } from '../../Common/components/AcademicSessionSelect';
 import { CampusSelect } from '../../Common/components/CampusSelect';
-import { FormikInputBox, FormikSubmit } from '../../../components/form-components';
-import { DateTime } from 'luxon';
 
 
 
@@ -56,7 +57,7 @@ const [isLoading, setIsLoading] = useState(false)
                         <div className='grid gap-4 col-span-6 border-b-2   border-blue-300/30 pb-2 px-4 mb-2 '>
                             <div className='grid gap-4 grid-cols-12   mb-2'>
                                 {/* <div className='col-span-1 text-md font-bold'>Filter</div> */}
-                                <div className='col-span-3 '>
+                                <div className='col-span-2 '>
                                 <CampusSelect formik={formik} auto={false} isLoading={isLoading} setIsLoading={setIsLoading}/>
 
                                 </div>
@@ -65,12 +66,12 @@ const [isLoading, setIsLoading] = useState(false)
                                     <AcademicSessionSelect formik={formik}   />
 
                                 </div>
-                                <div className='col-span-3 '>
+                                <div className='col-span-2 '>
 
                                     <FormikInputBox type={'date'} formik={formik} name={'from'} label={'From'}/>
 
                                 </div>
-                                <div className='col-span-3 '>
+                                <div className='col-span-2 '>
 
                                     <FormikInputBox type={'date'} formik={formik} name={'to'} label={'To'}/>
 

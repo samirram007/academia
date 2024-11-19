@@ -5,26 +5,22 @@ import {
     getPaginationRowModel,
     getSortedRowModel,
     useReactTable,
-} from '@tanstack/react-table'
-import { useEffect, useMemo } from 'react'
-import { useState } from 'react'
-import { Link, useLocation, useSearchParams } from 'react-router-dom'
+} from '@tanstack/react-table';
+import { useEffect, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 
-import { isBrowser, isMobile } from 'react-device-detect';
 
 
 import { IoMdAdd } from "react-icons/io";
 
 import { TbFilterSearch } from "react-icons/tb";
 
-import { useFormModal } from '../../../contexts/FormModalProvider'
-import { useCustomRoutes } from '../../../hooks';
-import FormikFormModal from '../../../components/form-components/FormikFormModal';
-import Breadcrumbs from '../../../components/Breadcrumbs';
-import Filter from './Filter';
-import Promote from './Promote';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import FormikFormModal from '@/components/form-components/FormikFormModal';
 import { DateTime } from 'luxon';
-import { RiPrinterLine } from 'react-icons/ri';
+import { useFormModal } from '../../../contexts/FormModalProvider';
+import { useCustomRoutes } from '../../../hooks';
+import Filter from './Filter';
 import PrintModal from './PrintModal';
 
 

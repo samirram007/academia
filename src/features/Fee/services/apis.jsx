@@ -1,4 +1,4 @@
-import axiosClient from '../../../utils/axios-client'
+import axiosClient from '../../../utils/axios-client';
 import { removeEmptyStrings } from '../../../utils/removeEmptyStrings';
 export function fetchFee(id) {
 
@@ -8,7 +8,7 @@ export function fetchFee(id) {
         })
 }
 export function fetchFees(payload) {
-const filterString=`academic_session_id=${payload.academic_session_id}&campus_id=${payload.campus_id}&from=${payload.from}&to=${payload.to}`
+    const filterString = `academic_session_id=${payload.academic_session_id}&from=${payload.from}&to=${payload.to}`
 
     return axiosClient
         .get(`/fees?${filterString}`)
@@ -47,7 +47,10 @@ export function updateFee(payload) {
         });
 }
 export function deleteFee(payload) {
+
+
     const { id, ...data } = payload;
+    console.log(id);
     return axiosClient.delete(`/fees/${id}`)
         .then(response => {
             return response.data;

@@ -1,5 +1,4 @@
-import { useFormik } from 'formik'
-import React from 'react'
+import { useFormik } from 'formik';
 import * as Yup from "yup";
 import {
     useDeleteFeeTemplateItemMutation,
@@ -7,9 +6,10 @@ import {
     useUpdateFeeTemplateItemMutation
 } from '../../FeeTemplateItem/hooks/mutations';
 
-import { FormikCheckBox, FormikInputBox, FormikSubmit } from '../../../components/form-components';
+
+import { FormikCheckBox } from '@/components/form-components/FormikCheckBox';
+import { FormikInputBox } from '@/components/form-components/FormikInputBox';
 import { FeeHeadSelect } from '../../Common/components/FeeHeadSelect';
-import { FormikInputBoxNDB } from '../../../components/form-components/FormikInputBoxNDB';
 const validationSchema = Yup.object().shape({
     name: Yup.string()
         .required("Name is required"),

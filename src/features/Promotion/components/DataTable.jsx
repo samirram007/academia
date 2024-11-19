@@ -1,54 +1,32 @@
-import React from 'react'
-
-
-import { useMemo } from 'react';
 
 
 
-import { usePromotions } from '../hooks/quaries';
+
+
 import Create from './Create';
-import Edit from './Edit';
 
-import Delete from './Delete';
-import Filter from './Filter';
-import PromotionTable from './PromotionTable';
 import { Checkbox } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import FormikEnrollmentFormModal from '../../../components/form-components/FormikEnrollmentFormModal';
-import Enrollment from '../../Student/components/profile/Enrollment';
-import moment from 'moment';
+import { usePromotionContext } from '../context/usePromotionContext';
+import PromotionTable from './PromotionTable';
 
-const initialValues = {
-  name: '',
-  code: '',
-  campus_id: 1,
-  academic_session_id: moment(new Date()).format('YYYY'),
-  academic_class_id: 1,
-  section_id: 1
 
-}
-const initialFilterValues = {
-  campus_id: initialValues.campus_id,
-  academic_session_id: initialValues.academic_session_id,
-  academic_class_id: initialValues.academic_class_id,
-  section_id: initialValues.section_id,
-}
 
 const DataTable = () => {
 
-  const PromotionData = usePromotions(initialFilterValues)
-  const navigate=useNavigate()
-  const mData = PromotionData.data?.data ?? [];
+  const {
+    previousClassData,
+    xData,
+    isFetchingPreviousClassData,
+    isReFetchingPreviousClassData,
+    isErrorPreviousClassData,
+    refetch,
+    initialValues,
+    initialFilterValues
+  } = usePromotionContext();
+  const navigate = useNavigate()
 
-    const data = useMemo(() => {
 
-    return mData.map(item => ({
-      ...item,
-
-      selectedStudentSession: item.student_sessions.find(x => x.academic_session_id == initialFilterValues.academic_session_id)
-    }))
-  }, [mData]);
-  // const data = useMemo(() => [...mData], [mData]);
 
 
 
@@ -65,23 +43,26 @@ const DataTable = () => {
       header: ({ table }) => (
         <Checkbox
           checked={table.getIsAllRowsSelected()}
+          className='!text-sky-500'
           indeterminate={table.getIsSomeRowsSelected()}
           onChange={table.getToggleAllRowsSelectedHandler()} //or getToggleAllPageRowsSelectedHandler
         />
       ),
-      accessorKey: 'is_promoted',
+      accessorKey: 'student_sessions && student_sessions[0].is_promoted',
       enableSorting: false,
+      size: 50,
       cell: ({ row }) => {
         return (
 
-          row.original.selectedStudentSession.is_promoted
+          row.original.student_sessions && row.original.student_sessions[0].is_promoted
             ?
-            <Checkbox checked={true} disabled={true} color="default"/>
+            <Checkbox checked={true} disabled={true} color="default" className='!text-blue-500' />
             :
             <Checkbox
               color="success"
+              className='!text-green-500'
               checked={row.getIsSelected()}
-              disabled={row.original.selectedStudentSession.is_promoted ? row.getCanSelect() : !row.getCanSelect()}
+              disabled={row.original.student_sessions && row.original.student_sessions[0].is_promoted ? row.getCanSelect() : !row.getCanSelect()}
               onChange={row.getToggleSelectedHandler()}
             />
 
@@ -93,11 +74,52 @@ const DataTable = () => {
     // {
     //   header: 'Promotion',
     //   accessorKey: 'is_promoted',
-    //   cell: ({ row }) => row.original.selectedStudentSession.is_promoted ? 'Promoted' : 'waiting'
+    //   cell: ({ row }) => row.original.student_sessions[0].is_promoted ? 'Promoted' : 'waiting'
     // },
     {
-      header: 'Name',
+      header: 'Student Description',
       accessorKey: 'name',
+      cell: ({ row }) => {
+        const thisRow = row.original
+        return (
+          <div className="flex items-center gap-2">
+            {thisRow.profile_document ?
+              <img src={thisRow.profile_document.path} className='w-10 h-10 rounded-full' /> :
+              <img src={`${import.meta.env.VITE_API_BASE_URL}/storage/documents/student.png`} className='w-10 h-10 rounded-full' alt="" />}
+            <div>
+
+              <div className='text-blue-200 font-bold text-md'>{thisRow.name}</div>
+              {thisRow &&
+                <>
+                  <div className='flex flex-row gap-2  text-[8px]'>
+                    <span className='text-green-400 font-normal'>
+                      <span className='mr-2'> Session:</span>
+                      <span className='  font-bold'>{thisRow.student_sessions && thisRow.student_sessions[0].academic_session.session}</span>
+                    </span>
+                  </div>
+                  <div className='flex flex-row gap-2  text-[8px]'>
+                    <span>
+                      <span className='text-blue-400 font-bold'>{thisRow.student_sessions && thisRow.student_sessions[0].academic_class.name}</span>
+                    </span>
+                    <span>
+                      Section:
+                      <span className='text-red-400 font-bold'>{thisRow.student_sessions && thisRow.student_sessions[0].section.name}</span>
+                    </span>
+                    <span>
+                      Roll:
+                      <span className='text-green-400 font-bold'>{thisRow.student_sessions && thisRow.student_sessions[0].roll_no}</span>
+                    </span>
+
+                  </div>
+
+                </>
+              }
+
+            </div>
+
+          </div>
+        )
+      }
     },
     {
       header: 'Campus',
@@ -105,11 +127,13 @@ const DataTable = () => {
     },
     {
       header: 'Session',
-      accessorKey: 'selectedStudentSession.academic_session.session',
+      accessorKey: ' student_sessions && student_sessions[0].academic_session.session',
+      visible: false,
     },
     {
       header: 'Class',
-      accessorKey: 'selectedStudentSession.academic_class.name',
+      accessorKey: ' student_sessions && student_sessions[0].academic_class.name',
+      visible: false,
     },
     {
       header: 'Action',
@@ -132,15 +156,11 @@ const DataTable = () => {
     }
 
   ]
-  //if(PromotionData.isError) return <div>Error...</div>
-  //PromotionData
+
   return (
-    <PromotionTable
-      data={data} columns={columns}
+    <PromotionTable columns={columns}
       createForm={<Create modal={true} />}
       createFormTitle="Create Promotion"
-      initialFilterValues={initialFilterValues}
-      PromotionData={PromotionData}
 
     />
   )

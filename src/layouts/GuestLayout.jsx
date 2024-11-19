@@ -1,12 +1,9 @@
 
-import { Navigate, Outlet } from 'react-router-dom'
 
-const GuestLayout = () => {
+const GuestLayout = ({ children }) => {
   return (
-    <>
-     <div>Guest Layout</div>
-      <Navigate to="/login"   />
-      <Outlet/>
+    <> 
+      {children}
       </>
   )
 }

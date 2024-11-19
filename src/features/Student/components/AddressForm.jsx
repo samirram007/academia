@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
-import FormikFormModal from '../../../components/form-components/FormikFormModal';
-import { MdOutlineCloseFullscreen } from 'react-icons/md';
+import FormikFormModal from '@/components/form-components/FormikFormModal';
 import { useFormik } from 'formik';
-import { useStoreStudentAddressMutation, useUpdateStudentAddressMutation } from '../hooks/mutations';
+import { useState } from 'react';
+import { MdOutlineCloseFullscreen } from 'react-icons/md';
+
+import { FormikInputBox } from '@/components/form-components/FormikInputBox';
+import { FormikSelect } from '@/components/form-components/FormikSelect';
+import { FormikSubmit } from '@/components/form-components/FormikSubmit';
 import { useAddressType } from '../../../hooks/queries';
-import { FormikInputBox, FormikSelect, FormikSubmit } from '../../../components/form-components';
+import { useStoreStudentAddressMutation, useUpdateStudentAddressMutation } from '../hooks/mutations';
 
 const AddressForm = ({ mode, address, setMode, student_id }) => {
     const [open, setOpen] = useState(true);

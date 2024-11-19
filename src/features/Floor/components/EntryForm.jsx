@@ -1,17 +1,15 @@
-import React from 'react'
 import * as Yup from "yup";
 
+import { useFormik } from 'formik';
 import {
     useDeleteFloorMutation,
     useStoreFloorMutation,
     useUpdateFloorMutation
 } from '../hooks/mutations';
-import { useFormik } from 'formik';
 
-import { FormikInputBox } from '../../../components/form-components';
-import { FormikTextBox } from '../../../components/form-components/FormikTextBox';
-import { CampusSelect } from '../../Common/components/CampusSelect';
+import { FormikInputBox } from '@/components/form-components/FormikInputBox';
 import { BuildingSelect } from '../../Common/components/BuildingSelect';
+import { CampusSelect } from '../../Common/components/CampusSelect';
 
 
 const validationSchema = Yup.object().shape({

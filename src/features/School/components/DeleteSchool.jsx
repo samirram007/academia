@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import { useState } from 'react';
 
 
 
-import FormikEditFormModal from '../../../components/form-components/FormikEditFormModal'
+import FormikEditFormModal from '@/components/form-components/FormikEditFormModal';
 import EntryForm from './EntryForm';
 
 const DeleteSchool = ({ initialValues }) => {

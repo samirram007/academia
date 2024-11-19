@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
-import { IoMdAddCircle } from 'react-icons/io';
-import AddressForm from './AddressForm';
-import { useAddressType } from '../../../hooks/queries';
+import { upperCase } from '@/utils/removeEmptyStrings';
+import { useState } from 'react';
 import { AiOutlineEdit } from 'react-icons/ai';
+import { IoMdAddCircle } from 'react-icons/io';
+import { useAddressType } from '../../../hooks/queries';
+import AddressForm from './AddressForm';
 
 const Addresses = ({ formik }) => {
   const student_id = formik.values.id;
@@ -15,6 +16,7 @@ const Addresses = ({ formik }) => {
       email: '',
       contact_no: ''
   }
+    console.log("ADDRESSES", formik.values.addresses);
 
   return (
     <div className='grid gap-4 grid-cols-6 border-t-2 border-blue-300/30 pt-2  mt-10'>
@@ -40,13 +42,13 @@ const Addresses = ({ formik }) => {
         {
             <div className='  col-span-6 '>
                 {
-                    formik.values.addresses && formik.values.addresses.length > 1 ?
+                      formik.values.addresses && formik.values.addresses.length >= 1 ?
                         <>
                             <div className='col-span-6 flex flex-row p-1
                         bg-slate-800/80
                         flex-nowrap  items-center justify-between
                         font-bold
-                        text-xs border-y-2 rounded-2xl border-blue-200/50'>
+                        text-xs border-y-2   border-blue-200/50'>
                                 <div className='flex flex-nowrap  justify-start flex-1  '>
 
                                     <div className='text-left w-32'>Type</div>
@@ -93,10 +95,11 @@ export const AddressView = ({ address,student_id }) => {
 
 
   return (
-      <div className='col-span-6 flex flex-row items-center justify-between border-b-[1px] border-violet-200/20'>
+      <div className='col-span-6 flex flex-row items-center justify-between border-b-[1px] 
+      border-violet-200/20 py-2'>
           <div className='flex flex-row justify-start tracking-tighter'>
               <div className='text-left w-32'>
-                  {addressTypeData.data.data[address.address_type]}</div>
+                  {upperCase(addressTypeData.data.data[address.address_type])}</div>
               <div> {address.display}</div>
           </div>
           <AiOutlineEdit onClick={()=>setMode('edit')} className='badge text-violet-400 cursor-pointer border-2 border-violet-300/30

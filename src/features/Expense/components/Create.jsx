@@ -1,7 +1,7 @@
 import { Breadcrumbs } from '@mui/material';
-import React, { useState } from 'react'
-import EntryForm from './EntryForm';
 import moment from 'moment';
+import { useState } from 'react';
+import EntryForm from './EntryForm';
 
  const Create = ({ modal }) => {
   const [entryMode, setEntryMode] = useState('create');
@@ -9,7 +9,7 @@ import moment from 'moment';
   const editData = {
     expense_no:'new',
     expense_date:    moment(new Date()).format('YYYY-MM-DD'),
-    academic_session_id: 1,
+    academic_session_id: moment(new Date()).format('YYYY'),
     campus_id: 1,
     user_id: null,
     total_amount: 0,

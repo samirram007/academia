@@ -1,15 +1,16 @@
-import React from 'react'
 import * as Yup from "yup";
 
+import { useFormik } from 'formik';
 import {
     useDeleteAcademicStandardMutation,
     useStoreAcademicStandardMutation,
     useUpdateAcademicStandardMutation
 } from '../hooks/mutations';
-import { useFormik } from 'formik';
 
-import { FormikInputBox } from '../../../components/form-components';
-import { FormikTextBox } from '../../../components/form-components/FormikTextBox';
+
+import { FormikInputBox } from "@/components/form-components/FormikInputBox";
+import { FormikTextBox } from "@/components/form-components/FormikTextBox";
+
 
 
 const validationSchema = Yup.object().shape({

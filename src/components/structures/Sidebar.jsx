@@ -106,7 +106,7 @@ export const RenderMenu = ({ isOpen, setOpen, menuGroupData }) => {
 
 const Sidebar = ({ isOpen, setOpen }) => {
   const { t } = useTranslation()
-  let menuClass = isOpen ? "md:translate-x-0" : "-translate-x-full md:translate-x-0";
+  let menuClass = isOpen ? "fixed md:translate-x-0  md:sticky" : "-translate-x-full fixed md:translate-x-0";
 
   const authUser = useQuery({
     queryKey: ['user'],
@@ -119,15 +119,15 @@ const Sidebar = ({ isOpen, setOpen }) => {
   return (
     <>
 
-      <aside className={`${menuClass} sidebar-menu fixed md:relative
-      min-w-[350px] md:min-w-48 lg:min-w-56  h-screen bg-[#272e48]
-        z-20 transition ease-in-out duration-500 overflow-y-auto`} >
-        <div className="flex-1 flex items-center gap-5   text-teal-500   px-5 py-[.53rem] text-lg min-h-[4rem]">
+      <aside className={`${menuClass} sidebar-menu  md:relative
+      min-w-[350px] md:min-w-48 lg:min-w-56  max-h-[95dvh] 2xl:max-h-[96dvh]  overflow-hidden   bg-[#272e48]
+        z-20 transition ease-in-out duration-500 `} >
+        <div className="flex-1 flex items-center gap-5   text-teal-500   px-5 py-[.53rem] text-lg min-h-[6dvh] 2xl:min-h-[4dvh]">
 
           <FaBookOpenReader />
           {import.meta.env.VITE_APP_NAME}
         </div>
-        <nav className='my-4 mx-2   p-4 rounded-lg bg-[#191d2d]'>
+        <nav className='my-4 mx-2   p-4 rounded-lg bg-[#191d2d] overflow-y-auto  max-h-[85dvh] 2xl:max-h-[90dvh] '>
 
           <ul className="flex flex-col gap-2" >
             <RenderMenuGroup isOpen={isOpen} setOpen={setOpen} />

@@ -1,14 +1,14 @@
-import React from 'react'
 import * as Yup from "yup";
 
+import { useFormik } from 'formik';
 import {
     useDeletePromotionMutation,
     useStorePromotionMutation,
     useUpdatePromotionMutation
 } from '../hooks/mutations';
-import { useFormik } from 'formik';
 
-import { FormikInputBox } from '../../../components/form-components';
+
+import { FormikInputBox } from "@/components/form-components/FormikInputBox";
 import { CampusSelect } from '../../Common/components/CampusSelect';
 
 

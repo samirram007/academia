@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
 
-import { useFormik } from 'formik'
+import { useFormik } from 'formik';
 import * as Yup from "yup";
-import { FormikHiddenInput, FormikInputBox, FormikSelect, FormikSubmit, ImageBox } from '../../../components/form-components'
 
+
+import { FormikInputBox } from '@/components/form-components/FormikInputBox';
+import { ImageBox } from '@/components/form-components/ImageBox';
 import { useDeleteSchoolMutation, useStoreSchoolMutation, useUpdateSchoolMutation } from '../hooks/mutations';
 
 

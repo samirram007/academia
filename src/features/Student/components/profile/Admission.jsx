@@ -1,9 +1,7 @@
-import React, { useState } from 'react'
-import { useFormModal } from '../../../../contexts/FormModalProvider'
+import { useState } from 'react';
 
-import FormikFormModal from '../../../../components/form-components/FormikFormModal'
-import Enrollment from './Enrollment'
-import FormikEnrollmentFormModal from '../../../../components/form-components/FormikEnrollmentFormModal'
+import FormikEnrollmentFormModal from '@/components/form-components/FormikEnrollmentFormModal';
+import Enrollment from './Enrollment';
 
 const Admission = ({ data, academicSessions,selectedStudentSession }) => {
     const [entryMode, setEntryMode] = useState('create');

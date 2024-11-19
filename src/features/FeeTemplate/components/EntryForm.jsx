@@ -1,11 +1,11 @@
-import { useFormik } from 'formik'
-import React from 'react'
+import { useFormik } from 'formik';
 import * as Yup from "yup";
-import { useCloneFeeTemplateMutation, useDeleteFeeTemplateMutation, useStoreFeeTemplateMutation, useUpdateFeeTemplateMutation } from '../hooks/mutations';
-import { CampusSelect } from '../../Common/components/CampusSelect';
-import { AcademicSessionSelect } from '../../Common/components/AcademicSessionSelect';
+
+import { FormikCheckBox } from '@/components/form-components/FormikCheckBox';
+import { FormikInputBox } from '@/components/form-components/FormikInputBox';
 import { AcademicClassSelect } from '../../Common/components/AcademicClassSelect';
-import { FormikCheckBox, FormikInputBox, FormikSubmit } from '../../../components/form-components';
+import { CampusSelect } from '../../Common/components/CampusSelect';
+import { useCloneFeeTemplateMutation, useDeleteFeeTemplateMutation, useStoreFeeTemplateMutation, useUpdateFeeTemplateMutation } from '../hooks/mutations';
 const validationSchema = Yup.object().shape({
     name: Yup.string()
         .required("Name is required"),

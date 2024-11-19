@@ -15,25 +15,17 @@ export function useAcademicClasses(payload) {
     queryKey: ['academic_classes'],
     queryFn: fetchAcademicClassServices,
     staleTime: Infinity,
-    enabled: !!payload.campus_id,
+    enabled: false,
     select: filterCallbackFn,
-    onSuccess: (data) => {
-      console.log('Query success:', data);
-    },
-    onError: (error) => {
-      console.log('Query error:', error);
-    }
   })
-  // console.log('fetchedData', fetchedData.data);
 
-  // return fetchedData
 }
 export function useCampusAcademicClasses() {
 
   const filterCallbackFn = useCallback((data) => {
     // console.log('Data before filtering:', data);
 
-    return { data: data.data}
+    return { data: data.data }
   }, []);
 
   return useQuery({

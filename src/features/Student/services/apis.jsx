@@ -17,7 +17,6 @@ export function fetchStudents(payload) {
         filterString += `&academic_class_id=${payload.academic_class_id}`
     }
 
-    console.log('fs',filterString);
     return (axiosClient.get(`/students${filterString}`))
         .then(response => {
 
@@ -44,7 +43,7 @@ export function storeStudent(payload) {
 }
 export function updateStudent(payload) {
     const { id, ...data } = payload;
-    console.log('student update',data)
+    // console.log('student update',id,removeEmptyStrings(data))
     return axiosClient.put(`/students/${id}`, removeEmptyStrings(data))
         .then(response => {
             return response.data;

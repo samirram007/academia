@@ -1,22 +1,22 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import { useCallback, useState } from 'react';
 
+import { useDropzone } from 'react-dropzone';
 import { PiUploadSimpleLight } from "react-icons/pi";
-import { useDropzone } from 'react-dropzone'
 
 
 
+import { useMutation } from '@tanstack/react-query';
 import { IoClose } from 'react-icons/io5';
 import { toast } from 'react-toastify';
-import { useMutation } from '@tanstack/react-query';
 
-import { queryClient } from '../../../utils/queryClient';
 import { AiOutlineUndo } from 'react-icons/ai';
 import { BsBackspaceReverse } from "react-icons/bs";
+import { queryClient } from '../../../utils/queryClient';
 import { storeDocuments } from '../services/apis';
 
 const maxLength = 30;
 
-const nameLengthValidator=file=> {
+const nameLengthValidator = file => {
 
     if (file.name.length > maxLength) {
 
@@ -47,15 +47,15 @@ const thumb = {
     padding: 1,
     boxSizing: 'border-box',
     display: 'flex',
-    justifyContent:'center',
+    justifyContent: 'center',
     alignItems: 'center',
-    overflow:'hidden',
-    position:'relative'
+    overflow: 'hidden',
+    position: 'relative'
 };
 
 const thumbInner = {
     display: 'flex',
-    justifyContent:'center',
+    justifyContent: 'center',
     alignItems: 'center',
     minWidth: 0,
     overflow: 'hidden',
@@ -68,7 +68,7 @@ const img = {
     height: '100%'
 };
 
-const CreateDocument = ({openPanel}) => {
+const CreateDocument = ({ openPanel }) => {
     const [files, setFiles] = useState([]);
     const [rejectedFiles, setRejectedFiles] = useState([]);
     const documentMutation = useMutation({
@@ -76,13 +76,13 @@ const CreateDocument = ({openPanel}) => {
         onSuccess: (data) => {
             setFiles([])
             setRejectedFiles([])
-         queryClient.invalidateQueries({ queryKey: ['documents'] })
-         toast.success("Document uploaded successfully")
+            queryClient.invalidateQueries({ queryKey: ['documents'] })
+            toast.success("Document uploaded successfully")
         },
         onError: (error) => {
-          toast.error(error.response.data.message, { transition: Flip })
+            toast.error(error.response.data.message, { transition: Flip })
         }
-      })
+    })
     const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
         if (acceptedFiles?.length) {
             setFiles(previousFiles => [
@@ -118,7 +118,7 @@ const CreateDocument = ({openPanel}) => {
     }
     const removeRejectedFile = name => {
 
-        setRejectedFiles(files => rejectedFiles.filter(({file })=> file.name !== name))
+        setRejectedFiles(files => rejectedFiles.filter(({ file }) => file.name !== name))
     }
 
     const acceptedFileItems = files.map(file => (
@@ -134,11 +134,11 @@ const CreateDocument = ({openPanel}) => {
 
                 </div>
                 <button
-                        type='button'
-                        className='absolute top-0 right-0 bg-red-500 hover:bg-red-700   text-xs font-bold  rounded-full'
-                        onClick={() => removeFile(file.name)}>
-<IoClose className='w-5 h-5 text-gray-100/90 hover:text-white shadow-md'/>
-                    </button>
+                    type='button'
+                    className='absolute top-0 right-0 bg-red-500 hover:bg-red-700   text-xs font-bold  rounded-full'
+                    onClick={() => removeFile(file.name)}>
+                    <IoClose className='w-5 h-5 text-gray-100/90 hover:text-white shadow-md' />
+                </button>
 
             </div>
             {/* <li key={file.path}>
@@ -150,7 +150,7 @@ const CreateDocument = ({openPanel}) => {
     const fileRejectionItems = rejectedFiles.map(({ file, errors }) => (
         <li key={file.path} className='flex items-center justify-between mt-2 border-t border-slate-100/30 '>
             <div>
-                <p className='mt-2 text-sm text-neutral-500  font-medium cursor-pointer' title={file.name}>{file.name.length>maxLength?file.name.slice(0, maxLength) + '...': file.name}</p>
+                <p className='mt-2 text-sm text-neutral-500  font-medium cursor-pointer' title={file.name}>{file.name.length > maxLength ? file.name.slice(0, maxLength) + '...' : file.name}</p>
                 <ul className='text-[12px] text-red-400'>
                     {errors.map(error => (
                         <li key={error.code}>{error.message}</li>
@@ -158,9 +158,9 @@ const CreateDocument = ({openPanel}) => {
                 </ul>
             </div>
             <button
-            type='button'
-            className='mt-1 ml-4 py-1 text-[12px]  uppercase tracking-wider font-bold badge badge-error px-4'
-            onClick={() => removeRejectedFile(file.name)}
+                type='button'
+                className='mt-1 ml-4 py-1 text-[12px]  uppercase tracking-wider font-bold badge badge-error px-4'
+                onClick={() => removeRejectedFile(file.name)}
             >remove</button>
 
         </li>
@@ -169,13 +169,13 @@ const CreateDocument = ({openPanel}) => {
 
     const handleSubmit = (ev) => {
         ev.preventDefault()
-        if(!files?.length) {
+        if (!files?.length) {
             toast.info("Please select a file")
             return
         }
         const formData = new FormData()
         files.forEach(file => {
-          formData.append('files[]', file)
+            formData.append('files[]', file)
         });
 
         documentMutation.mutate(formData)
@@ -200,20 +200,20 @@ const CreateDocument = ({openPanel}) => {
                 </div>
                 <div className='flex flex-row gap-2 justify-center flex-1 items-center'>
                     <button type="submit"
-                    disabled={!files?.length}
+                        disabled={!files?.length}
                         className='disabled:cursor-not-allowed disabled:bg-slate-500/50  btn btn-primary btn-wide btn-sm mt-4'>
                         <PiUploadSimpleLight /> Upload</button>
-                        <button type="button" onClick={() => {
-                            setFiles([])
-                            setRejectedFiles([])
-                        }}
+                    <button type="button" onClick={() => {
+                        setFiles([])
+                        setRejectedFiles([])
+                    }}
 
-                            className='cursor-not-allowed btn btn-primary  btn-sm mt-4'>
-                                <AiOutlineUndo /> Reset</button>
-                        <button type="button" onClick={openPanel}
+                        className='cursor-not-allowed btn btn-primary  btn-sm mt-4'>
+                        <AiOutlineUndo /> Reset</button>
+                    <button type="button" onClick={openPanel}
 
-                            className='  btn btn-error   btn-sm mt-4'>
-                                <BsBackspaceReverse /> Cancel</button>
+                        className='  btn btn-error   btn-sm mt-4'>
+                        <BsBackspaceReverse /> Cancel</button>
 
 
                 </div>
@@ -225,7 +225,7 @@ const CreateDocument = ({openPanel}) => {
                         <div className='text-white badge badge-primary badge-outline p-2'>Accepted file(s)</div>
                         <ul className='flex flex-row flex-wrap'>{acceptedFileItems}</ul>
                     </div>}
-                {rejectedFiles.length>0 &&
+                {rejectedFiles.length > 0 &&
                     <div className='mt-6'>
                         <div className='text-white badge badge-error p-2'>Rejected file(s)</div>
 

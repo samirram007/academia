@@ -1,11 +1,12 @@
 
-import { useFormik } from 'formik'
+import { useFormik } from 'formik';
 
 import * as Yup from "yup";
 
-import { FormikSubmit } from '../../../components/form-components';
 
-import {   useState } from 'react';
+
+import { FormikSubmit } from '@/components/form-components/FormikSubmit';
+import { useState } from 'react';
 import { TransportTypeSelect } from '../../Common/components/TransportTypeSelect';
 
 

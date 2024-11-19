@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import { useRef, useState } from 'react';
 
 
 import { CiEdit } from "react-icons/ci";
@@ -10,23 +10,21 @@ import { IoSaveOutline } from "react-icons/io5";
 import { RiDeleteBinLine } from 'react-icons/ri';
 
 import { ImSpinner } from "react-icons/im";
-import { Flip, toast } from 'react-toastify';
-import { PiUploadSimpleLight } from 'react-icons/pi';
-import { HiDotsVertical } from "react-icons/hi";
 import { MdFolder } from "react-icons/md";
+import { PiUploadSimpleLight } from 'react-icons/pi';
 import FilterDropDown from './FilterDropdown';
 
 
-import ImageToFolderBtn from './ImageToFolderBtn';
 import { useDocumentQuery } from '../hooks/queries';
-
-import CreateDocument from './CreateDocument';
+import ImageToFolderBtn from './ImageToFolderBtn';
 
 import { useDocumentDeleteMutation, useUpdateDocumentMutation } from '../hooks/mutations';
+import CreateDocument from './CreateDocument';
 
 
 
-const Documents = ({setImageId,setImageSrc}) => {
+
+const Documents = ({ setImageId, setImageSrc }) => {
     const [showUploadPanel, setShowUploadPanel] = useState(false);
     const docQuery = useDocumentQuery()
 
@@ -43,7 +41,8 @@ const Documents = ({setImageId,setImageSrc}) => {
         <>
             {showUploadPanel && <CreateDocument openPanel={() => setShowUploadPanel(!showUploadPanel)} />}
             {!showUploadPanel && <DocumentBar filterFn={docQuery.handleFilter} openPanel={() => setShowUploadPanel(!showUploadPanel)} />}
-            <div className='flex flex-row flex-wrap   justify-evenly w-full min-h-[200px]'>
+            {/* <div className='flex flex-row flex-wrap   justify-evenly w-full min-h-[200px]'> */}
+            <div className='columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 p-4'>
 
                 {
 
@@ -125,10 +124,11 @@ const ImageBox = ({ document, handleFilter, setImageId, setImageSrc }) => {
                 draggable
             >
                 {setImageId &&
-                <DocumentSelector document={document} setImageId={setImageId} setImageSrc={setImageSrc} />
-}
+                    <DocumentSelector document={document} setImageId={setImageId} setImageSrc={setImageSrc} />
+                }
                 <DocumentRemover document={document} handleFilter={handleFilter} />
                 <ImageMenuBtn tabindex="0" document={document} />
+                {/* <img src={document.path} alt="" className=' w-full h-full object-contain  ' /> */}
                 <img src={document.path} alt="" className=' w-full h-full object-contain  ' />
 
             </div>
@@ -187,7 +187,7 @@ const ImageMenuBtn = ({ document }) => {
 const DocumentRemover = ({ document, handleFilter }) => {
 
     const [isDeleteInit, setDeleteInit] = useState(false);
-    const deleteMutation =useDocumentDeleteMutation()
+    const deleteMutation = useDocumentDeleteMutation()
     const handleDelete = () => {
 
         setDeleteInit(true)

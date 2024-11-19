@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react'
-import { useDeleteTransportUserMutation, useStoreTransportUserMutation, useUpdateTransportUserMutation } from '../hooks/mutations'
-import * as Yup from "yup";
 import { useFormik } from 'formik';
-import { TransportSelect } from '../../Common/components/TransportSelect';
+import { useEffect } from 'react';
+import * as Yup from "yup";
+
+import { FormikCheckBox } from '@/components/form-components/FormikCheckBox';
+import { FormikInputBox } from '@/components/form-components/FormikInputBox';
 import { JourneyTypeSelect } from '../../Common/components/JourneyTypeSelect';
-import { FormikCheckBox, FormikInputBox } from '../../../components/form-components';
+import { TransportSelect } from '../../Common/components/TransportSelect';
+import { useDeleteTransportUserMutation, useStoreTransportUserMutation, useUpdateTransportUserMutation } from '../hooks/mutations';
 const validationSchema = Yup.object().shape({
     user_id: Yup.number()
         .required("User is required"),

@@ -1,12 +1,11 @@
-import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
-import { useState } from 'react'
-import { HiDotsVertical } from 'react-icons/hi'
 import { useMutation, useQuery } from '@tanstack/react-query'
+import { Fragment, useState } from 'react'
+import { HiDotsVertical } from 'react-icons/hi'
 
+import { useTranslation } from 'react-i18next'
 import { HiArrowLongDown } from "react-icons/hi2"
 import { Flip, toast } from 'react-toastify'
-import { useTranslation } from 'react-i18next'
 import { fetchDocuments, folderImageMapperFn } from '../services/apis'
 
 function classNames(...classes) {
@@ -65,29 +64,29 @@ export default function ImageToFolderBtn({ document }) {
     )
 }
 
-const MenuItem = ({ option , document }) => {
-     const { t } = useTranslation()
-     const [folderOption, setFolderOption] = useState({});
-     const [payload, setPayload] = useState({
+const MenuItem = ({ option, document }) => {
+    const { t } = useTranslation()
+    const [folderOption, setFolderOption] = useState({});
+    const [payload, setPayload] = useState({
         folder_id: option.id,
-         document_id: document.id,
-     })
-     const folderImageMapper = useMutation({
+        document_id: document.id,
+    })
+    const folderImageMapper = useMutation({
         mutationFn: folderImageMapperFn,
         onSuccess: (data) => {
-           toast.info("Added", { transition: Flip });
+            toast.info("Added", { transition: Flip });
 
         },
         onError: (error) => {
-           toast.error("Error", { transition: Flip });
+            toast.error("Error", { transition: Flip });
 
         },
     });
-     const handleMapperClick = () => {
+    const handleMapperClick = () => {
         folderImageMapper.mutate(payload)
     }
     return (
-        <Menu.Item   className="text-gray-100 overflow-hidden hover:bg-gray-600">
+        <Menu.Item className="text-gray-100 overflow-hidden hover:bg-gray-600">
             {({ active }) => (
 
                 <div onClick={handleMapperClick}

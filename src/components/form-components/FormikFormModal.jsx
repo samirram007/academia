@@ -1,7 +1,6 @@
 import { createPortal } from 'react-dom'
-import React from 'react'
 import { MdOutlineCloseFullscreen } from 'react-icons/md'
-import { FormModalProvider, useFormModal } from '../../contexts/FormModalProvider'
+import { useFormModal } from '../../contexts/FormModalProvider'
 const FormikFormModal = ({ label, children }) => {
     const { isOpen, setOpen } = useFormModal()
 
@@ -36,7 +35,7 @@ const FormikFormModal = ({ label, children }) => {
         <>
 
             <div style={overlay}>
-                <div style={modalStyle} className='h-screen max-h-screen min-w-[50%]'>
+                <div style={modalStyle} className='h-screen max-h-screen max-w-[100%] md:max-w-[90%] lg:max-w-[70%] xl:max-w-[60%]'>
                     {
                         label &&
                         <div className=' py-1 px-2   '>

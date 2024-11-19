@@ -1,14 +1,12 @@
 import {
-    flexRender,
     getCoreRowModel,
     getFilteredRowModel,
     getPaginationRowModel,
     getSortedRowModel,
-    useReactTable,
-} from '@tanstack/react-table'
-import { lazy, useEffect  } from 'react'
-import { useState } from 'react'
-import { Link,   useSearchParams } from 'react-router-dom'
+    useReactTable
+} from '@tanstack/react-table';
+import { lazy, useEffect, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 
 
 
@@ -18,18 +16,18 @@ import { IoMdAdd } from "react-icons/io";
 
 import { useCustomRoutes } from '../../../hooks';
 
-import { useFormModal } from '../../../contexts/FormModalProvider';
 import { DateTime } from 'luxon';
 import { MdOutlineModeEditOutline } from 'react-icons/md';
+import { useFormModal } from '../../../contexts/FormModalProvider';
 
-import { PrintModal } from '../../Fee/FeeProcess/print/PrintToPdf';
 import { RiPrinterLine } from 'react-icons/ri';
 import { Capitalize } from '../../../libs/utils';
+import { PrintModal } from '../../Fee/FeeProcess/print/PrintToPdf';
 
 const EditFees=lazy(()=>import('../../Fee/FeeProcess/EditFees'))
-const FormikFormModal=lazy(()=>import('../../../components/form-components/FormikFormModal'))
-const FormikEditFormModal=lazy(()=>import('../../../components/form-components/FormikEditFormModal'))
-const Breadcrumbs=lazy(()=>import('../../../components/Breadcrumbs'))
+const FormikFormModal = lazy(() => import('@/components/form-components/FormikFormModal'))
+const FormikEditFormModal = lazy(() => import('@/components/form-components/FormikEditFormModal'))
+const Breadcrumbs = lazy(() => import('@/components/Breadcrumbs'))
 const Filter=lazy(()=>import('./Filter'))
 
 export default function TransportFeeTable({ data, columns, pageSize = 100, createRoute,

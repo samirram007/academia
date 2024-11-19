@@ -1,11 +1,12 @@
 
-import { useFormik } from 'formik'
+import { useFormik } from 'formik';
 
 import * as Yup from "yup";
 import { CampusSelect } from '../../Common/components/CampusSelect';
-import { FormikSubmit } from '../../../components/form-components';
+
+import { FormikSubmit } from '@/components/form-components/FormikSubmit';
+import { useState } from 'react';
 import { AcademicSessionSelect } from '../../Common/components/AcademicSessionSelect';
-import {   useState } from 'react';
 
 const validationSchema = Yup.object().shape({
     // campus_id: Yup.number().integer()

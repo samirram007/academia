@@ -1,9 +1,8 @@
-import React, { lazy } from 'react'
+import { lazy } from 'react'
 import { IoMdAdd } from 'react-icons/io'
 import { useFormModal } from '../../../contexts/FormModalProvider'
-import { useEffect } from 'react'
 
-const FormikFormModal = lazy(() => import('../../../components/form-components/FormikFormModal'))
+const FormikFormModal = lazy(() => import('@/components/form-components/FormikFormModal'))
 const CreateFees = lazy(() => import('./CreateFees'))
 const FeeGrid = lazy(() => import('./FeeGrid'))
 
@@ -34,7 +33,8 @@ const InitFeeProcess = ({
                     isOpen &&
                     <>
                         <FormikFormModal label={'Fees'}>
-                            <CreateFees userData={userData} selectedStudentSession={selectedStudentSession} />
+                            <CreateFees userData={userData}
+                                selectedStudentSession={selectedStudentSession} />
                         </FormikFormModal>
                     </>
                 }

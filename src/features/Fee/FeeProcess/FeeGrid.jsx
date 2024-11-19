@@ -1,4 +1,4 @@
-import React, { lazy, useState } from 'react'
+import { lazy, useState } from 'react'
 
 
 import { DateTime } from 'luxon'
@@ -7,16 +7,17 @@ import DeleteFees from './DeleteFees'
 
 const EditFees = lazy(() => import('./EditFees'))
 const PrintToPdf = lazy(() => import('./print/PrintToPdf'))
-const FormikEditFormModal = lazy(() => import('../../../components/form-components/FormikEditFormModal'))
+const FormikEditFormModal = lazy(() => import('@/components/form-components/FormikEditFormModal'))
 const FeeGrid = ({ userData, fees, selectedStudentSession, session_id }) => {
-
 
     return (
         <>
             <div className='grid grid-cols-9 items-center  text-xs border-b-2 border-violet-400/20 '>
                 <div className="col-span-1">
 
-                    <div className='flex items-center justify-center  text-center   border-r-[1px] border-violet-500 py-2'>{fees.fee_no}</div>
+                    <div className='flex items-center justify-center  text-center   border-r-[1px] border-violet-500 py-2'>
+                        {fees.fee_no}- {fees.id}
+                    </div>
                 </div>
                 <div className="col-span-8 grid grid-cols-8">
                     <div className='pl-2' >  {DateTime.fromISO(fees.fee_date).toLocaleString(DateTime.DATE_MED)}</div>

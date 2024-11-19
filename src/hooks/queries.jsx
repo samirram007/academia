@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 import {
-    fetchBuildings,   fetchFloor,  fetchFloors,  fetchRoom,
-   fetchRooms,   fetchUser, fetchUsers } from '../services'
+  fetchUser, fetchUsers
+} from '../services'
 
 
 
-import { fetchAddressType, fetchCaste, fetchGender, fetchGuardianType,fetchSubjectType, fetchLanguage, fetchNationality, fetchReligion, fetchRoomType } from '../services/enums-api'
+import { fetchAddressType, fetchCaste, fetchGender, fetchGuardianType, fetchLanguage, fetchNationality, fetchReligion, fetchRoomType, fetchSubjectType } from '../services/enums-api'
 
 
 

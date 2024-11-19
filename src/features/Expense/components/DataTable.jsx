@@ -1,26 +1,24 @@
-import React from 'react'
 
 
+import { DateTime } from 'luxon';
 import { useMemo } from 'react';
-import { DateTime } from 'luxon'
 
-import Filter from './Filter';
 
 import { useNavigate } from 'react-router-dom';
 
+import moment from 'moment';
 import { useExpenses } from '../hooks/quaries';
 import CreateExpense from './Create';
-import Edit from './Edit';
 import Delete from './Delete';
+import Edit from './Edit';
 import ExpenseTable from './ExpenseTable';
-import moment from 'moment';
 
 
 
 const initialValues = {
   expense_no: '',
   expense_date: new Date(),
-  academic_session_id: 1,
+  academic_session_id: moment(new Date()).format('YYYY'),
   campus_id: 1,
   user_id: null,
   total_amount: 0,

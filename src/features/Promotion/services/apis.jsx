@@ -10,15 +10,10 @@ export function fetchPromotionService(id) {
         })
 }
 export function fetchPromotionsService(payload) {
-    // console.log(`/student_sessions?${payload}`)
     payload = removeEmptyStrings(payload)
-    //console.log(payload)
-    let filterString = `campus_id=${payload.campus_id}`
-    // if (payload.filter_option) {
-    //     filterString += `&filter_option=${payload.filter_option}`
-    // }
+    let filterString = `?`
     if (payload.academic_session_id) {
-        filterString += `&academic_session_id=${payload.academic_session_id}`
+        filterString += `academic_session_id=${payload.academic_session_id}`
     }
     if (payload.academic_class_id) {
         filterString += `&academic_class_id=${payload.academic_class_id}`
@@ -26,8 +21,10 @@ export function fetchPromotionsService(payload) {
     if (payload.section_id) {
         filterString += `&section_id=${payload.section_id}`
     }
-    return axiosClient.get(`/promotions?${filterString}`)
+
+    return axiosClient.get(`/promotions${filterString}`)
         .then(response => {
+            console.log(response.data);
             return response.data;
         })
         .catch(err => {

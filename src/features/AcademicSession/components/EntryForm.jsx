@@ -1,10 +1,8 @@
-import React, { useState } from 'react'
-import * as Yup from "yup";
-import { useCampuses } from '../../Campus/hooks/queries';
-import { useDeleteAcademicSessionMutation, useStoreAcademicSessionMutation, useUpdateAcademicSessionMutation } from '../hooks/mutations';
 import { useFormik } from 'formik';
-import { CampusSelect } from '../../Common/components/CampusSelect';
-import { FormikCheckBox, FormikInputBox } from '../../../components/form-components';
+import * as Yup from "yup";
+import { useDeleteAcademicSessionMutation, useStoreAcademicSessionMutation, useUpdateAcademicSessionMutation } from '../hooks/mutations';
+
+import { FormikInputBox } from '@/components/form-components/FormikInputBox';
 import { AcademicSessionSelect } from '../../Common/components/AcademicSessionSelect';
 
 const validationSchema = Yup.object().shape({

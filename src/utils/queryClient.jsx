@@ -1,5 +1,5 @@
-import { QueryCache, QueryClient } from "@tanstack/react-query";
-import { Flip, toast } from "react-toastify-modernize";
+import { QueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify-modernize";
 
 export const queryClient = new QueryClient({
     defaultOptions: {

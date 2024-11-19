@@ -6,31 +6,39 @@ import {
     getSortedRowModel,
     useReactTable,
 } from '@tanstack/react-table'
-import { useEffect, useMemo } from 'react'
+import { useEffect } from 'react'
 import { useState } from 'react'
-import { Link, useLocation, useSearchParams } from 'react-router-dom'
+import { Link,  useSearchParams } from 'react-router-dom'
 
-import { isBrowser, isMobile } from 'react-device-detect';
+
 
 
 import { IoMdAdd } from "react-icons/io";
 
 import { TbFilterSearch } from "react-icons/tb";
 
-import { useFormModal } from '../../../contexts/FormModalProvider'
-import { useCustomRoutes } from '../../../hooks';
-import FormikFormModal from '../../../components/form-components/FormikFormModal';
 import Breadcrumbs from '../../../components/Breadcrumbs';
-import Filter from './Filter';
+import PreviousClassFilter from './PreviousClassFilter.jsx';
 import Promote from './Promote';
+import { usePromotionContext } from '../context/usePromotionContext';
 
 
-export default function PromotionTable({ data, columns, pageSize = 100, createRoute,
+export default function PromotionTable({   columns, pageSize = 100, createRoute,
     createForm, createFormTitle,
-    mobileHeaders = ['id', 'name'], PromotionData, initialFilterValues }) {
-    const thisRoute = useCustomRoutes()
+    mobileHeaders = ['id', 'name'] }) {
+
+        const {
+            previousClassData,
+            xData,
+            isFetchingPreviousClassData,
+            isReFetchingPreviousClassData,
+            isErrorPreviousClassData,
+            refetch,
+            initialValues,
+            initialFilterValues
+        } = usePromotionContext();
     const [sorting, setSorting] = useState([])
-    const { isOpen, setOpen } = useFormModal()
+
     const [filtering, setFiltering] = useState('')
     const [searchParams, setSearchParams] = useSearchParams()
     const [rowSelection, setRowSelection] = useState({})
@@ -40,7 +48,7 @@ export default function PromotionTable({ data, columns, pageSize = 100, createRo
         pageSize: pageSize,
     })
     const table = useReactTable({
-        data,
+        data:xData,
         columns,
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
@@ -62,19 +70,19 @@ export default function PromotionTable({ data, columns, pageSize = 100, createRo
         onGlobalFilterChange: setFiltering,
         onPaginationChange: setPagination,
         onRowSelectionChange: setRowSelection,
-        enableRowSelection: row => row.original.selectedStudentSession.is_promoted ? false : true
+        enableRowSelection: row => row.original.student_sessions[0].is_promoted ? false : true
     })
 
-    useEffect(() => {
-        setSearchParams(
-            {
-                page: table.getState().pagination.pageIndex + 1,
-                limit: table.getState().pagination.pageSize,
-            },
+    // useEffect(() => {
+    //     setSearchParams(
+    //         {
+    //             page: table.getState().pagination.pageIndex + 1,
+    //             limit: table.getState().pagination.pageSize,
+    //         },
 
-        )
+    //     )
 
-    }, [pagination]);
+    // }, [pagination]);
 
     return (
         <div className='container-flex md-container'>
@@ -103,58 +111,35 @@ export default function PromotionTable({ data, columns, pageSize = 100, createRo
 
 
                         }
-                        {/* {
-                            createForm &&
-                            <button onClick={() => setOpen(true)} title='Create new'
-                                className="btn btn-primary btn-sm text-xl
-                            btn-rounded-symbol border-blue-300/10"><IoMdAdd /></button>
-                        } */}
-                        {/* {
-                            isOpen &&
-                            <>
-                                <FormikFormModal label={createFormTitle ?? 'Create new'}>
-                                    {createForm}
-                                </FormikFormModal>
-                            </>
-                        } */}
+
                     </div>
 
                 </div>
             </div>
             <div className='flex flex-col  '>
-                <Filter PromotionData={PromotionData} initialFilterValues={initialFilterValues} />
+                <PreviousClassFilter />
                 {
-                    <Promote PromotionData={data} table={table} initialFilterValues={{ ...initialFilterValues }} />
-                    // table.getSelectedRowModel().flatRows.length ?
-                    //      <Promote PromotionData={data} table={table} />:''
-                    //
+                    <Promote table={table}  />
+
                 }
             </div>
-            {/* <div>
 
-                <ul>
-                    {table.getSelectedRowModel().flatRows.map((element, index) => {
-                        // element.original.selectedStudentSession.is_promoted=true
-                        // console.log(element.original)
-                        return <li key={index}> {element.original.name}</li>
-                    })}
-                </ul>
-
-            </div> */}
 
             {
-                (!PromotionData.data || PromotionData.isError)
+                isErrorPreviousClassData
                     ? <div>{'No Data Found'}</div>
-                    : isBrowser ?
-                        <div className="overflow-x-auto">
-                            <table className="table table-zebra">
-                                <thead>
+                    :
+                       (
+                        <div className="table-responsive overflow-y-auto  max-h-[42vh] 2xl:max-h-[60vh]">
+                        <table className="table table-zebra overflow-y-scroll  bg-slate-800  scroll">
+                            <thead className='sticky top-0 z-10'>
                                     {table.getHeaderGroups().map(headerGroup => (
                                         <tr key={headerGroup.id}>
                                             {headerGroup.headers.map(header => (
                                                 <th
                                                     key={header.id}
                                                     onClick={header.column.getToggleSortingHandler()}
+                                                    className={header.column.columnDef.visible==false? 'hidden': 'py-0'}
                                                 >
                                                     {header.isPlaceholder ? null : (
                                                         <div>
@@ -176,12 +161,21 @@ export default function PromotionTable({ data, columns, pageSize = 100, createRo
                                 </thead>
 
                                 <tbody>
+                                {isFetchingPreviousClassData || isReFetchingPreviousClassData ?
+                                <tr>
+                                    <td colSpan={6} className="text-center bg-slate-600/30 ">
+                                        <div className="flex justify-center items-center ">
+                                            <div className="spinner  animate-spin border-violet-500 transition-colors rounded-full h-6 w-6 border-t-2 "></div>
+                                        </div>
+                                    </td>
+                                </tr> : <></>
+                            }
                                     {table.getRowModel().rows.map(row => (
 
                                         <tr key={row.id}>
                                             {row.getVisibleCells().map(cell => (
 
-                                                <td key={cell.id} >
+                                                <td key={cell.id} className={cell.column.columnDef.visible==false? 'hidden': ''}>
 
                                                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                                 </td>
@@ -191,48 +185,9 @@ export default function PromotionTable({ data, columns, pageSize = 100, createRo
                                 </tbody>
 
                             </table>
-                        </div>
-                        :
-                        <>
-                            <div className='flex gap-2 flex-col my-2'>
-                                {table.getRowModel().rows.map((row) => (
-                                    <MobileRow row={row} index={row.id} key={row.id} mobileHeaders={mobileHeaders} />
-                                ))}
-                            </div>
+                        </div>)
 
-                            <div className='row  flex flex-col md:flex-row justify-between gap-2 mt-6'>
-                                <div className='flex flex-row gap-2 flex-1 text-lg'>
-                                    {table.getState().pagination.pageIndex + 1} of {table.getPageCount()} pages
-                                </div>
-                                <div className='flex flex-row gap-2 flex-1'>
 
-                                </div>
-                                <div className='flex flex-row gap-2 justify-end flex-1'>
-                                    <div className='flex flex-row  gap-2'>
-                                        <button disabled={!table.getCanPreviousPage()} onClick={() => table.setPageIndex(0)}
-                                            className='btn btn-blue btn-sm btn-rounded'>{'<<'}</button>
-                                        <button
-                                            disabled={!table.getCanPreviousPage()}
-                                            onClick={() => table.previousPage()}
-                                            className='btn btn-blue btn-sm btn-rounded'
-                                        >
-                                            {'<'}
-                                        </button>
-                                        <button
-                                            disabled={!table.getCanNextPage()}
-                                            onClick={() => table.nextPage()}
-                                            className='btn btn-blue btn-sm btn-rounded'
-                                        >
-                                            {'>'}
-                                        </button>
-                                        <button onClick={() => table.setPageIndex(table.getPageCount() - 1)} disabled={!table.getCanNextPage()}
-                                            className='btn btn-blue btn-sm btn-rounded'>
-                                            {'>>'}
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </>
             }
         </div >
 

@@ -1,19 +1,23 @@
-import React, { lazy, useState } from 'react'
-import { FormikHiddenInput, FormikInputBox, FormikSelect, FormikSubmit, ImageBox } from '../../../components/form-components'
-import { useFormik } from 'formik'
+import { useFormik } from 'formik';
+import { lazy, useState } from 'react';
 import * as Yup from "yup";
+
 import {
     useCaste, useGender,
     useLanguage, useNationality, useReligion
-} from '../../../hooks/queries'
+} from '../../../hooks/queries';
 
 
 import { useStoreStudentMutation, useUpdateStudentMutation } from '../hooks/mutations';
 
 
-import { CampusSelect } from '../../Common/components/CampusSelect';
-import { AcademicSessionSelect } from '../../Common/components/AcademicSessionSelect';
+import { FormikInputBox } from '@/components/form-components/FormikInputBox';
+import { FormikSelect } from '@/components/form-components/FormikSelect';
+import { FormikSubmit } from '@/components/form-components/FormikSubmit';
+import { ImageBox } from '@/components/form-components/ImageBox';
 import { AcademicClassSelect } from '../../Common/components/AcademicClassSelect';
+import { AcademicSessionSelect } from '../../Common/components/AcademicSessionSelect';
+import { CampusSelect } from '../../Common/components/CampusSelect';
 
 const Guardians=lazy(()=>import('./Guardians'))
 const Addresses=lazy(()=>import('./Addresses'))

@@ -1,17 +1,15 @@
-import { DateTime } from 'luxon'
-import React, { useEffect, useRef, useState } from 'react'
+import { DateTime } from 'luxon';
+import { useEffect, useRef, useState } from 'react';
 
 
 
 import moment from 'moment';
-import { Flip, toast } from 'react-toastify';
 import { useReactToPrint } from 'react-to-print';
 
 
-import PdfModal from '../../../../components/form-components/PdfModal';
-import { useFeeTemplates } from '../../../FeeTemplate/hooks/quaries';
-import { MonthPanel } from '../FeeProcess';
+import PdfModal from '@/components/form-components/PdfModal';
 import { Capitalize } from '../../../../libs/utils';
+import { useFeeTemplates } from '../../../FeeTemplate/hooks/quaries';
 
 
 const apiDomain = import.meta.env.VITE_API_BASE_URL

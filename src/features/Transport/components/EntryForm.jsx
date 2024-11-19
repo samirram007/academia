@@ -1,18 +1,13 @@
-import React from 'react'
 import * as Yup from "yup";
 
+import { useFormik } from 'formik';
 import {
     useDeleteTransportMutation,
     useStoreTransportMutation,
     useUpdateTransportMutation
 } from '../hooks/mutations';
-import { useFormik } from 'formik';
 
-import { FormikInputBox } from '../../../components/form-components';
-import { FormikTextBox } from '../../../components/form-components/FormikTextBox';
-import { CampusSelect } from '../../Common/components/CampusSelect';
-import { BuildingSelect } from '../../Common/components/BuildingSelect';
-import { FloorSelect } from '../../Common/components/FloorSelect';
+import { FormikInputBox } from '@/components/form-components/FormikInputBox';
 
 import { TransportTypeSelect } from '../../Common/components/TransportTypeSelect';
 

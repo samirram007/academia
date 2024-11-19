@@ -8,8 +8,9 @@ import { useNavigate } from 'react-router-dom';
 import { useStudents } from '../hooks/queries';
 
 import moment from 'moment';
-const Filter=lazy(()=>import('./Filter'))
-const FilterTable=lazy(()=>import('../../../components/tables/FilterTable'))
+// import FilterTable from './FilterTable';
+const Filter = lazy(() => import('./Filter'))
+const FilterTable = lazy(() => import('./FilterTable'))
 
 
 const initialValues = {
@@ -48,7 +49,7 @@ const DataTable = () => {
     {
       header: "Roll",
       accessorKey: "student_session.roll_no",
-      visible:false
+      visible: false
     },
     {
       header: "Name",
@@ -58,25 +59,30 @@ const DataTable = () => {
         const thisRow = row.original.student_sessions
           .find(x => x.academic_session_id == initialFilterValues.academic_session_id)
         return (
-          <>
-          <div className='text-blue-200 font-bold text-md'>{row.original.name}</div>
-          { thisRow &&
-          <div className='flex flex-row gap-2  text-[8px]'>
-            <span>
-              <span className='text-blue-400 font-bold'>{thisRow.academic_class.name}</span>
-            </span>
-            <span>
-              Section:
-              <span className='text-red-400 font-bold'>{thisRow.section.name}</span>
-            </span>
-            <span>
-              Roll:
-              <span className='text-green-400 font-bold'>{thisRow.roll_no}</span>
-            </span>
+          <div className='flex flex-row gap-2'>
+            {row.original.profile_document ?
+              <img src={row.original.profile_document.path} className='w-10 h-10 rounded-full' /> :
+              <img src={`${import.meta.env.VITE_API_BASE_URL}/storage/documents/student.png`} className='w-10 h-10 rounded-full' alt="" />}
 
-          </div>}
-          </>
+            <div>
+              <div className='text-blue-200 font-bold text-md'>{row.original.name}</div>
+              {thisRow &&
+                <div className='flex flex-row gap-2  text-[8px]'>
+                  <span>
+                    <span className='text-blue-400 font-bold'>{thisRow.academic_class.name}</span>
+                  </span>
+                  <span>
+                    Section:
+                    <span className='text-red-400 font-bold'>{thisRow.section.name}</span>
+                  </span>
+                  <span>
+                    Roll:
+                    <span className='text-green-400 font-bold'>{thisRow.roll_no}</span>
+                  </span>
 
+                </div>}
+            </div>
+          </div>
 
         )
       }
@@ -134,6 +140,7 @@ const DataTable = () => {
   return (
     <FilterTable data={data} columns={columns}
       createRoute={createRoute}
+      fetchedData={fetchedData}
       filter={
         <Filter fetchedData={fetchedData}
           initialFilterValues={initialFilterValues} />

@@ -1,18 +1,17 @@
 
-import { useFormik } from 'formik'
+import { useFormik } from 'formik';
 
+import { FormikSubmit } from '@/components/form-components/FormikSubmit';
 import * as Yup from "yup";
-import { CampusSelect } from '../../Common/components/CampusSelect';
-import { FormikSubmit } from '../../../components/form-components';
 
 import { useState } from 'react';
 import { AcademicSessionSelect } from '../../Common/components/AcademicSessionSelect';
-import { AcademicClassSelect } from '../../Common/components/AcademicClassSelect';
 import { SectionSelect } from '../../Common/components/SectionSelect';
 import { useStorePromotionMutation } from '../hooks/mutations';
 
-import { Flip, toast } from "react-toastify";
 import moment from 'moment';
+import { Flip, toast } from "react-toastify";
+import { CampusAcademicClassSelect } from '../../Common/components/CampusAcademicClassSelect';
 const validationSchema = Yup.object().shape({
     // campus_id: Yup.number().integer()
     //     .min(1, "Please select Campus")
@@ -38,11 +37,11 @@ const initialValues = {
 }
 
 
-const Promote = ({ PromotionData, table, initialFilterValues }) => {
+const Promote = ({ table, initialFilterValues }) => {
     const promotionMutate = useStorePromotionMutation()
-    // const { data:PromotionData,refetch,isFetching} = useAcademicSessions({campus_id:initialValues.campus_id})
-    // const  PromotionData  = useAcademicSessions(initialFilterValues)
-    const [isLoading, setIsLoading] = useState(PromotionData.isLoading)
+    // const { data:PreviousClassData,refetch,isFetching} = useAcademicSessions({campus_id:initialValues.campus_id})
+    // const  PreviousClassData  = useAcademicSessions(initialFilterValues)
+
     const [showSelectedStudent, setShowSelectedStudent] = useState(false)
 
     const formik = useFormik({
@@ -83,11 +82,6 @@ const Promote = ({ PromotionData, table, initialFilterValues }) => {
             console.log(payloadValues, 'one or few Student Selected');
             promotionMutate.mutate(payloadValues)
 
-            // Object.assign(initialPromotionValues, values);
-            // PromotionData.refetch()
-            // PromotionData.isError(
-            //     console.log(PromotionData)
-            // )
             setTimeout(() => {
 
                 setSubmitting(false)
@@ -103,7 +97,7 @@ const Promote = ({ PromotionData, table, initialFilterValues }) => {
 
 
     return (
-        <div className={isLoading ? 'hidden' : 'flex-1 flex flex-col justify-end bg-blue-600/20  rounded-lg my-2 p-2 '}>
+        <div className={'flex-1 flex flex-col justify-end bg-blue-600/20  rounded-lg my-2 p-2 '}>
 
             <div>
                 <div className=' border-b-2 border-b-red-600 relative flex flex-row items-start justify-start pb-1'>
@@ -138,25 +132,20 @@ const Promote = ({ PromotionData, table, initialFilterValues }) => {
                         <div className='grid gap-4 col-span-6   pb-2 px-4   '>
                             <div className='grid gap-4 grid-cols-10   mb-2'>
                                 {/* <div className='col-span-1 text-md font-bold'>Filter</div> */}
-                                <div className='col-span-10 md:col-span-2 '>
-                                    <CampusSelect formik={formik} auto={false} isLoading={isLoading} setIsLoading={setIsLoading} />
 
-
-
-                                </div>
                                 <div className='col-span-10 md:col-span-2 '>
 
                                     <AcademicSessionSelect formik={formik}   />
 
                                 </div>
                                 <div className='col-span-10 md:col-span-2 '>
-                                    <AcademicClassSelect formik={formik} campus_id={formik.values.campus_id} />
+                                    <CampusAcademicClassSelect formik={formik} />
                                 </div>
                                 <div className='col-span-10 md:col-span-2 '>
                                     <SectionSelect formik={formik} />
                                 </div>
                                 {formik.values &&
-                                    <div className={isLoading ? 'hidden' : '  col-span-10 md:col-span-2 flex flex-col justify-end '}>
+                                    <div className={'   flex flex-col justify-end '}>
 
                                         <FormikSubmit formik={formik} btnColor={`btn-error`} label={'Promote'} />
                                     </div>

@@ -1,8 +1,7 @@
-import React, { Suspense, lazy, useEffect, useMemo, useState } from 'react'
+import { lazy, useEffect, useState } from 'react';
 
 
-import { useAcademicSessions } from '../../../AcademicSession/hooks/quaries';
-import { ErrorBoundary } from 'react-error-boundary';
+import { upperCase } from '@/utils/removeEmptyStrings';
 // import   FeeProcess  from '../../../Fee/FeeProcess/FeeProcess';
 // import Profile from './Profile';
 // import StudentSession from './StudentSession';
@@ -119,7 +118,10 @@ export const Address = ({ data }) => {
         <div className=' pl-1 mb-2'>
           {
             data.map((address, index) => (
-              <div key={index}>{address.address_type}: {address.display}</div>
+              <div key={index}>
+                <span className='p-2 bg-blue-600 rounded-md mr-2'> {upperCase(address.address_type)}:</span>
+                {address.display}
+              </div>
             ))
           }
         </div>

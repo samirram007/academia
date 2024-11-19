@@ -35,6 +35,13 @@ const navigate=useNavigate()
           <div className='w-36'>Birth Mark:</div> {data.birth_mark}
         </div>
         <div className=' pl-1 mb-2 flex'>
+          <div className='w-36'>Contact No.:</div> {data.contact_no}
+        </div>
+        <div className=' pl-1 mb-2 flex'>
+          <div className='w-36'>email:</div> {data.email}
+        </div>
+
+        <div className=' pl-1 mb-2 flex'>
           <div className='w-36'>Aadhaar Number:</div> {data.aadhaar_no}
         </div>
         <div className=' pl-1 mb-2 flex'>

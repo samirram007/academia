@@ -1,7 +1,6 @@
-import React from 'react';
 
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Pie, Bar, Line, Doughnut } from 'react-chartjs-2';
+import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
+import { Doughnut, Pie } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -30,14 +29,14 @@ const subjectsData = {
 
 
 const attendanceData = {
-  labels: ['January', 'February', 'March'],
-  datasets: [
-    {
-      label: 'Attendance',
-      data: [80, 60, 70],
-      backgroundColor: ['rgba(255, 99, 132, 0.8)','rgba(255, 255, 132, 0.8)','rgba(75, 192, 192, 0.2)'],
-    }
-  ]
+    labels: ['January', 'February', 'March'],
+    datasets: [
+        {
+            label: 'Attendance',
+            data: [80, 60, 70],
+            backgroundColor: ['rgba(255, 99, 132, 0.8)', 'rgba(255, 255, 132, 0.8)', 'rgba(75, 192, 192, 0.2)'],
+        }
+    ]
 };
 
 
@@ -47,7 +46,7 @@ const feesData = {
         {
             label: 'Fees Collection',
             data: [30000, 25000],
-            backgroundColor: ['rgba(255, 99, 132, 0.8)','rgba(255, 255, 132, 0.8)'],
+            backgroundColor: ['rgba(255, 99, 132, 0.8)', 'rgba(255, 255, 132, 0.8)'],
         }
     ]
 };
@@ -71,18 +70,30 @@ const scoresData = {
 
 const Dashboard = () => {
     return (
-        <div>
-            <h2>Students per Subject</h2>
-            <Pie data={subjectsData} />
+        <div className='w-full h-full overflow-scroll'>
+            {/* <QuickAccess/> */}
+            <div className='grid grid-cols-8 gap-5'>
+                <div className='col-span-2'>
+                    <h2>Students per Subject</h2>
+                    <Pie data={subjectsData} />
+                </div>
+                <div className='col-span-2'>
+                    <h2>Monthly Attendance</h2>
+                    <Pie data={attendanceData} />
+                </div>
 
-            <h2>Monthly Attendance</h2>
-            <Pie data={attendanceData} />
+                <div className='col-span-2'>
+                    <h2>Fees Collection</h2>
+                    <Doughnut data={feesData} />
+                </div>
 
-            <h2>Fees Collection</h2>
-            <Doughnut data={feesData} />
+                <div className='col-span-2'>
+                    <h2>Test Scores</h2>
+                    <Pie data={scoresData} />
+                </div>
 
-            <h2>Test Scores</h2>
-            <Pie data={scoresData} />
+
+            </div>
         </div>
     );
 };

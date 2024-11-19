@@ -1,9 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 
 
-import { useNavigate } from "react-router-dom";
-import { deleteFee, storeFee, updateFee } from "../services/apis";
 import { queryClient } from "../../../utils/queryClient";
+import { deleteFee, storeFee, updateFee } from "../services/apis";
 
 import { Flip, toast } from "react-toastify";
 import { useFormModal } from "../../../contexts/FormModalProvider";
@@ -45,7 +44,8 @@ export function useDeleteFeeMutation() {
   return useMutation({
     mutationFn: deleteFee,
     onSuccess: (data) => {
-     queryClient.invalidateQueries({ queryKey: ['fees'] })
+      //  queryClient.invalidateQueries({ queryKey: ['fees'] })
+      queryClient.invalidateQueries({ queryKey: ['student_session_fees'] })
       toast.success(data.message, { transition: Flip });
      // navigate("/fees", { replace: true })
       setOpen(false)

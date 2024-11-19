@@ -1,16 +1,14 @@
-import React, { memo, useEffect, useMemo, useState } from 'react'
+import { useState } from 'react';
 
-import { useFormik } from 'formik'
-import { FormikSelect, FormikSubmit } from '../../../components/form-components'
+import { useFormik } from 'formik';
 import * as Yup from "yup";
 
-import { CampusSelect } from '../../Common/components/CampusSelect'
 
+
+import { FormikSubmit } from '@/components/form-components/FormikSubmit';
 import { AcademicSessionSelect } from '../../Common/components/AcademicSessionSelect';
-import { AcademicClassSelect } from '../../Common/components/AcademicClassSelect';
-import { StudentFilterSelect } from '../../Common/components/StudentFilterSelect';
-import { queryClient } from '../../../utils/queryClient';
 import { CampusAcademicClassSelect } from '../../Common/components/CampusAcademicClassSelect';
+import { StudentFilterSelect } from '../../Common/components/StudentFilterSelect';
 
 
 const validationSchema = Yup.object().shape({
@@ -35,7 +33,7 @@ const Filter = ({ fetchedData, initialFilterValues }) => {
         enableReinitialize: true,
         onSubmit: (values, { setSubmitting }) => {
             Object.assign(initialFilterValues, values);
-            console.log('ib', initialFilterValues);
+            // console.log('ib', initialFilterValues);
             // setSubmitting(false)
             fetchedData.refetch()
             setSubmitting(false)
@@ -86,19 +84,29 @@ const Filter = ({ fetchedData, initialFilterValues }) => {
                                 </div> */}
                                 <div className='col-span-2 '>
 
-<CampusAcademicClassSelect formik={formik} name='academic_class_id' label={'Class'} />
+                                    <CampusAcademicClassSelect formik={formik} name='academic_class_id' label={'Class'} />
 
-</div>
-
-
-                                {formik.values &&
-                                    <div className='col-span-1 flex flex-col justify-end '>
+                                </div>
 
 
+                                {fetchedData.isRefetching ?
+                                    (
+                                        <div className={'flex flex-col justify-end '}>
+                                            <button type="submit"
+                                                className={`btn !bg-red-400 !text-slate-900 btn-disabled flex flex-row flex-nowrap text-nowrap`}>
+                                                Filtering
+                                            </button>
+                                        </div>
+                                    )
+                                    :
+                                    (
+                                        formik.values &&
+                                        <div className={' flex flex-col justify-end '}>
 
+                                                <FormikSubmit formik={formik} label={'Filter'} />
+                                            </div>
+                                    )
 
-                                        <FormikSubmit formik={formik} label={'Filter'} />
-                                    </div>
                                 }
                             </div>
                         </div>

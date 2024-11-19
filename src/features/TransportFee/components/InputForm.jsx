@@ -1,18 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react'
-import {
-    useDeleteTransportFeeMutation,
-    useStoreTransportFeeMutation, useUpdateTransportFeeMutation
-} from '../hooks/mutations'
-import * as Yup from "yup";
 import { useFormik } from 'formik';
-import { TransportSelect } from '../../Common/components/TransportSelect';
-import { JourneyTypeSelect } from '../../Common/components/JourneyTypeSelect';
-import { FormikCheckBox, FormikInputBox } from '../../../components/form-components';
+import { useEffect, useRef, useState } from 'react';
+import { LuLoader2 } from 'react-icons/lu';
+import { Flip, toast } from 'react-toastify';
+import * as Yup from "yup";
+
+import { FormikInputBox } from '@/components/form-components/FormikInputBox';
 import { AcademicSessionSelect } from '../../Common/components/AcademicSessionSelect';
 import { CampusSelect } from '../../Common/components/CampusSelect';
 import { useFeeHeads } from '../../FeeHead/hooks/queries';
-import { Flip, toast } from 'react-toastify';
-import { LuLoader, LuLoader2 } from 'react-icons/lu';
+import {
+    useDeleteTransportFeeMutation,
+    useStoreTransportFeeMutation, useUpdateTransportFeeMutation
+} from '../hooks/mutations';
 const validationSchema = Yup.object().shape({
     user_id: Yup.number()
         .required("User is required"),

@@ -16,7 +16,6 @@ const DataTable = () => {
 
     const fetchedData = useExpenseHeads({})
 
-
       const mData = fetchedData.data?.data ?? [];
 
       const data = useMemo(() => [...mData], [mData]);

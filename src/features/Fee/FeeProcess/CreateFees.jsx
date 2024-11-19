@@ -1,11 +1,10 @@
-import { Flip, toast } from "react-toastify";
-import { useStoreStudentFeeMutation } from "../../Student/hooks/mutations";
-import { useEffect, useState } from "react";
-import { CgArrowsExchangeAltV } from "react-icons/cg";
-import { FeeEntryRow, FeeEntryRows } from "./FeeProcess";
-import { useFeeTemplates } from "../../FeeTemplate/hooks/quaries";
 import moment from "moment";
+import { useEffect, useState } from "react";
+import { Flip, toast } from "react-toastify";
 import { Capitalize } from "../../../libs/utils";
+import { useFeeTemplates } from "../../FeeTemplate/hooks/quaries";
+import { useStoreStudentFeeMutation } from "../../Student/hooks/mutations";
+import { FeeEntryRows } from "./FeeProcess";
 const defaultFeeData = {
     fee_no: 'NEW',
     fee_date: new Date(),
@@ -64,9 +63,8 @@ const CreateFees = ({ userData, selectedStudentSession }) => {
     }
 
     return (
-        <>
+
             <div className='relative flex flex-row gap-6 justify-around px-2 w-[100dvw] max-w-full   h-[90dvh] max-h-full'>
-                {/* <div className={`${!panelToggle ? 'flex overflow-y-auto flex-col w-full min-w-80 gap-2' : 'hidden'} `}> */}
                 <div className={`flex overflow-y-auto flex-col  gap-1 border-2 border-rose-600/90 rounded-lg shadow-inner  mb-8 pb-2 `} >
                     <div className='      flex items-center justify-center text-md rounded-t-[2px] py-1 font-bold text-white bg-rose-600/90'>
                         Select Template</div>
@@ -75,7 +73,7 @@ const CreateFees = ({ userData, selectedStudentSession }) => {
                         {
                             fetchedFeeTemplatesData.data.data.map((feeTemplate, index) => (
                                 <div key={index}
-                                    className={`${feeTemplate.id === selectedTemplate?.id ? 'text-red-400 text-[9px]`' : 'text-gray-600 text-[7px]'} w-full  btn btn-link text-wrap   btn-sm `}
+                                    className={`${feeTemplate.id === selectedTemplate?.id ? 'text-red-400 text-[10px]`' : 'text-gray-400 text-[11px]'} w-full  btn btn-link text-wrap   btn-sm `}
                                     onClick={() => handleToggle(feeTemplate)}>
                                     {feeTemplate.name}
                                 </div>
@@ -101,7 +99,7 @@ const CreateFees = ({ userData, selectedStudentSession }) => {
                     />
                 </div>
             </div>
-        </>
+
     )
 }
 export default CreateFees

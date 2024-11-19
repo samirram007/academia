@@ -1,13 +1,19 @@
-import React, {   useState } from 'react'
-import { FormikHiddenInput, FormikInputBox, FormikSelect, FormikSubmit, ImageBox } from '../../../components/form-components'
-import {useFormik } from 'formik'
+import { useFormik } from 'formik';
+import { useState } from 'react';
 import * as Yup from "yup";
-import {    useCaste, useGender,
-    useLanguage, useNationality, useReligion } from '../../../hooks/queries'
+
+import {
+    useCaste, useGender,
+    useLanguage, useNationality, useReligion
+} from '../../../hooks/queries';
 
 
-import { useStoreTeacherMutation, useUpdateTeacherMutation } from '../hooks/mutations';
+import { FormikInputBox } from '@/components/form-components/FormikInputBox';
+import { FormikSelect } from '@/components/form-components/FormikSelect';
+import { FormikSubmit } from '@/components/form-components/FormikSubmit';
+import { ImageBox } from '@/components/form-components/ImageBox';
 import { useCampuses } from '../../Campus/hooks/queries';
+import { useStoreTeacherMutation, useUpdateTeacherMutation } from '../hooks/mutations';
 
 const validationSchema = Yup.object().shape({
     name: Yup.string()

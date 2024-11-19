@@ -5,8 +5,8 @@ import { useDocumentTitle } from '../../../hooks'
     useDocumentTitle()
     return (
         <>
-            <div className="flex justify-stretch flex-col w-full overflow-y-auto">
-                <div className="card  animated fadeInDown bg-zinc-600/20">
+            <div className="flex justify-stretch flex-col w-full max-h-full h-full">
+                <div className="card  animated fadeInDown bg-zinc-600/20 max-h-full h-full">
                     <DataTable />
                 </div>
             </div>

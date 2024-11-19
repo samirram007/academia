@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
-import FormikEditFormModal from '../../../components/form-components/FormikEditFormModal'
-import EntryForm from './EntryForm'
-import DataTable from './DataTable'
+
+import FormikEditFormModal from '@/components/form-components/FormikEditFormModal'
 import Create from './Create'
+import DataTable from './DataTable'
 import Edit from './Edit'
 
 const ExpenseItem = ({ initialValues }) => {

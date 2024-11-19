@@ -24,6 +24,7 @@ const defaultFeeData = {
     ]
 }
 const EditFees = ({ userData, fees, isOpen, setOpen, selectedStudentSession = fees.student_session }) => {
+
     const [selectedTemplate, setSelectedTemplate] = useState(null)
     const [panelToggle, setPanelToggle] = useState(false)
     const [isMount, setIsMount] = useState(false);
@@ -130,7 +131,7 @@ const EditFees = ({ userData, fees, isOpen, setOpen, selectedStudentSession = fe
                     {
                         fetchedFeeTemplatesData.data.data.map((feeTemplate, index) => (
                             <div key={index}
-                                className={`${feeTemplate.id === selectedTemplate?.id ? 'text-red-400 text-[9px]`' : 'text-gray-600 text-[7px]'} w-full  btn btn-link text-wrap   btn-sm `}
+                                className={`${feeTemplate.id === selectedTemplate?.id ? 'text-red-400 text-[10px]`' : 'text-gray-400 text-[9px]'} w-full  btn btn-link text-wrap   btn-sm `}
                                 onClick={() => handleToggle(feeTemplate)}>
                                 {feeTemplate.name}
                             </div>
@@ -140,7 +141,7 @@ const EditFees = ({ userData, fees, isOpen, setOpen, selectedStudentSession = fe
 
 
             </div>
-            <div className={`flex-1 flex flex-col gap-2 relative border-2 border-rose-800/90 rounded-lg shadow-inner  mb-8 pb-2   `}>
+            <div className={`flex-1 flex flex-col gap-2 relative border-2 border-rose-800/90 rounded-lg shadow-inner  mb-8  `}>
                 {fetchedFeeTemplatesData.data &&
                     <EditFeesReadyMode
                         userData={userData}
@@ -284,7 +285,8 @@ const EditProcessPanel = ({ userData, selectedTemplate, isMount, setIsMount, fee
 
             </div>
             {
-                !selectedTemplate && <div className="text-red-500 flex justify-center items-center h-100 underline decoration-1 font-semibold underline-offset-2 decoration-blue-500">Please select Template</div>
+                !selectedTemplate && <div className="text-red-500 flex justify-center items-center h-100 underline decoration-1
+                font-semibold underline-offset-2 decoration-blue-500">Please select Template</div>
             }
             {
                 selectedTemplate && <SelectedTemplatePanelEditMode selectedTemplate={selectedTemplate}
@@ -374,9 +376,9 @@ const SelectedTemplatePanelEditMode = ({ selectedTemplate, isMount, setIsMount, 
                     <FeeEntryRows feeData={feeData} setChanges={setChanges} selectedStudentSession={selectedStudentSession} mode='edit' />
 
                 </div>
-                <div className='sticky w-full bg-violet-400
+                <div className='absolute    w-full bg-violet-400
           text-slate-800 bottom-0 flex flex-row justify-end gap-2
-          font-bold border-t-2 border-violet-400/60 py-2'>
+          font-bold border-t-2 border-violet-400/60 py-3 rounded-md'>
                     <span className='w-64 text-right '>{'Total'}:</span>
                     <span className='w-32 text-right pr-2'>{Number(total).toFixed(2)} </span>
                 </div>

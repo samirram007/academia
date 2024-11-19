@@ -1,8 +1,8 @@
+import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { Flip, toast } from "react-toastify";
 import { useAuth } from "../../../contexts";
 import { queryClient } from "../../../utils/queryClient";
-import { Flip, toast } from "react-toastify";
-import { useMutation } from "@tanstack/react-query";
 import { authLogin, authLogout } from "../services/apis";
 
 export function useAuthLogin() {
@@ -15,8 +15,8 @@ export function useAuthLogin() {
       setUser(data.data)
       setToken(data.token)
       queryClient.invalidateQueries({ queryKey: ['user'] })
-      toast.success("Login Successful", { transition: Flip });
-      navigate("/dashboard")
+      // toast.success("Login Successful", { transition: Flip });
+      // navigate("/dashboard")
     },
     onError: (error) => {
 
@@ -37,7 +37,7 @@ export function useAuthLogout() {
     onSuccess: () => {
       setUser({});
       setToken(null);
-      navigate("/login")
+      navigate("/")
     },
     onError: (err) => {
       toast.error(err.response.data.message, { transition: Flip })

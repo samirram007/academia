@@ -10,7 +10,7 @@ export const SectionSelect = ({ formik, name,label,exclude }) => {
 
 
     const SectionData = useSections();
-    if (SectionData.isLoading) return <Loader />;
+    if (SectionData.isLoading)  return <Loader size={6} label={'Academic Class'} />
     return (
 
         <CustomSelect formik={formik} name={name??"section_id"}

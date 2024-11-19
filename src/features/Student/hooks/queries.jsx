@@ -1,6 +1,6 @@
-import { useQuery } from "@tanstack/react-query"
-import { fetchStudentById, fetchStudents } from "../services/apis"
-import { useCallback } from "react"
+import { useQuery } from "@tanstack/react-query";
+import { useCallback } from "react";
+import { fetchStudentById, fetchStudents } from "../services/apis";
 
 
 export function useStudents(payload) {
