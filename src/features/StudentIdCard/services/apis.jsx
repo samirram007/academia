@@ -37,7 +37,7 @@ export function fetchStudentIdCardsService(payload) {
 }
 
 export function storeStudentIdCardService(payload) {
-    console.log(payload);
+
     return axiosClient.post("/student_id_cards", removeEmptyStrings(payload))
         .then(response => {
             return response.data;

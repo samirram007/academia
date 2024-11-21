@@ -1,12 +1,12 @@
-import { useQuery } from "@tanstack/react-query"
-import { fetchAcademicClassByCampusIdService, fetchAcademicClassService, fetchAcademicClassServices } from "../services/apis"
+import { useQuery } from "@tanstack/react-query";
 import { useCallback } from "react";
+import { fetchAcademicClassByCampusIdService, fetchAcademicClassService, fetchAcademicClassServices } from "../services/apis";
 
 
 export function useAcademicClasses(payload) {
 
   const filterCallbackFn = useCallback((data) => {
-    // console.log('Data before filtering:', data);
+
 
     return { data: data.data.filter(x => x.campus_id === parseInt(payload.campus_id)) }
   }, [payload.campus_id]);

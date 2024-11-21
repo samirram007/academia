@@ -50,7 +50,7 @@ export function deleteFee(payload) {
 
 
     const { id, ...data } = payload;
-    console.log(id);
+
     return axiosClient.delete(`/fees/${id}`)
         .then(response => {
             return response.data;

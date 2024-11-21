@@ -268,7 +268,7 @@ export const FeeCard = ({ row, index }) => {
     )
 }
 export const TransportFeeDetails = ({ data }) => {
-console.log(data.transport_fee_items);
+
     return (
         <div className='p-2 text-[8px]'>
             <div className='flex flex-row flex-nowrap justify-between items-center

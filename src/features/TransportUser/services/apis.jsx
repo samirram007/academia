@@ -22,8 +22,7 @@ export function fetchTransportUsersService(payload) {
 
 }
 export function fetchUserSearchService(payload) {
-    const filterString=payload.searchText?`?search_text=${payload.searchText}`:``
-     console.log(filterString)
+    const filterString = payload.searchText ? `?search_text=${payload.searchText}` : ``
     return axiosClient.get(`/search_users_for_transport${filterString}`)
         .then(response => {
             return response.data;
@@ -47,11 +46,9 @@ export function fetchTransportUserSearchService(payload) {
 }
 
 export function storeTransportUserService(payload) {
-console.log('api',payload)
-// return
+
     return axiosClient.post("/transport_users", removeEmptyStrings(payload))
         .then(response => {
-            console.log(response);
             return response.data;
         })
         .catch(err=> {console.log('error', err)})

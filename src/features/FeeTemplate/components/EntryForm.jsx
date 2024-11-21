@@ -20,7 +20,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
     const feeTemplateDeleteMutation = useDeleteFeeTemplateMutation()
 
     const handleFormSubmit = (values) => {
-        console.log(values);
+
         if (entryMode === 'create') {
             feeTemplateStoreMutation.mutate(values)
         } else if (entryMode === 'edit') {

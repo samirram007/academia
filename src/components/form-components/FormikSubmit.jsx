@@ -1,11 +1,11 @@
 export const FormikSubmit = (
-    { formik, label, btnColor = `btn-primary` }
+    { formik, label, btnColor = `btn-primary`, ...props }
 ) => {
 
     return (
         <>
             <button type="submit"
-                className={`btn cursor-pointer  ${btnColor} flex flex-row flex-nowrap text-nowrap`}>
+                className={` cursor-pointer  ${btnColor} flex flex-row flex-nowrap text-nowrap ${props.className} btn`}>
 
                 {label}
 

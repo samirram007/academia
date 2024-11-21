@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { createContext, useContext, useState, useCallback, useMemo } from 'react';
-import { fetchPromotionsService } from '../services/apis';
 import moment from 'moment';
+import { createContext, useCallback, useContext, useMemo, useState } from 'react';
+import { fetchPromotionsService } from '../services/apis';
 
 const PromotionContext = createContext();
 
@@ -35,7 +35,8 @@ export const PromotionProvider = ({ children }) => {
     } = useQuery({
         queryKey: ['promotions', filters],
         queryFn: () => fetchPromotionsService(filters),
-        enabled: !!filters, // Disable automatic fetching
+        // enabled: !!filters, // Disable automatic fetching
+        enabled: false, // Disable automatic fetching
         staleTime: 1000*60*5,
         retryDelay: 1000*60*5,
         retry: 2,

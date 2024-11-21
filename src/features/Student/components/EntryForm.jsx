@@ -56,7 +56,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
         validationSchema,
         enableReinitialize: true,
         onSubmit: values => {
-          //  console.log(typeof values.academic_session_id);
+
             if(typeof values.campus_id==='string' && values.campus_id!==''){
                 values.campus_id=parseInt(values.campus_id)
             }
@@ -78,7 +78,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
         <form onSubmit={formik.handleSubmit}>
             <div className='grid grid-cols-1  '>
                 <div className='grid grid-flow-row md:grid-flow-col grid-cols-6 gap-5'>
-                    <div className='grid gap-4 col-span-6 md:col-span-4 border-b-2 md:border-r-2 md:border-b-0 border-blue-300/30 pb-2 px-4 mb-2 '>
+                    <div className='overflow-y-scroll    scroll grid gap-4 col-span-6 md:col-span-4 border-b-2 md:border-r-2 md:border-b-0 border-blue-300/30 pb-2 px-4 mb-2 '>
                         <div className='grid gap-4 grid-cols-6  border-b-2 border-blue-300/30 pb-2  mb-2'>
                             <div className='col-span-6 md:col-span-6'>
 
@@ -172,14 +172,14 @@ const EntryForm = ({ initialValues, entryMode }) => {
                         {entryMode == 'edit' &&
                             <>
                                 <Guardians formik={formik} name="guardians" label="Guardian" />
-                                <Addresses formik={formik} name="addresses" label="Address" />
+                            <Addresses formik={formik} name="addresses" label="Address" />
                             </>
                         }
 
 
 
                     </div>
-                    <div className='col-span-6 md:col-span-2  '>
+                    <div className='overflow-y-scroll    scroll col-span-6 md:col-span-2  '>
                             <div className='col-span-6 md:col-span-4'>
                                 <ImageBox formik={formik} name="profile_document_id" editable={true} resource="profile_document" />
                             </div>

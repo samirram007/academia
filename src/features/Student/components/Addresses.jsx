@@ -16,14 +16,14 @@ const Addresses = ({ formik }) => {
       email: '',
       contact_no: ''
   }
-    console.log("ADDRESSES", formik.values.addresses);
+
 
   return (
-    <div className='grid gap-4 grid-cols-6 border-t-2 border-blue-300/30 pt-2  mt-10'>
+      <div className='grid gap-1 grid-cols-6 border-t-2 border-blue-300/30 pt-1  mt-4'>
         <div className='col-span-6 '>
             <div className='flex justify-between items-center'>
 
-                <div>Address</div>
+                  <div className='text-xl font-bold text-orange-400'>Address</div>
                 <div>
                     <span
                         onClick={()=>setMode('add')}
@@ -102,7 +102,8 @@ export const AddressView = ({ address,student_id }) => {
                   {upperCase(addressTypeData.data.data[address.address_type])}</div>
               <div> {address.display}</div>
           </div>
-          <AiOutlineEdit onClick={()=>setMode('edit')} className='badge text-violet-400 cursor-pointer border-2 border-violet-300/30
+          <AiOutlineEdit onClick={() => setMode('edit')}
+              className='badge text-violet-400 cursor-pointer border-2 border-violet-300/30
             hover:border-violet-300
             active:bg-blue-700/30
             active:border-blue-400/30

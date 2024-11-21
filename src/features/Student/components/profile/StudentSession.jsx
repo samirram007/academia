@@ -140,7 +140,7 @@ export const SessionsDropdown = ({ data, session_id, student_id, selectedStudent
     // console.log("ac",selectedSession,academicSessions, academicSessions.data.find(x => x.id === selectedSession.id).session);
     return (
         <>
-            <span className='flex flex-row relative'>
+            <span className='flex flex-row relative z-10'>
                 Selected Session: {'' + selectedSession.session}
 
                 <span className='ml-4 text-4xl cursor-pointer rounded-full

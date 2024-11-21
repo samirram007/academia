@@ -21,8 +21,11 @@ shadow-lg border-b-[1px] border-slate-50/20 text-red-300 font-bold -mb-2  `
 
   const [selectedSession, setSelectedSession] = useState(
     studentSessions.length > 0
-      ? (studentSessions.find(x => x.academic_session.is_current == 1)?.academic_session
-        ?? studentSessions[0].academic_session)
+      ? (
+        studentSessions.find(x => x.academic_session.is_current == 1)
+          ?.academic_session
+        ?? studentSessions[0].academic_session
+      )
       : null
   )
 
@@ -64,8 +67,8 @@ shadow-lg border-b-[1px] border-slate-50/20 text-red-300 font-bold -mb-2  `
 
       </div>
 
-      <div className='h-42 w-full bg-gradient-to-r  from-blue-500 to-cyan-500
-      rounded-md px-4 pt-2 text-slate-800 -mt-2'>
+      <div className='w-full bg-gradient-to-r  from-blue-500 to-cyan-500 
+      rounded-md px-4 pt-2 pb-2 text-slate-800 -mt-2'>
         <ul className='flex flex-row gap-4 cursor-pointer text-sm'>
           <li className={`${activeView === 'profile' ? activeTab : ''}`} onClick={() => setActiveView('profile')}>Profile</li>
           <li className={`${activeView === 'address' ? activeTab : ''}`} onClick={() => setActiveView('address')}>Address</li>
@@ -75,7 +78,21 @@ shadow-lg border-b-[1px] border-slate-50/20 text-red-300 font-bold -mb-2  `
           <li className={`${activeView === 'activity' ? activeTab : ''}`} onClick={() => setActiveView('activity')}>Activity</li>
           <li className={`${activeView === 'achievement' ? activeTab : ''}`} onClick={() => setActiveView('achievement')}>Achievement</li>
         </ul>
+        <ProfileHeaderWrapper data={data} activeView={activeView} academicSessions={academicSessions} selectedSession={selectedSession} selectedStudentSession={selectedStudentSession} />
       </div>
+
+    </>
+  )
+}
+const ProfileHeaderWrapper = ({ data, activeView, academicSessions, selectedSession, selectedStudentSession }) => {
+  return (
+    <div className="overflow-y-scroll bg-red-500   
+    bg-gradient-to-r  from-slate-800 to-slate-700 
+    scroll rounded-lg  
+    max-h-[40vh] 
+    md:min-h-[48vh] lg:min-h-[48vh] xl:min-h-[58vh] 2xl:min-h-[60vh] 
+     max-h-[40vh] 
+    md:max-h-[48vh] lg:max-h-[48vh] xl:max-h-[58vh] 2xl:max-h-[60vh]  ">
       {activeView === 'profile' && <Profile data={data} />}
       {activeView === 'address' && <Address data={data.addresses} />}
       {activeView === 'guardian' && <Guardian data={data.guardians} />}
@@ -100,9 +117,7 @@ shadow-lg border-b-[1px] border-slate-50/20 text-red-300 font-bold -mb-2  `
       {activeView === 'activity' && <Activity data={data} />}
       {activeView === 'achievement' && <Achievement data={data} />}
 
-
-    </>
-  )
+    </div>)
 }
 
 export default ProfileHeader
@@ -114,8 +129,8 @@ export default ProfileHeader
 export const Address = ({ data }) => {
   return (
     <>
-      <div className='h-42 w-full bg-gradient-to-r  from-slate-800 to-slate-700 rounded-md p-4 text-slate-300 mt-2'>
-        <div className=' pl-1 mb-2'>
+      <div className='w-full h-[40dvh] bg-gradient-to-r  from-slate-800 to-slate-700 rounded-md  text-slate-300  '>
+        <div className=' pl-4 mb-2 pt-4'>
           {
             data.map((address, index) => (
               <div key={index}>
@@ -132,12 +147,17 @@ export const Address = ({ data }) => {
 export const Guardian = ({ data }) => {
   return (
     <>
-      <div className='h-42 w-full bg-gradient-to-r  from-slate-800 to-slate-700 rounded-md p-4 text-slate-300 mt-2'>
-        <div>Guardian</div>
-        <div className=' pl-1 mb-2'>
+      <div className=' w-full   p-4 text-slate-300 mt-2'>
+        <div className='text-xl font-bold text-orange-400 mb-2'>Guardian</div>
+        <div className=' pl-1 mb-2 flex flex-col gap-4'>
           {
             data.map((guardian, index) => (
-              <div key={index}>{guardian.guardian_type}: {guardian.name}</div>
+              <div key={index}>
+                <span className='w-[20px] px-2 py-1 bg-blue-600 rounded-2xl mr-2'>
+
+                  {upperCase(guardian.guardian_type)}
+                </span>
+                {guardian.name}</div>
             ))
           }
         </div>

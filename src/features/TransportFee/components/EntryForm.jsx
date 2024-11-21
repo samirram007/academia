@@ -55,7 +55,7 @@ export const SearchUser = ({ initialValues, entryMode, setSearching, setSelected
     const [inputText, setInputText] = useState({ searchText: '' })
     const [debouncedValue, setDebouncedValue] = useState('');
     const userData = useTransportUserSearch({ searchText })
-    console.log(userData)
+
     // const debouncedInput = useDebouncedInput(searchRef.current,1000);
     useEffect(() => {
         const handler = setTimeout(() => {

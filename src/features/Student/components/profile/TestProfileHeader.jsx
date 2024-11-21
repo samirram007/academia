@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const TestProfileHeader=({data,fetchedAcademicSessions})=>{
     const [academicSessions, setAcademicSessions] = useState([])
@@ -12,7 +12,7 @@ const TestProfileHeader=({data,fetchedAcademicSessions})=>{
     //       ?? studentSessions[0].academic_session)
     //     : null
     },[])
-    return <div>Hello3
+    return <div> 
         {/* {JSON.stringify(fetchedAcademicSessions)} */}
         </div>
   }

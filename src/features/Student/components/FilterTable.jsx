@@ -67,7 +67,7 @@ export default function FilterTable({ data, columns, pageSize = 100, createRoute
 
     }, [pagination]);
     useEffect(() => {
-        console.log(filter, showFilter);
+
         if (filter) {
 
             setShowFilter(prev => true)
@@ -137,7 +137,8 @@ export default function FilterTable({ data, columns, pageSize = 100, createRoute
 
 
             {isBrowser ?
-                <div className="table-responsive overflow-y-auto  max-h-[50vh] 2xl:max-h-[67vh]">
+                <div className="table-responsive overflow-y-auto  
+                max-h-[50vh] md:max-h-[50vh] lg:max-h-[50vh] xl:max-h-[60vh] 2xl:max-h-[50vh] 2xl:max-h-[67vh]">
                     <table className="table table-zebra overflow-y-scroll  bg-slate-800  scroll">
                         <thead className='sticky top-0 z-10'>
                             {table.getHeaderGroups().map(headerGroup => (

@@ -8,12 +8,12 @@ export  function fetchStudentSessionsByStudentId(payload) {
         return response.data;
     })
     .catch(err => {
-        console.log("Error: ", err);
+
         //throw err;
     });
 }
 export  function fetchStudentSessionsFeesByStudentSessionId(payload) {
-    console.log(payload.student_session_id);
+
 
     return (  axiosClient.get(`/fees_by_student_session/${payload.student_session_id}`))
     .then(response => {
@@ -21,7 +21,7 @@ export  function fetchStudentSessionsFeesByStudentSessionId(payload) {
         return response.data;
     })
     .catch(err => {
-        console.log("Error: ", err);
+
         //throw err;
     });
 }
@@ -52,7 +52,7 @@ export  function fetchGenerateRollNo(payload) {
         return response.data;
     })
     .catch(err => {
-        console.log("Error: ", err);
+
         //throw err;
     });
 }

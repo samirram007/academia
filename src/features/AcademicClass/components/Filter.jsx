@@ -31,7 +31,7 @@ const Filter = ({ fetchedData, initialFilterValues }) => {
         onSubmit: (values, { setSubmitting }) => {
             Object.assign(initialFilterValues, values);
             fetchedData.refetch()
-            // console.log("iv", fetchedData)
+
             if (!fetchedData.isRefetching) {
                 setSubmitting(false)
             }

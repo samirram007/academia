@@ -1,10 +1,9 @@
-import React, { lazy, useMemo, useState } from 'react'
+import { lazy, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useStudent } from '../../hooks/queries';
 import { useAcademicSessions } from '../../../AcademicSession/hooks/quaries';
+import { useStudent } from '../../hooks/queries';
 
 // import ProfileHeader from './ProfileHeader';
-import TestProfileHeader from './TestProfileHeader';
  const ProfileHeader=lazy(() => import('./ProfileHeader'));
 const Breadcrumbs=lazy(() => import('../../../../components/Breadcrumbs'));
 
@@ -60,7 +59,7 @@ const Information = () => {
   }
 
   return (
-    <div className='pb-10 w-full'>
+    <div className='container-flex md-container max-h-full w-full '>
     <div className='row  flex flex-col md:flex-row justify-between gap-2 border-b-2 border-blue-300/10 pb-2 mb-2 '>
         <div className='flex flex-col gap-2 flex-1 text-3xl'>
           <Breadcrumbs />
@@ -73,8 +72,8 @@ const Information = () => {
         </div>
     </div>
 
-    <TestAcademicSessionsCall data={initialValues}  />
-    {/* <AcademicSessionsCall data={initialValues}  /> */}
+      {/* <TestAcademicSessionsCall data={initialValues}  /> */}
+      <AcademicSessionsCall data={initialValues} />
     {/* <div>Hello</div> */}
 
 
@@ -88,10 +87,9 @@ export const TestAcademicSessionsCall=({data})=>{
   if (fetchedData.isLoading) return <div>Loading..</div>
   return(
     <ProfileHeader data={data} fetchedAcademicSessions={fetchedAcademicSessions}/>
-    // <TestProfileHeader data={data} fetchedAcademicSessions={fetchedAcademicSessions}/>
-    // <div>OK</div>
+
   )
-  return <div>Hello 2{JSON.stringify(data)}</div>
+
 }
 // export const TestProfileHeader=({data,fetchedAcademicSessions})=>{
 //   return <div>Hello3{JSON.stringify(fetchedAcademicSessions)}</div>

@@ -39,7 +39,7 @@ export function storeAcademicClassService(payload) {
 
 }
 export function updateAcademicClassService(payload) {
-console.log(payload)
+
 const {id,...data}=payload
       return axiosClient.put(`/academic_classes/${id}`, data)
       .then(response => {

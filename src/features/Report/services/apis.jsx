@@ -19,7 +19,7 @@ export function fetchMonthlyFeeCollectionReportService(payload) {
     if(payload.section_id){
         filterString=`${filterString}&section_id=${payload.section_id}`
     }
-console.log(filterString);
+
     return axiosClient
         .get(`/monthly_fee_collection_report?${filterString}`)
         .then(response => {

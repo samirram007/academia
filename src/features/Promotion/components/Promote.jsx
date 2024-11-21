@@ -49,12 +49,16 @@ const Promote = ({ table, initialFilterValues }) => {
         enableReinitialize: true,
 
         onSubmit: (values, { setSubmitting }) => {
+
+            //Check if any student is selected
             if (table.getSelectedRowModel().flatRows.length == 0) {
-                // console.log('No Student Selected');
+
                 setSubmitting(false)
                 return
             }
-            // console.log(table.getSelectedRowModel().flatRows);
+
+
+            //Map selected students
             const selectedStudentData = table.getSelectedRowModel().flatRows
                 .map(x => ({
                     student_id: x.original.id,
@@ -64,9 +68,9 @@ const Promote = ({ table, initialFilterValues }) => {
                     academic_session_id: values.academic_session_id,
                     academic_class_id: values.academic_class_id,
                 }))
+
             const newData = { ...values }
             const oldData = { ...initialFilterValues }
-            //console.log(newData.academic_session_id,oldData.academic_session_id);
             if (newData.academic_session_id == oldData.academic_session_id) {
                 toast.info("Select New Academic Session", { transition: Flip })
                 setSubmitting(false)
@@ -80,7 +84,9 @@ const Promote = ({ table, initialFilterValues }) => {
             const payloadValues = { newData, oldData, students: selectedStudentData }
 
             console.log(payloadValues, 'one or few Student Selected');
-            promotionMutate.mutate(payloadValues)
+            promotionMutate.mutate(payloadValues), {
+
+            }
 
             setTimeout(() => {
 

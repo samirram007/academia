@@ -11,13 +11,13 @@ axiosClient.interceptors.request.use((config) => {
     // config.headers.Accept=`application/json`
     // config.headers["Content-Type"]=`application/json`
 
-    console.log("Api Call Count: ",config.url,ApiCallCount++);
+    // console.log("Api Call Count: ",config.url,ApiCallCount++);
     return config
 })
 
 
 axiosClient.interceptors.response.use((response) => {
-    console.log("Response: ",response);
+    // console.log("Response: ",response);
     return response
 },
     (error) => {
@@ -29,7 +29,7 @@ axiosClient.interceptors.response.use((response) => {
                 localStorage.removeItem('ACCESS_TOKEN')
             }
         } catch (e) {
-            console.log(e);
+            // console.log(e);
 
         }
         throw error;

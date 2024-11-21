@@ -33,7 +33,7 @@ const Filter = ({ fetchedData, initialFilterValues }) => {
         enableReinitialize: true,
         onSubmit: (values, { setSubmitting }) => {
             Object.assign(initialFilterValues, values);
-            // console.log('ib', initialFilterValues);
+
             // setSubmitting(false)
             fetchedData.refetch()
             setSubmitting(false)

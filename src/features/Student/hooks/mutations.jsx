@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 
 import { useNavigate, useParams } from "react-router-dom";
 import { queryClient } from "../../../utils/queryClient";
-import { storeStudent, storeStudentFee, updateStudent, updateStudentFee } from "../services/apis";
+import { storeGuardian, storeStudent, storeStudentFee, updateGuardian, updateStudent, updateStudentFee } from "../services/apis";
 
 import { Flip, toast } from "react-toastify";
 import { useFormModal } from "../../../contexts/FormModalProvider";
@@ -23,13 +23,13 @@ export function useStoreStudentMutation() {
 }
 export function useUpdateStudentMutation() {
   const navigate = useNavigate()
-
+  const student_id = useParams('id')
   return useMutation({
     mutationFn: updateStudent,
     onSuccess: (data) => {
-     queryClient.invalidateQueries({ queryKey: ['students'] })
+      queryClient.invalidateQueries({ queryKey: ['students', student_id] })
       toast.success(data.message, { transition: Flip });
-      navigate("/students", { replace: true })
+      navigate(`/students/edit/${student_id.id}`, { replace: true })
     },
     onError: (error) => {
       toast.error(error.response.data.message, { transition: Flip })
@@ -40,7 +40,7 @@ export function useStoreStudentGuardianMutation() {
   const student_id=useParams('id')
   const navigate = useNavigate()
   return useMutation({
-    mutationFn: storeStudent,
+    mutationFn: storeGuardian,
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ['students',student_id] })
       toast.success(data.message, { transition: Flip });
@@ -57,7 +57,7 @@ export function useUpdateStudentGuardianMutation() {
   const navigate = useNavigate()
 
   return useMutation({
-    mutationFn: updateStudent,
+    mutationFn: updateGuardian,
     onSuccess: (data) => {
      queryClient.invalidateQueries({ queryKey: ['students',student_id] })
       toast.success(data.message, { transition: Flip });

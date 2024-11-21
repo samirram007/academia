@@ -13,7 +13,7 @@ export function fetchExpenseHeads() {
 
     return axiosClient.get("/expense_heads")
         .then(response => {
-            console.log(response.data);
+
             return response.data;
         })
         .catch(err => {

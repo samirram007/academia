@@ -7,7 +7,6 @@ import FormikEditFormModal from '@/components/form-components/FormikEditFormModa
 const Edit = ({ initialValues }) => {
 
   const [isOpen, setOpen] = useState(false)
-console.log(initialValues)
   return (
     <>
 

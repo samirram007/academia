@@ -30,8 +30,7 @@ export async function fetchStudentById(id) {
    // console.log('student_id:',id);
    return (await axiosClient.get(`/students/${id}`)).data
 }
-export function storeStudent(payload) {
-//console.log(payload);
+export function storeStudent(payload) { 
     return axiosClient.post("/students", removeEmptyStrings(payload))
         .then(response => {
             return response.data;
@@ -43,7 +42,7 @@ export function storeStudent(payload) {
 }
 export function updateStudent(payload) {
     const { id, ...data } = payload;
-    // console.log('student update',id,removeEmptyStrings(data))
+    console.log('student update', id, removeEmptyStrings(data))
     return axiosClient.put(`/students/${id}`, removeEmptyStrings(data))
         .then(response => {
             return response.data;
@@ -71,13 +70,37 @@ export function updateStudentFee(payload) {
   //  console.log(removeEmptyStrings(payload));
     return axiosClient.put(`/fees/${id}`, removeEmptyStrings(data))
         .then(response => {
-            console.log("Response", response.data);
+
             return response.data;
         })
         .catch(err => {
-            console.log("Response", err.data);
+
             throw err;
         });
 
 }
 
+export function storeGuardian(payload) {
+    // console.log("Guardian payload", removeEmptyStrings(payload));
+    return axiosClient.post("/guardians", removeEmptyStrings(payload))
+        .then(response => {
+            return response.data;
+        })
+        .catch(err => {
+            throw err;
+        });
+}
+export function updateGuardian(payload) {
+    const { id, ...data } = payload;
+
+    // console.log("Guardian payload", id, removeEmptyStrings(data));
+    return axiosClient.put(`/guardians/${id}`, removeEmptyStrings(data))
+        .then(response => {
+// console.log('success update');
+
+            return response.data;
+        })
+        .catch(err => {
+            throw err;
+        });
+}

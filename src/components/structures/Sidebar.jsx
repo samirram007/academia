@@ -1,12 +1,12 @@
-import { Fragment} from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { Fragment } from "react";
+import { useTranslation } from "react-i18next";
 import { FaBookOpenReader } from "react-icons/fa6";
 import { MdOutlineDashboard } from "react-icons/md";
 import { TfiLayoutListThumb } from "react-icons/tfi";
-import { useTranslation } from "react-i18next";
-import { useQuery } from "@tanstack/react-query";
-import { fetchUser } from "../../services";
+import { NavLink, useLocation } from "react-router-dom";
 import { menuGroup, page } from "../../Routes/navigation";
+import { fetchUser } from "../../services";
 
 
 const checkActive = (param) => {
@@ -120,14 +120,15 @@ const Sidebar = ({ isOpen, setOpen }) => {
     <>
 
       <aside className={`${menuClass} sidebar-menu  md:relative
-      min-w-[350px] md:min-w-48 lg:min-w-56  max-h-[95dvh] 2xl:max-h-[96dvh]  overflow-hidden   bg-[#272e48]
+      min-w-[350px] md:min-w-48 lg:min-w-56  
+      max-h-[95dvh] ms-max-h-[95dvh] xl-max-h-[70dvh] 2xl:max-h-[96dvh]  overflow-hidden   bg-[#272e48]
         z-20 transition ease-in-out duration-500 `} >
         <div className="flex-1 flex items-center gap-5   text-teal-500   px-5 py-[.53rem] text-lg min-h-[6dvh] 2xl:min-h-[4dvh]">
 
           <FaBookOpenReader />
           {import.meta.env.VITE_APP_NAME}
         </div>
-        <nav className='my-4 mx-2   p-4 rounded-lg bg-[#191d2d] overflow-y-auto  max-h-[85dvh] 2xl:max-h-[90dvh] '>
+        <nav className='my-1 mx-2   p-4 rounded-lg bg-[#191d2d] overflow-y-auto  max-h-[85dvh] 2xl:max-h-[90dvh] '>
 
           <ul className="flex flex-col gap-2" >
             <RenderMenuGroup isOpen={isOpen} setOpen={setOpen} />

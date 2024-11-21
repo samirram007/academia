@@ -4,7 +4,6 @@ import RenderRoute from "./RenderRoute"
 
 
 const AuthRouter = () => {
-    console.log(RenderRoute('auth'))
     return (
 
 

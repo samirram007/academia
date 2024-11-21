@@ -64,7 +64,7 @@ const Edit = () => {
 
 
     return (
-        <div className='pb-10 w-full'>
+        <div className='container-flex md-container max-h-full '>
             <div className='row  flex flex-col md:flex-row justify-between gap-2 border-b-2 border-blue-300/10 pb-2 mb-2 '>
                 <div className='flex flex-col gap-2 flex-1 text-3xl'>
                     {/* {'Edit Student'} */}
@@ -77,7 +77,10 @@ const Edit = () => {
 
                 </div>
             </div>
+            <div className='overflow-y-auto  max-h-[75vh] 2xl:max-h-[67vh]'>
+
             <EntryForm initialValues={initialValues} entryMode={entryMode}/>
+            </div>
 
 
         </div>

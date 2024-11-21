@@ -21,7 +21,7 @@ import { fetchGenerateRollNo, fetchStudentSessionsByStudentId, fetchStudentSessi
   }
 
   export async function useGenerateRollNo(payload) {
-    console.log(payload)
+
     const data=await fetchGenerateRollNo(payload)
     //console.log(data);
     if(!data){throw new Error('Error in generating roll no')}

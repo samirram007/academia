@@ -59,7 +59,7 @@ export const SelectedPanelPrintMode = ({ printQueue }) => {
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
     });
-    console.log(printQueue)
+
 
 
 

@@ -6,7 +6,7 @@ export const Profile = ({ data }) => {
 const navigate=useNavigate()
   return (
     <>
-      <div className='h-42 w-full bg-gradient-to-r  from-slate-800 to-slate-700 rounded-md p-4 text-slate-300 mt-2'>
+      <div className='h-42 w-full rounded-md p-4 text-slate-300 mt-2'>
         <div className='text-lg underline flex'>
           <span className='font-bold'>Full Profile </span>
           <span onClick={()=>navigate(`/students/edit/${data.id}`)} className='flex justify-between items-center rounded-full  ml-2 cursor-pointer'>

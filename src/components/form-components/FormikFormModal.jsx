@@ -4,6 +4,7 @@ import { useFormModal } from '../../contexts/FormModalProvider'
 const FormikFormModal = ({ label, children }) => {
     const { isOpen, setOpen } = useFormModal()
 
+
     const overlay = {
         position: "fixed",
         top: 0,

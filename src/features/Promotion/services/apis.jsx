@@ -24,7 +24,7 @@ export function fetchPromotionsService(payload) {
 
     return axiosClient.get(`/promotions${filterString}`)
         .then(response => {
-            console.log(response.data);
+
             return response.data;
         })
         .catch(err => {
@@ -34,7 +34,7 @@ export function fetchPromotionsService(payload) {
 }
 
 export function storePromotionService(payload) {
-    console.log(payload);
+
     return axiosClient.post("/promotions", removeEmptyStrings(payload))
         .then(response => {
             return response.data;

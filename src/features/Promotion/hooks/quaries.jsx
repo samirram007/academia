@@ -1,6 +1,5 @@
-import { useQuery } from "@tanstack/react-query"
-import { fetchPromotionService, fetchPromotionsService } from "../services/apis"
-import { useCallback } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { fetchPromotionService, fetchPromotionsService } from "../services/apis";
 
 export function usePromotions(payload) {
   //console.log("payload test: ",payload);
@@ -32,7 +31,8 @@ export function usePromotions(payload) {
     queryKey: ['promotions', payload],
     queryFn: () => fetchPromotionsService(payload),
     retry: true,
-    enabled: payload ? !!payload : false,
+    enabled: false,
+    // enabled: payload ? !!payload : false,
     staleTime: 1000,
     // select: filterCallbackFn
   })

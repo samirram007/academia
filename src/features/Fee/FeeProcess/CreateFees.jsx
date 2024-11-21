@@ -135,7 +135,7 @@ export const ProcessPanel = ({ userData, selectedTemplate, isMount, setIsMount, 
             payment_mode: feeData.payment_mode,
             fee_items: feeData.fee_items.filter(x => x.total_amount > 0 && x.is_active),
         }
-           console.log('payload', payload);
+
 
         if (payload.fee_items.length == 0) {
             return toast.error("Error in input(s)", { transition: Flip })

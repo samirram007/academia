@@ -43,7 +43,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
         initialValues,
         validationSchema,
         onSubmit: values => {
-            console.log(values)
+
             handleFormSubmit(values)
         },
     });

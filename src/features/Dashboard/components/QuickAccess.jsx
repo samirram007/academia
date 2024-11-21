@@ -1,13 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { Fragment, useState } from 'react'
+import { Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import Loader from '../../../components/Loader';
-import { FaBookOpenReader } from 'react-icons/fa6';
-import { NavLink, useLocation } from 'react-router-dom';
-import { fetchUser } from '../../../services';
-import { menuGroup, quickMenuGroup, page } from '../../../Routes/navigation';
 import { MdOutlineDashboard } from 'react-icons/md';
 import { TfiLayoutListThumb } from 'react-icons/tfi';
+import { NavLink, useLocation } from 'react-router-dom';
+import Loader from '../../../components/Loader';
+import { menuGroup, page, quickMenuGroup } from '../../../Routes/navigation';
+import { fetchUser } from '../../../services';
 
 
 const QuickAccess = () => {
@@ -104,7 +103,7 @@ export const RenderQuickMenuGroup = ({ isOpen, setOpen, group }) => {
   )
 }
 export const RenderMenu = ({ isOpen, setOpen, menuGroupData }) => {
-  console.log(quickMenuGroup,menuGroupData);
+
   return (
     page.map(({ path, name, element, children, icon, isMenu, menuGroup }, i) => {
 

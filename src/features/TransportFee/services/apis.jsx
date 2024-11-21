@@ -10,12 +10,10 @@ export function fetchTransportFeeService(id) {
         })
 }
 export function fetchTransportFeesService(payload) {
-    const filterString=`academic_session_id=${payload.academic_session_id}&from=${payload.from}&to=${payload.to}`
-console.log(filterString);
+    const filterString = `academic_session_id=${payload.academic_session_id}&from=${payload.from}&to=${payload.to}`
 
     return axiosClient.get(`/transport_fees?${filterString}`)
         .then(response => {
-            console.log(response)
             return response.data;
         })
         .catch(err => {

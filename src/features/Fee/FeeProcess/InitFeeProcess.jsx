@@ -17,9 +17,11 @@ const InitFeeProcess = ({
     return (
         <>
 
-            <div className='h-42 w-full bg-gradient-to-r  from-slate-800 to-slate-700 rounded-md p-4 text-slate-300 mt-2'>
-                <div className='flex flex-row justify-between items-center pr-8'>
-                    <div className='font-bold text-xl text-red-300'>
+            <div className='  w-full   text-slate-300 relative  '>
+                <div className='flex flex-row justify-between items-center
+                bg-slate-700
+                 sticky top-0  '>
+                    <div className='font-bold text-xl text-red-300 p-2'>
                         Fees for Session {academicSessions.find(x => x.id === selectedStudentSession.academic_session_id)?.session}
                     </div>
                     <button onClick={() => setOpen(true)} title='Create new'
@@ -38,7 +40,10 @@ const InitFeeProcess = ({
                         </FormikFormModal>
                     </>
                 }
-                <div className='grid grid-cols-9 font-semibold text-primary  items-center border-b-2 border-violet-500  '>
+                <div className='grid grid-cols-9 font-semibold 
+                text-primary  items-center  
+                sticky  top-11   bg-gradient-to-b from-slate-700 to-slate-900
+                 '>
                     <div className='col-span-1 '>
                         <div className='text-center border-r-[1px] border-violet-500'>Receipt No.</div>
                     </div>
@@ -54,7 +59,7 @@ const InitFeeProcess = ({
                     </div>
 
                 </div>
-                <div>
+                <div className='overflow-y-scroll'>
                     {
                         !studentSessionFeesData ?
                             <div className='grid grid-cols-9 items-center py-1 border-b-2 border-violet-400/20 '>

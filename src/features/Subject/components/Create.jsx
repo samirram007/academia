@@ -1,12 +1,11 @@
 
-import React, {   useState } from 'react'
+import { useState } from 'react';
 
 import * as Yup from "yup";
 
 
 import Breadcrumbs from '../../../components/Breadcrumbs';
 
-import EntryForm from './EntryForm';
 const validationSchema = Yup.object().shape({
     name: Yup.string()
         .required("Name is required"),

@@ -24,7 +24,7 @@ const DataTable = () => {
 
 
   const mData = fetchedData.data?.data ?? [];
-// console.log(mData)
+
   const data = useMemo(() => [...mData], [mData]);
 
   /** @type {import('@tanstack/react-table').ColumnDef<any>} */

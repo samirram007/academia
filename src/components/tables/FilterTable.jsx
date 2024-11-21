@@ -6,16 +6,15 @@ import {
     getSortedRowModel,
     useReactTable,
 } from '@tanstack/react-table'
-import { useEffect, useMemo } from 'react'
-import { useState } from 'react'
-import { Link, useLocation, useSearchParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { isBrowser } from 'react-device-detect'
+import { Link, useSearchParams } from 'react-router-dom'
 import { useCustomRoutes } from '../../hooks'
-import { isBrowser, isMobile } from 'react-device-detect';
 
 
-import { IoMdAdd } from "react-icons/io";
+import { IoMdAdd } from "react-icons/io"
+import { TbFilterSearch } from "react-icons/tb"
 import Breadcrumbs from '../Breadcrumbs'
-import { TbFilterSearch } from "react-icons/tb";
 import FormikFormModal from '../form-components/FormikFormModal'
 
 import { useFormModal } from '../../contexts/FormModalProvider'
@@ -64,7 +63,7 @@ export default function FilterTable({ data, columns, pageSize = 100, createRoute
 
     }, [pagination]);
 useEffect(()=>{
-    console.log(filter,showFilter);
+
     if(filter){
 
         setShowFilter(prev=>true)

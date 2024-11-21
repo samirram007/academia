@@ -19,7 +19,7 @@ const validationSchema = Yup.object().shape({
 })
 const InputForm = ({ initialValues, entryMode, selectedTransportUserPanel,
     selectedTransportUser, defaultMonthlyCharge, setDefaultMonthlyCharge }) => {
-    console.log('iv', initialValues);
+
     const transportFeeStoreMutation = useStoreTransportFeeMutation()
     const transportFeeUpdateMutation = useUpdateTransportFeeMutation()
     const transportFeeDeleteMutation = useDeleteTransportFeeMutation()

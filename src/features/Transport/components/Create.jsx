@@ -33,7 +33,7 @@ const Create = ({ modal }) => {
         transport_type_id: 1
 
     }
-    console.log(editData);
+
     const initialValues = editData ?? {
         name: '',
         registration_no: '',
@@ -45,7 +45,7 @@ const Create = ({ modal }) => {
         capacity: 50,
         transport_type_id: 1
     }
-console.log(initialValues);
+
 
 
     return (

@@ -85,7 +85,7 @@ export default function StudentIdCardTable({ data, columns, pageSize = 100, crea
         // console.log(table.getSelectedRowModel().rows.map(items=>items.original))
     }
     useEffect(() => {
-        console.log(printQueue)
+
     }, [printQueue])
     useEffect(() => {
         setSearchParams(
@@ -310,8 +310,8 @@ export const IdCard = ({ row }) => {
     )
 }
 export const IdCardCell = ({ cell }) => {
-    // console.log("cell",cell.row.original);
-    console.log("cell", import.meta.env.VITE_API_BASE_URL);
+
+    // console.log("cell", import.meta.env.VITE_API_BASE_URL);
     const baseUrl = import.meta.env.VITE_API_BASE_URL
     const data = cell.row.original
     return (
