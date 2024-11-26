@@ -1,0 +1,1 @@
+export {Examinations,CreateExamination,EditExamination} from '../features/Examination';
