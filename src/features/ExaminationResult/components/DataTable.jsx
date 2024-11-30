@@ -7,7 +7,7 @@ import FilterTable from "../../../components/tables/FilterTable";
 import Edit from "./Edit";
 import Delete from "./Delete";
 import Create from "./Create";
-import { useExaminationSchedules } from "../hooks/quaries";
+import { useExaminationResults } from "../hooks/quaries";
 
 const initialValues = {
   campus_id: 1,
@@ -18,7 +18,7 @@ const initialValues = {
 };
 
 const DataTable = () => {
-  const fetchedData = useExaminationSchedules(initialValues);
+  const fetchedData = useExaminationResults(initialValues);
 
   const mData = fetchedData.data?.data ?? [];
 
@@ -33,20 +33,23 @@ const DataTable = () => {
       size: 50,
     },
     {
-      header: "Subject",
-      accessorKey: "subject.name",
+      header: "Scheduled Date & time",
+      accessorKey: "examination_scheduled.id",
+      cell: (props) => (
+        <>
+          {props.row.original.examination_scheduled.examination_date +
+            " - " +
+            props.row.original.examination_scheduled.examination_time}
+        </>
+      ),
     },
     {
-      header: "Date",
-      accessorKey: "examination_date",
+      header: "Mark",
+      accessorKey: "marks",
     },
     {
-      header: "Time",
-      accessorKey: "examination_time",
-    },
-    {
-      header: "Teacher",
-      accessorKey: "teacher.name",
+      header: "Student",
+      accessorKey: "student.name",
     },
     {
       header: "Action",
@@ -68,7 +71,7 @@ const DataTable = () => {
       data={data}
       columns={columns}
       createForm={<Create modal={true} />}
-      createFormTitle="Create Examination Schedule"
+      createFormTitle="Create Examination Result"
     />
   );
 };

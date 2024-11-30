@@ -151,6 +151,12 @@ import {
   EditExaminationSchedule,
 } from "@/pages/ExaminationSchedule";
 
+import {
+  ExaminationResults,
+  CreateExaminationResult,
+  EditExaminationResult,
+} from "@/pages/ExaminationResult";
+
 export const common = (module) => {
   return { path: module, name: module };
 };
@@ -1174,6 +1180,36 @@ export const page = [
         path: "edit/:id",
         name: "Edit Class",
         element: <EditExaminationSchedule />,
+        isMenu: false,
+        isPrivate: true,
+        authType: true,
+      },
+    ],
+  },
+  {
+    path: "examination_result",
+    name: "Examination Result",
+    element: <ExaminationResults />,
+    isMenu: true,
+    menuGroup: "EXAMINATION",
+    isPrivate: true,
+    authType: true,
+    icon: icons.academic_classes,
+    role: ["admin"],
+    children: [
+      {
+        path: "create",
+        name: "Create Class",
+        element: <CreateExaminationResult />,
+        isMenu: false,
+        isPrivate: true,
+        authType: true,
+        icon: icons.create_academic_class,
+      },
+      {
+        path: "edit/:id",
+        name: "Edit Class",
+        element: <EditExaminationResult />,
         isMenu: false,
         isPrivate: true,
         authType: true,

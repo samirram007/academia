@@ -8,6 +8,9 @@ import {
 } from "../hooks/mutations";
 
 import { FormikInputBox } from "@/components/form-components/FormikInputBox";
+import { useExaminationStandards } from "@/features/ExaminationStandard/hooks/quaries";
+import { FormikSelect } from "@/components/form-components/FormikSelect";
+import { useSubjects } from "@/features/Subject/hooks/quaries";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Examination Type is required"),
@@ -20,6 +23,11 @@ const EntryForm = ({ initialValues, entryMode }) => {
     useUpdateExaminationScheduleMutation();
   const examinationScheduleDeleteMutation =
     useDeleteExaminationScheduleMutation();
+
+  const examinationStandardData = useExaminationStandards();
+  const subjectData = useSubjects();
+
+  console.log(subjectData, "subject data");
 
   const handleFormSubmit = (values) => {
     if (entryMode === "create") {
@@ -47,11 +55,42 @@ const EntryForm = ({ initialValues, entryMode }) => {
         <div className="grid grid-cols-1  ">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
-              <FormikInputBox
-                formik={formik}
-                name="name"
-                label="Examination Type"
-              />
+              {examinationStandardData.data && (
+                <FormikSelect
+                  formik={formik}
+                  name="examination_standard_id"
+                  label="Examination Standard"
+                  options={
+                    examinationStandardData.data.data &&
+                    Object.entries(examinationStandardData.data.data).map(
+                      ([key, value], index) => (
+                        <option key={index} value={value.id}>
+                          {value.academic_standard.name}
+                        </option>
+                      )
+                    )
+                  }
+                />
+              )}
+            </div>
+            <div>
+              {subjectData.data && (
+                <FormikSelect
+                  formik={formik}
+                  name="examination_standard_id"
+                  label="Examination Standard"
+                  options={
+                    subjectData.data.data &&
+                    Object.entries(subjectData.data.data).map(
+                      ([key, value], index) => (
+                        <option key={index} value={value.id}>
+                          {value.academic_standard.name}
+                        </option>
+                      )
+                    )
+                  }
+                />
+              )}
             </div>
           </div>
 
