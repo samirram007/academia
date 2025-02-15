@@ -16,6 +16,11 @@ const validationSchema = Yup.object().shape({
   name: Yup.string().required("Examination Type is required"),
 });
 
+const initialFilterValues = {
+  academic_standard_id: "",
+  subject_group_id: "",
+};
+
 const EntryForm = ({ initialValues, entryMode }) => {
   const examinationScheduleStoreMutation =
     useStoreExaminationScheduleMutation();
@@ -25,9 +30,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
     useDeleteExaminationScheduleMutation();
 
   const examinationStandardData = useExaminationStandards();
-  const subjectData = useSubjects();
-
-  console.log(subjectData, "subject data");
+  const subjectData = useSubjects(initialFilterValues);
 
   const handleFormSubmit = (values) => {
     if (entryMode === "create") {
@@ -64,7 +67,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
                     examinationStandardData.data.data &&
                     Object.entries(examinationStandardData.data.data).map(
                       ([key, value], index) => (
-                        <option key={index} value={value.id}>
+                        <option key={index} value={value.academic_standard.id}>
                           {value.academic_standard.name}
                         </option>
                       )
@@ -77,14 +80,14 @@ const EntryForm = ({ initialValues, entryMode }) => {
               {subjectData.data && (
                 <FormikSelect
                   formik={formik}
-                  name="examination_standard_id"
-                  label="Examination Standard"
+                  name="subject_id"
+                  label="Subject"
                   options={
                     subjectData.data.data &&
                     Object.entries(subjectData.data.data).map(
                       ([key, value], index) => (
                         <option key={index} value={value.id}>
-                          {value.academic_standard.name}
+                          {value.name}
                         </option>
                       )
                     )
