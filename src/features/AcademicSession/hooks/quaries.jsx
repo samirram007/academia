@@ -1,14 +1,7 @@
-import { useQuery } from "@tanstack/react-query"
-import { useCallback } from "react"
-import { fetchAcademicSessionByCampusIdService, fetchAcademicSessionService, fetchAcademicSessionServices } from "../services/apis"
-
 import { useQuery } from "@tanstack/react-query";
-import {
-  fetchAcademicSessionByCampusIdService,
-  fetchAcademicSessionService,
-  fetchAcademicSessionServices,
-} from "../services/apis";
 import { useCallback } from "react";
+import { fetchAcademicSessionByCampusIdService, fetchAcademicSessionService, fetchAcademicSessionServices } from "../services/apis";
+
 
 export function useAcademicSessions(payload) {
 
