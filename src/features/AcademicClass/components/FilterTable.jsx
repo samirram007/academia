@@ -20,6 +20,7 @@ import { TbFilterSearch } from "react-icons/tb";
 
 import Breadcrumbs from '../../../components/Breadcrumbs';
 
+import FormikFormModal from '@/components/form-components/FormikFormModal';
 import { useFormModal } from '../../../contexts/FormModalProvider';
 import Filter from './Filter';
 export default function FilterTable({ data, columns, pageSize = 100, createRoute,

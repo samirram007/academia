@@ -15,7 +15,10 @@ export function fetchDailyCollectionReportService(payload) {
         });
 }
 export function fetchMonthlyFeeCollectionReportService(payload) {
-    let filterString=`academic_session_id=${payload.academic_session_id}&academic_class_id=${payload.academic_class_id}`
+    let filterString=`academic_session_id=${payload.academic_session_id}`
+    if(payload.academic_class_id){
+        filterString=`${filterString}&academic_class_id=${payload.academic_class_id}`
+    }
     if(payload.section_id){
         filterString=`${filterString}&section_id=${payload.section_id}`
     }

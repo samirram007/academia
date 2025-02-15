@@ -28,7 +28,7 @@ const initialValues = {
     name: '',
     code: '',
     campus_id: 1,
-    academic_session_id: moment(new Date()).format('YYYY')    ,
+    academic_session_id: moment(new Date()).format('YYYY'),
     academic_class_id: 1,
     is_available: true,
     capacity: 0,
@@ -62,12 +62,14 @@ const Promote = ({ table, initialFilterValues }) => {
             const selectedStudentData = table.getSelectedRowModel().flatRows
                 .map(x => ({
                     student_id: x.original.id,
-                    previous_student_session_id:x.original.selectedStudentSession.id,
-                    new_student_session_id:null,
+                    // previous_student_session_id: x.original.selectedStudentSession.id,
+                    previous_student_session_id: x.original.student_sessions[0].id,
+                    new_student_session_id: null,
                     campus_id: values.campus_id,
                     academic_session_id: values.academic_session_id,
                     academic_class_id: values.academic_class_id,
                 }))
+            // console.log('values', values, selectedStudentData);
 
             const newData = { ...values }
             const oldData = { ...initialFilterValues }
@@ -83,21 +85,27 @@ const Promote = ({ table, initialFilterValues }) => {
             }
             const payloadValues = { newData, oldData, students: selectedStudentData }
 
-            console.log(payloadValues, 'one or few Student Selected');
+            //console.log(payloadValues, 'one or few Student Selected');
+            //   return
             promotionMutate.mutate(payloadValues), {
+                onSuccess: () => {
+                    toast.success("Promotion Success", { transition: Flip })
+                    setShowSelectedStudent(false)
+                    table.resetRowSelection()
+                    setSubmitting(false)
+                },
+                onError: () => {
+                    toast.error("Promotion Failed", { transition: Flip })
+                    setShowSelectedStudent(false)
+                    table.resetRowSelection()
+                    setSubmitting(false)
+                },
+
 
             }
 
-            setTimeout(() => {
-
-                setSubmitting(false)
-            }, 500);
-
         },
-        onError: (errors, values, { setSubmitting }) => {
-            setSubmitting(false)
 
-        }
     })
 
 
@@ -141,7 +149,7 @@ const Promote = ({ table, initialFilterValues }) => {
 
                                 <div className='col-span-10 md:col-span-2 '>
 
-                                    <AcademicSessionSelect formik={formik}   />
+                                    <AcademicSessionSelect formik={formik} />
 
                                 </div>
                                 <div className='col-span-10 md:col-span-2 '>

@@ -1,4 +1,3 @@
-import React from 'react'
 
 
 import { useMemo } from 'react';
@@ -6,14 +5,13 @@ import { useMemo } from 'react';
 
 
 
-import { useNavigate } from 'react-router-dom';
+import { DateTime } from 'luxon';
 import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
+import { Capitalize } from '../../../../../libs/utils';
+import { useMonths } from '../../../../Common/hooks/quaries';
 import { useMonthlyFeeCollectionReport } from '../../../hooks/queries';
 import MonthlyCollectionReportTable from '../MonthlyCollectionReportTable/MonthlyCollectionReportTable';
-import { useMonths } from '../../../../Common/hooks/quaries';
-import { current } from '@reduxjs/toolkit';
-import { DateTime } from 'luxon';
-import { Capitalize } from '../../../../../libs/utils';
 
 const initialValues = {
   academic_session_id: moment(new Date()).format('YYYY'),
@@ -35,14 +33,14 @@ const MonthlyDataTable = () => {
   const mData = fetchedData.data?.data ?? [];
   const monthData = feeMonths.data?.data ?? [];
 
+    const data = useMemo(() => [...mData], [mData]);
+  // const data = useMemo(() => {
 
-  const data = useMemo(() => {
-
-    return mData.map(item => ({
-      ...item,
-      selectedFeesData: item
-    }))
-  }, [mData]);
+  //   return mData.map(item => ({
+  //     ...item,
+  //     selectedFeesData: item
+  //   }))
+  // }, [mData]);
 
 
 

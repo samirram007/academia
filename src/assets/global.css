@@ -8,7 +8,7 @@
 * {
     @apply m-0 p-0;
     box-sizing: border-box;
-    font-size: 0.8rem;
+    font-size: 0.95rem;
 
 }
 .print *{
@@ -170,9 +170,9 @@ table > tbody > tr > td {
 .card {
     border-radius: 0.5rem;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-    padding: 1.25rem 1.5rem;
-    margin-bottom: 1rem;
-    margin-top: 0.5rem;
+    padding: 1.0rem 1.5rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.1rem;
 }
 
 .alert {

@@ -1,1 +1,1 @@
-export {Expenses,CreateExpense, EditExpense} from './components';
+export { CreateExpense, EditExpense, Expenses } from './components';

@@ -2,6 +2,7 @@ import { useFormik } from 'formik';
 import * as Yup from "yup";
 import { useDeleteAcademicSessionMutation, useStoreAcademicSessionMutation, useUpdateAcademicSessionMutation } from '../hooks/mutations';
 
+import { FormikCheckBox } from '@/components/form-components/FormikCheckBox';
 import { FormikInputBox } from '@/components/form-components/FormikInputBox';
 import { AcademicSessionSelect } from '../../Common/components/AcademicSessionSelect';
 

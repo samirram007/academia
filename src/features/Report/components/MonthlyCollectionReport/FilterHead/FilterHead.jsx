@@ -35,7 +35,7 @@ const FilterHead = ({ initialFilterValues, fetchedData }) => {
 
                                 <div className='col-span-2 '>
 
-                                    <AcademicSessionSelect formik={formik} is_current={true} />
+                                    <AcademicSessionSelect formik={formik}   />
 
                                 </div>
                                 <div className='col-span-2 '>

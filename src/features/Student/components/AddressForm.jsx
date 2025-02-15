@@ -1,8 +1,8 @@
-import FormikFormModal from '@/components/form-components/FormikFormModal';
 import { useFormik } from 'formik';
 import { useState } from 'react';
 import { MdOutlineCloseFullscreen } from 'react-icons/md';
 
+import FormikEmptyModal from '@/components/form-components/FormikEmptyModal';
 import { FormikInputBox } from '@/components/form-components/FormikInputBox';
 import { FormikSelect } from '@/components/form-components/FormikSelect';
 import { FormikSubmit } from '@/components/form-components/FormikSubmit';
@@ -44,7 +44,7 @@ const AddressForm = ({ mode, address, setMode, student_id }) => {
 
     };
     return (
-        <FormikFormModal isOpen={open} onClose={handleClose}>
+        <FormikEmptyModal isModalOpen={open} onClose={handleClose}>
             <div className='flex justify-between items-center border-b-2 border-slate-600/50 pb-2   ' >
                 <div>New Address</div>
                 <button onClick={handleClose} type="button"
@@ -83,7 +83,7 @@ const AddressForm = ({ mode, address, setMode, student_id }) => {
 
 
             </form>
-        </FormikFormModal>
+        </FormikEmptyModal>
     )
 }
 

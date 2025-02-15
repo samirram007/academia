@@ -34,9 +34,9 @@ const AuthLayout = ({ children }) => {
       <div className=' flex-1 relative   w-full h-screen min-h-screen max-h-screen flex flex-col justify-start items-center  '>
         <Navbar isOpen={isOpen} setOpen={setOpen} userName={authUser.data.name} onLogout={onLogout} />
 
-        <div className='  w-full  mr-2 h-full    '>
+        <div className='  w-full    mr-2 h-full    '>
           <div className='  flex flex-col items-center  md:p-2 md:ml-4 mb-2  bg-slate-900  rounded-lg 
-          mx-auto w-[90vw] md:w-[80vw] lg:w-[80vw] xl:w-[85vw] 2xl:w-[87vw] h-[85vh] 2xl:h-[90vh] '>
+          mx-auto w-[90vw] md:w-[78vw] lg:w-[80vw] xl:w-[82vw] 2xl:w-[87vw] h-[85vh] 2xl:h-[90vh] '>
             {/* {
               location.pathname === '/' ? <Dashboard /> : 
             } */}

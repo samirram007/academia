@@ -34,8 +34,7 @@ const DataTable = () => {
   const columns = [
     {
       header: "ID",
-      accessorKey: "id",
-      visible: false,
+      accessorKey: "id", 
       size: 50,
 
     },

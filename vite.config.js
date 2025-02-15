@@ -11,7 +11,7 @@ export default defineConfig({
     hmr: {
       overlay: true, // Disable the HMR overlay
     },
-    open:true
+    open:false
 
   },
   resolve: {
@@ -41,7 +41,7 @@ export default defineConfig({
   }),
   visualizer({
     filename: './stats.html', // Output file for the visualizer report
-    open: true, // Automatically open the visualizer report in the browser
+    open: false, // Automatically open the visualizer report in the browser
   })],
   consistentExport: true
 })

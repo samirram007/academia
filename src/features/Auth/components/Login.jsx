@@ -27,24 +27,24 @@ export default function Login() {
 
     return (
         <div className="login-signup-form animated fadeInDown w-full    ">
-            <div className="form mt-[2rem]  bg-zinc-700/30  dark:bg-zinc-200/10 rounded-lg">
+            <div className="form mt-[2rem] h-[25rem]  bg-zinc-700/30  dark:bg-zinc-200/10 rounded-lg border-2">
                 <form onSubmit={onSubmit}>
-                    <h1 className="title">Login into your account</h1>
+                    <div className="title pb-6 ">Login into your account</div>
 
                     <input ref={usernameRef} type="text"
                         placeholder="username"
                         defaultValue={"admin00000"}
-                        className=" input-primary w-full   py-2 px-2  "
+                        className=" input-primary w-full   py-2 px-2 rounded-xl font-stretch-[66.66%] "
                     />
                     <input
                         ref={passwordRef}
                         type="password"
                         placeholder="Password"
                         defaultValue={"password"}
-                        className=" input-primary w-full   py-2 px-2  "
+                        className=" input-primary w-full   py-2 px-2  rounded-xl "
                     />
                     <button
-                        className=" glass   py-2 w-full
+                        className=" mt-8 glass   py-2 w-full
                          bg-slate-600 dark:bg-slate-800/10
                      text-zinc-800 dark:text-slate-300
                      hover:bg-slate-800 hover:dark:bg-slate-600

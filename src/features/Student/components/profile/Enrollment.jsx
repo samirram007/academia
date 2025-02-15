@@ -16,20 +16,12 @@ import { useGenerateRollNo } from '../../../StudentSession/hooks/queries';
 
 
 const validationSchema = Yup.object().shape({
-    campus_id: Yup.number()
-        .required("Campus is required")
-        .min(1, "Campus must be selected"),
-    academic_session_id: Yup.number()
-        .required("Academic Session is required"),
-    academic_class_id: Yup.number()
-        .required("Academic Class is required"),
-    section_id: Yup.number()
-        .required("Section is required"),
-    admission_no: Yup.string()
-        .required("Admission No is required")
-        .typeError('Admission No is required'),
-    admission_date: Yup.date()
-        .typeError('Invalid date format'),
+    // campus_id: Yup.required("Campus is required"),
+    // academic_session_id: Yup.required("Academic Session is required"),
+    // academic_class_id: Yup.required("Academic Class is required"),
+    // section_id: Yup.required("Section is required"),
+    // admission_no: Yup.required("Admission No is required"),
+    // admission_date: Yup.required("Admission Date is required"),
 })
 
 
@@ -57,25 +49,27 @@ const Enrollment = ({ data, entryMode, enrollmentType, selectedStudentSession })
         validationSchema,
         enableReinitialize: true,
         onSubmit: values => {
-            //  console.log(typeof values.academic_session_id);
-            if (typeof values.campus_id === 'string' && values.campus_id !== '') {
-                values.campus_id = parseInt(values.campus_id)
-            }
-            if (typeof values.academic_session_id === 'string' && values.academic_session_id !== '') {
-                values.academic_session_id = parseInt(values.academic_session_id)
-            }
-            if (typeof values.academic_class_id === 'string' && values.academic_class_id !== '') {
-                values.academic_class_id = parseInt(values.academic_class_id)
-            }
-            if (typeof values.section_id === 'string' && values.section_id !== '') {
-                values.section_id = parseInt(values.section_id)
-            }
+            console.log('Submit Valus', values);
+            //  return
+            // if (typeof values.campus_id === 'string' && values.campus_id !== '') {
+            //     values.campus_id = parseInt(values.campus_id)
+            // }
+            // if (typeof values.academic_session_id === 'string' && values.academic_session_id !== '') {
+            //     values.academic_session_id = parseInt(values.academic_session_id)
+            // }
+            // if (typeof values.academic_class_id === 'string' && values.academic_class_id !== '') {
+            //     values.academic_class_id = parseInt(values.academic_class_id)
+            // }
+            // if (typeof values.section_id === 'string' && values.section_id !== '') {
+            //     values.section_id = parseInt(values.section_id)
+            // }
             // console.log(values);
             //  return
             handleFormSubmit(values)
         }
     })
     const handleFormSubmit = (values) => {
+        console.log('Enroll Values: ', entryMode, values);
         if (entryMode === 'create') {
             enrollmentStoreMutation.mutate(values)
         } else if (entryMode === 'edit') {

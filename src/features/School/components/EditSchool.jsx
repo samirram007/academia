@@ -54,7 +54,8 @@ const {data:editData,isError, isLoading}=useSchool(id)
 
                 </div>
             </div>
-            <EntryForm initialValues={initialValues} entryMode={entryMode}/>
+            <EntryForm initialValues={initialValues}
+                entryMode={entryMode} />
 
 
         </div>

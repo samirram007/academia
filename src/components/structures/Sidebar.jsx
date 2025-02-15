@@ -29,7 +29,6 @@ export const RenderMenuGroup = ({ isOpen, setOpen, group }) => {
       return (
         visible ?
           <Fragment key={i}>
-
             <li className="menu-header">{name}</li>
             <RenderMenu isOpen={isOpen} setOpen={setOpen} menuGroupData={{ name, visible, sort }} />
           </Fragment>

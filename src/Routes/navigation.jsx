@@ -12,6 +12,7 @@ import { Documents } from "../pages/Document";
 import { CreateUser, EditUser, Users } from "../pages/User";
 import { icons } from "./icons";
 
+import { Examinations } from "@/pages/Examination";
 import {
     CreatePromotion,
     EditPromotion,
@@ -148,7 +149,7 @@ export const menuGroup = [
     { name: "EMPLOYEE", visible: true, sort: 5 },
     { name: "FEES", visible: true, sort: 6 },
     { name: "EXPENSE", visible: true, sort: 7 },
-    { name: "TRANSPORT", visible: true, sort: 8 },
+    { name: "TRANSPORT", visible: false, sort: 8 },
     { name: "REPORT INTERFACE", visible: true, sort: 9 },
     { name: "STRUCTURE", visible: true, sort: 10 },
     { name: "SETTINGS", visible: true, sort: 11 },
@@ -581,7 +582,7 @@ export const page = [
         path: "transports",
         name: "Transport",
         element: <Transports />,
-        isMenu: true,
+        isMenu: false,
         menuGroup: "TRANSPORT",
         isPrivate: true, authType: true,
         icon: icons.transports,
@@ -663,7 +664,7 @@ export const page = [
         path: "transport_users",
         name: "Traveler",
         element: <TransportUsers />,
-        isMenu: true,
+        isMenu: false,
         menuGroup: "TRANSPORT",
         isPrivate: true, authType: true,
         icon: icons.transport_users,
@@ -691,7 +692,7 @@ export const page = [
         path: "transport_fees",
         name: "Fee",
         element: <TransportFees />,
-        isMenu: true,
+        isMenu: false,
         menuGroup: "TRANSPORT",
         isPrivate: true, authType: true,
         icon: icons.transport_fees,
@@ -718,7 +719,7 @@ export const page = [
         path: "transport_expenses",
         name: "Expense",
         element: <TransportExpenses />,
-        isMenu: true,
+        isMenu: false,
         menuGroup: "TRANSPORT",
         isPrivate: true, authType: true,
         icon: icons.transport_expenses,
@@ -1152,6 +1153,14 @@ export const page = [
         element: <Documents />,
         isMenu: true,
         menuGroup: "SETTINGS",
+        isPrivate: true, authType: true,
+    },
+    {
+        path: "examinations",
+        name: "Examinations",
+        element: <Examinations />,
+        isMenu: true,
+        menuGroup: "Examination",
         isPrivate: true, authType: true,
     },
     {

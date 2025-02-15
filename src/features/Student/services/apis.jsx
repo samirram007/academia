@@ -36,6 +36,8 @@ export function storeStudent(payload) {
             return response.data;
         })
         .catch(err => {
+            console.log(err);
+
             throw err;
         });
 
@@ -53,7 +55,7 @@ export function updateStudent(payload) {
         });
 }
 export function storeStudentFee(payload) {
-    // console.log('payload',removeEmptyStrings(payload));
+  //  console.log('payload',removeEmptyStrings(payload));
      //return
     return axiosClient.post("/fees", removeEmptyStrings(payload))
         .then(response => {
