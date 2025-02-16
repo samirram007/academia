@@ -9,7 +9,7 @@ import { Documents } from "../pages/Document";
 import { CreateUser, EditUser, Users } from "../pages/User";
 import { icons } from "./icons";
 
-import { Examinations } from "@/pages/Examination";
+import { CreateExamination, EditExamination, Examinations } from "@/pages/Examination";
 import { CreateExaminationResult, EditExaminationResult, ExaminationResults } from "@/pages/ExaminationResult";
 import { CreateExaminationSchedule, EditExaminationSchedule, ExaminationSchedules } from "@/pages/ExaminationSchedule";
 import { CreateExaminationStandard, EditExaminationStandard, ExaminationStandards } from "@/pages/ExaminationStandard";

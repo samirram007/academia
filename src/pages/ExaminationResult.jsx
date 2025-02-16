@@ -1,5 +1,4 @@
 export {
-  ExaminationResults,
   CreateExaminationResult,
-  EditExaminationResult,
+  EditExaminationResult, ExaminationResults
 } from "../features/ExaminationResult";
