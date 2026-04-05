@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { useFormModal } from "../../../contexts/FormModalProvider";
 import { queryClient } from "../../../utils/queryClient";
 import {

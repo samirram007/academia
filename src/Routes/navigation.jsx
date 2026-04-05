@@ -1229,7 +1229,11 @@ export const page = [
     path: "monthly_collection_report",
     name: "Monthly Collection",
     element: <MonthlyCollectionReport />,
-      {
+    isMenu: true,
+    menuGroup: "REPORT INTERFACE",
+    isPrivate: true, authType: true,
+  },
+  {
     path: "exam_fees_collection_report",
     name: "Exam Fees Collection",
     element: <ExamFeesCollectionReport />,
@@ -1237,12 +1241,8 @@ export const page = [
     menuGroup: "REPORT INTERFACE",
     isPrivate: true, authType: true,
   },
-  isMenu: true,
-  menuGroup: "REPORT INTERFACE",
-  isPrivate: true, authType: true,
-  },
-{
-  path: "logout",
+  {
+    path: "logout",
     name: "Logout",
       element: <Logout />,
         isMenu: true,
