@@ -2,8 +2,11 @@ import { createPortal } from 'react-dom'
 import { MdClose } from 'react-icons/md'
 import { useFormModal } from '../../contexts/FormModalProvider'
 
-const FormikFormModal = ({ label, children }) => {
+const FormikFormModal = ({ label, children, size }) => {
     const { isOpen, setOpen } = useFormModal()
+    const widthClass = size === 'full'
+        ? 'md:max-w-[96%] lg:max-w-[90%] xl:max-w-[86%] 2xl:max-w-[82%]'
+        : 'md:max-w-[90%] lg:max-w-[60%] xl:max-w-[50%]'
 
     if (!isOpen) return null;
 
@@ -13,7 +16,7 @@ const FormikFormModal = ({ label, children }) => {
             style={{ background: "rgba(15, 23, 42, 0.45)", backdropFilter: "blur(4px)" }}
             onClick={(e) => { if (e.target === e.currentTarget) setOpen(false) }}
         >
-            <div className="relative flex flex-col h-screen max-h-screen w-full max-w-[100%] md:max-w-[90%] lg:max-w-[60%] xl:max-w-[50%] bg-white dark:bg-slate-900 shadow-2xl border-l border-slate-200 dark:border-slate-700/60">
+            <div className={`relative flex flex-col h-screen max-h-screen w-full max-w-[100%] ${widthClass} bg-white dark:bg-slate-900 shadow-2xl border-l border-slate-200 dark:border-slate-700/60`}>
 
                 {/* Header */}
                 <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-slate-700/60 shrink-0">

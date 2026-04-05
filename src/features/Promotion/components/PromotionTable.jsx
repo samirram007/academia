@@ -84,18 +84,18 @@ export default function PromotionTable({   columns, pageSize = 100, createRoute,
     // }, [pagination]);
 
     return (
-        <div className='flex flex-col gap-2'>
+        <div className='flex flex-col'>
             {/* Header row */}
-            <div className='flex flex-col md:flex-row justify-between gap-2 border-b border-slate-200 dark:border-blue-300/10 pb-2'>
-                <div className='flex flex-col gap-2 flex-1'>
+            <div className='flex items-center justify-between gap-4 border-b border-slate-200 dark:border-blue-300/10 px-5 py-4'>
+                <div className='min-w-0'>
                     <Breadcrumbs />
                 </div>
-                <div className='flex flex-row gap-2 justify-center flex-1 items-center'>
+                <div className='flex items-center gap-2 shrink-0'>
                     <input
                         type='text'
                         value={filtering}
                         onChange={e => setFiltering(e.target.value)}
-                        className='rounded-full py-1.5 text-sm px-4 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/40 w-full max-w-xs'
+                        className='input input-sm input-bordered w-full max-w-xs'
                         placeholder='Enter your search'
                     />
                     {createRoute &&
@@ -108,7 +108,7 @@ export default function PromotionTable({   columns, pageSize = 100, createRoute,
             </div>
 
             {/* Filters + Promotion setup */}
-            <div className='flex flex-col gap-2'>
+            <div className='flex flex-col px-5 py-3'>
                 <PreviousClassFilter />
                 <Promote table={table} />
             </div>

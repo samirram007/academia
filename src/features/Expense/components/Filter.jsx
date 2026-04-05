@@ -47,43 +47,23 @@ const [isLoading, setIsLoading] = useState(false)
     // if(ExpenseData.isFetching) return <div>Loading</div>
 
     return (
-        <div>
-            <form onSubmit={formik.handleSubmit}>
-                <div className='grid grid-cols-1  '>
-                    <div className='grid grid-flow-row md:grid-flow-col grid-cols-6 gap-5'>
-                        <div className='grid gap-4 col-span-6 border-b-2   border-blue-300/30 pb-2 px-4 mb-2 '>
-                            <div className='grid gap-4 grid-cols-12   mb-2'>
-
-                                <div className='col-span-2 '>
-
-                                    <AcademicSessionSelect formik={formik}   />
-
-                                </div>
-                                <div className='col-span-2 '>
-
-                                    <FormikInputBox type={'date'} formik={formik} name={'from'} label={'From'}/>
-
-                                </div>
-                                <div className='col-span-2 '>
-
-                                    <FormikInputBox type={'date'} formik={formik} name={'to'} label={'To'}/>
-
-                                </div>
-
-
-                                {formik.values &&
-                                    <div className='col-span-1 flex flex-col justify-end '>
-
-                                        <FormikSubmit formik={formik} label={'Filter'} />
-                                    </div>
-                                }
-                                 <div className='col-span-3 '>  </div>
-                            </div>
-                        </div>
-                    </div>
+        <form onSubmit={formik.handleSubmit}>
+            <div className='flex flex-wrap items-end gap-4'>
+                <div className='w-56'>
+                    <AcademicSessionSelect formik={formik} />
                 </div>
-            </form>
-        </div>
+                <div className='w-56'>
+                    <FormikInputBox type={'date'} formik={formik} name={'from'} label={'From'} />
+                </div>
+                <div className='w-56'>
+                    <FormikInputBox type={'date'} formik={formik} name={'to'} label={'To'} />
+                </div>
+
+                {formik.values &&
+                    <FormikSubmit formik={formik} label={'Filter'} />
+                }
+            </div>
+        </form>
     )
 }
 

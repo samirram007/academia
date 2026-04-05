@@ -11,7 +11,7 @@ const Breadcrumbs = ({title}) => {
     )
 
     return (
-        <nav className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-300 py-1">
+        <nav className="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-300 leading-none">
             <Link to="/dashboard" className="inline-flex items-center text-slate-400 hover:text-blue-600 dark:hover:text-blue-300">
                 <TiHome />
             </Link>

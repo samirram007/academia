@@ -66,44 +66,31 @@ const Filter = ({ StudentIdCardData, initialFilterValues, setFilterReady }) => {
 
 
     return (
-        <div className={isLoading ? 'hidden' : 'flex-1 flex flex-col justify-end bg-slate-200/10  rounded-lg my-2 '}>
+        <div className={isLoading ? 'hidden' : 'flex-1'}>
             <form onSubmit={formik.handleSubmit}>
-                <div className='grid grid-cols-1  '>
-                    <div className='grid grid-flow-row md:grid-flow-col grid-cols-6 gap-5'>
-                        <div className='grid gap-4 col-span-6   pb-2 px-4   '>
-                            <div className='grid gap-4 grid-cols-10   mb-2'>
-                                {/* <div className='col-span-1 text-md font-bold'>Filter</div> */}
-                                <div className='col-span-10 md:col-span-2 '>
-                                    <CampusSelect formik={formik} auto={true}
-                                    isLoading={isLoading}
-                                    setFilterReady={setFilterReady}
-                                    setIsLoading={setIsLoading} />
-
-
-
-                                </div>
-                                <div className='col-span-10 md:col-span-2 '>
-
-                                    <AcademicSessionSelect  formik={formik}
-                                    setFilterReady={setFilterReady}
-                                    campus_id={formik.values.campus_id} />
-
-                                </div>
-                                <div className='col-span-10 md:col-span-2 '>
-                                    <AcademicClassSelect formik={formik} setFilterReady={setFilterReady}  campus_id={formik.values.campus_id} />
-                                </div>
-                                <div className='col-span-10 md:col-span-2 '>
-                                    <SectionSelect formik={formik} setFilterReady={setFilterReady}   />
-                                </div>
-                                {formik.values &&
-                                    <div className={isLoading ? 'hidden' : '  col-span-10 md:col-span-2 flex flex-col justify-end '}>
-
-                                        <FormikSubmit formik={formik} label={'Filter'} />
-                                    </div>
-                                }
-                            </div>
-                        </div>
+                <div className='flex flex-wrap items-end gap-4'>
+                    <div className='w-60'>
+                        <CampusSelect formik={formik} auto={true}
+                            isLoading={isLoading}
+                            setFilterReady={setFilterReady}
+                            setIsLoading={setIsLoading} />
                     </div>
+                    <div className='w-60'>
+                        <AcademicSessionSelect formik={formik}
+                            setFilterReady={setFilterReady}
+                            campus_id={formik.values.campus_id} />
+                    </div>
+                    <div className='w-60'>
+                        <AcademicClassSelect formik={formik} setFilterReady={setFilterReady} campus_id={formik.values.campus_id} />
+                    </div>
+                    <div className='w-60'>
+                        <SectionSelect formik={formik} setFilterReady={setFilterReady} />
+                    </div>
+                    {formik.values &&
+                        <div className={isLoading ? 'hidden' : ''}>
+                            <FormikSubmit formik={formik} label={'Filter'} />
+                        </div>
+                    }
                 </div>
             </form>
         </div>

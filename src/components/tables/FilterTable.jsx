@@ -62,14 +62,14 @@ export default function FilterTable({ data, columns, pageSize = 100, createRoute
         )
 
     }, [pagination]);
-useEffect(()=>{
+    useEffect(() => {
 
-    if(filter){
+        if (filter) {
 
-        setShowFilter(prev=>true)
+            setShowFilter(prev => true)
 
     }
-},[])
+    }, [])
     return (
         <div className='flex flex-col'>
             {/* Header */}
@@ -82,8 +82,8 @@ useEffect(()=>{
                         type='text'
                         value={filtering}
                         onChange={e => setFiltering(e.target.value)}
-                        className='rounded-full py-1.5 text-sm px-4 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/40 w-44'
-                        placeholder='Enter our search'
+                        className='input input-sm input-bordered w-full max-w-xs'
+                        placeholder='Enter your search'
                     />
                     {createRoute &&
                         <Link to={createRoute} title='Create new'
@@ -106,7 +106,7 @@ useEffect(()=>{
                 </div>
             </div>
 
-            {/* Filter panel */}
+            { }
             {filter && showFilter && (
                 <div className='flex px-5 py-3 border-b border-slate-100 dark:border-slate-800'>
                     {filter}
@@ -129,13 +129,13 @@ useEffect(()=>{
                                             onClick={header.column.getToggleSortingHandler()}
                                                 className={`px-4 py-3 ${alignClass} text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wide cursor-pointer select-none`}
                                         >
-                                            {header.isPlaceholder ? null : (
+                                                {header.isPlaceholder ? null : (
                                                     <div className={`flex items-center gap-1 ${align === 'right' ? 'justify-end' : align === 'center' ? 'justify-center' : ''}`}>
                                                         {flexRender(header.column.columnDef.header, header.getContext())}
                                                         {({ asc: '↑', desc: '↓' })[header.column.getIsSorted() ?? null]}
-                                                </div>
-                                            )}
-                                        </th>
+                                                    </div>
+                                                )}
+                                            </th>
                                         );
                                     })}
                                 </tr>
@@ -150,7 +150,7 @@ useEffect(()=>{
                                         return (
                                             <td key={cell.id} className={`px-4 py-3 text-slate-700 dark:text-slate-200 ${alignClass}`}>
                                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                        </td>
+                                            </td>
                                         );
                                     })}
                                 </tr>
@@ -159,9 +159,9 @@ useEffect(()=>{
                     </table>
                 </div>
             ) : (
-                <div className='flex gap-2 flex-col my-2'>
-                    {table.getRowModel().rows.map((row) => (
-                        <MobileRow row={row} index={row.id} key={row.id} mobileHeaders={mobileHeaders} />
+                    <div className='flex gap-2 flex-col my-2'>
+                        {table.getRowModel().rows.map((row) => (
+                            <MobileRow row={row} index={row.id} key={row.id} mobileHeaders={mobileHeaders} />
                     ))}
                 </div>
             )}

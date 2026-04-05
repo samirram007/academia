@@ -75,23 +75,17 @@ export default function FilterTable({ data, columns, pageSize = 100, createRoute
         }
     }, [])
     return (
-        <div className='container-flex md-container max-h-full overflow-hidden text-slate-800 dark:text-slate-100'>
-            <div className='flex flex-col md:flex-row justify-between gap-2 border-b border-blue-200/70 dark:border-blue-300/10 pb-2'>
-                <div className='flex flex-col gap-1 flex-1 text-base'>
-                    {/* {thisRoute} */}
+        <div className='flex flex-col text-slate-800 dark:text-slate-100'>
+            <div className='flex items-center justify-between gap-4 border-b border-blue-200/70 dark:border-blue-300/10 px-5 py-4'>
+                <div className='min-w-0'>
                     <Breadcrumbs />
-
                 </div>
-                <div className='flex flex-row gap-2 flex-1'>
-
-                </div>
-                <div className='flex flex-row gap-2 justify-center flex-1 items-start'>
-                    <div className='flex flex-row gap-2 justify-center flex-1 items-center'>
+                <div className='flex items-center gap-2 shrink-0'>
                         <input
                             type='text'
                             value={filtering}
                             onChange={e => setFiltering(e.target.value)}
-                            className='rounded-full py-1.5 text-sm px-4 m-0 border border-blue-200 dark:border-blue-300/20 bg-white dark:bg-slate-900/60 text-slate-700 dark:text-slate-200 placeholder:text-slate-400 dark:placeholder:text-slate-500'
+                        className='input input-sm input-bordered w-full max-w-xs'
                             placeholder='Enter your search'
                         />
                         {
@@ -126,14 +120,14 @@ export default function FilterTable({ data, columns, pageSize = 100, createRoute
                             filter={filter}
                             showFilter={showFilter}
                             setShowFilter={setShowFilter} />
-                        }
-                    </div>
-
+                    }
                 </div>
             </div>
-            <div className={`${(!showFilter) ? 'hidden' : 'flex  '}`}>
-                {filter && filter}
-            </div>
+            {filter && showFilter && (
+                <div className='px-5 py-3 border-b border-blue-100/70 dark:border-blue-300/10'>
+                    {filter}
+                </div>
+            )}
 
 
             {isBrowser ?

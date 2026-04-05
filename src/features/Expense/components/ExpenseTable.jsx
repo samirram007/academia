@@ -73,27 +73,23 @@ export default function ExpenseTable({ data, columns, pageSize=100 , createRoute
         )
 
     }, [pagination]);
-    if(ExpenseData.isFetching) return <div>Loading</div>
+    if (ExpenseData.isFetching) return <div className='px-5 py-6 text-slate-500 dark:text-slate-400'>Loading...</div>
     return (
-        <div className='container-flex md-container'>
-            <div className='row   flex flex-col md:flex-row justify-between gap-2 border-b-2 border-blue-300/10 pb-2 '>
-                <div className='flex flex-col gap-2 flex-1 text-3xl'>
-                    {/* {thisRoute} */}
+        <div className='flex flex-col'>
+            <div className='flex items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-700/60 px-5 py-4'>
+                <div className='min-w-0'>
                     <Breadcrumbs />
-
                 </div>
-                <div className='flex flex-row gap-2 flex-1'>
+                <div className='flex flex-row justify-start  items-center gap-2 shrink-0'>
 
-                </div>
-                <div className='flex flex-row gap-2 justify-center flex-1 items-start'>
-                    <div className='flex flex-row gap-2 justify-center flex-1 items-center'>
                         <input
                             type='text'
                             value={filtering}
                             onChange={e => setFiltering(e.target.value)}
-                            className='rounded-full py-0 text-sm px-4 m-0 border-blue-300/10  bg-transparent'
-                            placeholder='Enter our search'
+                        className='input input-sm input-bordered w-full max-w-xs'
+                        placeholder='Enter your search'
                         />
+
                         {
                             createRoute &&
                             <Link to={createRoute} title='Create new'
@@ -104,8 +100,7 @@ export default function ExpenseTable({ data, columns, pageSize=100 , createRoute
                         {
                             createForm &&
                             <button onClick={() => setOpen(true)} title='Create new'
-                                className="btn btn-primary btn-sm text-xl
-                            btn-rounded-symbol border-blue-300/10"><IoMdAdd /></button>
+                                className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-lg transition-colors"><IoMdAdd /></button>
                         }
                         {
                             isOpen &&
@@ -127,30 +122,30 @@ export default function ExpenseTable({ data, columns, pageSize=100 , createRoute
                             showFilter={showFilter}
                             setShowFilter={setShowFilter} />
                             } */}
-
-                    </div>
-
                 </div>
             </div>
             {/* <div className={`${( !showFilter) ? 'hidden' : 'flex  '}`}>
                 {filter &&  filter}
             </div> */}
+            <div className='px-5 py-3 border-b border-slate-100 dark:border-slate-800'>
             <Filter
                     setFilterReady={setFilterReady}
                     ExpenseData={ExpenseData}
                     initialFilterValues={initialFilterValues}
                 />
+            </div>
 
             {isBrowser ?
                 <div className="overflow-x-auto">
-                    <table className="table table-zebra">
-                        <thead>
+                    <table className="w-full text-sm border-collapse">
+                        <thead className='bg-slate-100 dark:bg-slate-800'>
                             {table.getHeaderGroups().map(headerGroup => (
-                                <tr key={headerGroup.id}>
+                                <tr key={headerGroup.id} className='border-b border-slate-200 dark:border-slate-700'>
                                     {headerGroup.headers.map(header => (
                                         <th
                                             key={header.id}
                                             onClick={header.column.getToggleSortingHandler()}
+                                            className='px-4 py-3 text-left text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wide cursor-pointer select-none'
                                         >
                                             {header.isPlaceholder ? null : (
                                                 <div>
@@ -171,13 +166,13 @@ export default function ExpenseTable({ data, columns, pageSize=100 , createRoute
                             ))}
                         </thead>
 
-                        <tbody>
+                        <tbody className='bg-white dark:bg-slate-900 divide-y divide-slate-100 dark:divide-slate-800'>
                             {table.getRowModel().rows.map(row => (
 
-                                <tr key={row.id}>
+                                <tr key={row.id} className='hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors'>
                                     {row.getVisibleCells().map(cell => (
 
-                                        <td key={cell.id} >
+                                        <td key={cell.id} className='px-4 py-3 text-slate-700 dark:text-slate-200'>
 
                                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                         </td>
@@ -195,34 +190,34 @@ export default function ExpenseTable({ data, columns, pageSize=100 , createRoute
                     ))}
                 </div>
             }
-            <div className='row  flex flex-col md:flex-row justify-between gap-2 mt-6'>
-                <div className='flex flex-row gap-2 flex-1 text-lg'>
+            <div className='flex flex-col md:flex-row justify-between gap-2 px-5 py-4 border-t border-slate-100 dark:border-slate-800'>
+                <div className='flex flex-row gap-2 flex-1 text-sm text-slate-500 dark:text-slate-400'>
                     {table.getState().pagination.pageIndex + 1} of {table.getPageCount()} pages
                 </div>
-                <div className='flex flex-row gap-2 flex-1 justify-end'>
+                <div className='flex flex-row gap-2 flex-1 justify-end text-sm text-slate-600 dark:text-slate-300'>
                 Total: { table.getRowModel().rows.reduce((total,x)=>total+parseFloat(x.original.total_amount),0)}
                 </div>
                 {/* <div className='flex flex-row gap-2  justify-end w-[200px]'>    </div> */}
                 <div className='flex flex-row gap-2 justify-end w-[200px] '>
-                    <div className='flex flex-row  gap-2'>
+                    <div className='flex flex-row gap-1.5'>
                         <button disabled={!table.getCanPreviousPage()} onClick={() => table.setPageIndex(0)}
-                            className='btn btn-blue btn-sm btn-rounded'>{'<<'}</button>
+                            className='inline-flex items-center justify-center w-8 h-8 rounded-full text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors'>{'<<'}</button>
                         <button
                             disabled={!table.getCanPreviousPage()}
                             onClick={() => table.previousPage()}
-                            className='btn btn-blue btn-sm btn-rounded'
+                            className='inline-flex items-center justify-center w-8 h-8 rounded-full text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors'
                         >
                             {'<'}
                         </button>
                         <button
                             disabled={!table.getCanNextPage()}
                             onClick={() => table.nextPage()}
-                            className='btn btn-blue btn-sm btn-rounded'
+                            className='inline-flex items-center justify-center w-8 h-8 rounded-full text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors'
                         >
                             {'>'}
                         </button>
                         <button onClick={() => table.setPageIndex(table.getPageCount() - 1)} disabled={!table.getCanNextPage()}
-                            className='btn btn-blue btn-sm btn-rounded'>
+                            className='inline-flex items-center justify-center w-8 h-8 rounded-full text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors'>
                             {'>>'}
                         </button>
                     </div>

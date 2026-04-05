@@ -50,85 +50,74 @@ const EntryForm = ({ initialValues, entryMode }) => {
         }
     })
 
+    const computedTotal = formik.values.expense_items.reduce((acc, item) => acc + (parseFloat(item.total_amount) || 0), 0)
+
     return (
-        <div className='w-100 mx-auto'>
-            <form onSubmit={formik.handleSubmit}>
-                <div className='grid grid-cols-1  '>
-                    <div className='grid grid-flow-row md:grid-flow-col grid-cols-6 gap-5'>
-                        <div className='grid gap-4 col-span-6   pb-2 px-4 mb-2 '>
-                            <div className='grid gap-4 grid-cols-12  md:grid-cols-12  mb-2'>
-                                {/* <div className='col-span-1 text-md font-bold'>Filter</div> */}
-                                <div className='col-span-6 md:col-span-2 '>
-                                    <FormikInputBox formik={formik} type={"text"} extClass={'align-self-right'} name="voucher_no" label="Voucher No" />
-
-
-                                </div>
-
-                                <div className=' md:col-span-6 '></div>
-                                <div className='col-span-6  md:col-span-2 '>
-
-                                    <AcademicSessionSelect formik={formik} />
-
-                                </div>
-                                <div className='col-span-6  md:col-span-2 flex flex-col justify-end items-center '>
-
-                                    <FormikInputBox formik={formik} type={"date"} extClass={'align-self-right'} name="expense_date" label="Date" />
-
-
-                                </div>
-
-
-                            </div>
-
+        <div className='w-full'>
+            <form onSubmit={formik.handleSubmit} className='flex flex-col gap-4'>
+                <div className='rounded-xl border border-slate-200 dark:border-slate-700/60 bg-slate-50/70 dark:bg-slate-800/40 p-4'>
+                    <div className='flex flex-col lg:flex-row gap-4 lg:items-end'>
+                        <div className='w-full lg:w-1/3'>
+                            <FormikInputBox formik={formik} type={"text"} name="voucher_no" label="Voucher No" />
+                        </div>
+                        <div className='w-full lg:flex-1 grid grid-cols-1 md:grid-cols-2 gap-4'>
+                            <AcademicSessionSelect formik={formik} />
+                            <FormikInputBox formik={formik} type={"date"} name="expense_date" label="Date" />
                         </div>
                     </div>
-                    <div className='flex flex-row justify-center'>
-                        <div className='badge badge-success'>Expenses</div>
+                </div>
+
+                <div className='rounded-xl border border-slate-200 dark:border-slate-700/60 overflow-hidden'>
+                    <div className='px-4 py-3 bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-700/60'>
+                        <h3 className='text-sm font-semibold text-slate-700 dark:text-slate-200'>Expense Items</h3>
                     </div>
-                    <div className='grid grid-cols-6 gap-5 border-b-2   border-blue-300/30 pb-2 px-4 mb-2'>
+                    <div className='grid grid-cols-6 gap-4 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-700/60'>
                         <div className='col-span-4'>Particulars</div>
                         <div className='text-right'>Amount</div>
                         <div className='text-center'>Action</div>
                     </div>
-                    <ExpenseItems formik={formik} changes={changes} setChanges={setChanges} setTotal={setTotal} />
 
-                    {
-
-                        !confirm &&
-                        (addMore ?
-                            <ExpenseItemNew formik={formik} changes={changes} setChanges={setChanges} setAddMore={setAddMore} />
-                            :
-
-                            (<div className='flex flex-row gap-4 justify-end p-4'>
-                                <div onClick={() => setAddMore(true)} className='btn btn-primary'>Add More</div>
-                                <div onClick={() => setConfirm(true)} className='btn btn-primary'>Confirm</div>
-                            </div>)
-                        )
-
-
-                    }
-
-
-
-
+                    <div className='px-4 py-2'>
+                        <ExpenseItems formik={formik} changes={changes} setChanges={setChanges} />
+                        {!confirm && (
+                            addMore ? (
+                                <ExpenseItemNew formik={formik} changes={changes} setChanges={setChanges} setAddMore={setAddMore} />
+                            ) : (
+                                <div className='flex flex-row gap-2 justify-end py-3'>
+                                    <button
+                                        type='button'
+                                        onClick={() => setAddMore(true)}
+                                        className='inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold border border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors'
+                                    >
+                                        Add More
+                                    </button>
+                                    <button
+                                        type='button'
+                                        onClick={() => setConfirm(true)}
+                                        className='inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white transition-colors'
+                                    >
+                                        Confirm Items
+                                    </button>
+                                </div>
+                            )
+                        )}
+                    </div>
                 </div>
-                <div className='fixed-bottom'>
 
-                    <div className='border-t-2 border-primary flex flex-row justify-between'>
-                        <div >Total:</div><div>{total}</div>
+                <div className='sticky bottom-0 z-10 rounded-xl border border-slate-200 dark:border-slate-700/60 bg-white/95 dark:bg-slate-900/95 backdrop-blur px-4 py-3'>
+                    <div className='flex items-center justify-between border-b border-slate-200 dark:border-slate-700/60 pb-3 mb-3'>
+                        <span className='text-sm font-semibold text-slate-600 dark:text-slate-300'>Total</span>
+                        <span className='text-lg font-bold text-slate-800 dark:text-slate-100'>{computedTotal.toFixed(2)}</span>
                     </div>
 
-                    <div className='flex flex-row '>
-                        <div className='remarks-box flex-1 px-6'>
+                    <div className='flex flex-col lg:flex-row gap-3 lg:items-end'>
+                        <div className='flex-1'>
                             <MultiInputBox formik={formik} name="narration" label="Remarks" />
                         </div>
-                        <div className='mx-auto flex flex-col 
-                        justify-end items-center border-t-2 border-blue-300/10 mt-2 
-                        pb-2 pt-6'>
-                            <div className='flex gap-2 items-center text-red-600'>
-
-                                {entryMode === 'delete' && "Are your sure you want to delete this entry?"}
-                            </div>
+                        <div className='flex flex-col items-end gap-2'>
+                            {entryMode === 'delete' && (
+                                <div className='text-xs text-red-500'>Are your sure you want to delete this entry?</div>
+                            )}
                             <button type="submit" className='inline-flex items-center justify-center gap-2 rounded-lg px-6 py-2.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors disabled:opacity-60 disabled:cursor-not-allowed'>
                                 {entryMode === 'delete' ? 'Delete' : 'Confirm'}
                                 {formik.isSubmitting && (
@@ -176,10 +165,10 @@ const ExpenseItemRow = ({ expense_item }) => {
     return (
         <>
 
-            <div className='grid grid-cols-6 gap-5 border-b-2   border-blue-300/30 pb-2 px-4 mb-2'>
+            <div className='grid grid-cols-6 gap-4 border-b border-slate-200 dark:border-slate-700/60 py-2'>
                 <div className='col-span-4'>{expense_item.expense_head.name}</div>
                 <div className='text-right'>{expense_item.total_amount}</div>
-                <div className='text-center'><button type="button">Edit</button></div>
+                <div className='text-center'><button type="button" className='text-xs text-slate-400 cursor-not-allowed' disabled>Edit</button></div>
             </div>
 
         </>
@@ -240,14 +229,13 @@ export const ExpenseItemNew = ({ formik, changes, setChanges, setAddMore }) => {
         <>
 
 
-            <div className='grid grid-cols-12 gap-5 border-b-2   border-blue-300/30 pb-2 px-4 mb-2'>
+            <div className='grid grid-cols-12 gap-4 border-b border-slate-200 dark:border-slate-700/60 py-2'>
                 <div className='col-span-4'>
                     {/* <FormikInputBox formik={formik} type={"text"} name={`expense_items.particulars`} label="" /> */}
                     {/* <input                className={`  input mb-0 input-bordered input-primary    ${formik.errors[name]? 'input-error' : ''}`}/> */}
                     <select ref={expenseHeadRef}
                         onChange={handleDropdownChange}
-
-                        className={`select  w-full  select-primary`}
+                        className='w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-3 py-2 text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/40'
                     >
                         <option value='0'      >-- please select</option>
                         {
@@ -260,11 +248,16 @@ export const ExpenseItemNew = ({ formik, changes, setChanges, setAddMore }) => {
                 </div>
                 <div className='col-span-4'></div>
                 <div className='text-right col-span-2'>
-                    <input type={"number"} ref={totalAmountRef} step={"100"} className={`  input mb-0 input-bordered input-primary  `} />
+                    <input
+                        type={"number"}
+                        ref={totalAmountRef}
+                        step={"100"}
+                        className='w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-3 py-2 text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/40'
+                    />
                 </div>
 
                 <div className='text-center col-span-2'>
-                    <button type="button" onClick={addExpense} className='btn btn-primary btn-sm btn-rounded'>Set</button>
+                    <button type="button" onClick={addExpense} className='inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white transition-colors'>Set</button>
                 </div>
             </div>
 

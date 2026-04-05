@@ -55,65 +55,31 @@ const Filter = ({ fetchedData, initialFilterValues }) => {
 
 
     return (
-        <div>
-            <form onSubmit={formik.handleSubmit}>
-                <div className='grid grid-cols-1  '>
-                    <div className='grid grid-flow-row md:grid-flow-col grid-cols-6 gap-5'>
-                        <div className='grid gap-4 col-span-6 border-b-2   border-blue-300/30 pb-2 px-4 mb-2 '>
-                            <div className='grid gap-4 grid-cols-12   mb-2'>
-                                {/* <div className='col-span-1 text-md font-bold'>Filter</div> */}
-                                <div className='col-span-2 '>
-
-                                    <StudentFilterSelect formik={formik} />
-
-
-                                </div>
-                                <div className='col-span-2 '>
-
-                                    <AcademicSessionSelect formik={formik} />
-
-                                </div>
-                                {/* <div className='col-span-2 '>
-                                    <CampusSelect formik={formik} auto={false} isLoading={isLoading} setIsLoading={setIsLoading} />
-
-                                </div>
-                                <div className='col-span-2 '>
-
-                                    <AcademicClassSelect formik={formik} campus_id={formik.values.campus_id} />
-
-                                </div> */}
-                                <div className='col-span-2 '>
-
-                                    <CampusAcademicClassSelect formik={formik} name='academic_class_id' label={'Class'} />
-
-                                </div>
-
-
-                                {fetchedData.isRefetching ?
-                                    (
-                                        <div className={'flex flex-col justify-end '}>
-                                            <button type="submit"
-                                                disabled className="inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-semibold bg-amber-400/60 text-slate-700 cursor-not-allowed opacity-70 whitespace-nowrap">
-                                                Filtering
-                                            </button>
-                                        </div>
-                                    )
-                                    :
-                                    (
-                                        formik.values &&
-                                        <div className={' flex flex-col justify-end '}>
-
-                                                <FormikSubmit formik={formik} label={'Filter'} />
-                                            </div>
-                                    )
-
-                                }
-                            </div>
-                        </div>
-                    </div>
+        <form onSubmit={formik.handleSubmit}>
+            <div className='flex flex-wrap items-end gap-4'>
+                <div className='w-60'>
+                    <StudentFilterSelect formik={formik} />
                 </div>
-            </form>
-        </div>
+                <div className='w-60'>
+                    <AcademicSessionSelect formik={formik} />
+                </div>
+                <div className='w-60'>
+                    <CampusAcademicClassSelect formik={formik} name='academic_class_id' label={'Class'} />
+                </div>
+
+                {fetchedData.isRefetching ? (
+                    <button
+                        type="submit"
+                        disabled
+                        className="inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-semibold bg-amber-400/60 text-slate-700 cursor-not-allowed opacity-70 whitespace-nowrap"
+                    >
+                        Filtering
+                    </button>
+                ) : (
+                    formik.values && <FormikSubmit formik={formik} label={'Filter'} />
+                )}
+            </div>
+        </form>
     )
 }
 

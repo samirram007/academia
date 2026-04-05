@@ -84,7 +84,7 @@ export default function MonthlyCollectionReportTable({ data, columns, pageSize =
                         type='text'
                         value={filtering}
                         onChange={e => setFiltering(e.target.value)}
-                        className='rounded-lg py-1.5 text-sm px-4 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-blue-500/30'
+                        className='input input-sm input-bordered w-full max-w-xs'
                         placeholder='Search...'
                     />
                     <ExportToExcel table={table} />

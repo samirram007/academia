@@ -61,150 +61,127 @@ export default function BasicTable({ data, columns, pageSize = 100, createRoute,
     }, [pagination]);
 
     return (
-        <div className='container-flex md-container'>
-            <div className='row   flex flex-col md:flex-row justify-between gap-2 border-b-2 border-blue-300/10 pb-2 '>
-                <div className='flex flex-col gap-2 flex-1 text-3xl'>
-                    {/* {thisRoute} */}
+        <div className='flex flex-col'>
+            <div className='flex items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-700/60 px-5 py-4'>
+                <div className='min-w-0'>
                     <Breadcrumbs />
-
                 </div>
-                <div className='flex flex-row gap-2 flex-1'>
-
-                </div>
-                <div className='flex flex-row gap-2 justify-center flex-1 items-start'>
-                    <div className='flex flex-row gap-2 justify-center flex-1 items-center'>
-                        <input
-                            type='text'
-                            value={filtering}
-                            onChange={e => setFiltering(e.target.value)}
-                            className='rounded-full py-0 text-sm px-4 m-0 border-blue-300/10  bg-transparent'
-                            placeholder='Enter our search'
-                        />
-                        {
-                            createRoute &&
-                            <Link to={createRoute} title='Create new'
-                                className="btn btn-primary btn-sm text-xl     btn-rounded-symbol border-blue-300/10    "><IoMdAdd /></Link>
-
-
-                        }
-                        {
-                            createForm &&
-                            <button onClick={() => setOpen(true)} title='Create new'
-                                className="btn btn-primary btn-sm text-xl
-                            btn-rounded-symbol border-blue-300/10"><IoMdAdd /></button>
-                        }
-                        {
-                            isOpen &&
-                            <>
-
-
-                                <FormikFormModal label={createFormTitle ?? 'Create new'}>
-                                    {createForm}
-                                </FormikFormModal>
-
-
-
-                            </>
-
-
-                        }
-
-                    </div>
-
+                <div className='flex items-center gap-2 shrink-0'>
+                    <input
+                        type='text'
+                        value={filtering}
+                        onChange={e => setFiltering(e.target.value)}
+                         className='input input-sm input-bordered w-full max-w-xs'
+                        placeholder='Enter your search'
+                    />
+                    {createRoute && (
+                        <Link
+                            to={createRoute}
+                            title='Create new'
+                            className='inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-lg transition-colors'
+                        >
+                            <IoMdAdd />
+                        </Link>
+                    )}
+                    {createForm && (
+                        <button
+                            onClick={() => setOpen(true)}
+                            title='Create new'
+                            className='inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-lg transition-colors'
+                        >
+                            <IoMdAdd />
+                        </button>
+                    )}
+                    {isOpen && (
+                        <FormikFormModal label={createFormTitle ?? 'Create new'}>
+                            {createForm}
+                        </FormikFormModal>
+                    )}
                 </div>
             </div>
 
-
-
-            {isBrowser ?
-                <div className="overflow-x-auto">
-                    <table className="table table-zebra">
-                        <thead>
+            {isBrowser ? (
+                <div className='overflow-x-auto'>
+                    <table className='w-full text-sm border-collapse'>
+                        <thead className='bg-slate-100 dark:bg-slate-800'>
                             {table.getHeaderGroups().map(headerGroup => (
-                                <tr key={headerGroup.id}>
-                                    {headerGroup.headers.map(header => (
-                                        <th
-                                            key={header.id}
-                                            onClick={header.column.getToggleSortingHandler()}
-                                        >
-                                            {header.isPlaceholder ? null : (
-                                                <div>
-                                                    {flexRender(
-                                                        header.column.columnDef.header,
-                                                        header.getContext()
-                                                    )}
-                                                    {
-                                                        { asc: '🔼', desc: '🔽' }[
-                                                        header.column.getIsSorted() ?? null
-                                                        ]
-                                                    }
-                                                </div>
-                                            )}
-                                        </th>
-                                    ))}
+                                <tr key={headerGroup.id} className='border-b border-slate-200 dark:border-slate-700'>
+                                    {headerGroup.headers.map(header => {
+                                        const align = header.column.columnDef.align;
+                                        const alignClass = align === 'right' ? 'text-right' : align === 'center' ? 'text-center' : 'text-left';
+                                        return (
+                                            <th
+                                                key={header.id}
+                                                onClick={header.column.getToggleSortingHandler()}
+                                                className={`px-4 py-3 ${alignClass} text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wide cursor-pointer select-none`}
+                                            >
+                                                {header.isPlaceholder ? null : (
+                                                    <div className={`flex items-center gap-1 ${align === 'right' ? 'justify-end' : align === 'center' ? 'justify-center' : ''}`}>
+                                                        {flexRender(header.column.columnDef.header, header.getContext())}
+                                                        {({ asc: '↑', desc: '↓' })[header.column.getIsSorted() ?? null]}
+                                                    </div>
+                                                )}
+                                            </th>
+                                        );
+                                    })}
                                 </tr>
                             ))}
                         </thead>
-
-                        <tbody>
+                        <tbody className='bg-white dark:bg-slate-900 divide-y divide-slate-100 dark:divide-slate-800'>
                             {table.getRowModel().rows.map(row => (
-
-                                <tr key={row.id}>
-                                    {row.getVisibleCells().map(cell => (
-
-                                        <td key={cell.id} >
-
-                                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                        </td>
-                                    ))}
+                                <tr key={row.id} className='hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors'>
+                                    {row.getVisibleCells().map(cell => {
+                                        const align = cell.column.columnDef.align;
+                                        const alignClass = align === 'right' ? 'text-right' : align === 'center' ? 'text-center' : 'text-left';
+                                        return (
+                                            <td key={cell.id} className={`px-4 py-3 text-slate-700 dark:text-slate-200 ${alignClass}`}>
+                                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                            </td>
+                                        );
+                                    })}
                                 </tr>
                             ))}
                         </tbody>
-
                     </table>
                 </div>
-                :
+            ) : (
                 <div className='flex gap-2 flex-col my-2'>
                     {table.getRowModel().rows.map((row) => (
                         <MobileRow row={row} index={row.id} key={row.id} mobileHeaders={mobileHeaders} />
                     ))}
                 </div>
-            }
-            <div className='row  flex flex-col md:flex-row justify-between gap-2 mt-6'>
-                <div className='flex flex-row gap-2 flex-1 text-lg'>
+            )}
+
+            <div className='flex flex-col md:flex-row justify-between gap-2 px-5 py-4 border-t border-slate-100 dark:border-slate-800'>
+                <div className='flex flex-row gap-2 flex-1 text-sm text-slate-500 dark:text-slate-400'>
                     {table.getState().pagination.pageIndex + 1} of {table.getPageCount()} pages
                 </div>
-                <div className='flex flex-row gap-2 flex-1'>
-
-                </div>
                 <div className='flex flex-row gap-2 justify-end flex-1'>
-                    <div className='flex flex-row  gap-2'>
+                    <div className='flex flex-row gap-1.5'>
                         <button disabled={!table.getCanPreviousPage()} onClick={() => table.setPageIndex(0)}
-                            className='btn btn-blue btn-sm btn-rounded'>{'<<'}</button>
+                            className='inline-flex items-center justify-center w-8 h-8 rounded-full text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors'>{'<<'}</button>
                         <button
                             disabled={!table.getCanPreviousPage()}
                             onClick={() => table.previousPage()}
-                            className='btn btn-blue btn-sm btn-rounded'
+                            className='inline-flex items-center justify-center w-8 h-8 rounded-full text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors'
                         >
                             {'<'}
                         </button>
                         <button
                             disabled={!table.getCanNextPage()}
                             onClick={() => table.nextPage()}
-                            className='btn btn-blue btn-sm btn-rounded'
+                            className='inline-flex items-center justify-center w-8 h-8 rounded-full text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors'
                         >
                             {'>'}
                         </button>
                         <button onClick={() => table.setPageIndex(table.getPageCount() - 1)} disabled={!table.getCanNextPage()}
-                            className='btn btn-blue btn-sm btn-rounded'>
+                            className='inline-flex items-center justify-center w-8 h-8 rounded-full text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors'>
                             {'>>'}
                         </button>
                     </div>
                 </div>
             </div>
-
         </div>
-
     )
 }
 

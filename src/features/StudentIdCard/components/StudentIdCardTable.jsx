@@ -101,24 +101,18 @@ export default function StudentIdCardTable({ data, columns, pageSize = 100, crea
         setSelectedItems(prev => table.getSelectedRowModel().flatRows.length)
     }, [table.getSelectedRowModel().flatRows.length]);
     return (
-        <div className='container-flex md-container'>
-            <div className='row   flex flex-col md:flex-row justify-between gap-2 border-b-2 border-blue-300/10 pb-2 '>
-                <div className='flex flex-col gap-2 flex-1 text-3xl'>
-                    {/* {thisRoute} */}
+        <div className='flex flex-col'>
+            <div className='flex items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-700/60 px-5 py-4'>
+                <div className='min-w-0'>
                     <Breadcrumbs />
-
                 </div>
-                <div className='flex flex-row gap-2 flex-1'>
-
-                </div>
-                <div className='flex flex-row gap-2 justify-center flex-1 items-start'>
-                    <div className='flex flex-row gap-2 justify-center flex-1 items-center'>
+                <div className='flex items-center gap-2 shrink-0'>
                         <input
                             type='text'
                             value={filtering}
                             onChange={e => setFiltering(e.target.value)}
-                            className='rounded-full py-0 text-sm px-4 m-0 border-blue-300/10  bg-transparent'
-                            placeholder='Enter our search'
+                        className='input input-sm input-bordered w-full max-w-xs'
+                        placeholder='Enter your search'
                         />
                         {
                             createRoute &&
@@ -130,8 +124,7 @@ export default function StudentIdCardTable({ data, columns, pageSize = 100, crea
                         {
                             createForm &&
                             <button onClick={() => setOpen(true)} title='Create new'
-                                className="btn btn-primary btn-sm text-xl
-                            btn-rounded-symbol border-blue-300/10"><IoMdAdd /></button>
+                                className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-lg transition-colors"><IoMdAdd /></button>
                         }
                         {
                             isOpen &&
@@ -147,13 +140,10 @@ export default function StudentIdCardTable({ data, columns, pageSize = 100, crea
                             </>
 
 
-                        }
-
-                    </div>
-
+                    }
                 </div>
             </div>
-            <div className='flex flex-col  '>
+            <div className='px-5 py-3 border-b border-slate-100 dark:border-slate-800'>
                 <Filter
                     setFilterReady={setFilterReady}
                     StudentIdCardData={StudentIdCardData}
@@ -179,15 +169,15 @@ export default function StudentIdCardTable({ data, columns, pageSize = 100, crea
             </div> */}
             {
                 filterReady &&
-                <div>
+                <div className='px-5 py-3'>
                     {/* {console.log(StudentIdCardData)} */}
                     {(!StudentIdCardData.data || StudentIdCardData.isError || StudentIdCardData.data.data.length === 0)
-                        ? <div className='p-4 flex justify-center items-center text-2xl bg-slate-600 mt-4 rounded-lg h-40'>
+                            ? <div className='p-4 flex justify-center items-center text-lg text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-800/40 rounded-lg h-32 border border-slate-200 dark:border-slate-700/60'>
                             No Data Found
                         </div>
                         :
                         <>
-                            <div className='flex flex-row justify-between bg-blue-600/30 rounded-lg text-slate-200 items-center pr-4'>
+                                <div className='flex flex-col md:flex-row justify-between bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 rounded-lg text-slate-700 dark:text-slate-200 items-start md:items-center px-4 py-2 gap-2'>
 
                                 <div>
                                     {table.getHeaderGroups().map(headerGroup => (
@@ -216,19 +206,17 @@ export default function StudentIdCardTable({ data, columns, pageSize = 100, crea
                                 </div>
 
                                 <div className='flex flex-row gap-1 items-center  '>
-                                    <div className="badge badge-success badge-outline">{selectedItems} selected</div>
-                                    <button className='btn btn-outline btn-blue btn-rounded '
+                                        <div className="inline-flex items-center rounded-full border border-emerald-400/60 text-emerald-600 dark:text-emerald-400 px-2.5 py-1 text-xs font-semibold">{selectedItems} selected</div>
+                                        <button className='inline-flex items-center rounded-full border border-blue-500 text-blue-600 dark:text-blue-400 px-3 py-1.5 text-xs font-semibold hover:bg-blue-600 hover:text-white transition-colors'
                                         onClick={() => addToPrintQueue()}
-                                    >
-                                        <span className='text-blue-800 hover:text-blue-300'>
+                                        >
                                             Add to print queue
-                                        </span>
                                     </button>
                                     <PrintModal printQueue={printQueue} />
 
                                 </div>
                             </div>
-                            <div className='w-[750px] flex gap-2 flex-row flex-wrap justify-between my-2'>
+                                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 my-3'>
                                 {table.getRowModel().rows.map((row, index) => (
                                     <IdCard row={row} index={row.id} key={index} mobileHeaders={mobileHeaders} />
                                 ))}

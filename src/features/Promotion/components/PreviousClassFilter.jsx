@@ -52,7 +52,7 @@ const PreviousClassFilter = () => {
 
 
     return (
-        <div className={'flex-1 flex flex-col justify-end bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg p-3 my-1'}>
+        <div className={'flex-1 flex flex-col justify-end bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg p-3'}>
             <form onSubmit={formik.handleSubmit}>
                 <div className='grid grid-cols-1  '>
                     <div className='grid grid-flow-row md:grid-flow-col grid-cols-6 gap-5'>
