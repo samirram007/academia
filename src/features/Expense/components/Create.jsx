@@ -8,8 +8,7 @@ import EntryForm from './EntryForm';
 
   const editData = {
     expense_no:'new',
-    narration: '',
-    voucher_no: '',
+    narration: '', 
     expense_date:    moment(new Date()).format('YYYY-MM-DD'),
     academic_session_id: moment(new Date()).format('YYYY'), 
     user_id: null,
@@ -23,8 +22,6 @@ import EntryForm from './EntryForm';
 
   const initialValues = editData ?? {
     expense_no:'new',
-
-    voucher_no: '',
     narration: '', 
     expense_date:     moment(new Date()).format('YYYY-MM-DD'),
     academic_session_id: 1, 

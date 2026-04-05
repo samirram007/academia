@@ -5,6 +5,7 @@ import FilterTable from "../../../components/tables/FilterTable";
 
 import { useExaminations } from "../hooks/quaries";
 
+import Create from "./Create";
 import Delete from "./Delete";
 import Edit from "./Edit";
 
@@ -61,7 +62,7 @@ const DataTable = () => {
       align: "center",
       cell: ({ row }) => {
         return (
-          <div className="flex justify-end  items-center gap-2">
+          <div className="flex justify-start md:justify-center  items-center gap-2">
             <Edit initialValues={row.original} />
             <Delete initialValues={row.original} />
           </div>
@@ -74,7 +75,7 @@ const DataTable = () => {
     <FilterTable
       data={data}
       columns={columns}
-      createRoute="/examinations/create" 
+      createForm={<Create modal={true} />}
       createFormTitle="Create Examination"
     />
   );

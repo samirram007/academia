@@ -24,7 +24,7 @@ export function fetchExpenses(payload) {
 
 
 export function storeExpense(payload) {
-    //  console.log('Pload', removeEmptyStrings(payload))
+    //console.log(removeEmptyStrings(payload))
     return axiosClient.post("/expenses", removeEmptyStrings(payload))
         .then(response => {
             return response.data;
@@ -37,7 +37,7 @@ export function storeExpense(payload) {
 }
 export function updateExpense(payload) {
     const { id, ...data } = payload;
-    // console.log(id, removeEmptyStrings(data))
+    //console.log(id, removeEmptyStrings(data))
     return axiosClient.put(`/expenses/${id}`, removeEmptyStrings(data))
         .then(response => {
             return response.data;

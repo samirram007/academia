@@ -10,16 +10,22 @@ export function fetchExaminationService(id) {
         })
 }
 export function fetchExaminationsService(payload) {
+
     return getData(`${modulePath}`)
+
 }
 
 export function storeExaminationService(payload) {
-    return postData(`${modulePath}`, payload)
-}
 
+    return postData(`${modulePath}`, payload)
+
+}
 export function updateExaminationService(payload) {
+
     const { id, ...data } = payload
     return putData(`${modulePath}/${id}`, data)
+
+
 }
 export function deleteExaminationService(payload) {
     const { id } = payload

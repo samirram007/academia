@@ -9,7 +9,7 @@ import {
 
 import { FormikInputBox } from "@/components/form-components/FormikInputBox";
 import { FormikSelect } from "@/components/form-components/FormikSelect";
-import { useAcademicSessions } from "@/features/AcademicSession/backup/hooks/quaries";
+import { useAcademicSessions } from "@/features/AcademicSession/hooks/quaries";
 import { useCampuses } from "@/features/Campus/hooks/queries";
 import { useExaminationTypes } from "@/features/ExaminationType/hooks/quaries";
 
@@ -125,16 +125,16 @@ const EntryForm = ({ initialValues, entryMode }) => {
           <div className="order-first"></div>
         </div>
 
-        <div className="flex flex-col gap-3 mt-6 pt-5 border-t border-slate-100 dark:border-slate-700/60">
+        <div className="mx-auto flex flex-col justify-center items-center border-t-2 border-blue-300/10 mt-2 pt-6">
           <div className="flex gap-2 items-center text-red-600">
             {entryMode === "delete" &&
               "Are your sure you want to delete this entry?"}
           </div>
-          <button type="submit" className="inline-flex items-center justify-center gap-2 rounded-lg px-6 py-2.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors disabled:opacity-60 disabled:cursor-not-allowed">
+          <button type="submit" className="btn btn-primary btn-wide">
             {entryMode === "delete" ? "Delete" : "Save"}
             {formik.isSubmitting && (
               <span
-                className="inline-block w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin"
+                className="spinner-border spinner-border-sm ms-2"
                 role="status"
                 aria-hidden="true"
               ></span>

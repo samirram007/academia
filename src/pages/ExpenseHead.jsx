@@ -1,4 +1,1 @@
-
-
-
-export { ExpenseHeads,CreateExpenseHead, EditExpenseHead} from '../features/ExpenseHead';
+export { CreateExpenseHead, EditExpenseHead, ExpenseHeads } from '../features/ExpenseHead';

@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from 'react-router';
+import { useNavigate } from "react-router-dom";
 import { useFormModal } from "../../../contexts/FormModalProvider";
-import { queryClient } from "../../../lib/queryClient";
+import { queryClient } from "../../../utils/queryClient";
 import {
   deleteExaminationService,
   storeExaminationService,

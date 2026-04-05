@@ -1,13 +1,13 @@
 import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from 'react-router';
-import { Flip, toast } from "react-toastify";
-import { useFormModal } from "../../../contexts/FormModalProvider";
-import { queryClient } from "../../../lib/queryClient";
+import { useNavigate } from "react-router-dom";
 import {
   deleteExaminationStandardService,
   storeExaminationStandardService,
   updateExaminationStandardService,
 } from "../services/apis";
+import { queryClient } from "../../../utils/queryClient";
+import { Flip, toast } from "react-toastify";
+import { useFormModal } from "../../../contexts/FormModalProvider";
 
 export function useStoreExaminationStandardMutation() {
   const navigate = useNavigate();

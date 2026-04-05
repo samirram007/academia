@@ -7,8 +7,11 @@ export function useAcademicClasses(payload) {
 
   const filterCallbackFn = useCallback((data) => {
 
+    if (payload.campus_id > 0) {
+      return { data: data.data.filter(x => x.campus_id === parseInt(payload.campus_id)) }
+    }
+    return data
 
-    return { data: data.data.filter(x => x.campus_id === parseInt(payload.campus_id)) }
   }, [payload.campus_id]);
 
   return useQuery({
