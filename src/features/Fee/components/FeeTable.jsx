@@ -133,7 +133,7 @@ export default function FeeTable({ data, columns, pageSize = 2000, createRoute,
             {
                 filterReady &&
                 <div>
-                        {FeeData.isFetching ?
+                        {(FeeData.isFetching && table.getRowModel().rows.length === 0) ?
 
                             <div className="flex justify-center items-center ">
                                 <div className="spinner  animate-spin border-violet-500 transition-colors rounded-full h-6 w-6 border-t-2 "></div>
@@ -141,7 +141,7 @@ export default function FeeTable({ data, columns, pageSize = 2000, createRoute,
                             : <></>
                         }
                     {
-                        (!FeeData.data || FeeData.isError || FeeData.data.data.length === 0)
+                            (!FeeData.isFetching && (!FeeData.data || FeeData.isError || FeeData.data.data.length === 0))
                                 ? <div className='flex justify-center items-center text-xl text-slate-400 dark:text-slate-500 h-40'>
                                 No Data Found
                             </div>

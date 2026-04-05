@@ -966,6 +966,7 @@ export const page = [
     isMenu: true,
     menuGroup: "SETTINGS",
     isPrivate: true, authType: true,
+    icon: icons.documents,
   },
   {
     path: "examinations",
@@ -974,6 +975,7 @@ export const page = [
     isMenu: true,
     menuGroup: "Examination",
     isPrivate: true, authType: true,
+    icon: icons.examinations,
   },
 
   {
@@ -984,7 +986,7 @@ export const page = [
     menuGroup: "EXAMINATION",
     isPrivate: true,
     authType: true,
-    icon: icons.academic_classes,
+    icon: icons.examinations,
     role: ["admin"],
     children: [
       {
@@ -994,7 +996,7 @@ export const page = [
         isMenu: false,
         isPrivate: true,
         authType: true,
-        icon: icons.create_academic_class,
+        icon: icons.create_examination,
       },
       {
         path: "edit/:id",
@@ -1014,7 +1016,7 @@ export const page = [
     menuGroup: "EXAMINATION",
     isPrivate: true,
     authType: true,
-    icon: icons.academic_classes,
+    icon: icons.examination_types,
     role: ["admin"],
     children: [
       {
@@ -1024,7 +1026,7 @@ export const page = [
         isMenu: false,
         isPrivate: true,
         authType: true,
-        icon: icons.create_academic_class,
+        icon: icons.create_examination_type,
       },
       {
         path: "edit/:id",
@@ -1044,7 +1046,7 @@ export const page = [
     menuGroup: "EXAMINATION",
     isPrivate: true,
     authType: true,
-    icon: icons.academic_classes,
+    icon: icons.examination_standard,
     role: ["admin"],
     children: [
       {
@@ -1054,7 +1056,7 @@ export const page = [
         isMenu: false,
         isPrivate: true,
         authType: true,
-        icon: icons.create_academic_class,
+        icon: icons.create_examination_standard,
       },
       {
         path: "edit/:id",
@@ -1074,7 +1076,7 @@ export const page = [
     menuGroup: "EXAMINATION",
     isPrivate: true,
     authType: true,
-    icon: icons.academic_classes,
+    icon: icons.examination_schedule,
     role: ["admin"],
     children: [
       {
@@ -1084,7 +1086,7 @@ export const page = [
         isMenu: false,
         isPrivate: true,
         authType: true,
-        icon: icons.create_academic_class,
+        icon: icons.create_examination_schedule,
       },
       {
         path: "edit/:id",
@@ -1104,7 +1106,7 @@ export const page = [
     menuGroup: "EXAMINATION",
     isPrivate: true,
     authType: true,
-    icon: icons.academic_classes,
+    icon: icons.examination_result,
     role: ["admin"],
     children: [
       {
@@ -1114,7 +1116,7 @@ export const page = [
         isMenu: false,
         isPrivate: true,
         authType: true,
-        icon: icons.create_academic_class,
+        icon: icons.create_examination_result,
       },
       {
         path: "edit/:id",
@@ -1224,6 +1226,7 @@ export const page = [
     isMenu: true,
     menuGroup: "REPORT INTERFACE",
     isPrivate: true, authType: true,
+    icon: icons.daily_collection_report,
   },
   {
     path: "monthly_collection_report",
@@ -1232,6 +1235,7 @@ export const page = [
     isMenu: true,
     menuGroup: "REPORT INTERFACE",
     isPrivate: true, authType: true,
+    icon: icons.monthly_collection_report,
   },
   {
     path: "exam_fees_collection_report",
@@ -1240,6 +1244,7 @@ export const page = [
     isMenu: true,
     menuGroup: "REPORT INTERFACE",
     isPrivate: true, authType: true,
+    icon: icons.exam_fees_collection_report,
   },
   {
     path: "logout",

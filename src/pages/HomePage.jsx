@@ -1,4 +1,4 @@
-import { CiUser } from "react-icons/ci";
+import BrandMark from "@/components/BrandMark";
 import { NavLink } from "react-router";
 
 const HomePage = () => {
@@ -47,7 +47,7 @@ const HomePage = () => {
                 <div className="flex w-full items-center justify-center px-6 pb-12 pt-2 sm:px-10 lg:w-2/5 lg:px-8 lg:pb-0">
                     <div className="w-full max-w-md rounded-3xl border border-white/15 bg-white/10 p-7 shadow-2xl backdrop-blur-xl sm:p-8">
                         <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg">
-                            <CiUser className="text-5xl text-white" />
+                            <BrandMark showText={false} iconClassName="h-12 w-12" />
                         </div>
 
                         <h2 className="text-center text-2xl font-bold text-white">

@@ -140,7 +140,7 @@ export default function PromotionTable({   columns, pageSize = 100, createRoute,
                                 ))}
                             </thead>
                             <tbody className='bg-white dark:bg-slate-900 divide-y divide-slate-100 dark:divide-slate-800'>
-                                {(isFetchingPreviousClassData || isReFetchingPreviousClassData) && (
+                                {((isFetchingPreviousClassData || isReFetchingPreviousClassData) && table.getRowModel().rows.length === 0) && (
                                     <tr>
                                         <td colSpan={6} className="text-center py-6">
                                             <div className="flex justify-center items-center gap-2 text-slate-500 dark:text-slate-400">

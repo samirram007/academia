@@ -126,7 +126,7 @@ export default function MonthlyCollectionReportTable({ data, columns, pageSize =
                     </thead>
 
                     <tbody className='divide-y divide-slate-100 dark:divide-slate-700/60'>
-                        {fetchedData.isFetching ?
+                        {(fetchedData.isFetching && table.getRowModel().rows.length === 0) ?
                             <tr>
                                 <td colSpan={13} className="text-center">
                                     <div className="flex justify-center items-center py-8">

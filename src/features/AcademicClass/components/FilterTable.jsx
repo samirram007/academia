@@ -133,7 +133,7 @@ export default function FilterTable({ data, columns, pageSize = 100, createRoute
                             ))}
                         </thead>
                         <tbody className='bg-white dark:bg-slate-900 divide-y divide-slate-100 dark:divide-slate-800'>
-                            {fetchedData.isFetching && (
+                            {(fetchedData.isFetching && table.getRowModel().rows.length === 0) && (
                                 <tr>
                                     <td colSpan={5} className="text-center py-6">
                                         <div className="flex justify-center items-center gap-2 text-slate-500 dark:text-slate-400">
@@ -164,19 +164,19 @@ export default function FilterTable({ data, columns, pageSize = 100, createRoute
             )}
 
             {/* Pagination */}
-            <div className='flex flex-col md:flex-row justify-between gap-2 px-5 py-4 border-t border-slate-100 dark:border-slate-800'>
+            <div className='flex flex-col md:flex-row md:items-center justify-between gap-3 px-2 py-3 border-t border-slate-100 dark:border-slate-800'>
                 <div className='flex-1 text-sm text-slate-500 dark:text-slate-400'>
                     {table.getState().pagination.pageIndex + 1} of {table.getPageCount()} pages
                 </div>
                 <div className='flex flex-row gap-1.5 justify-end flex-1'>
                     <button disabled={!table.getCanPreviousPage()} onClick={() => table.setPageIndex(0)}
-                        className='inline-flex items-center justify-center w-8 h-8 rounded-full text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors'>{'<<'}</button>
+                        className='inline-flex items-center justify-center min-w-10 h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed'>{'<<'}</button>
                     <button disabled={!table.getCanPreviousPage()} onClick={() => table.previousPage()}
-                        className='inline-flex items-center justify-center w-8 h-8 rounded-full text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors'>{'<'}</button>
+                        className='inline-flex items-center justify-center min-w-10 h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed'>{'<'}</button>
                     <button disabled={!table.getCanNextPage()} onClick={() => table.nextPage()}
-                        className='inline-flex items-center justify-center w-8 h-8 rounded-full text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors'>{'>'}</button>
+                        className='inline-flex items-center justify-center min-w-10 h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed'>{'>'}</button>
                     <button disabled={!table.getCanNextPage()} onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-                        className='inline-flex items-center justify-center w-8 h-8 rounded-full text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors'>{'>>'}</button>
+                        className='inline-flex items-center justify-center min-w-10 h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed'>{'>>'}</button>
                 </div>
             </div>
         </div>

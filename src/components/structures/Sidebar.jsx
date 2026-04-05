@@ -1,13 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { FaBookOpenReader } from "react-icons/fa6";
 import { MdOutlineDashboard } from "react-icons/md";
 import { TfiLayoutListThumb } from "react-icons/tfi";
 import { NavLink, useLocation } from 'react-router';
 import { menuGroup, page } from "../../Routes/navigation";
-import { fetchUser } from "../../services";
-import Loader from "../Loader";
+import BrandMark from "../BrandMark";
+import { warmupCriticalRoutes, warmupRoute } from "../../utils/routeWarmup";
 
 
 const checkActive = (param) => {
@@ -43,6 +41,11 @@ export const RenderMenuGroup = ({ isOpen, setOpen, group }) => {
   )
 }
 export const RenderMenu = ({ isOpen, setOpen, menuGroupData }) => {
+  const getWarmupHandlers = (routePath) => ({
+    onMouseEnter: () => warmupRoute(routePath),
+    onFocus: () => warmupRoute(routePath),
+    onPointerDown: () => warmupRoute(routePath),
+  });
 
   return (
     page.map(({ path, name, element, children, icon, isMenu, menuGroup }, i) => {
@@ -53,7 +56,7 @@ export const RenderMenu = ({ isOpen, setOpen, menuGroupData }) => {
         return (
           <li className={`flex flex-row gap-2 items-center min-h-[1rem] ${menuGroupData.visible ? 'pl-2' : ''}`} key={i}>
             {icon ?? <MdOutlineDashboard />}
-            <NavLink to={`/${path}`} className="rounded-md px-2 py-1 hover:bg-blue-50/80 dark:hover:bg-slate-800 transition-colors">
+            <NavLink to={`/${path}`} {...getWarmupHandlers(path)} className="rounded-md px-2 py-1 hover:bg-blue-50/80 dark:hover:bg-slate-800 transition-colors">
               {name}
             </NavLink>
           </li>
@@ -67,7 +70,7 @@ export const RenderMenu = ({ isOpen, setOpen, menuGroupData }) => {
           return (
             <li className={`flex flex-row gap-2 items-center min-h-[1rem] ${menuGroupData.visible ? 'pl-2' : ''}`} key={i}>
               {icon ?? <MdOutlineDashboard />}
-              <NavLink to={`/${path}`} className="rounded-md px-2 py-1 hover:bg-blue-50/80 dark:hover:bg-slate-800 transition-colors">
+              <NavLink to={`/${path}`} {...getWarmupHandlers(path)} className="rounded-md px-2 py-1 hover:bg-blue-50/80 dark:hover:bg-slate-800 transition-colors">
                 {name}
               </NavLink>
             </li>
@@ -81,7 +84,7 @@ export const RenderMenu = ({ isOpen, setOpen, menuGroupData }) => {
               <ul key={i} className="pl-2 collapse-content flex flex-col gap-2">
                 <li className="flex flex-row gap-2 items-center min-h-[1rem] " key={i}   >
                   <TfiLayoutListThumb />
-                  <NavLink to={`/${path}`} onClick={() => setOpen(!isOpen)} className={`w-full h-full rounded-md px-2 py-1 hover:bg-blue-50/80 dark:hover:bg-slate-800 transition-colors ${checkActive(path) ? "text-blue-600 dark:text-blue-300" : ""}`} >
+                  <NavLink to={`/${path}`} {...getWarmupHandlers(path)} className={`w-full h-full rounded-md px-2 py-1 hover:bg-blue-50/80 dark:hover:bg-slate-800 transition-colors ${checkActive(path) ? "text-blue-600 dark:text-blue-300" : ""}`} >
                     {name}
                   </NavLink>
                 </li>
@@ -89,7 +92,7 @@ export const RenderMenu = ({ isOpen, setOpen, menuGroupData }) => {
                   if (!item.isMenu) return
                   return <li className="flex flex-row gap-2 items-center min-h-[1rem]" key={j} path={`/>${item.path}`}   >
                     {item.icon ?? <MdOutlineDashboard />}
-                    <NavLink to={`/${path}/${item.path}`} onClick={() => setOpen(!isOpen)} className={`w-full h-full rounded-md px-2 py-1 hover:bg-blue-50/80 dark:hover:bg-slate-800 transition-colors ${checkActive(path + item.path) ? "text-blue-600 dark:text-blue-300" : ""}`}>
+                    <NavLink to={`/${path}/${item.path}`} {...getWarmupHandlers(path)} className={`w-full h-full rounded-md px-2 py-1 hover:bg-blue-50/80 dark:hover:bg-slate-800 transition-colors ${checkActive(path + item.path) ? "text-blue-600 dark:text-blue-300" : ""}`}>
                       {item.name}
                     </NavLink>
                   </li>
@@ -106,27 +109,35 @@ export const RenderMenu = ({ isOpen, setOpen, menuGroupData }) => {
 
 const Sidebar = ({ isOpen, setOpen }) => {
   const { t } = useTranslation()
-  let menuClass = isOpen ? "fixed md:translate-x-0  md:sticky" : "-translate-x-full fixed md:translate-x-0";
+  const menuClass = isOpen
+    ? "translate-x-0 md:translate-x-0 md:w-56 lg:w-64 md:min-w-56 lg:min-w-64 md:pointer-events-auto"
+    : "-translate-x-full md:translate-x-0 md:w-0 lg:w-0 md:min-w-0 lg:min-w-0 md:border-r-0 md:pointer-events-none";
 
-  const authUser = useQuery({
-    queryKey: ['user'],
-    queryFn: fetchUser,
-    staleTime: Infinity
-  })
-  if (authUser.isLoading) {
-    return (<Loader />)
-  }
+  useEffect(() => {
+    const runWarmups = () => warmupCriticalRoutes();
+
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      const idleId = window.requestIdleCallback(runWarmups);
+      return () => window.cancelIdleCallback(idleId);
+    }
+
+    const timerId = setTimeout(runWarmups, 0);
+    return () => clearTimeout(timerId);
+  }, []);
+
   return (
     <>
 
-      <aside className={`${menuClass} sidebar-menu  md:relative
-      min-w-[290px] md:min-w-56 lg:min-w-64
+      <aside className={`${menuClass} sidebar-menu fixed md:relative
+      w-[290px]
       max-h-screen overflow-hidden bg-white/80 dark:bg-slate-900/70 border-r border-blue-200/60 dark:border-blue-300/10
         z-20 transition ease-in-out duration-500 `} >
         <div className="flex-1 flex items-center gap-3 text-blue-700 dark:text-blue-300 px-5 py-4 text-lg font-semibold tracking-wide border-b border-blue-200/60 dark:border-blue-300/10">
-
-          <FaBookOpenReader />
-          {import.meta.env.VITE_APP_NAME}
+          <BrandMark
+            className="text-blue-700 dark:text-blue-300"
+            iconClassName="h-6 w-6"
+            textClassName="text-3xl font-semibold tracking-wide"
+          />
         </div>
         <nav className='my-2 mx-2 p-3 rounded-xl bg-slate-50/80 dark:bg-slate-950/60 overflow-y-auto h-[calc(100vh-96px)]'>
 
@@ -135,7 +146,10 @@ const Sidebar = ({ isOpen, setOpen }) => {
           </ul>
         </nav>
       </aside>
-      <div className={`${menuClass} md:hidden   fixed inset-0 w-full h-full z-10 bg-black/50`} onClick={() => setOpen(!isOpen)}></div>
+      <div
+        className={`md:hidden fixed inset-0 w-full h-full z-10 bg-black/50 transition-opacity duration-300 ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+        onClick={() => setOpen(false)}
+      ></div>
 
     </>
   );

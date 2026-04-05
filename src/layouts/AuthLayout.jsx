@@ -1,7 +1,7 @@
 
 import { Navbar, Sidebar } from '../components/structures';
 
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 
 import Loader from '../components/Loader';
 import { useAuthLogout, useAuthUser } from '../features/Auth';
@@ -37,14 +37,20 @@ const AuthLayout = ({ children }) => {
 
   return (
     <div className='min-h-screen w-full flex bg-gradient-to-br from-slate-100 to-white dark:from-slate-900 dark:to-slate-800 text-slate-900 dark:text-slate-100 overflow-hidden'>
-      <Sidebar isOpen={!isOpen} setOpen={() => { setOpen(!isOpen) }} />
+      <Sidebar isOpen={isOpen} setOpen={setOpen} />
 
       <div className='flex-1 relative min-w-0 flex flex-col'>
         <Navbar isOpen={isOpen} setOpen={setOpen} userName={authUser.data.name} onLogout={onLogout} />
 
         <main className='flex-1 p-3 md:p-4 lg:p-6 overflow-hidden'>
           <div className='h-full w-full overflow-auto'>
-            {children}
+            <Suspense
+              fallback={
+                <div className='h-full w-full' />
+              }
+            >
+              {children}
+            </Suspense>
           </div>
         </main>
       </div>

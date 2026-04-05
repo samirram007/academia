@@ -22,7 +22,7 @@ import { useDocumentDeleteMutation, useUpdateDocumentMutation } from '../hooks/m
 import CreateDocument from './CreateDocument';
 
 const apiBase = import.meta.env.VITE_API_BASE_URL;
-const fallbackDocImage = `${apiBase}/storage/documents/student.png`;
+const fallbackDocImage = '/no-image.png';
 
 const resolveDocumentPath = (path) => {
     if (!path || typeof path !== 'string') return fallbackDocImage;
@@ -85,14 +85,16 @@ export default Documents
 const DocumentBar = ({ openPanel, filterFn }) => {
     return (
         <>
-            <div className='flex flex-row justify-between items-center w-full px-2 py-2 border-b-2 border-violet-300/10'>
-                <h1 className='text-2xl font-bold'>Documents</h1>
+            <div className='flex flex-row justify-between items-center w-full px-2 py-2 border-b border-slate-200 dark:border-slate-700/60'>
+                <h1 className='text-4xl font-extrabold text-slate-700 dark:text-slate-100'>Documents</h1>
                 <div className='flex flex-row gap-2 justify-end items-center'>
                     <FilterDropDown filterFn={filterFn} />
                     <button type="button"
                         onClick={openPanel}
-                        className='btn btn-primary btn-narrow btn-sm '>
-                        <PiUploadSimpleLight /> Upload</button>
+                        className='inline-flex items-center gap-2 rounded-lg border border-blue-200 bg-blue-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500/40 dark:border-blue-500/30 dark:bg-blue-600 dark:hover:bg-blue-500'>
+                        <PiUploadSimpleLight className='text-base' />
+                        <span>Upload</span>
+                    </button>
                 </div>
             </div>
 
@@ -165,13 +167,7 @@ const ImageMenuBtn = ({ document }) => {
 
     return (
         <>
-            <div className='absolute top-2 right-2 flex flex-row gap-2
-         text-slate-100/20
-         text-lg
-         hover:text-green-400 hover:rotate-1 transform transition duration-300 ease-in-out
-          active:text-slate-100/20 active:rotate-6 active:touch-pinch-zoom  rounded-tl-lg'>
-
-
+            <div className='absolute top-2 right-2 flex flex-row gap-2'>
                 <ImageToFolderBtn document={document} />
             </div>
         </>
@@ -219,11 +215,14 @@ const DocumentRemover = ({ document, handleFilter }) => {
 
     return (
         <>
-            <div className='absolute bottom-2 right-2 flex flex-row gap-2
-         text-slate-100/20
-         hover:text-red-400 hover:rotate-2 transform transition duration-300 ease-in-out
-          active:text-slate-100/20 active:touch-pinch-zoom  rounded-tl-lg' >
-                <RiDeleteBinLine onClick={handleDelete} className={`size-6  ${isDeleteInit ? 'animate-spin hidden' : ''} `} />
+            <div className='absolute bottom-2 right-2 flex flex-row gap-2'>
+                <button
+                    type='button'
+                    onClick={handleDelete}
+                    className={`inline-flex items-center justify-center rounded-md border border-slate-200 bg-white/90 p-1.5 text-slate-500 shadow-sm transition-colors hover:text-red-500 dark:border-slate-700 dark:bg-slate-800/90 dark:text-slate-300 dark:hover:text-red-400 ${isDeleteInit ? 'hidden' : ''}`}
+                >
+                    <RiDeleteBinLine className='size-5' />
+                </button>
                 <ImSpinner className={`size-6 text-red-400 animate-spin ${isDeleteInit ? '' : '  hidden'} `} />
             </div>
         </>

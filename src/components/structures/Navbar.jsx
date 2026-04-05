@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useRef, useState } from "react";
-import { Turn as Hamburger } from "hamburger-react";
+import { RiMenuFoldLine, RiMenuUnfoldLine } from "react-icons/ri";
 import LangSelector from '../LangSelector';
+import BrandMark from '../BrandMark';
 import ThemeController from "../ThemeController";
 
 const Navbar = ({ userName, onLogout, isOpen, setOpen }) => {
@@ -10,9 +11,7 @@ const Navbar = ({ userName, onLogout, isOpen, setOpen }) => {
     const safeUserName = typeof userName === 'string' && userName.trim() ? userName.trim() : 'User';
     const userInitial = safeUserName.charAt(0).toUpperCase();
 
-    const toggleMenu = () => {
-        setOpen(!isOpen);
-    };
+    const toggleMenu = () => setOpen(!isOpen);
 
     useEffect(() => {
         const onClickOutside = (event) => {
@@ -31,24 +30,27 @@ const Navbar = ({ userName, onLogout, isOpen, setOpen }) => {
 
                 <nav
                     className="w-full flex justify-between items-center h-14 md:h-16 z-10 px-4 md:px-6 lg:px-8">
-                    <div className="text-slate-500 font-semibold tracking-wide">Workspace</div>
+                    <div className="flex items-center gap-3">
+                        <button
+                            type="button"
+                            aria-label={isOpen ? "Collapse sidebar" : "Expand sidebar"}
+                            onClick={toggleMenu}
+                            className="inline-flex items-center gap-2 rounded-lg border border-blue-200/80 dark:border-blue-300/20 bg-white/70 dark:bg-slate-900/50 px-3 py-2 text-blue-700 dark:text-blue-300 transition hover:bg-blue-50 dark:hover:bg-slate-800"
+                        >
+                            {isOpen ? <RiMenuFoldLine className="h-5 w-5" /> : <RiMenuUnfoldLine className="h-5 w-5" />}
+                            <span className="hidden sm:inline text-sm font-medium">Menu</span>
+                        </button>
+                        <BrandMark
+                            showText={false}
+                            className="text-blue-700 dark:text-blue-300"
+                            iconClassName="h-6 w-6"
+                        />
+                    </div>
 
                     <div className="flex gap-3 md:gap-5 h-full items-center">
 
                         <ThemeController />
                         <LangSelector />
-                        <div className="text-blue-600 dark:text-blue-300 flex md:hidden">
-                            <Hamburger
-                                className="  "
-                                easing="ease-in"
-                                hideOutline={true}
-                                toggled={!isOpen}
-                                toggle={setOpen}
-                                onToggle={() => {
-                                    toggleMenu();
-                                }}
-                            />
-                        </div>
                         <div ref={profileRef} className="relative z-[10000]">
                             <button
                                 type="button"

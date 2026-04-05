@@ -80,26 +80,25 @@ export default function FilterTable({ data, columns, pageSize = 100, createRoute
                 <div className='min-w-0'>
                     <Breadcrumbs />
                 </div>
-                <div className='flex items-center gap-2 shrink-0'>
+                <div className='flex items-center gap-2.5 shrink-0'>
                         <input
                             type='text'
                             value={filtering}
                             onChange={e => setFiltering(e.target.value)}
-                        className='input input-sm input-bordered w-full max-w-xs'
+                        className='rounded-full h-8 text-sm px-4 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/40 w-72 max-w-[45vw]'
                             placeholder='Enter your search'
                         />
                         {
                             createRoute &&
                             <Link to={createRoute} title='Create new'
-                                className="btn btn-primary btn-sm text-xl     btn-rounded-symbol border-blue-300/10    "><IoMdAdd /></Link>
+                                className='inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-lg transition-colors'><IoMdAdd /></Link>
 
 
                         }
                         {
                             createForm &&
                             <button onClick={() => setOpen(true)} title='Create new'
-                                className="btn btn-primary btn-sm text-xl
-                            btn-rounded-symbol border-blue-300/10"><IoMdAdd /></button>
+                                className='inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-lg transition-colors'><IoMdAdd /></button>
                         }
                         {
                             isOpen &&
@@ -162,7 +161,7 @@ export default function FilterTable({ data, columns, pageSize = 100, createRoute
                         </thead>
 
                         <tbody className=''>
-                            {fetchedData.isFetching ?
+                            {(fetchedData.isFetching && table.getRowModel().rows.length === 0) ?
                                 <tr>
                                     <td colSpan={columns.length} className="text-center bg-slate-100 dark:bg-slate-800/40 py-8">
                                         <div className="flex justify-center items-center ">
@@ -201,36 +200,33 @@ export default function FilterTable({ data, columns, pageSize = 100, createRoute
                     ))}
                 </div>
             }
-            <div className='flex flex-col md:flex-row justify-between gap-2 mt-4'>
+            <div className='flex flex-col md:flex-row md:items-center justify-between gap-3 mt-3 px-2 py-3 border-t border-slate-200 dark:border-slate-700/60'>
                 {/* <div className='flex flex-row gap-2 flex-1 text-lg'>
                     {table.getState().pagination.pageIndex + 1} of {table.getPageCount()} pages
                 </div> */}
-                <div className='flex flex-row gap-2 flex-1 text-base md:text-lg text-slate-700 dark:text-slate-200'>
+                <div className='text-base md:text-lg text-slate-700 dark:text-slate-200 px-1'>
                     No. of records: {table.getRowCount()}
                 </div>
-                <div className='flex flex-row gap-2 flex-1'>
-
-                </div>
-                <div className='flex flex-row gap-2 justify-end flex-1'>
-                    <div className='flex flex-row  gap-2'>
+                <div className='flex justify-end'>
+                    <div className='flex flex-row gap-2'>
                         <button disabled={!table.getCanPreviousPage()} onClick={() => table.setPageIndex(0)}
-                            className='btn btn-blue btn-sm btn-rounded'>{'<<'}</button>
+                            className='inline-flex items-center justify-center min-w-10 h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed'>{'<<'}</button>
                         <button
                             disabled={!table.getCanPreviousPage()}
                             onClick={() => table.previousPage()}
-                            className='btn btn-blue btn-sm btn-rounded'
+                            className='inline-flex items-center justify-center min-w-10 h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed'
                         >
                             {'<'}
                         </button>
                         <button
                             disabled={!table.getCanNextPage()}
                             onClick={() => table.nextPage()}
-                            className='btn btn-blue btn-sm btn-rounded'
+                            className='inline-flex items-center justify-center min-w-10 h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed'
                         >
                             {'>'}
                         </button>
                         <button onClick={() => table.setPageIndex(table.getPageCount() - 1)} disabled={!table.getCanNextPage()}
-                            className='btn btn-blue btn-sm btn-rounded'>
+                            className='inline-flex items-center justify-center min-w-10 h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed'>
                             {'>>'}
                         </button>
                     </div>
@@ -249,7 +245,7 @@ export const FilterButton = ({ filter, showFilter, setShowFilter }) => {
     }
     return (
         <button onClick={handleSwitchFilter}
-            className={`${filter ? '' : 'hidden'} btn btn-primary btn-sm text-xl     btn-rounded-symbol border-blue-300/10    `}>
+            className={`${filter ? '' : 'hidden'} inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-lg transition-colors`}>
             <TbFilterSearch />
         </button>
 

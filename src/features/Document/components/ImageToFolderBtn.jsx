@@ -3,7 +3,6 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { Fragment, useState } from 'react'
 import { HiDotsVertical } from 'react-icons/hi'
 
-import { useTranslation } from 'react-i18next'
 import { HiArrowLongDown } from "react-icons/hi2"
 import { Flip, toast } from 'react-toastify'
 import { fetchDocuments, folderImageMapperFn } from '../services/apis'
@@ -33,8 +32,8 @@ export default function ImageToFolderBtn({ document }) {
     return (
         <Menu as="div" className="relative inline-block text-left  ">
             <div>
-                <Menu.Button as='div' className=" rounded-full bg-primary p-2">
-                    <HiDotsVertical />
+                <Menu.Button as='button' className="inline-flex items-center justify-center rounded-md border border-slate-200 bg-white/90 p-1.5 text-slate-500 shadow-sm transition-colors hover:text-blue-600 dark:border-slate-700 dark:bg-slate-800/90 dark:text-slate-300 dark:hover:text-blue-400">
+                    <HiDotsVertical className='size-5' />
                 </Menu.Button>
             </div>
 
@@ -47,10 +46,9 @@ export default function ImageToFolderBtn({ document }) {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
             >
-                <Menu.Items className="absolute right-0 z-50 mt-2 px-4 w-36 origin-top-right rounded-md
-                 bg-slate-800  ring-1 ring-black ring-opacity-5 focus:outline-none focus:shadow-outline shadow-sm shadow-blue-500">
+                <Menu.Items className="absolute right-0 z-50 mt-2 px-4 w-40 origin-top-right rounded-md border border-slate-200 bg-white ring-1 ring-black/5 focus:outline-none shadow-sm dark:border-slate-700 dark:bg-slate-800 dark:shadow-blue-500/30">
                     <div className="py-1">
-                        <div className='py-2  border-b-2 border-gray-400/30 text-xs'>
+                        <div className='py-2 border-b border-slate-200 text-xs text-slate-700 dark:border-slate-700 dark:text-slate-200'>
                             <span className='flex font-extrabold '>Move To <HiArrowLongDown className='text-xl' /></span>
                         </div>
                         {folders && folders.map((option, index) => (
@@ -65,8 +63,6 @@ export default function ImageToFolderBtn({ document }) {
 }
 
 const MenuItem = ({ option, document }) => {
-    const { t } = useTranslation()
-    const [folderOption, setFolderOption] = useState({});
     const [payload, setPayload] = useState({
         folder_id: option.id,
         document_id: document.id,
@@ -86,11 +82,11 @@ const MenuItem = ({ option, document }) => {
         folderImageMapper.mutate(payload)
     }
     return (
-        <Menu.Item className="text-gray-100 overflow-hidden hover:bg-gray-600">
+        <Menu.Item className="overflow-hidden">
             {({ active }) => (
 
                 <div onClick={handleMapperClick}
-                    className={classNames(active ? 'bg-gray-100 text-gray-200' : 'text-gray-300', 'flex flex-nowrap items-center gap-4 cursor-pointer select-none   py-2 text-xs border-b-2 border-gray-500/20')}
+                    className={classNames(active ? 'bg-slate-100 text-slate-900 dark:bg-slate-700 dark:text-slate-100' : 'text-slate-700 dark:text-slate-200', 'flex flex-nowrap items-center gap-4 cursor-pointer select-none py-2 text-xs border-b border-slate-200/70 dark:border-slate-700/70')}
                 >  {option.original_name.split('.')[0]}
                 </div>
             )}

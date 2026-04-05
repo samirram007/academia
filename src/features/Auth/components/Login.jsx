@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { Link, useNavigate } from 'react-router';
+import BrandMark from "@/components/BrandMark";
 import { useDocumentTitle } from "../../../hooks";
 import { useAuthLogin } from "../hooks/mutations";
 
@@ -137,12 +138,11 @@ export default function Login() {
             <div className="w-full lg:w-1/2 bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100 dark:bg-slate-800 flex flex-col items-center justify-center p-6 sm:p-8 overflow-y-auto">
                 {/* Logo for mobile */}
                 <div className="lg:hidden text-center mb-8">
-                    <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-full shadow-lg mb-4">
-                        <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z" />
-                        </svg>
-                    </div>
-                    <h2 className="text-2xl font-bold text-gray-800 dark:text-white">Academia</h2>
+                    <BrandMark
+                        className="text-blue-700 dark:text-blue-300"
+                        iconClassName="h-8 w-8"
+                        textClassName="text-2xl font-bold tracking-wide"
+                    />
                 </div>
 
                 {/* Login Form Card */}

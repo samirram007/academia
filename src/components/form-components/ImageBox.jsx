@@ -9,7 +9,7 @@ export const ImageBox = ({ formik, name, resource, editable, src = '' }) => {
     const [imageId, setImageId] = useState(formik.values[name])
 
 
-    const [defaultImage, setDefaultImage] = useState(`${import.meta.env.VITE_API_BASE_URL}/storage/documents/student.png`)
+    const defaultImage = '/no-image.png'
     const [open, setOpen] = React.useState(false);
     const resolveImagePath = (path) => {
         if (!path || typeof path !== 'string') return defaultImage
@@ -56,9 +56,9 @@ export const ImageBox = ({ formik, name, resource, editable, src = '' }) => {
             />
             <span className='active:touch-pinch-zoom' style={{ borderRadius: '0.5rem', border: '2px  solid #eaecee55' }}>
                 <img
-                    style={{ width: '15rem', borderRadius: '0.6rem', border: '10px  solid #eaecee11' }}
-                    className='hover:scale-95 '
-                    onClick={ editable ?? editable ? handleOpen : undefined }
+                    style={{ width: '14rem', height: '9rem', borderRadius: '0.6rem', border: '8px solid #eaecee11' }}
+                    className='object-contain bg-slate-50 dark:bg-slate-800 hover:scale-95 transition-transform'
+                    onClick={editable ? handleOpen : undefined}
                     src={imageSrc}
                     onError={() => {
                         setImageSrc(defaultImage)
@@ -68,13 +68,13 @@ export const ImageBox = ({ formik, name, resource, editable, src = '' }) => {
             {
                editable ?
 
-                <button type='button' className='btn btn-link mt-n2 !pt-0' onClick={handleOpen}>Click to change</button>
+                    <button type='button' className='mt-2 inline-flex items-center rounded-md px-2.5 py-1 text-sm font-semibold text-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-slate-800 transition-colors' onClick={handleOpen}>Click to change</button>
                 :
                 ""
             }
             <DocumentModal isOpen={open} onClose={handleClose}>
                 <h1 className='flex justify-end   ' >
-                    <button onClick={handleClose} type="button" className='btn !btn-circle btn-outline'>
+                    <button onClick={handleClose} type="button" className='inline-flex items-center justify-center h-9 w-9 rounded-md border border-slate-200 bg-white text-slate-500 hover:text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700 transition-colors'>
                         <MdClose />
                     </button>
                 </h1>

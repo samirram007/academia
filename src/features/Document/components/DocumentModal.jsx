@@ -5,38 +5,17 @@ import React from 'react'
 
 
 const DocumentModal = ({ isOpen, onClose, children }) => {
-    const overlay={
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100vw",
-        height: "100vh",
-        background: "rgba(200, 200, 200, 0.2)",
-        padding:"20px 40px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-    }
-    const  modalStyle= {
-        background: "#0f172a",
-        margin: "auto",
-        padding: "20px",
-        border: "2px solid #000",
-        borderRadius: "10px",
-        boxShadow: "2px solid black",
-        overflowY: "scroll",
-        maxHeight:"90vh"
-    }
-
     if (!isOpen) return null;
 
 
 
     return  createPortal(
         <>
-            <div style={overlay}>
-                <div style={modalStyle}>
-                    {children}
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/20 px-4 py-6 backdrop-blur-[1px]">
+                <div className="w-[1100px] max-w-[95vw] h-[760px] max-h-[90vh] rounded-xl border border-slate-200 bg-white p-5 shadow-xl dark:border-slate-700 dark:bg-slate-900 overflow-hidden">
+                    <div className="h-full overflow-y-auto">
+                        {children}
+                    </div>
                 </div>
             </div>
         </>,
