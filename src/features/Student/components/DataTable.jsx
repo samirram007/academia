@@ -1,10 +1,10 @@
-import React, { lazy } from 'react'
+import { lazy } from 'react';
 
 
-import { useMemo } from 'react';
-import { DateTime } from 'luxon'
+import { DateTime } from 'luxon';
+import { useMemo, useState } from 'react';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { useStudents } from '../hooks/queries';
 
 import moment from 'moment';
@@ -26,6 +26,38 @@ const initialFilterValues = {
   academic_session_id: initialValues.academic_session_id,
   filter_option: 'active'
 }
+
+const getInitials = (name) => {
+  const safeName = (name || 'Student').trim();
+  const parts = safeName.split(/\s+/).filter(Boolean);
+
+  if (parts.length === 1) {
+    return parts[0].slice(0, 1).toUpperCase();
+  }
+
+  return `${parts[0].slice(0, 1)}${parts[1].slice(0, 1)}`.toUpperCase();
+};
+
+const StudentAvatar = ({ name, src }) => {
+  const [hasError, setHasError] = useState(false);
+
+  if (!src || hasError) {
+    return (
+      <div className='w-10 h-10 rounded-full flex items-center justify-center bg-gradient-to-br from-blue-600 to-cyan-500 text-white text-xs font-semibold'>
+        {getInitials(name)}
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={src}
+      alt={`${name || 'Student'} avatar`}
+      className='w-10 h-10 rounded-full object-cover'
+      onError={() => setHasError(true)}
+    />
+  );
+};
 
 const DataTable = () => {
   const fetchedData = useStudents(initialFilterValues)
@@ -60,24 +92,25 @@ const DataTable = () => {
           .find(x => x.academic_session_id == initialFilterValues.academic_session_id)
         return (
           <div className='flex flex-row gap-2'>
-            {row.original.profile_document ?
-              <img src={row.original.profile_document.path} className='w-10 h-10 rounded-full' /> :
-              <img src={`${import.meta.env.VITE_API_BASE_URL}/storage/documents/student.png`} className='w-10 h-10 rounded-full' alt="" />}
+            <StudentAvatar
+              name={row.original.name}
+              src={row.original.profile_document?.path}
+            />
 
             <div>
-              <div className='text-blue-200 font-bold text-md'>{row.original.name}</div>
+              <div className='text-slate-800 dark:text-blue-100 font-semibold text-sm md:text-base'>{row.original.name}</div>
               {thisRow &&
-                <div className='flex flex-row gap-2  text-[8px]'>
+                <div className='flex flex-row gap-2 text-[11px]'>
                   <span>
-                    <span className='text-blue-400 font-bold'>{thisRow.academic_class.name}</span>
+                    <span className='text-blue-600 dark:text-blue-300 font-semibold'>{thisRow.academic_class.name}</span>
                   </span>
                   <span>
                     Section:
-                    <span className='text-red-400 font-bold'>{thisRow.section.name}</span>
+                    <span className='text-rose-500 dark:text-rose-300 font-semibold'>{thisRow.section.name}</span>
                   </span>
                   <span>
                     Roll:
-                    <span className='text-green-400 font-bold'>{thisRow.roll_no}</span>
+                    <span className='text-emerald-600 dark:text-emerald-300 font-semibold'>{thisRow.roll_no}</span>
                   </span>
 
                 </div>}
@@ -110,21 +143,21 @@ const DataTable = () => {
     {
       header: 'Action',
       accessorKey: 'action',
-      align: 'center',
+      align: 'right',
       cell: ({ row }) => {
         return (
-          <div className="flex justify-start md:justify-center  items-center gap-2">
+          <div className="flex justify-end  items-center gap-2">
             {/* <button onClick={() => { navigate(`/students/info/${btoa(row.original.student_sessions.filter(x=>x.academic_session.is_current==1).id)}`) }} */}
             <button onClick={() => { navigate(`/students/info/${row.original.id}`) }}
-              className="btn btn-outline btn-primary btn-sm btn-rounded ">
+              className="btn btn-primary btn-sm btn-rounded ">
               Info..
             </button>
             <button onClick={() => { navigate(`/students/edit/${row.original.id}`) }}
-              className="btn btn-outline btn-primary btn-sm btn-rounded ">
+              className="btn btn-primary btn-sm btn-rounded ">
               Edit
             </button>
             {/* <button onClick={() => { deleteUserData(row.original.id) }}
-              className="btn btn-outline btn-primary btn-sm btn-rounded  ">
+              className="inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-xs font-semibold border border-red-400 text-red-500 hover:bg-red-500 hover:text-white dark:border-red-400 dark:text-red-400 dark:hover:bg-red-500 dark:hover:text-white transition-colors  ">
               Delete
             </button> */}
           </div>

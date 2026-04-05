@@ -16,9 +16,9 @@ export const FormikTextBox = (
                 onChange={debouncedFormik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values[name]}
-                className={`  input mb-0 input-bordered input-primary    ${formik.errors[name]? 'input-error' : ''}`}
+                className={`w-full rounded-lg border bg-white px-3 py-2 text-sm text-slate-900 transition-colors focus:outline-none focus:ring-2 dark:bg-slate-800 dark:text-slate-100 min-h-24 ${formik.errors[name] ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : 'border-slate-300 focus:ring-blue-500 focus:border-blue-500 dark:border-slate-600'}`}
             />
-            {formik.touched[name] && formik.errors[name] ? <div className='text-error text-sm pl-2'>{formik.errors[name]}</div> : null}
+            {formik.touched[name] && formik.errors[name] ? <div className='text-red-500 text-sm pl-2'>{formik.errors[name]}</div> : null}
         </>
 
     )

@@ -36,7 +36,9 @@ const Promotion = ({ data, academicSessions,selectedSession,selectedStudentSessi
                 isOpen &&
                 <>
                     <FormikEnrollmentFormModal label={'Enrollment'} isOpen={isOpen} setOpen={setOpen}>
-                        <Enrollment data={data} entryMode={entryMode} selectedStudentSession={selectedStudentSession} enrollmentType={2}   />
+                        <Enrollment data={data} entryMode={entryMode}
+                            selectedStudentSession={selectedStudentSession}
+                            enrollmentType={2} />
                     </FormikEnrollmentFormModal>
                 </>
             }

@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
-import { deleteSectionService, storeSectionService, updateSectionService } from "../services/apis";
-import { queryClient } from "../../../utils/queryClient";
+import { useNavigate } from 'react-router';
 import { Flip, toast } from "react-toastify";
 import { useFormModal } from "../../../contexts/FormModalProvider";
+import { queryClient } from "../../../utils/queryClient";
+import { deleteSectionService, storeSectionService, updateSectionService } from "../services/apis";
 
 
 export function useStoreSectionMutation() {

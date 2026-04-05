@@ -4,7 +4,7 @@ const ExportToExcel = ({ table }) => {
 
 const csvConfig = mkConfig({
     fieldSeparator: ',',
-    filename: 'report', // export file name (without .csv)
+    filename: 'daily_collection_report', // export file name (without .csv)
     decimalSeparator: '.',
     useKeysAsHeaders: true,
 });

@@ -1,6 +1,6 @@
 import { createPortal } from 'react-dom'
-import React, { forwardRef } from 'react'
-import { MdOutlineCloseFullscreen, MdOutlineLocalPrintshop } from 'react-icons/md'
+import React from 'react'
+import { MdOutlineCloseFullscreen } from 'react-icons/md'
 
 const PdfModal =  ({ isOpen, setOpen, label, children } ) => {
 
@@ -10,21 +10,24 @@ const PdfModal =  ({ isOpen, setOpen, label, children } ) => {
         left: 0,
         width: "100vw",
         height: "100vh",
-        background: "rgba(20, 20, 20, 0.8)",
-        padding: "20px 40px",
+        background: "rgba(15, 23, 42, 0.55)",
+        backdropFilter: "blur(2px)",
+        padding: "20px 24px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        zIndex: 1200,
     }
     const modalStyle = {
-        background: "rgba(255, 255, 255, 0.9)",
+        background: "#f8fafc",
         margin: "auto",
-        padding: "20px",
-        border: "5px solid #00000011",
-        borderRadius: "10px",
-        boxShadow: "0 0 5px 2px #ddaaaa66",
-        overflowY: "scroll",
-        maxHeight: "90vh"
+        padding: "16px",
+        border: "1px solid #cbd5e1",
+        borderRadius: "14px",
+        boxShadow: "0 24px 60px rgba(15, 23, 42, 0.25)",
+        overflowY: "auto",
+        maxHeight: "92vh",
+        width: "min(96vw, 1500px)",
     }
 
     if (!isOpen) return null;
@@ -35,21 +38,14 @@ const PdfModal =  ({ isOpen, setOpen, label, children } ) => {
 
             <div style={overlay}>
                 <div style={modalStyle}>
-                    {
-                        label &&
-                        <div className='flex justify-between items-center
-                            border-b-2 border-slate-600/50    ' >
-                            <div>{label}</div>
+                    <div className={`mb-3 flex items-center text-slate-700 ${label ? 'justify-between border-b border-slate-300/80 pb-2' : 'justify-end'}`}>
+                        {label ? <div className='text-sm font-semibold tracking-wide'>{label}</div> : <div />}
 
-                            <button onClick={() => setOpen(false)} type="button"
-                                className='rounded-full p-2
-        bg-slate-50/5 text-orange-500 cursor-pointer
-        hover:text-yellow-500 hover:bg-slate-600
-        active:text-orange-600 active:touch-pinch-zoom '>
-                                <MdOutlineCloseFullscreen className='text-xl active:scale-90 transition delay-75 ease-in-out ' />
-                            </button>
-                        </div>
-                    }
+                        <button onClick={() => setOpen(false)} type="button"
+                            className='inline-flex h-8 w-8 items-center justify-center rounded-full border border-slate-300 bg-white text-slate-600 transition hover:bg-slate-100 hover:text-slate-900 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700'>
+                            <MdOutlineCloseFullscreen className='text-lg' />
+                        </button>
+                    </div>
 
                     {children}
                 </div>

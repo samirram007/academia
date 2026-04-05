@@ -13,7 +13,7 @@ const DeleteEducationBoard = ({ initialValues }) => {
     <>
 
       <button onClick={() => setOpen(true)}
-        className="btn btn-outline btn-primary btn-sm btn-rounded  ">
+        className="inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-xs font-semibold border border-red-400 text-red-500 hover:bg-red-500 hover:text-white dark:border-red-400 dark:text-red-400 dark:hover:bg-red-500 dark:hover:text-white transition-colors  ">
         Delete
       </button>
       {isOpen &&

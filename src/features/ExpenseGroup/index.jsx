@@ -1,1 +1,1 @@
-export {ExpenseGroups,CreateExpenseGroup, EditExpenseGroup} from './components';
+export { ExpenseGroups, CreateExpenseGroup, EditExpenseGroup } from './components';

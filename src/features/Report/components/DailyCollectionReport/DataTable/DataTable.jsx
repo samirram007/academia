@@ -1,4 +1,3 @@
-import React from 'react'
 
 
 import { useMemo } from 'react';
@@ -6,11 +5,9 @@ import { useMemo } from 'react';
 
 
 
-import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import { useDailyCollectionReport } from '../../../hooks/queries';
 import DailyCollectionReportTable from '../DailyCollectionReportTable/DailyCollectionReportTable';
-import { useFeeHeadAll, useFeeHeads } from '../../../../FeeHead/hooks/queries';
 
 const initialValues = {
   //  from: moment(new Date(new Date().getFullYear(),0,1)).format('YYYY-MM-DD'),
@@ -92,34 +89,31 @@ const DataTable = () => {
     {
       header: 'Name',
       accessorKey: 'name',
-      className: 'pinned-left sticky left-0 bg-slate-800 border-r-2 border-b-[1px] border-violet-500   ',
+      className: 'sticky left-0 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-700 z-10',
       cell: info => {
         const student = info.row.original
         return <div className='w-[300px] max-w-[300px]'>
-          <div className='text-blue-200 font-bold text-md cursor-pointer btn-link'  >{student.name}</div>
+          <div className='text-blue-600 dark:text-blue-400 font-bold text-sm cursor-pointer'>{student.name}</div>
           {student &&
-            <div className='flex flex-row gap-2  text-[8px]'>
+            <div className='flex flex-row gap-2 text-[8px] text-slate-500 dark:text-slate-400'>
               <span>
-                <span className='text-blue-400 font-bold'>{student.class}</span>
+                <span className='text-blue-500 dark:text-blue-400 font-bold'>{student.class}</span>
               </span>
               <span>
                 Section:
-                <span className='text-red-400 font-bold'>{student.section}</span>
+                <span className='text-red-500 dark:text-red-400 font-bold'>{student.section}</span>
               </span>
               <span>
                 Roll:
-                <span className='text-green-400 font-bold'>{student.roll_no}</span>
+                <span className='text-green-600 dark:text-green-400 font-bold'>{student.roll_no}</span>
               </span>
-
             </div>
-
           }
-          <div className='flex flex-row gap-10  text-[8px]'>
+          <div className='flex flex-row gap-10 text-[8px] text-slate-400'>
             <div>Fee No. {student.fee_no}</div>
             <div>Fee Date. {moment(student.fee_date).format('DD-MM-YYYY')}</div>
           </div>
         </div>
-
       },
 
       footer: ({ table }) => {
@@ -154,7 +148,7 @@ const DataTable = () => {
       const total = table.getFilteredRowModel().rows.reduce((sum, row) => parseFloat(row.original.total) + parseFloat(sum), 0);
       return <div className='text-right font-bold'>{total.toFixed(2)}</div>;
     },
-    className: 'pinned-right sticky right-0 bg-slate-900 border-r-2 border-b-[1px] border-violet-500 text-right !w-[150px] !max-w-[150px] !min-w-[150px]   ',
+    className: 'sticky right-0 bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-700 z-10 text-right !w-[150px] !max-w-[150px] !min-w-[150px]',
   };
 
   const columns = [...staticColumns, ...dynamicColumns, totalColumn];

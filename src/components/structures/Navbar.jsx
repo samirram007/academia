@@ -1,44 +1,43 @@
 /* eslint-disable react/prop-types */
-import { Link } from 'react-router-dom';
-import LangSelector from '../LangSelector'
-import ThemeController from "../ThemeController";
+import { useEffect, useRef, useState } from "react";
 import { Turn as Hamburger } from "hamburger-react";
-import { RiLogoutCircleRLine } from "react-icons/ri";
-import { Menu, Transition } from '@headlessui/react';
-import { Fragment } from 'react';
-const user = {
-    name: 'Tom Cook',
-    email: 'tom@example.com',
-    imageUrl:
-        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-}
-const userNavigation = [
-    { name: 'Your Profile', href: '#' },
-    { name: 'Settings', href: '#' },
-    { name: 'Sign out', href: '#' },
-]
+import LangSelector from '../LangSelector';
+import ThemeController from "../ThemeController";
 
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
 const Navbar = ({ userName, onLogout, isOpen, setOpen }) => {
+    const [isProfileOpen, setProfileOpen] = useState(false);
+    const profileRef = useRef(null);
+    const safeUserName = typeof userName === 'string' && userName.trim() ? userName.trim() : 'User';
+    const userInitial = safeUserName.charAt(0).toUpperCase();
+
     const toggleMenu = () => {
         setOpen(!isOpen);
     };
 
+    useEffect(() => {
+        const onClickOutside = (event) => {
+            if (profileRef.current && !profileRef.current.contains(event.target)) {
+                setProfileOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', onClickOutside);
+        return () => document.removeEventListener('mousedown', onClickOutside);
+    }, []);
+
     return (
         <>
-            <header className="sticky w-full flex justify-between items-center bg-[#272e48] z-50 ">
+            <header className="sticky top-0 w-full z-40 border-b border-blue-200/70 dark:border-blue-300/10 bg-white/80 dark:bg-slate-900/75 backdrop-blur-sm">
 
                 <nav
-                    className="navbar navbar-static-top pl-30 sticky w-full flex justify-between items-center h-12 top-0 border-danger z-10 px-4 md:px-10">
-                    <div className="text-slate-500">{""}</div>
+                    className="w-full flex justify-between items-center h-14 md:h-16 z-10 px-4 md:px-6 lg:px-8">
+                    <div className="text-slate-500 font-semibold tracking-wide">Workspace</div>
 
-                    <div className="flex gap-6 h-full items-center ">
+                    <div className="flex gap-3 md:gap-5 h-full items-center">
 
                         <ThemeController />
                         <LangSelector />
-                        <div className="text-accent-2 flex md:hidden ">
+                        <div className="text-blue-600 dark:text-blue-300 flex md:hidden">
                             <Hamburger
                                 className="  "
                                 easing="ease-in"
@@ -50,48 +49,30 @@ const Navbar = ({ userName, onLogout, isOpen, setOpen }) => {
                                 }}
                             />
                         </div>
-                        <div className="dropdown dropdown-end z-[10000]">
-                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle btn-lg avatar">
-                                <div className="w-40 rounded-full">
-                                    <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                                </div>
-                            </div>
+                        <div ref={profileRef} className="relative z-[10000]">
+                            <button
+                                type="button"
+                                aria-label="Open profile menu"
+                                onClick={() => setProfileOpen((prev) => !prev)}
+                                className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 text-sm font-semibold text-white shadow-sm ring-2 ring-blue-500/25 transition hover:brightness-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60 md:h-11 md:w-11"
+                            >
+                                <span aria-hidden="true">{userInitial}</span>
+                            </button>
 
-                            <ul tabIndex={0} className="menu menu-sm dropdown-content absolute right-0
-                            z-50 mt-2 w-64 pt-4 pb-4 mr-4 md:mr-[-1.2rem]
-                             animated flipInX origin-top-right rounded-md bg-[#272e48]  shadow-lg ring-1
-                             ring-black ring-opacity-5 focus:outline-none gap-4 ">
+                            <ul className={`${isProfileOpen ? 'block' : 'hidden'} menu menu-sm absolute right-0
+                            z-50 mt-2 w-64 pt-3 pb-3 mr-0 md:mr-1
+                             animated fadeInDown origin-top-right rounded-xl bg-white dark:bg-slate-900 shadow-lg ring-1
+                             ring-blue-200/70 dark:ring-blue-300/10 focus:outline-none gap-2`}>
                                 <li className="dropdown-item " >
-                                    <a className="justify-start gap-4">
+                                    <a className="justify-start gap-3 text-slate-700 dark:text-slate-200 hover:bg-blue-50 dark:hover:bg-slate-800 rounded-lg">
                                         Profile
-                                        <span className="badge">{userName}</span>
+                                        <span className="badge bg-blue-600 text-white border-none">{safeUserName}</span>
                                     </a>
                                 </li>
-                                <li className="dropdown-item   " ><a>Settings</a></li>
-                                <li className="dropdown-item   " ><a onClick={onLogout}>Logout</a></li>
+                                <li className="dropdown-item" ><a className="text-slate-700 dark:text-slate-200 hover:bg-blue-50 dark:hover:bg-slate-800 rounded-lg">Settings</a></li>
+                                <li className="dropdown-item" ><a className="text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg" onClick={(ev) => { setProfileOpen(false); onLogout(ev); }}>Logout</a></li>
                             </ul>
 
-
-                        </div>
-                        <div className='hidden ' >
-                            <ul className=' '>
-                                <li className=" ">
-                                    <div onClick={() => { }} className="waves-effect waves-light rounded-full overflow-hidden h-[40px] w-[40px] dropdown-toggle p-0" data-toggle="dropdown" title="User">
-                                        <img className='w-full h-full' src="vite.svg" alt="" />
-                                    </div>
-                                    <ul className="dropdown-menu animated flipInX absolute right-0  z-50 mt-2 w-48
-                                    origin-top-right rounded-md bg-white py-1 shadow-lg ring-1
-                                     ring-black ring-opacity-5 focus:outline-none">
-                                        <li className="user-body">
-                                            <a className="dropdown-item" href="https://school.ctrlaltfix.live/profile/view"><i className="ti-user text-muted mr-2"></i> Profile</a>
-                                            <a className="dropdown-item" href="#"><i className="ti-wallet text-muted mr-2"></i> My Wallet</a>
-                                            <a className="dropdown-item" href="#"><i className="ti-settings text-muted mr-2"></i> Settings</a>
-                                            <div className="dropdown-divider"></div>
-                                            <a className="dropdown-item" href="https://school.ctrlaltfix.live/admin/logout"><i className="ti-lock text-muted mr-2"></i> Logout</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
 
                         </div>
                     </div>

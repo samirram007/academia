@@ -84,13 +84,13 @@ const EntryForm = ({ initialValues, entryMode, setEntryId }) => {
                                 <div className='col-span-12  md:col-span-4'>
                                     {entryMode === 'create' &&
                                         <button type="submit"
-                                            className='btn btn-primary w-full'>
+                                            className='w-full inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-colors'>
                                             {'Add'}
 
 
                                             {formik.isSubmitting && (
                                                 <span
-                                                    className='spinner-border spinner-border-sm ms-2'
+                                                    className='inline-block w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin'
                                                     role='status'
                                                     aria-hidden='true'
                                                 ></span>
@@ -101,13 +101,13 @@ const EntryForm = ({ initialValues, entryMode, setEntryId }) => {
                                         <div div className='flex flex-row gap-4'>
 
                                             <button type="submit"
-                                                className='btn btn-primary w-1/2'>
+                                                className='w-1/2 inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-colors'>
                                                 {'Update'}
 
 
                                                 {formik.isSubmitting && (
                                                     <span
-                                                        className='spinner-border spinner-border-sm ms-2'
+                                                        className='inline-block w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin'
                                                         role='status'
                                                         aria-hidden='true'
                                                     ></span>
@@ -115,7 +115,7 @@ const EntryForm = ({ initialValues, entryMode, setEntryId }) => {
                                             </button>
                                             <button type="button"
                                             onClick={()=>setEntryId(0)}
-                                                className='btn btn-primary w-1/3'>
+                                                className='w-1/3 inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold border border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors'>
                                                 Reset
                                             </button>
                                         </div>

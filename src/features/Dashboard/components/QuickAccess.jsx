@@ -3,7 +3,7 @@ import { Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdOutlineDashboard } from 'react-icons/md';
 import { TfiLayoutListThumb } from 'react-icons/tfi';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router';
 import Loader from '../../../components/Loader';
 import { menuGroup, page, quickMenuGroup } from '../../../Routes/navigation';
 import { fetchUser } from '../../../services';

@@ -4,7 +4,7 @@ import { DateTime } from 'luxon';
 import { useMemo } from 'react';
 
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import moment from 'moment';
 import { useExpenses } from '../hooks/quaries';
@@ -17,9 +17,11 @@ import ExpenseTable from './ExpenseTable';
 
 const initialValues = {
   expense_no: '',
+
+  narration: '',
+  voucher_no: '',
   expense_date: new Date(),
-  academic_session_id: moment(new Date()).format('YYYY'),
-  campus_id: 1,
+  academic_session_id: moment(new Date()).format('YYYY'), 
   user_id: null,
   total_amount: 0,
   paid_amount: 0,
@@ -30,19 +32,11 @@ const initialValues = {
 const currentDate = moment(new Date()).format('YYYY-MM-DD');
  const firstDayOfYear = moment(new Date(new Date().getFullYear(), 0, 1)).format('YYYY-MM-DD'); // January 1st of the current year
 
-const initialFilterValues = {
-  campus_id: initialValues.campus_id,
+const initialFilterValues = { 
   academic_session_id: initialValues.academic_session_id,
   from: firstDayOfYear, // 'YYYY-MM-DD' format for first day of the year
   to: currentDate  // 'YYYY-MM-DD' format for current date
 };
-// const initialFilterValues = {
-//   campus_id: initialValues.campus_id,
-//   academic_session_id: initialValues.academic_session_id,
-//    from:new Date().toISOString().split('T')[0],
-//    to:new Date().toISOString().split('T')[0]
-// }
-// console.log(initialFilterValues)
 const DataTable = () => {
 
   // const formattedDate = new Date().toString('yyyy-MM-dd');
@@ -60,14 +54,15 @@ const DataTable = () => {
       header: "ID",
       accessorKey: "id",
       visible: false,
-      size: 50,
-
+      size: 50, 
     },
     {
       header: "Expense No",
       accessorKey: "expense_no",
+      cell: info =>
+        (<div className='text-center w-20'> {info.getValue() ?? ''} {info.row.original?.voucher_no ? `(${info.row.original?.voucher_no})` : ''}</div>),
 
-    },
+    }, 
     {
       header: "Date",
       accessorKey: "expense_date",
@@ -76,8 +71,8 @@ const DataTable = () => {
 
     },
     {
-      header: "Campus",
-      accessorKey: "campus.name",
+      header: "Remarks",
+      accessorKey: "narration",
     },
 
     {
@@ -94,10 +89,10 @@ const DataTable = () => {
     {
       header: 'Action',
       accessorKey: 'action',
-      align: 'center',
+      align: 'right',
       cell: ({ row }) => {
         return (
-          <div className="flex justify-start md:justify-center  items-center gap-2">
+          <div className="flex justify-end  items-center gap-2">
             {/* <Print initialValues={row.original} /> */}
             <Edit initialValues={row.original} />
             <Delete initialValues={row.original} />

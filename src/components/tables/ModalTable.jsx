@@ -62,22 +62,23 @@ export default function ModalTable({ data, columns, pageSize = 10}) {
     // }, [pagination]);
 
     return (
-        <div className='container-flex md-container'>
+        <div className='flex flex-col'>
 
 
             {isBrowser ?
-                <div className="overflow-x-auto bg-black/30 mt-2 p-4 rounded-lg">
-                    <table className="table table-zebra">
-                        <thead>
+                <div className="overflow-x-auto mt-3 border border-slate-200 dark:border-slate-700/60 rounded-xl overflow-hidden">
+                    <table className="w-full text-sm text-left">
+                        <thead className="bg-slate-50 dark:bg-slate-800 text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                             {table.getHeaderGroups().map(headerGroup => (
                                 <tr key={headerGroup.id}>
                                     {headerGroup.headers.map(header => (
                                         <th
                                             key={header.id}
                                             onClick={header.column.getToggleSortingHandler()}
+                                            className="px-4 py-3 font-medium cursor-pointer select-none"
                                         >
                                             {header.isPlaceholder ? null : (
-                                                <div>
+                                                <div className="flex items-center gap-1">
                                                     {flexRender(
                                                         header.column.columnDef.header,
                                                         header.getContext()
@@ -95,13 +96,13 @@ export default function ModalTable({ data, columns, pageSize = 10}) {
                             ))}
                         </thead>
 
-                        <tbody>
+                        <tbody className="divide-y divide-slate-100 dark:divide-slate-700/60">
                             {table.getRowModel().rows.map(row => (
 
-                                <tr key={row.id}>
+                                <tr key={row.id} className="bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
                                     {row.getVisibleCells().map(cell => (
 
-                                        <td key={cell.id} className='py-1.5' >
+                                        <td key={cell.id} className='px-4 py-2 text-slate-700 dark:text-slate-300' >
 
                                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                         </td>
@@ -127,25 +128,25 @@ export default function ModalTable({ data, columns, pageSize = 10}) {
 
                 </div>
                 <div className='flex flex-row gap-2 justify-end flex-1'>
-                    <div className='flex flex-row  gap-2'>
+                    <div className='flex flex-row gap-1'>
                         <button disabled={!table.getCanPreviousPage()} onClick={() => table.setPageIndex(0)}
-                            className='btn btn-blue btn-sm btn-rounded'>{'<<'}</button>
+                            className='inline-flex items-center justify-center w-8 h-8 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-sm'>{'<<'}</button>
                         <button
                             disabled={!table.getCanPreviousPage()}
                             onClick={() => table.previousPage()}
-                            className='btn btn-blue btn-sm btn-rounded'
+                            className='inline-flex items-center justify-center w-8 h-8 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-sm'
                         >
                             {'<'}
                         </button>
                         <button
                             disabled={!table.getCanNextPage()}
                             onClick={() => table.nextPage()}
-                            className='btn btn-blue btn-sm btn-rounded'
+                            className='inline-flex items-center justify-center w-8 h-8 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-sm'
                         >
                             {'>'}
                         </button>
                         <button onClick={() => table.setPageIndex(table.getPageCount() - 1)} disabled={!table.getCanNextPage()}
-                            className='btn btn-blue btn-sm btn-rounded'>
+                            className='inline-flex items-center justify-center w-8 h-8 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-sm'>
                             {'>>'}
                         </button>
                     </div>
@@ -163,7 +164,7 @@ export const FilterButton = ({ filter, showFilter, setShowFilter }) => {
     }
     return (
         <button onClick={handleSwitchFilter}
-            className={`${filter ? '' : 'hidden'} btn btn-primary btn-sm text-xl     btn-rounded-symbol border-blue-300/10    `}>
+            className={`${filter ? '' : 'hidden'} inline-flex items-center justify-center w-8 h-8 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-lg`}>
             <TbFilterSearch />
         </button>
 

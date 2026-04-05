@@ -1,25 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 
-import { useDocumentTitle } from '../../../hooks';
-
-
 
 import DataTable from "./DataTable";
 
 
 
 export default function Gateway() {
-    useDocumentTitle('STUDENTS')
 
     return (
-        <div className="flex justify-stretch flex-col w-full max-h-full">
+        <div className="flex flex-col w-full">
 
-            <div
-                className="card  animated fadeInDown max-h-full
-            bg-zinc-600/20
-            "
-            >
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/60 shadow-sm rounded-2xl overflow-hidden">
                 <DataTable />
 
 

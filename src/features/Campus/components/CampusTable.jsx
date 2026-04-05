@@ -1,15 +1,12 @@
-import React from 'react'
 
-import { useQuery } from '@tanstack/react-query';
 
 import { useMemo } from 'react';
-import { DateTime } from 'luxon'
 import FilterTable from '../../../components/tables/FilterTable';
 
 
-import DeleteCampus from './DeleteCampus';
+import { Link } from 'react-router';
 import { useCampuses } from '../hooks/queries';
-import { Link } from 'react-router-dom';
+import DeleteCampus from './DeleteCampus';
 const CampusTable = () => {
   const CampusData = useCampuses()
 
@@ -49,7 +46,7 @@ const CampusTable = () => {
           <div className="flex justify-start md:justify-center  items-center gap-2">
             <div className="flex justify-start md:justify-center  items-center gap-2">
               <Link to={`/campuses/edit/${row.original.id}`}
-              className='btn btn-outline btn-primary btn-sm btn-rounded ' >Edit</Link>
+              className='inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-xs font-semibold border border-blue-500 text-blue-600 hover:bg-blue-600 hover:text-white dark:text-blue-400 dark:border-blue-400 dark:hover:bg-blue-600 dark:hover:text-white transition-colors ' >Edit</Link>
               <DeleteCampus initialValues={row.original} />
 
             </div>

@@ -2,6 +2,7 @@ import  { useState, useEffect } from 'react'
 import { GrLanguage } from "react-icons/gr"; import i18next from 'i18next';
 // import { useTranslation } from 'react-i18next';
 import { motion } from "framer-motion"
+
 export default function LangSelector() {
     const [isOpen, setOpen] = useState(false)
     const [lang, setLang] = useState(localStorage.getItem('language') == null ? 'en' : localStorage.getItem('language'))
@@ -39,14 +40,23 @@ export default function LangSelector() {
     return (
         <>
 
+            <div className="relative mx-2 md:mx-3">
+                <button
+                    type="button"
+                    aria-label="Choose language"
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-blue-200/70 bg-white/80 text-orange-400 transition hover:bg-blue-50 dark:border-blue-300/20 dark:bg-slate-800 dark:hover:bg-slate-700"
+                    onClick={() => { setOpen(!isOpen) }}
+                >
+                    <GrLanguage className="text-base" />
+                </button>
 
-            <div className="dropdown dropdown-end  mx-3 text-orange-400 w-5    md:mx-3 ">
-                <div tabIndex={0} role="button" className=" text-lg m-1" onClick={() => { setOpen(!isOpen) }}><GrLanguage /></div>
                 <motion.ul animate={isOpen ? "enter" : "exit"}
-                    variants={subMenuAnimate} tabIndex={0} className={!isOpen ? `hidden` : `dropdown-content z-[1] menu p-2 shadow-lg bg-zinc-900/70  md:bg-blue-100/10 rounded-box w-32 -mr-14 md:mr-0  mt-2`}>
-                    <li onClick={e => handleClick('en')}><a>English</a></li>
-                    <li onClick={e => handleClick('hi')}><a>Hindi</a></li>
-                    <li onClick={e => handleClick('bn')}><a>Bengali</a></li>
+                    variants={subMenuAnimate}
+                    className={!isOpen ? `hidden` : `absolute right-0 z-[100] mt-2 w-32 rounded-lg border border-blue-200/70 bg-white p-2 shadow-lg dark:border-blue-300/10 dark:bg-slate-900`}
+                >
+                    <li onClick={e => handleClick('en')}><button type="button" className="w-full rounded-md px-2 py-1.5 text-left text-sm text-slate-700 hover:bg-blue-50 dark:text-slate-200 dark:hover:bg-slate-800">English</button></li>
+                    <li onClick={e => handleClick('hi')}><button type="button" className="w-full rounded-md px-2 py-1.5 text-left text-sm text-slate-700 hover:bg-blue-50 dark:text-slate-200 dark:hover:bg-slate-800">Hindi</button></li>
+                    <li onClick={e => handleClick('bn')}><button type="button" className="w-full rounded-md px-2 py-1.5 text-left text-sm text-slate-700 hover:bg-blue-50 dark:text-slate-200 dark:hover:bg-slate-800">Bengali</button></li>
                 </motion.ul>
             </div >
 

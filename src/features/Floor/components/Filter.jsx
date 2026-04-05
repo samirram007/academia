@@ -49,7 +49,7 @@ const Filter = ({ FloorData,  initialFilterValues }) => {
 
 
     return (
-        <div className={isLoading ? 'hidden' : 'flex-1 flex flex-col justify-end bg-slate-900/10 rounded-lg '}>
+        <div className={isLoading ? 'hidden' : 'flex-1 flex flex-col justify-end'}>
             <form onSubmit={formik.handleSubmit}>
                 <div className='grid grid-cols-1  '>
                     <div className='grid grid-flow-row md:grid-flow-col grid-cols-6 gap-5'>

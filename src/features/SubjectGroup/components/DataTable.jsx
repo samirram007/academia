@@ -47,11 +47,11 @@ const DataTable = () => {
     {
       header: 'Action',
       accessorKey: 'action',
-      align: 'center',
+      align: 'right',
       cell: ({ row }) => {
 
         return (
-          <div className="flex justify-start md:justify-center  items-center gap-2">
+          <div className="flex justify-end  items-center gap-2">
            <Edit initialValues={row.original} />
            <Delete initialValues={row.original} />
 

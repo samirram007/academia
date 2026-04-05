@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router';
+import { queryClient } from "../../../lib/queryClient";
 import { storeExpenseHead, updateExpenseHead } from "../services/apis";
-import { queryClient } from "../../../utils/queryClient";
 
 import { Flip, toast } from "react-toastify";
 import { useFormModal } from "../../../contexts/FormModalProvider";

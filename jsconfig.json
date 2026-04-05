@@ -1,11 +1,9 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  },
-    "bin": {
-        "nrd": "npm run dev"
-      },
+      "ignoreDeprecations": "6.0",
+      "baseUrl": ".",
+      "paths": {
+          "@/*": ["./src/*"]
+      }
+  }
 }

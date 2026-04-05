@@ -7,7 +7,7 @@ import {
     useReactTable,
 } from '@tanstack/react-table';
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router';
 
 import { TbFilterSearch } from "react-icons/tb";
 
@@ -74,52 +74,40 @@ export default function MonthlyCollectionReportTable({ data, columns, pageSize =
 
 
     return (
-        <div className='container-flex md-container  max-h-full overflow-hidden'>
-            <div className='flex flex-col justify-between gap-2 pb-2 border-b-2 row md:flex-row border-blue-300/10 '>
-                <div className='flex flex-col flex-1 gap-2 text-3xl'>
-
+        <div className='flex flex-col'>
+            <div className='flex flex-col md:flex-row justify-between items-center gap-2 px-5 py-4 border-b border-slate-200 dark:border-slate-700/60'>
+                <div className='flex flex-col flex-1'>
                     <Breadcrumbs />
-
                 </div>
-                <div className='flex flex-row flex-1 gap-2'>
-
-                </div>
-                <div className='flex flex-row items-start justify-center flex-1 gap-2'>
-                    <div className='flex flex-row items-center justify-center flex-1 gap-2'>
-                        <input
-                            type='text'
-                            value={filtering}
-                            onChange={e => setFiltering(e.target.value)}
-                            className='px-4 py-2 m-0 bg-transparent rounded-full border-blue-300/10'
-                            placeholder='Enter our search'
-                        />
-
-                        <ExportToExcel table={table} />
-
-                    </div>
-
+                <div className='flex flex-row items-center gap-2'>
+                    <input
+                        type='text'
+                        value={filtering}
+                        onChange={e => setFiltering(e.target.value)}
+                        className='rounded-lg py-1.5 text-sm px-4 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-blue-500/30'
+                        placeholder='Search...'
+                    />
+                    <ExportToExcel table={table} />
                 </div>
             </div>
-            <div>
+            <div className='border-b border-slate-200 dark:border-slate-700/60'>
                 <FilterHead initialFilterValues={initialFilterValues} fetchedData={fetchedData} />
             </div>
 
 
-            <div className="table-responsive overflow-y-auto  max-h-[50vh] 2xl:max-h-[67vh]">
-                <table className="table table-zebra overflow-scroll max-w-full  bg-slate-800  scroll">
-                    <thead className='sticky top-0 z-10 bg-slate-900'>
+            <div className="overflow-x-auto overflow-y-auto max-h-[55vh] 2xl:max-h-[68vh]">
+                <table className="w-full text-sm text-left">
+                    <thead className='sticky top-0 z-10 bg-slate-50 dark:bg-slate-800 text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider'>
                         {table.getHeaderGroups().map(headerGroup => (
                             <tr key={headerGroup.id}>
                                 {headerGroup.headers.map(header => (
                                     <th
                                         key={header.id}
                                         onClick={header.column.getToggleSortingHandler()}
-
-                                        className={`px-6 py-4  bg-gray-900 ${header.column.columnDef.className || ''}`}
-
+                                        className={`px-4 py-3 font-medium cursor-pointer select-none whitespace-nowrap ${header.column.columnDef.className || ''}`}
                                     >
                                         {header.isPlaceholder ? null : (
-                                            <div className={`${header.column.columnDef.align == 'center' ? 'text-center' : ''} ${header.column.columnDef.align == 'right' ? 'text-right' : ''}`}>
+                                            <div className={`${header.column.columnDef.align === 'center' ? 'text-center' : ''} ${header.column.columnDef.align === 'right' ? 'text-right' : ''}`}>
                                                 {flexRender(
                                                     header.column.columnDef.header,
                                                     header.getContext()
@@ -137,23 +125,22 @@ export default function MonthlyCollectionReportTable({ data, columns, pageSize =
                         ))}
                     </thead>
 
-                    <tbody>
+                    <tbody className='divide-y divide-slate-100 dark:divide-slate-700/60'>
                         {fetchedData.isFetching ?
                             <tr>
-                                <td colSpan={13} className="text-center bg-slate-600/30 ">
-                                    <div className="flex justify-center items-center ">
-                                        <div className="spinner  animate-spin border-violet-500 transition-colors   rounded-full h-6 w-6 border-t-2 border-b-
-     "></div>
+                                <td colSpan={13} className="text-center">
+                                    <div className="flex justify-center items-center py-8">
+                                        <div className="animate-spin border-blue-500 rounded-full h-6 w-6 border-t-2 border-r-2"></div>
                                     </div>
                                 </td>
                             </tr> : <></>
                         }
                         {table.getRowModel().rows.map(row => (
 
-                            <tr key={row.id}>
+                            <tr key={row.id} className='bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors'>
                                 {row.getVisibleCells().map(cell => (
 
-                                    <td key={cell.id} className={` border-b-3 ${cell.column.columnDef.className || ''}`}>
+                                    <td key={cell.id} className={`px-4 py-2 text-slate-700 dark:text-slate-300 ${cell.column.columnDef.className || ''}`}>
 
                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                     </td>
@@ -177,7 +164,7 @@ export const FilterButton = ({ filter, showFilter, setShowFilter }) => {
     }
     return (
         <button onClick={handleSwitchFilter}
-            className={`${filter ? '' : 'hidden'} btn btn-primary btn-sm text-xl     btn-rounded-symbol border-blue-300/10    `}>
+            className={`${filter ? '' : 'hidden'} inline-flex items-center justify-center w-8 h-8 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-lg`}>
             <TbFilterSearch />
         </button>
 

@@ -5,10 +5,9 @@ import {
     getPaginationRowModel,
     getSortedRowModel,
     useReactTable,
-  } from '@tanstack/react-table'
-import { useEffect } from 'react'
-  import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+} from '@tanstack/react-table'
+import { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router'
 
   export default function ServerTable({ data, columns }) {
     /*

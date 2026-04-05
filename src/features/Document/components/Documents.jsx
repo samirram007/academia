@@ -21,6 +21,15 @@ import ImageToFolderBtn from './ImageToFolderBtn';
 import { useDocumentDeleteMutation, useUpdateDocumentMutation } from '../hooks/mutations';
 import CreateDocument from './CreateDocument';
 
+const apiBase = import.meta.env.VITE_API_BASE_URL;
+const fallbackDocImage = `${apiBase}/storage/documents/student.png`;
+
+const resolveDocumentPath = (path) => {
+    if (!path || typeof path !== 'string') return fallbackDocImage;
+    if (path.startsWith('http://') || path.startsWith('https://')) return path;
+    if (path.startsWith('/')) return `${apiBase}${path}`;
+    return `${apiBase}/${path.replace(/^\/+/, '')}`;
+};
 
 
 
@@ -116,6 +125,9 @@ const FolderBox = ({ document }) => {
     )
 }
 const ImageBox = ({ document, handleFilter, setImageId, setImageSrc }) => {
+    const [hasError, setHasError] = useState(false);
+    const imagePath = resolveDocumentPath(document.path);
+
     return (
         <div className='flex px-6 py-2 flex-col-reverse justify-start gap-2 w-full md:w-64  ' >
             <DocumentName document={document} className="order-last" />
@@ -128,8 +140,16 @@ const ImageBox = ({ document, handleFilter, setImageId, setImageSrc }) => {
                 }
                 <DocumentRemover document={document} handleFilter={handleFilter} />
                 <ImageMenuBtn tabindex="0" document={document} />
-                {/* <img src={document.path} alt="" className=' w-full h-full object-contain  ' /> */}
-                <img src={document.path} alt="" className=' w-full h-full object-contain  ' />
+                {!hasError ? (
+                    <img
+                        src={imagePath}
+                        alt={document.original_name || 'Document image'}
+                        className='w-full h-full object-contain'
+                        onError={() => setHasError(true)}
+                    />
+                ) : (
+                    <img src={fallbackDocImage} alt='Document fallback' className='w-full h-full object-contain opacity-80' />
+                )}
 
             </div>
 
@@ -279,7 +299,7 @@ const DocumentName = ({ document }) => {
 const DocumentSelector = ({ document, setImageId, setImageSrc }) => {
     const handleOnClick = () => {
         setImageId(document.id)
-        setImageSrc(document.path)
+        setImageSrc(resolveDocumentPath(document.path))
 
     }
     return (

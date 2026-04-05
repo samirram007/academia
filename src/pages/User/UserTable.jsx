@@ -1,12 +1,11 @@
-import React from 'react'
 
 
+import { DateTime } from 'luxon';
 import { useMemo } from 'react';
-import { DateTime } from 'luxon'
 
-import { useNavigate, useNavigation } from 'react-router-dom';
-import { useUsers } from '../../hooks/queries';
+import { useNavigate } from 'react-router';
 import FilterTable from '../../components/tables/FilterTable';
+import { useUsers } from '../../hooks/queries';
 const UserTable = () => {
     const usersData =useUsers()
     const navigate = useNavigate()

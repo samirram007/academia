@@ -11,15 +11,26 @@ export const ImageBox = ({ formik, name, resource, editable, src = '' }) => {
 
     const [defaultImage, setDefaultImage] = useState(`${import.meta.env.VITE_API_BASE_URL}/storage/documents/student.png`)
     const [open, setOpen] = React.useState(false);
+    const resolveImagePath = (path) => {
+        if (!path || typeof path !== 'string') return defaultImage
+        if (path.startsWith('http://') || path.startsWith('https://')) return path
+        if (path.startsWith('/')) return `${import.meta.env.VITE_API_BASE_URL}${path}`
+        return `${import.meta.env.VITE_API_BASE_URL}/${path.replace(/^\/+/, '')}`
+    }
+
     const [imageSrc, setImageSrc] = useState(
         (formik.values[resource]) ?
-            (formik.values[resource].path)
+            (resolveImagePath(formik.values[resource].path))
             :
             defaultImage)
 
     const handleSetImageId = (param) => {
         setImageId(param)
         formik.values[name] = param
+    }
+
+    const handleSetImageSrc = (path) => {
+        setImageSrc(resolveImagePath(path))
     }
     const handleClose = () => {
         setOpen(false);
@@ -49,6 +60,9 @@ export const ImageBox = ({ formik, name, resource, editable, src = '' }) => {
                     className='hover:scale-95 '
                     onClick={ editable ?? editable ? handleOpen : undefined }
                     src={imageSrc}
+                    onError={() => {
+                        setImageSrc(defaultImage)
+                    }}
                     alt={name} />
             </span>
             {
@@ -64,7 +78,7 @@ export const ImageBox = ({ formik, name, resource, editable, src = '' }) => {
                         <MdClose />
                     </button>
                 </h1>
-                <Documents setImageId={handleSetImageId} setImageSrc={setImageSrc} />
+                <Documents setImageId={handleSetImageId} setImageSrc={handleSetImageSrc} />
 
             </DocumentModal>
 

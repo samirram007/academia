@@ -1,6 +1,5 @@
-import { useEffect } from "react"
-import { set } from "react-hook-form";
-import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { useLocation } from 'react-router';
 
 export const useDocumentTitle = (param) => {
     const location = useLocation();

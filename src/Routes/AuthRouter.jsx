@@ -1,4 +1,4 @@
-import { Routes } from "react-router-dom"
+import { Navigate, Route, Routes } from 'react-router'
 import RenderRoute from "./RenderRoute"
 
 
@@ -8,6 +8,14 @@ const AuthRouter = () => {
 
 
         <Routes>
+            <Route
+                index
+                element={<Navigate to="/dashboard" replace />}
+            />
+            <Route
+                path="/frontend"
+                element={<Navigate to="/dashboard" replace />}
+            />
             {RenderRoute('auth')}
         </Routes>
 

@@ -1,5 +1,5 @@
 
-import { Route } from 'react-router-dom';
+import { Route } from 'react-router';
 
 
 
@@ -18,9 +18,9 @@ const RenderRoute = (RouteType) => {
             <Route key={i} path={path} element={element} />
         }
         else if (RouteType == 'auth' && authType) {
-          return ['', 'index', 'dashboard'].includes(path) ? <Route key={i} index element={element} />
-            :
-            <Route key={i} path={path} element={element} />
+          return ['', 'index'].includes(path)
+            ? <Route key={i} index element={element} />
+            : <Route key={i} path={path} element={element} />
         }
         else {
           return <Route key={i} path={path} element={<NotFound />} />

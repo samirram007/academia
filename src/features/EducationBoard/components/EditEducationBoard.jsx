@@ -1,10 +1,10 @@
 
 import { useState } from 'react';
+import { useParams } from 'react-router';
 import Breadcrumbs from '../../../components/Breadcrumbs';
-import EntryForm from './EntryForm';
-import { useEducationBoard } from '../hooks/quaries';
 import Loader from '../../../components/Loader';
-import { useParams } from 'react-router-dom';
+import { useEducationBoard } from '../hooks/quaries';
+import EntryForm from './EntryForm';
 
 
 const EditEducationBoard = () => {

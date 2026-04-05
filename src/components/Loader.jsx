@@ -1,12 +1,15 @@
 
 const Loader = ({size,label}) => {
-  const sizeStyle = size ? `h-${size} w-${size}` : 'h-20 w-20'
+  const spinnerSize = size ? `${size * 4}px` : '80px'
   return (
     <>
-    <div>{label ?? label}</div>
+      {label ? <div className='text-sm text-slate-500 dark:text-slate-400 mb-2'>{label}</div> : null}
 
       <div className={`flex ${label?'justify-start':'justify-center'} items-center`}>
-        <div className={`animate-spin rounded-full ${sizeStyle} border-t-2 border-b-2 border-gray-400`}></div>
+        <div
+          className='animate-spin rounded-full border-2 border-slate-300 border-t-blue-600 dark:border-slate-600 dark:border-t-blue-400'
+          style={{ width: spinnerSize, height: spinnerSize }}
+        ></div>
       </div>
     </>
   )

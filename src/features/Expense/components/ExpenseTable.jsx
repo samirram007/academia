@@ -7,7 +7,7 @@ import {
     useReactTable,
 } from '@tanstack/react-table';
 import { useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router';
 
 import { isBrowser } from 'react-device-detect';
 
@@ -45,6 +45,9 @@ export default function ExpenseTable({ data, columns, pageSize=100 , createRoute
         getPaginationRowModel: getPaginationRowModel(),
         getSortedRowModel: getSortedRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
+        initialState: {
+            sorting: [{ id: "id", desc: true }], // Default sorting on "id" in descending order
+        },
         state: {
             sorting: sorting,
             globalFilter: filtering,
@@ -109,7 +112,7 @@ export default function ExpenseTable({ data, columns, pageSize=100 , createRoute
                             <>
 
 
-                                <FormikFormModal label={createFormTitle ?? 'Create new'}>
+                                <FormikFormModal size={'full'} label={createFormTitle ?? 'Create new'}>
                                     {createForm}
                                 </FormikFormModal>
 

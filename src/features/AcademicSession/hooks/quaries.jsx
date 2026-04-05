@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query"
-import { fetchAcademicSessionByCampusIdService, fetchAcademicSessionService, fetchAcademicSessionServices } from "../services/apis"
 import { useCallback } from "react"
+import { fetchAcademicSessionByCampusIdService, fetchAcademicSessionService, fetchAcademicSessionServices } from "../services/apis"
 
 
 export  function useAcademicSessions(payload) {
 
-   const filterCallbackFn= useCallback((data)=>{
+  const filterCallbackFn = useCallback(
+    (data) => {
      if(payload.is_current)
     {
       return {data:data.data.filter(x=>x.is_current==true)}

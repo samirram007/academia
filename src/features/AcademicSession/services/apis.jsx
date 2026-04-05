@@ -12,6 +12,7 @@ export function fetchAcademicSessionServices(payload) {
 
     return axiosClient.get(`/academic_sessions`)
         .then(response => {
+            console.log(response);
             return response.data;
         })
         .catch(err => {

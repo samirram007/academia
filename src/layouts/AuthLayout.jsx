@@ -1,5 +1,4 @@
 
-import { useLocation } from 'react-router-dom';
 import { Navbar, Sidebar } from '../components/structures';
 
 import { useState } from 'react';
@@ -9,7 +8,6 @@ import { useAuthLogout, useAuthUser } from '../features/Auth';
 
 
 const AuthLayout = ({ children }) => {
-  const location = useLocation()
   const authUser = useAuthUser()
   const logout = useAuthLogout()
   const [isOpen, setOpen] = useState(true);
@@ -20,35 +18,37 @@ const AuthLayout = ({ children }) => {
     logout.mutate()
   }
   if (authUser.isLoading) {
-    return (<Loader size={32} />)
+    return (
+      <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-slate-100 to-white dark:from-slate-900 dark:to-slate-800">
+        <Loader size={16} label="Loading workspace..." />
+      </div>
+    )
   }
   if (authUser.isError) {
-    return (<div className="w-full h-full flex justify-center items-center">
-      <h1 className="text-4xl">Error...</h1>
-    </div>)
+    return (
+      <div className="min-h-screen w-full flex justify-center items-center bg-gradient-to-br from-slate-100 to-white dark:from-slate-900 dark:to-slate-800 px-4">
+        <div className="rounded-2xl border border-red-300/40 bg-red-500/10 px-6 py-5 text-center text-red-700 dark:text-red-300">
+          <h1 className="text-2xl font-semibold">Authentication Error</h1>
+          <p className="mt-2 text-sm">Unable to load your authenticated session.</p>
+        </div>
+      </div>
+    )
   }
-  return (
-    <div className='flex flex-row h-screen  w-screen max-w-screen relative bg-[#272e48]  overflow-hidden'>
 
+  return (
+    <div className='min-h-screen w-full flex bg-gradient-to-br from-slate-100 to-white dark:from-slate-900 dark:to-slate-800 text-slate-900 dark:text-slate-100 overflow-hidden'>
       <Sidebar isOpen={!isOpen} setOpen={() => { setOpen(!isOpen) }} />
-      <div className=' flex-1 relative   w-full h-screen min-h-screen max-h-screen flex flex-col justify-start items-center  '>
+
+      <div className='flex-1 relative min-w-0 flex flex-col'>
         <Navbar isOpen={isOpen} setOpen={setOpen} userName={authUser.data.name} onLogout={onLogout} />
 
-        <div className='  w-full  mr-2 h-full    '>
-          <div className='  flex flex-col items-center  md:p-2 md:ml-4 mb-2  bg-slate-900  rounded-lg 
-          mx-auto w-[90vw] md:w-[80vw] lg:w-[80vw] xl:w-[85vw] 2xl:w-[87vw] h-[85vh] 2xl:h-[90vh] '>
-            {/* {
-              location.pathname === '/' ? <Dashboard /> : 
-            } */}
+        <main className='flex-1 p-3 md:p-4 lg:p-6 overflow-hidden'>
+          <div className='h-full w-full overflow-auto'>
             {children}
-
           </div>
-
-        </div>
-
+        </main>
       </div>
     </div>
-
   )
 }
 

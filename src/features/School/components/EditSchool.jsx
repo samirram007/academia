@@ -3,8 +3,8 @@ import { useState } from 'react';
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import EntryForm from './EntryForm';
 
+import { useParams } from 'react-router';
 import Loader from '../../../components/Loader';
-import { useParams } from 'react-router-dom';
 import { useSchool } from '../hooks/queries';
 
 
@@ -54,7 +54,8 @@ const {data:editData,isError, isLoading}=useSchool(id)
 
                 </div>
             </div>
-            <EntryForm initialValues={initialValues} entryMode={entryMode}/>
+            <EntryForm initialValues={initialValues}
+                entryMode={entryMode} />
 
 
         </div>

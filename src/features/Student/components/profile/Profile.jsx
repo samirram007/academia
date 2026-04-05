@@ -1,60 +1,43 @@
 import { DateTime } from "luxon"
 import { MdOutlineModeEditOutline } from "react-icons/md"
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from 'react-router'
 
 export const Profile = ({ data }) => {
 const navigate=useNavigate()
+
+  const profileRows = [
+    ['Id', data.id],
+    ['Name', data.name],
+    ['Username', data.username],
+    ['Code', data.code],
+    ['Dob', data.dob ? DateTime.fromISO(data.dob).toLocaleString(DateTime.DATE_MED) : '-'],
+    ['Gender', data.gender],
+    ['Birth Mark', data.birth_mark],
+    ['Contact No.', data.contact_no],
+    ['Email', data.email],
+    ['Aadhaar Number', data.aadhaar_no],
+    ['Nationality', data.nationality],
+    ['Language', data.language],
+    ['Religion', data.religion],
+    ['Caste', data.caste],
+  ]
+
   return (
     <>
-      <div className='h-42 w-full rounded-md p-4 text-slate-300 mt-2'>
-        <div className='text-lg underline flex'>
-          <span className='font-bold'>Full Profile </span>
-          <span onClick={()=>navigate(`/students/edit/${data.id}`)} className='flex justify-between items-center rounded-full  ml-2 cursor-pointer'>
-            <MdOutlineModeEditOutline className='text-orange-600 text-xl  ' />
+      <div className='w-full rounded-md p-4 text-slate-700 dark:text-slate-200'>
+        <div className='mb-4 flex items-center text-lg'>
+          <span className='font-semibold tracking-tight text-slate-900 dark:text-slate-100'>Full Profile</span>
+          <span onClick={() => navigate(`/students/edit/${data.id}`)} className='ml-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-blue-100 text-blue-700 transition hover:bg-blue-200 dark:bg-blue-500/15 dark:text-blue-200 dark:hover:bg-blue-500/25'>
+            <MdOutlineModeEditOutline className='text-base' />
           </span>
         </div>
-        <div className=' pl-1 mb-2 flex'>
-          <div className='w-36'>Id:</div>  {data.id}
-        </div>
-        <div className=' pl-1 mb-2 flex'>
-          <div className='w-36'>Name:</div>  {data.name}
-        </div>
-        <div className=' pl-1 mb-2 flex'>
-          <div className='w-36'>Username:</div>  {data.username}
-        </div>
-        <div className=' pl-1 mb-2 flex'>
-          <div className='w-36'>Code:</div>  {data.code}
-        </div>
-        <div className=' pl-1 mb-2 flex'>
-          <div className='w-36'>Dob: </div>{DateTime.fromISO(data.dob).toLocaleString(DateTime.DATE_MED)}
-        </div>
-        <div className=' pl-1 mb-2 flex'>
-          <div className='w-36'>Gender: </div>{data.gender}
-        </div>
-        <div className=' pl-1 mb-2 flex'>
-          <div className='w-36'>Birth Mark:</div> {data.birth_mark}
-        </div>
-        <div className=' pl-1 mb-2 flex'>
-          <div className='w-36'>Contact No.:</div> {data.contact_no}
-        </div>
-        <div className=' pl-1 mb-2 flex'>
-          <div className='w-36'>email:</div> {data.email}
-        </div>
-
-        <div className=' pl-1 mb-2 flex'>
-          <div className='w-36'>Aadhaar Number:</div> {data.aadhaar_no}
-        </div>
-        <div className=' pl-1 mb-2 flex'>
-          <div className='w-36'>Nationality: </div>{data.nationality}
-        </div>
-        <div className=' pl-1 mb-2 flex'>
-          <div className='w-36'>Language: </div>{data.language}
-        </div>
-        <div className=' pl-1 mb-2 flex'>
-          <div className='w-36'>Religion: </div>{data.religion}
-        </div>
-        <div className=' pl-1 mb-2 flex'>
-          <div className='w-36'>Caste: </div>{data.caste}
+        <div className='grid grid-cols-1 gap-2 md:grid-cols-2'>
+          {profileRows.map(([label, value]) => (
+            <div key={label} className='flex items-center gap-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-800/70'>
+              <div className='w-32 text-slate-500 dark:text-slate-400'>{label}:</div>
+              <div className='font-medium text-slate-800 dark:text-slate-100'>{value || '-'}</div>
+            </div>
+          ))}
         </div>
       </div>
 

@@ -5,10 +5,7 @@ module.exports = {
     './index.html',
     './src/**/*.{js,jsx,ts,tsx}',
   ],
-  daisyui: {
-    themes: ["dark"],
-  },
-  darkMode:'class',
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
@@ -27,5 +24,5 @@ module.exports = {
 
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [],
 }

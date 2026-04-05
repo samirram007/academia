@@ -7,15 +7,12 @@ import * as Yup from "yup";
 import { FormikInputBox } from '@/components/form-components/FormikInputBox';
 import { FormikSubmit } from '@/components/form-components/FormikSubmit';
 import { AcademicSessionSelect } from '../../Common/components/AcademicSessionSelect';
-import { CampusSelect } from '../../Common/components/CampusSelect';
 
 
 
 
 const validationSchema = Yup.object().shape({
-    campus_id: Yup.number().integer()
-    //     .min(1, "Please select Campus")
-    //     .required("Please select Campus"),
+
     // academic_session_id: Yup.number().integer()
     //     .min(1, "Please select Academic session")
     //     .required("Please select Academic session"),
@@ -56,11 +53,7 @@ const [isLoading, setIsLoading] = useState(false)
                     <div className='grid grid-flow-row md:grid-flow-col grid-cols-6 gap-5'>
                         <div className='grid gap-4 col-span-6 border-b-2   border-blue-300/30 pb-2 px-4 mb-2 '>
                             <div className='grid gap-4 grid-cols-12   mb-2'>
-                                {/* <div className='col-span-1 text-md font-bold'>Filter</div> */}
-                                <div className='col-span-2 '>
-                                <CampusSelect formik={formik} auto={false} isLoading={isLoading} setIsLoading={setIsLoading}/>
 
-                                </div>
                                 <div className='col-span-2 '>
 
                                     <AcademicSessionSelect formik={formik}   />

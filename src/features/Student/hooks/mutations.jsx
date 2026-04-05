@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 
 
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from 'react-router';
 import { queryClient } from "../../../utils/queryClient";
 import { storeGuardian, storeStudent, storeStudentFee, updateGuardian, updateStudent, updateStudentFee } from "../services/apis";
 

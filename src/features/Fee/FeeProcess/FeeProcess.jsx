@@ -17,7 +17,17 @@ const FeeProcess = ({
     selectedStudentSession }) => {
     const fetchedSessionFeesData = useStudentSessionFees({ student_session_id: selectedStudentSession.id })
 
-    if (fetchedSessionFeesData.isPending) return <div>Loading</div>
+    if (fetchedSessionFeesData.isPending) {
+        return (
+            <div className='p-4'>
+                <div className='animate-pulse space-y-3 rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-700 dark:bg-slate-900'>
+                    <div className='h-7 w-64 rounded bg-slate-200 dark:bg-slate-700' />
+                    <div className='h-10 w-full rounded bg-slate-100 dark:bg-slate-800' />
+                    <div className='h-56 w-full rounded bg-slate-100 dark:bg-slate-800' />
+                </div>
+            </div>
+        )
+    }
 
     const mData = fetchedSessionFeesData.data?.data ?? [];
     const studentSessionFeesData = mData//useMemo(() => [...mData], [mData]);
@@ -140,7 +150,9 @@ export const MonthPanel = ({ selectedStudentSession, feeTemplateItem, currentQua
     const fetchMonths = useMonths()
     const mData = fetchMonths.data?.data ?? [];
     const months = useMemo(() => [...mData], [mData]);
-    if (fetchMonths.isFetching) return <div>Loading</div>
+    if (fetchMonths.isLoading) {
+        return <div className='h-6 w-12 rounded bg-slate-200 dark:bg-slate-700 animate-pulse' />
+    }
 
     return (
         <>

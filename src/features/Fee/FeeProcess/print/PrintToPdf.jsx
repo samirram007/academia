@@ -36,7 +36,7 @@ const PrintToPdf = ({ fees, session_id }) => {
       {
 
         <button onClick={() => setOpen(true)}
-          className={`${isOpen ? 'btn-error' : 'btn-outline'} badge badge-error      py-0 text-xs     `}>{'Print'}</button>
+          className='inline-flex items-center rounded-full border border-slate-300 bg-white px-2.5 py-0.5 text-xs font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700'>{'Print'}</button>
       }
       {
         isOpen &&
@@ -58,7 +58,7 @@ export const PrintModal = ({ fees, isOpen, setOpen, selectedStudentSession = fee
   })
   return (
 
-    <PdfModal isOpen={isOpen} setOpen={setOpen} label="Preview Fees">
+    <PdfModal isOpen={isOpen} setOpen={setOpen}>
       <PrintFees fees={fees} isOpen={isOpen} setOpen={setOpen} session_id={session_id}
         payload={payload}
         selectedTemplate={selectedTemplate}
@@ -127,7 +127,7 @@ export const PrintFeesReadyMode = ({ FeeTemplatesData, fees, isOpen, setOpen, se
   }, []);
   return (
     <>
-      <div className=' flex flex-row bg-slate-800/20 rounded-md shadow-inner w-[95dvw] max-w-full    h-[70dvh] max-h-full  overflow-hidden'>
+      <div className='w-[95dvw] max-w-full h-[70dvh] max-h-full overflow-hidden rounded-xl border border-slate-200 bg-slate-100/70 shadow-inner dark:border-slate-700 dark:bg-slate-900/70'>
         <div className={`relative flex flex-col min-w-full `}>
           {
             selectedTemplate &&
@@ -220,27 +220,19 @@ export const SelectedPanelPrintMode = ({ selectedTemplate, isMount, setIsMount, 
 
   return (
     <>
-
-      <div className=' hidden  flex-row justify-between mt-2 pb-2 border-b-4 border-violet-400/60  '>
-        <div className='flex flex-row items-center justify-center '>
-          <div className='font-bold'> {selectedTemplate && selectedTemplate.name}</div>
-
+      <div className='mb-3 flex items-center justify-between rounded-lg border border-slate-200 bg-white px-3 py-2 text-slate-700 shadow-sm dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200'>
+        <div className='text-sm font-semibold'>Receipt Preview</div>
+        <div className='flex items-center gap-2'>
+          <button
+            className='inline-flex items-center rounded-full border border-blue-300 bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700 transition hover:bg-blue-100 dark:border-blue-400/40 dark:bg-blue-500/10 dark:text-blue-200 dark:hover:bg-blue-500/20'
+            onClick={handlePrint}
+          >
+            Print Receipt
+          </button>
         </div>
-
-
-      </div>
-      <div className='relative'>
-
-        <div className='mb-3 mr-10  bottom-0     right-0 flex justify-end'>
-          <button className='badge badge-error btn-outline bg-error text-slate-50    '
-            onClick={handlePrint}>Print</button>
-        </div>
-
       </div>
 
-      <div ref={componentRef} className='print relative overflow-y-auto   text-slate-950
-       bg-white mx-auto rounded-md shadow-lg w-[750px]      max-h-[calc(100% - 180px)
-        p-4 '>
+      <div ref={componentRef} className='print relative text-slate-950 bg-white mx-auto rounded-md shadow-lg w-[750px] p-4'>
         <div className='relative border-2 border-slate-900 mt-2 min-h-[400px]  '>
           <div className=' grid grid-cols-10 px-2 py-1'>
             <div className={' col-span-2 '}>No. {feeData.fee_no}</div>
@@ -281,18 +273,22 @@ export const SelectedPanelPrintMode = ({ selectedTemplate, isMount, setIsMount, 
 
           </div>
 
-          <div className='px-2  '>
-            <div className='grid grid-cols-12 items-center gap-2 border-y-2 border-slate-800 font-bold   text-slate-800'>
+          <div className='px-2'>
+            <div className='grid grid-cols-12 items-stretch border-y-2 border-slate-800 font-bold text-slate-800'>
 
-              <div className='col-span-10 border-r-2 border-slate-800'> <div className='py-1 pl-4'>Particulars</div></div>
-              <div className='col-span-2 text-right '> <div className='py-1 pr-4'>Amount</div></div>
+              <div className='col-span-10 border-r-2 border-slate-800'>
+                <div className='py-1 pl-4 leading-6'>Particulars</div>
+              </div>
+              <div className='col-span-2 text-right'>
+                <div className='py-1 pr-4 leading-6'>Amount</div>
+              </div>
             </div>
             <FeeEntryRowsPrint feeData={feeData} setChanges={setChanges} selectedStudentSession={selectedStudentSession} />
 
           </div>
           <div className='px-2'>
-            <div className=' w-full           text-slate-800 bottom-0 grid grid-cols-12 justify-end gap-2           font-bold border-t-4 border-slate-800  '>
-              <div className='col-span-10 text-right border-r-2 border-slate-800  '>{'Total'}:</div>
+            <div className='w-full text-slate-800 bottom-0 grid grid-cols-12 font-bold border-t-4 border-slate-800'>
+              <div className='col-span-10 text-right border-r-2 border-slate-800 leading-6'>{'Total'}:</div>
               <div className='col-span-2 text-right '>
                 <div className='py-1 pr-4 font-semibold'>
                   {Number(total).toFixed(2)}
@@ -302,7 +298,7 @@ export const SelectedPanelPrintMode = ({ selectedTemplate, isMount, setIsMount, 
           </div>
 
           <div className='w-full py-1 pl-4 text-[10px] -mt-2'>
-            (in words) : Rupees. {convertNumberToWords(Number(Number(total).toFixed(2)))}
+            (in words) :  {convertNumberToWords(Number(Number(total).toFixed(2)))}
           </div>
           <div className='absolute bottom-0 right-0 pr-2 !text-[8px]'>Print Time: {moment(new Date()).format('DD-MMM-YYYY hh:mm a')}</div>
         </div>
@@ -337,10 +333,10 @@ export const FeeEntryRowPrint = ({ feeTemplateItem, index, setChanges, selectedS
   return (
     <>
 
-      <div className={` grid grid-cols-12  items-center  text-xs    `}>
+      <div className='grid grid-cols-12 items-stretch text-xs'>
 
-        <div className='col-span-10 flex flex-row items-center gap-2 pl-4 border-r-2 border-slate-800'>
-          <div className='py-2'>
+        <div className='col-span-10 border-r-2 border-slate-800 pl-4'>
+          <div className='py-2 leading-5'>
             <div className='flex flex-row flex-nowrap items-center  '>
               {Capitalize(feeTemplateItem.fee_head.name)}
 
@@ -370,8 +366,8 @@ export const FeeEntryRowPrint = ({ feeTemplateItem, index, setChanges, selectedS
 
         </div>
 
-        <div className='col-span-2 text-right '>
-          <div className='py-1 pr-4 flex flex-row items-center justify-end'>
+        <div className='col-span-2 text-right'>
+          <div className='flex h-full min-h-[36px] items-center justify-end py-1 pr-4 leading-5'>
             {feeTemplateItem.amount > 0 ? Number(parseFloat(feeTemplateItem.total_amount)).toFixed(2) : ''}
           </div>
         </div>

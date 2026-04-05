@@ -22,29 +22,19 @@ const FilterHead = ({ initialFilterValues, fetchedData }) => {
     })
 
     return (
-        <div>
-            <div className='grid grid-cols-1 '>
-                <div className='grid grid-flow-row grid-cols-6 gap-5 md:grid-flow-col'>
-                    <div className='grid col-span-6 gap-4 px-4 pb-2 mb-2 border-b-2 border-blue-300/30 '>
-
-
-                        <form onSubmit={formik.handleSubmit} className='flex flex-row items-center justify-center flex-1 gap-2'>
-                            <div className='grid grid-cols-12 gap-4 mb-2'>
-                                <div className='col-span-6 flex flex-row gap-2 pt-4 '>
-                                    <span>Period</span>
-                                    <FormikInputBox type="date" formik={formik} name="from" label="" />
-                                    <span>To</span>
-                                    <FormikInputBox type="date" formik={formik} name="to" label="" />
-                                    <FormikSubmit formik={formik} label={'Filter'} />
-                                </div>
-                            </div>
-                        </form>
-
-
-                    </div>
+        <form onSubmit={formik.handleSubmit}>
+            <div className='flex flex-wrap items-end gap-4 px-5 py-3'>
+                <div className='flex flex-row items-end gap-2'>
+                    <span className='text-sm text-slate-500 dark:text-slate-400 pb-2'>Period</span>
+                    <FormikInputBox type="date" formik={formik} name="from" label="" />
                 </div>
+                <div className='flex flex-row items-end gap-2'>
+                    <span className='text-sm text-slate-500 dark:text-slate-400 pb-2'>To</span>
+                    <FormikInputBox type="date" formik={formik} name="to" label="" />
+                </div>
+                <FormikSubmit formik={formik} label={'Filter'} />
             </div>
-        </div>
+        </form>
     )
 }
 

@@ -1,5 +1,5 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useNavigate, useParams } from 'react-router';
 
 
 import { toastr } from "react-redux-toastr";
@@ -55,7 +55,7 @@ export default function CreateUser(){
 
     return (
         <>
-            <div className="card animated fadeInDown  bg-zinc-700/30  dark:bg-zinc-200/10">
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/60 shadow-sm rounded-2xl overflow-hidden p-6">
                 {loading && <div className="text-center">Loading...</div>}
                 {errors && (
                     <div className="alert">

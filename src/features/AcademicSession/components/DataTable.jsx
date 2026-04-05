@@ -51,10 +51,10 @@ const DataTable = () => {
         DateTime.fromISO(info.getValue()).toLocaleString(DateTime.DATE_MED),
     },
     {
-      header: 'Action', accessorKey: 'action', align: 'center',
+      header: 'Action', accessorKey: 'action', align: 'right',
       cell: ({ row }) => {
         return (
-          <div className="flex justify-start md:justify-center  items-center gap-2">
+          <div className="flex justify-end  items-center gap-2">
             <EditAcademicSession initialValues={row.original} />
             {/* <DeleteAcademicSession initialValues={row.original} /> */}
           </div>

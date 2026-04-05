@@ -201,7 +201,7 @@ const CreateDocument = ({ openPanel }) => {
                 <div className='flex flex-row gap-2 justify-center flex-1 items-center'>
                     <button type="submit"
                         disabled={!files?.length}
-                        className='disabled:cursor-not-allowed disabled:bg-slate-500/50  btn btn-primary btn-wide btn-sm mt-4'>
+                        className='disabled:cursor-not-allowed disabled:bg-slate-500/50  inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors disabled:opacity-60 disabled:cursor-not-allowed mt-4'>
                         <PiUploadSimpleLight /> Upload</button>
                     <button type="button" onClick={() => {
                         setFiles([])

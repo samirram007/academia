@@ -1,7 +1,7 @@
-import { useMutation } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query';
 
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { Flip, toast } from 'react-toastify';
 import { queryClient } from '../utils/queryClient';
 

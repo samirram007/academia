@@ -16,9 +16,4 @@ import { fetchExpense, fetchExpenses } from "../services/apis"
       queryFn: ()=>fetchExpense(id),
     })
   }
-  export function useExpensesBySessionNClass(payload) {
-    return useQuery({
-      queryKey: ['expenses',payload],
-      queryFn: ()=>fetchExpensesBySessionNClass(payload),
-    })
-  }
+

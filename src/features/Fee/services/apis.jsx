@@ -24,7 +24,7 @@ export function fetchFees(payload) {
 
 
 export function storeFee(payload) {
-
+console.log(removeEmptyStrings(payload))
     return axiosClient.post("/fees", removeEmptyStrings(payload))
         .then(response => {
             return response.data;
@@ -37,7 +37,7 @@ export function storeFee(payload) {
 }
 export function updateFee(payload) {
     const { id, ...data } = payload;
-    // console.log(id, removeEmptyStrings(data))
+     console.log(id, removeEmptyStrings(data))
     return axiosClient.put(`/fees/${id}`, removeEmptyStrings(data))
         .then(response => {
             return response.data;

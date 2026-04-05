@@ -14,11 +14,12 @@ const AuthContext = createContext({
 });
 
 export const AuthProvider = ({ children }) => {
+    const initialToken = localStorage.getItem("ACCESS_TOKEN");
     const [user, setUser] = useState({});
-    const [isGuest, setGuest] = useState(true);
+    const [isGuest, setGuest] = useState(!initialToken);
     const [isLoading, setLoading] = useState(true);
     const [role, setRole] = useState('admin');
-    const [token, _setToken] = useState(localStorage.getItem("ACCESS_TOKEN"));
+    const [token, _setToken] = useState(initialToken);
 
     const setToken = (token) => {
         _setToken(token);
@@ -31,7 +32,7 @@ export const AuthProvider = ({ children }) => {
         }
     };
     useEffect(() => {
-        if (token) setGuest(false)
+        setGuest(!token);
         // const timer = setTimeout(() => {
         // setLoading(false); // Stop loading after 1.5s
         //     if (token) setGuest(false)

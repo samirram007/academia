@@ -3,12 +3,49 @@
 
 
 
+import { useState } from 'react';
 import Create from './Create';
 
 import { Checkbox } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { usePromotionContext } from '../context/usePromotionContext';
 import PromotionTable from './PromotionTable';
+
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
+const getInitials = (name) => {
+  const safeName = (name || 'Student').trim();
+  const parts = safeName.split(/\s+/).filter(Boolean);
+  if (parts.length === 1) return parts[0].slice(0, 1).toUpperCase();
+  return `${parts[0].slice(0, 1)}${parts[1].slice(0, 1)}`.toUpperCase();
+};
+
+const resolveImagePath = (path) => {
+  if (!path || typeof path !== 'string') return null;
+  if (path.startsWith('http://') || path.startsWith('https://')) return path;
+  if (path.startsWith('/')) return `${API_BASE}${path}`;
+  return `${API_BASE}/${path.replace(/^\/+/, '')}`;
+};
+
+const StudentAvatar = ({ name, src }) => {
+  const [hasError, setHasError] = useState(false);
+  const resolved = resolveImagePath(src);
+  if (!resolved || hasError) {
+    return (
+      <div className='w-10 h-10 rounded-full flex items-center justify-center bg-gradient-to-br from-blue-600 to-cyan-500 text-white text-xs font-semibold shrink-0'>
+        {getInitials(name)}
+      </div>
+    );
+  }
+  return (
+    <img
+      src={resolved}
+      alt={name}
+      onError={() => setHasError(true)}
+      className='w-10 h-10 rounded-full object-cover shrink-0'
+    />
+  );
+};
 
 
 
@@ -34,8 +71,7 @@ const DataTable = () => {
   const columns = [
     {
       header: "ID",
-      accessorKey: "id",
-      visible: false,
+      accessorKey: "id", 
       size: 50,
 
     },
@@ -82,41 +118,34 @@ const DataTable = () => {
       cell: ({ row }) => {
         const thisRow = row.original
         return (
-          <div className="flex items-center gap-2">
-            {thisRow.profile_document ?
-              <img src={thisRow.profile_document.path} className='w-10 h-10 rounded-full' /> :
-              <img src={`${import.meta.env.VITE_API_BASE_URL}/storage/documents/student.png`} className='w-10 h-10 rounded-full' alt="" />}
+          <div className="flex items-center gap-3">
+            <StudentAvatar name={thisRow.name} src={thisRow.profile_document?.path} />
             <div>
-
-              <div className='text-blue-200 font-bold text-md'>{thisRow.name}</div>
+              <div className='text-slate-800 dark:text-blue-200 font-bold text-sm'>{thisRow.name}</div>
               {thisRow &&
                 <>
-                  <div className='flex flex-row gap-2  text-[8px]'>
-                    <span className='text-green-400 font-normal'>
-                      <span className='mr-2'> Session:</span>
-                      <span className='  font-bold'>{thisRow.student_sessions && thisRow.student_sessions[0].academic_session.session}</span>
+                <div className='flex flex-row gap-2 text-[9px]'>
+                  <span className='text-emerald-600 dark:text-green-400 font-normal'>
+                    <span className='mr-1'>Session:</span>
+                    <span className='font-bold'>{thisRow.student_sessions && thisRow.student_sessions[0].academic_session.session}</span>
                     </span>
                   </div>
-                  <div className='flex flex-row gap-2  text-[8px]'>
+                <div className='flex flex-row gap-2 text-[9px]'>
                     <span>
-                      <span className='text-blue-400 font-bold'>{thisRow.student_sessions && thisRow.student_sessions[0].academic_class.name}</span>
+                    <span className='text-blue-600 dark:text-blue-400 font-bold'>{thisRow.student_sessions && thisRow.student_sessions[0].academic_class.name}</span>
                     </span>
                     <span>
                       Section:
-                      <span className='text-red-400 font-bold'>{thisRow.student_sessions && thisRow.student_sessions[0].section.name}</span>
+                    <span className='text-red-500 dark:text-red-400 font-bold'>{thisRow.student_sessions && thisRow.student_sessions[0].section.name}</span>
                     </span>
                     <span>
                       Roll:
-                      <span className='text-green-400 font-bold'>{thisRow.student_sessions && thisRow.student_sessions[0].roll_no}</span>
-                    </span>
-
-                  </div>
-
+                    <span className='text-emerald-600 dark:text-green-400 font-bold'>{thisRow.student_sessions && thisRow.student_sessions[0].roll_no}</span>
+                  </span>
+                </div>
                 </>
               }
-
             </div>
-
           </div>
         )
       }
@@ -138,14 +167,14 @@ const DataTable = () => {
     {
       header: 'Action',
       accessorKey: 'action',
-      align: 'center',
+      align: 'right',
       cell: ({ row }) => {
 
         return (
-          <div className="flex justify-start md:justify-center  items-center gap-2">
+          <div className="flex justify-end  items-center gap-2">
             <button onClick={() => { navigate(`/students/info/${row.original.id}`) }}
-              className="btn btn-outline btn-primary btn-sm btn-rounded ">
-              Info..
+              className="inline-flex items-center justify-center rounded-full px-3 py-1 text-xs font-semibold bg-blue-600 hover:bg-blue-700 text-white transition-colors cursor-pointer">
+              Info
             </button>
             {/* <Edit initialValues={row.original} />
             <Delete initialValues={row.original} /> */}

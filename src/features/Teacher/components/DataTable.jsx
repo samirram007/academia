@@ -1,10 +1,9 @@
-import React from 'react'
-import FilterTable from '../../../components/tables/FilterTable'
+import FilterTable from '../../../components/tables/FilterTable';
 
+import { DateTime } from 'luxon';
 import { useMemo } from 'react';
-import { DateTime } from 'luxon'
 
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { useTeachers } from '../hooks/queries';
 const DataTable = () => {
     const fetchedData =useTeachers()
@@ -48,18 +47,14 @@ const DataTable = () => {
         {
             header: 'Action',
             accessorKey: 'action',
-            align: 'center',
+          align: 'right',
             cell: ({row})=>{
                 return (
-                    <div className="flex justify-start md:justify-center  items-center">
+                  <div className="flex justify-end  items-center">
                         <button onClick={()=>{ editUserData(row.original.id)}}
-                        className="btn btn-outline btn-primary btn-sm btn-rounded ">
+                      className="inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-xs font-semibold border border-blue-500 text-blue-600 hover:bg-blue-600 hover:text-white dark:text-blue-400 dark:border-blue-400 dark:hover:bg-blue-600 dark:hover:text-white transition-colors ">
                             Edit
-                        </button>
-                        <button onClick={()=>{ deleteUserData(row.original.id)}}
-                        className="btn btn-outline btn-primary btn-sm btn-rounded ml-2">
-                            Delete
-                        </button>
+                    </button>
                     </div>
                 )
             }
@@ -68,9 +63,6 @@ const DataTable = () => {
       ]
       const editUserData=(id)=>{
         navigate(`/teachers/edit/${id}`)
-      }
-      const deleteUserData=(id)=>{
-        navigate(`/teachers/delete/${id}`)
       }
   return (
     <FilterTable data={data} columns={columns} createRoute={createRoute} />

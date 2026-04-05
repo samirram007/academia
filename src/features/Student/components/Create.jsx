@@ -85,22 +85,12 @@ const [entryMode,setEntryMode]=useState('create');
 
 
     return (
-        <div className='pb-10 w-full'>
-            <div className='row  flex flex-col md:flex-row justify-between gap-2 border-b-2 border-blue-300/10 pb-2 mb-2 '>
-                <div className='flex flex-col gap-2 flex-1 text-3xl'>
-                    {/* {'New Student'} */}
-                    <Breadcrumbs />
-                </div>
-                <div className='flex flex-row gap-2 flex-1'>
-
-                </div>
-                <div className='flex flex-row gap-2 justify-center flex-1 items-center'>
-
-                </div>
+        <div className='w-full pb-8'>
+            <div className='mb-4 border-b border-blue-200/60 pb-2 dark:border-slate-700'>
+                <Breadcrumbs />
             </div>
-            <EntryForm initialValues={initialValues} entryMode={entryMode}/>
 
-
+            <EntryForm initialValues={initialValues} entryMode={entryMode} />
         </div>
     )
 }

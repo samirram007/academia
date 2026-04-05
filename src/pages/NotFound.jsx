@@ -1,5 +1,5 @@
 import { useAuth } from '@/contexts';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 
 export default function NotFound() {

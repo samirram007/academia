@@ -1,4 +1,3 @@
-import React from 'react'
 
 
 import { useMemo } from 'react';
@@ -6,14 +5,13 @@ import { useMemo } from 'react';
 
 
 
-import { useNavigate } from 'react-router-dom';
+import { DateTime } from 'luxon';
 import moment from 'moment';
+import { useNavigate } from 'react-router';
+import { Capitalize } from '../../../../../libs/utils';
+import { useMonths } from '../../../../Common/hooks/quaries';
 import { useMonthlyFeeCollectionReport } from '../../../hooks/queries';
 import MonthlyCollectionReportTable from '../MonthlyCollectionReportTable/MonthlyCollectionReportTable';
-import { useMonths } from '../../../../Common/hooks/quaries';
-import { current } from '@reduxjs/toolkit';
-import { DateTime } from 'luxon';
-import { Capitalize } from '../../../../../libs/utils';
 
 const initialValues = {
   academic_session_id: moment(new Date()).format('YYYY'),
@@ -35,14 +33,14 @@ const MonthlyDataTable = () => {
   const mData = fetchedData.data?.data ?? [];
   const monthData = feeMonths.data?.data ?? [];
 
+  const data = useMemo(() => [...mData], [mData]);
+  // const data = useMemo(() => {
 
-  const data = useMemo(() => {
-
-    return mData.map(item => ({
-      ...item,
-      selectedFeesData: item
-    }))
-  }, [mData]);
+  //   return mData.map(item => ({
+  //     ...item,
+  //     selectedFeesData: item
+  //   }))
+  // }, [mData]);
 
 
 
@@ -73,28 +71,26 @@ const MonthlyDataTable = () => {
     {
       header: 'Name',
       accessorKey: 'student_name',
-      className: 'pinned-left sticky left-0 bg-slate-800 border-r-2 border-b-[1px] border-violet-500 ',
+      className: 'sticky left-0 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-700 z-10',
       cell: info => {
         const student = info.row.original
         return <>
-          <div className='text-blue-200 font-bold text-md cursor-pointer btn-link' onClick={() => { navigate(`/students/info/${student.id}`) }}>{student.student_name}</div>
+          <div className='text-blue-600 dark:text-blue-400 font-bold text-sm cursor-pointer hover:underline' onClick={() => { navigate(`/students/info/${student.id}`) }}>{student.student_name}</div>
           {student &&
-            <div className='flex flex-row gap-2  text-[8px]'>
+            <div className='flex flex-row gap-2 text-[8px] text-slate-500 dark:text-slate-400'>
               <span>
-                <span className='text-blue-400 font-bold'>{student.class}</span>
+                <span className='text-blue-500 dark:text-blue-400 font-bold'>{student.class}</span>
               </span>
               <span>
                 Section:
-                <span className='text-red-400 font-bold'>{student.section}</span>
+                <span className='text-red-500 dark:text-red-400 font-bold'>{student.section}</span>
               </span>
               <span>
                 Roll:
-                <span className='text-green-400 font-bold'>{student.roll_no}</span>
+                <span className='text-green-600 dark:text-green-400 font-bold'>{student.roll_no}</span>
               </span>
-
             </div>}
         </>
-
       }
 
 
@@ -111,17 +107,15 @@ const MonthlyDataTable = () => {
       cell: ({ row }) => {
         const getMonth = row.original.months.find(x => x.id === tab.id)
         if (getMonth?.amount === 0) {
-          return <div className='text-center border-x-2 border-slate-400/10 text-gray-500 text-[11px]'>
-            <div className='text-gray-600 font-bold text-[14px]'>{Capitalize(getMonth?.short_name)} </div>
-            <div className='  text-[11px]'>{getMonth?.id <= moment(new Date()).format('M') ? <span className="text-red-500">Due</span> : ''}</div>
-            {/* <div>{getMonth?.id}??{ moment(new Date()).format('M')} </div> */}
-
+          return <div className='text-center px-1'>
+            <div className='text-slate-400 dark:text-slate-500 font-bold text-[13px]'>{Capitalize(getMonth?.short_name)} </div>
+            <div className='text-[11px]'>{getMonth?.id <= moment(new Date()).format('M') ? <span className="text-red-500 dark:text-red-400 font-medium">Due</span> : ''}</div>
           </div>
         }
-        return <div className='text-center border-x-2 border-slate-400/10 text-gray-500 text-[11px]'>
-          <div className='text-green-500 font-bold text-[14px]'>{getMonth?.amount} </div>
-          <div className='  text-[11px]'>Fee No  {getMonth?.fee_no} </div>
-          <div className=' text-[11px]'>{DateTime.fromISO(getMonth?.fee_date).toLocaleString(DateTime.DATE_MED)} </div>
+        return <div className='text-center px-1'>
+          <div className='text-green-600 dark:text-green-400 font-bold text-[13px]'>{getMonth?.amount} </div>
+          <div className='text-[11px] text-slate-500 dark:text-slate-400'>Fee No {getMonth?.fee_no} </div>
+          <div className='text-[11px] text-slate-400 dark:text-slate-500'>{DateTime.fromISO(getMonth?.fee_date).toLocaleString(DateTime.DATE_MED)} </div>
         </div>
       }
     }

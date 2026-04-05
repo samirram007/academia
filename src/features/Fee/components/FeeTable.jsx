@@ -11,7 +11,7 @@ import { lazy, useEffect, useState, } from 'react';
 import { IoMdAdd } from "react-icons/io";
 import { MdOutlineModeEditOutline } from 'react-icons/md';
 import { RiPrinterLine } from 'react-icons/ri';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router';
 import { useFormModal } from '../../../contexts/FormModalProvider';
 import { useCustomRoutes } from '../../../hooks';
 import { PrintModal } from '../FeeProcess/print/PrintToPdf';
@@ -71,37 +71,34 @@ export default function FeeTable({ data, columns, pageSize = 2000, createRoute,
     }, [pagination]);
 
     return (
-        <div className='container-flex md-container'>
-            <div className='row   flex flex-col md:flex-row justify-between gap-2 border-b-2 border-blue-300/10 pb-2 '>
-                <div className='flex flex-col gap-2 flex-1 text-3xl'>
+        <div className='flex flex-col'>
+            <div className='flex flex-col md:flex-row justify-between gap-2 items-center px-5 py-4 border-b border-slate-200 dark:border-slate-700/60'>
+                <div className='flex flex-col flex-1'>
                     {/* {thisRoute} */}
                     <Breadcrumbs />
 
                 </div>
-                <div className='flex flex-row gap-2 flex-1'>
-
-                </div>
-                <div className='flex flex-row gap-2 justify-center flex-1 items-start'>
-                    <div className='flex flex-row gap-2 justify-center flex-1 items-center'>
+                <div className='flex flex-1' />
+                <div className='flex flex-row gap-2 justify-end flex-1 items-center'>
+                    <div className='flex flex-row gap-2 justify-end items-center'>
                         <input
                             type='text'
                             value={filtering}
                             onChange={e => setFiltering(e.target.value)}
-                            className='rounded-full py-0 text-sm px-4 m-0 border-blue-300/10  bg-transparent'
-                            placeholder='Enter our search'
+                            className='rounded-lg py-1.5 text-sm px-4 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-blue-500/30'
+                            placeholder='Search...'
                         />
                         {
                             createRoute &&
                             <Link to={createRoute} title='Create new'
-                                className="btn btn-primary btn-sm text-xl     btn-rounded-symbol border-blue-300/10    "><IoMdAdd /></Link>
+                                    className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-colors text-lg"><IoMdAdd /></Link>
 
 
                         }
                         {
                             createForm &&
                             <button onClick={() => setOpen(true)} title='Create new'
-                                className="btn btn-primary btn-sm text-xl
-                            btn-rounded-symbol border-blue-300/10"><IoMdAdd /></button>
+                                    className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-colors text-lg"><IoMdAdd /></button>
                         }
                         {
                             isOpen &&
@@ -125,11 +122,13 @@ export default function FeeTable({ data, columns, pageSize = 2000, createRoute,
                 </div>
             </div>
 
-            <Filter
-                setFilterReady={setFilterReady}
-                FeeData={FeeData}
-                initialFilterValues={initialFilterValues}
-            />
+            <div className='border-b border-slate-200 dark:border-slate-700/60'>
+                <Filter
+                    setFilterReady={setFilterReady}
+                    FeeData={FeeData}
+                    initialFilterValues={initialFilterValues}
+                />
+            </div>
 
             {
                 filterReady &&
@@ -143,7 +142,7 @@ export default function FeeTable({ data, columns, pageSize = 2000, createRoute,
                         }
                     {
                         (!FeeData.data || FeeData.isError || FeeData.data.data.length === 0)
-                            ? <div className='p-4 flex justify-center items-center text-2xl bg-slate-600 mt-4 rounded-lg h-40'>
+                                ? <div className='flex justify-center items-center text-xl text-slate-400 dark:text-slate-500 h-40'>
                                 No Data Found
                             </div>
                             :

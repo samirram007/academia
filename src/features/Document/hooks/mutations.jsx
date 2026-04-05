@@ -1,7 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 
 
-import { useNavigate } from "react-router-dom";
 
 import { queryClient } from "../../../utils/queryClient";
 

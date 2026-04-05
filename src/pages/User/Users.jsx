@@ -1,15 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import { Link } from "react-router-dom";
 
 
 
 
 
 import { UserTable } from ".";
-import axiosClient from "../../utils/axios-client";
 import { useDocumentTitle } from "../../hooks";
 import { useUsers } from "../../hooks/queries";
+import axiosClient from "../../utils/axios-client";
 
 
 export default function Users () {
@@ -44,9 +43,7 @@ export default function Users () {
         <div className="flex justify-stretch flex-col w-full overflow-y-auto">
 
             <div
-                className="card  animated fadeInDown
-            bg-zinc-600/20
-            "
+                className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/60 shadow-sm rounded-2xl overflow-hidden"
             >
                 <UserTable />
 

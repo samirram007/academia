@@ -13,7 +13,7 @@ const Edit = ({ initialValues,setEntryId }) => {
     <>
 
       <button onClick={() => setOpen(true)}
-        className="btn btn-outline btn-primary btn-sm btn-rounded ">
+        className="inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-xs font-semibold border border-blue-500 text-blue-600 hover:bg-blue-600 hover:text-white dark:text-blue-400 dark:border-blue-400 dark:hover:bg-blue-600 dark:hover:text-white transition-colors ">
         Edit
       </button>
       {isOpen &&

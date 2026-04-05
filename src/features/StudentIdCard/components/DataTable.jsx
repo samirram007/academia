@@ -8,7 +8,7 @@ import { useStudentIdCards } from '../hooks/quaries';
 import Create from './Create';
 
 import { Checkbox } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import StudentIdCardTable from './StudentIdCardTable';
 
 const initialValues = {

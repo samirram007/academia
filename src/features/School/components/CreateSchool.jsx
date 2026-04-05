@@ -7,10 +7,6 @@ import * as Yup from "yup";
 import Breadcrumbs from '../../../components/Breadcrumbs';
 
 import EntryForm from './EntryForm';
-const validationSchema = Yup.object().shape({
-    name: Yup.string()
-        .required("Session is required"),
-})
 
 
 
@@ -31,10 +27,6 @@ const CreateSchool = ({ modal }) => {
         logo_image_id:null,
         school_type_id:null,
         education_board_id:null,
-
-
-
-
 
     }
 

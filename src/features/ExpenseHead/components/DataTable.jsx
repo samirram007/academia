@@ -1,9 +1,7 @@
-import React, { lazy } from 'react'
+import { lazy } from 'react';
 
 import { useMemo } from 'react';
-import { DateTime } from 'luxon'
 
-import { useNavigate } from 'react-router-dom';
 import { useExpenseHeads } from '../hooks/queries';
 
 // import FilterTable from '../../../components/tables/FilterTable';
@@ -42,10 +40,10 @@ const DataTable = () => {
         {
             header: 'Action',
             accessorKey: 'action',
-            align: 'center',
+            align: 'right',
             cell: ({row})=>{
                 return (
-                  <div className="flex justify-start md:justify-center  items-center gap-2">
+                  <div className="flex justify-end  items-center gap-2">
                   <Edit initialValues={row.original} />
 
                  </div>

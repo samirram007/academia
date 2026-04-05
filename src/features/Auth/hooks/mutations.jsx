@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router';
 import { Flip, toast } from "react-toastify";
 import { useAuth } from "../../../contexts";
 import { queryClient } from "../../../utils/queryClient";

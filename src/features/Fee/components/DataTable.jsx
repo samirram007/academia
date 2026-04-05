@@ -1,19 +1,15 @@
-import React from 'react'
 
 
+import { DateTime } from 'luxon';
 import { useMemo } from 'react';
-import { DateTime } from 'luxon'
 
-import Filter from './Filter';
 
-import { useNavigate } from 'react-router-dom';
 
-import { useFees } from '../hooks/quaries';
-import CreateFee from './Create';
-import Edit from './Edit';
-import Delete from './Delete';
-import FeeTable from './FeeTable';
 import moment from 'moment';
+import { useFees } from '../hooks/quaries';
+import Delete from './Delete';
+import Edit from './Edit';
+import FeeTable from './FeeTable';
 
 
 
@@ -96,10 +92,10 @@ const DataTable = () => {
     {
       header: 'Action',
       accessorKey: 'action',
-      align: 'center',
+      align: 'right',
       cell: ({ row }) => {
         return (
-          <div className="flex justify-start md:justify-center  items-center gap-2">
+          <div className="flex justify-end  items-center gap-2">
             {/* <Print initialValues={row.original} /> */}
             <Edit initialValues={row.original} />
             <Delete initialValues={row.original} />

@@ -10,12 +10,12 @@ const FeeTemplateItem = ({ initialValues }) => {
   const [isOpen, setOpen] = useState(false)
   const [entryMode, setEntryMode] = useState('create')
   const [entryId, setEntryId] = useState(0)
-const feeTemplateName = <span className='text-blue-400 '> <b>Fee Template</b>: {initialValues.name}</span>
+  const feeTemplateName = <span> <b>Fee Template</b>: {initialValues.name}</span>
   return (
     <>
 
       <button onClick={() => setOpen(true)}
-        className="btn  btn-primary btn-sm btn-rounded py-1 ">
+        className="inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-xs font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-colors">
         Details
       </button>
       {isOpen &&

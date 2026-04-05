@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
-import { deleteJourneyTypeService, storeJourneyTypeService, updateJourneyTypeService } from "../services/apis";
-import { queryClient } from "../../../utils/queryClient";
+import { useNavigate } from 'react-router';
 import { Flip, toast } from "react-toastify";
 import { useFormModal } from "../../../contexts/FormModalProvider";
+import { queryClient } from "../../../utils/queryClient";
+import { deleteJourneyTypeService, storeJourneyTypeService, updateJourneyTypeService } from "../services/apis";
 
 
 export function useStoreJourneyTypeMutation() {

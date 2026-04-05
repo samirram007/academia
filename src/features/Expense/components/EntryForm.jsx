@@ -7,7 +7,6 @@ import * as Yup from "yup";
 
 import MultiInputBox from '@/components/form-components/MultiInputBox';
 import { AcademicSessionSelect } from '../../Common/components/AcademicSessionSelect';
-import { CampusSelect } from '../../Common/components/CampusSelect';
 import { useExpenseHeads } from '../../ExpenseHead/hooks/queries';
 import { useDeleteExpenseMutation, useStoreExpenseMutation, useUpdateExpenseMutation } from '../hooks/mutations';
 const validationSchema = Yup.object().shape({
@@ -60,7 +59,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
                             <div className='grid gap-4 grid-cols-12  md:grid-cols-12  mb-2'>
                                 {/* <div className='col-span-1 text-md font-bold'>Filter</div> */}
                                 <div className='col-span-6 md:col-span-2 '>
-                                    <CampusSelect formik={formik} />
+                                    <FormikInputBox formik={formik} type={"text"} extClass={'align-self-right'} name="voucher_no" label="Voucher No" />
 
 
                                 </div>
@@ -121,7 +120,7 @@ const EntryForm = ({ initialValues, entryMode }) => {
 
                     <div className='flex flex-row '>
                         <div className='remarks-box flex-1 px-6'>
-                            <MultiInputBox name="remarks" label="Remarks"></MultiInputBox>
+                            <MultiInputBox formik={formik} name="narration" label="Remarks" />
                         </div>
                         <div className='mx-auto flex flex-col 
                         justify-end items-center border-t-2 border-blue-300/10 mt-2 
@@ -130,11 +129,11 @@ const EntryForm = ({ initialValues, entryMode }) => {
 
                                 {entryMode === 'delete' && "Are your sure you want to delete this entry?"}
                             </div>
-                            <button type="submit" className='btn btn-primary btn-wide'>
+                            <button type="submit" className='inline-flex items-center justify-center gap-2 rounded-lg px-6 py-2.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors disabled:opacity-60 disabled:cursor-not-allowed'>
                                 {entryMode === 'delete' ? 'Delete' : 'Confirm'}
                                 {formik.isSubmitting && (
                                     <span
-                                        className='spinner-border spinner-border-sm ms-2'
+                                        className='inline-block w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin'
                                         role='status'
                                         aria-hidden='true'
                                     ></span>

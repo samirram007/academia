@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
-import { deleteEducationBoard, storeEducationBoard, updateEducationBoard } from "../services/apis";
-import { queryClient } from "../../../utils/queryClient";
+import { useNavigate } from 'react-router';
 import { Flip, toast } from "react-toastify";
+import { queryClient } from "../../../utils/queryClient";
+import { deleteEducationBoard, storeEducationBoard, updateEducationBoard } from "../services/apis";
 
 
 export function useStoreEducationBoardMutation() {

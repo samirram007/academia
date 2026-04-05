@@ -17,16 +17,13 @@ const InitFeeProcess = ({
     return (
         <>
 
-            <div className='  w-full   text-slate-300 relative  '>
-                <div className='flex flex-row justify-between items-center
-                bg-slate-700
-                 sticky top-0  '>
-                    <div className='font-bold text-xl text-red-300 p-2'>
+            <div className='w-full text-slate-700 dark:text-slate-200 relative'>
+                <div className='sticky top-0 z-10 flex flex-row justify-between items-center rounded-t-xl border-b border-slate-200 bg-slate-100/95 px-3 py-2 backdrop-blur dark:border-slate-700 dark:bg-slate-900/95'>
+                    <div className='font-semibold text-lg text-slate-800 dark:text-slate-100'>
                         Fees for Session {academicSessions.find(x => x.id === selectedStudentSession.academic_session_id)?.session}
                     </div>
                     <button onClick={() => setOpen(true)} title='Create new'
-                        className="btn btn-primary btn-sm text-xl
-                                  btn-rounded-symbol border-blue-300/10">
+                        className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-blue-600 text-white shadow-sm transition hover:bg-blue-700">
                         <IoMdAdd />
                     </button>
                 </div>
@@ -40,12 +37,9 @@ const InitFeeProcess = ({
                         </FormikFormModal>
                     </>
                 }
-                <div className='grid grid-cols-9 font-semibold 
-                text-primary  items-center  
-                sticky  top-11   bg-gradient-to-b from-slate-700 to-slate-900
-                 '>
+                <div className='sticky top-12 z-[9] grid grid-cols-9 items-center border-b border-slate-200 bg-slate-50 font-semibold text-slate-600 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300'>
                     <div className='col-span-1 '>
-                        <div className='text-center border-r-[1px] border-violet-500'>Receipt No.</div>
+                        <div className='border-r border-slate-200 py-2 text-center dark:border-slate-700'>Receipt No.</div>
                     </div>
                     <div className="col-span-8 grid grid-cols-8 grid-flow-col">
 
@@ -59,10 +53,10 @@ const InitFeeProcess = ({
                     </div>
 
                 </div>
-                <div className='overflow-y-scroll'>
+                <div className='overflow-y-auto'>
                     {
                         !studentSessionFeesData ?
-                            <div className='grid grid-cols-9 items-center py-1 border-b-2 border-violet-400/20 '>
+                            <div className='grid grid-cols-9 items-center border-b border-slate-200 py-2 dark:border-slate-700'>
 
                                 <div className='col-span-9 text-center'>{'-- No Data Found --'}</div>
                             </div>
@@ -74,7 +68,7 @@ const InitFeeProcess = ({
                                         <FeeGrid key={index} userData={userData} fees={fees} selectedStudentSession={selectedStudentSession}  />
                                     ))}
                                 </div>
-                                <div className='col-span-9 grid grid-cols-9 bg-red-900 py-2 mt-2 font-bold rounded-md'>
+                                <div className='col-span-9 mt-3 grid grid-cols-9 rounded-lg bg-red-600 py-2 font-bold text-white dark:bg-red-700/90'>
                                     <div className='col-span-4 flex flex-row justify-end  '>Total: </div>
                                     <div className='col-span-1 flex flex-row justify-end   pr-2'>
                                         {

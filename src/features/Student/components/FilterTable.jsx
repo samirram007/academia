@@ -7,7 +7,7 @@ import {
     useReactTable,
 } from '@tanstack/react-table';
 import { useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router';
 
 import { isBrowser } from 'react-device-detect';
 
@@ -75,9 +75,9 @@ export default function FilterTable({ data, columns, pageSize = 100, createRoute
         }
     }, [])
     return (
-        <div className='container-flex md-container max-h-full overflow-hidden'>
-            <div className='row   flex flex-col md:flex-row justify-between gap-2 border-b-2 border-blue-300/10 pb-2 '>
-                <div className='flex flex-col gap-2 flex-1 text-3xl'>
+        <div className='container-flex md-container max-h-full overflow-hidden text-slate-800 dark:text-slate-100'>
+            <div className='flex flex-col md:flex-row justify-between gap-2 border-b border-blue-200/70 dark:border-blue-300/10 pb-2'>
+                <div className='flex flex-col gap-1 flex-1 text-base'>
                     {/* {thisRoute} */}
                     <Breadcrumbs />
 
@@ -91,8 +91,8 @@ export default function FilterTable({ data, columns, pageSize = 100, createRoute
                             type='text'
                             value={filtering}
                             onChange={e => setFiltering(e.target.value)}
-                            className='rounded-full py-0 text-sm px-4 m-0 border-blue-300/10  bg-transparent'
-                            placeholder='Enter our search'
+                            className='rounded-full py-1.5 text-sm px-4 m-0 border border-blue-200 dark:border-blue-300/20 bg-white dark:bg-slate-900/60 text-slate-700 dark:text-slate-200 placeholder:text-slate-400 dark:placeholder:text-slate-500'
+                            placeholder='Enter your search'
                         />
                         {
                             createRoute &&
@@ -137,10 +137,10 @@ export default function FilterTable({ data, columns, pageSize = 100, createRoute
 
 
             {isBrowser ?
-                <div className="table-responsive overflow-y-auto  
-                max-h-[50vh] md:max-h-[50vh] lg:max-h-[50vh] xl:max-h-[60vh] 2xl:max-h-[50vh] 2xl:max-h-[67vh]">
-                    <table className="table table-zebra overflow-y-scroll  bg-slate-800  scroll">
-                        <thead className='sticky top-0 z-10'>
+                <div className="table-responsive overflow-y-auto rounded-xl border border-blue-200/70 dark:border-blue-300/10 
+                max-h-[50vh] md:max-h-[50vh] lg:max-h-[50vh] xl:max-h-[60vh] 2xl:max-h-[67vh]">
+                    <table className="table table-zebra overflow-y-scroll bg-white dark:bg-slate-900 scroll">
+                        <thead className='sticky top-0 z-10 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200'>
                             {table.getHeaderGroups().map(headerGroup => (
                                 <tr key={headerGroup.id}>
                                     {headerGroup.headers.map(header => (
@@ -170,10 +170,17 @@ export default function FilterTable({ data, columns, pageSize = 100, createRoute
                         <tbody className=''>
                             {fetchedData.isFetching ?
                                 <tr>
-                                    <td colSpan={6} className="text-center bg-slate-600/30 ">
+                                    <td colSpan={columns.length} className="text-center bg-slate-100 dark:bg-slate-800/40 py-8">
                                         <div className="flex justify-center items-center ">
-                                            <div className="spinner  animate-spin border-violet-500 transition-colors rounded-full h-6 w-6 border-t-2 "></div>
+                                            <div className="animate-spin transition-colors rounded-full h-7 w-7 border-2 border-slate-300 dark:border-slate-600 border-t-blue-500 dark:border-t-blue-400"></div>
                                         </div>
+                                    </td>
+                                </tr> : <></>
+                            }
+                            {!fetchedData.isFetching && table.getRowModel().rows.length === 0 ?
+                                <tr>
+                                    <td colSpan={columns.length} className="text-center text-slate-500 dark:text-slate-400 py-6 bg-white dark:bg-slate-900">
+                                        No data found for selected filters.
                                     </td>
                                 </tr> : <></>
                             }
@@ -200,12 +207,12 @@ export default function FilterTable({ data, columns, pageSize = 100, createRoute
                     ))}
                 </div>
             }
-            <div className='row  flex flex-col md:flex-row justify-between gap-2 mt-6'>
+            <div className='flex flex-col md:flex-row justify-between gap-2 mt-4'>
                 {/* <div className='flex flex-row gap-2 flex-1 text-lg'>
                     {table.getState().pagination.pageIndex + 1} of {table.getPageCount()} pages
                 </div> */}
-                <div className='flex flex-row gap-2 flex-1 text-lg'>
-                    No. of record(s) : {table.getRowCount()}
+                <div className='flex flex-row gap-2 flex-1 text-base md:text-lg text-slate-700 dark:text-slate-200'>
+                    No. of records: {table.getRowCount()}
                 </div>
                 <div className='flex flex-row gap-2 flex-1'>
 

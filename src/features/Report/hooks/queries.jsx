@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchDailyCollectionReportService, fetchMonthlyFeeCollectionReportService } from "../services/apis";
+import { fetchDailyCollectionReportService, fetchExamFeesCollectionReportService, fetchMonthlyFeeCollectionReportService } from "../services/apis";
 
 export function useDailyCollectionReport(payload) {
     return useQuery({
@@ -18,3 +18,12 @@ export function useMonthlyFeeCollectionReport(payload) {
 
     })
   }
+export function useExamFeesCollectionReport(payload) {
+
+  return useQuery({
+    queryKey: ['exam_fees_collection_report', payload],
+    queryFn: () => fetchExamFeesCollectionReportService(payload),
+    staleTime: Infinity,
+
+  })
+}

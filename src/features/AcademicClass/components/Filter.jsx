@@ -55,7 +55,7 @@ const Filter = ({ fetchedData, initialFilterValues }) => {
     // })
 
     return (
-        <div className={isLoading ? 'hidden' : 'flex-1 flex flex-col justify-end bg-slate-900/10 rounded-lg '}>
+        <div className={isLoading ? 'hidden' : 'flex-1 flex flex-col justify-end'}>
             <form onSubmit={formik.handleSubmit}>
                 <div className='grid grid-cols-1  '>
                     <div className='grid grid-flow-row md:grid-flow-col grid-cols-6 gap-5'>
@@ -72,7 +72,7 @@ const Filter = ({ fetchedData, initialFilterValues }) => {
                                     (
                                         <div className={'flex flex-col justify-end '}>
                                             <button type="submit"
-                                                className={`btn !bg-red-400 !text-slate-900 btn-disabled flex flex-row flex-nowrap text-nowrap`}>
+                                                disabled className="inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-semibold bg-amber-400/60 text-slate-700 cursor-not-allowed opacity-70 whitespace-nowrap">
                                                 Filtering
                                             </button>
                                         </div>

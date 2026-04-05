@@ -6,16 +6,14 @@ import {
     getSortedRowModel,
     useReactTable,
 } from '@tanstack/react-table'
-import { useEffect, useMemo } from 'react'
-import { useState } from 'react'
-import { Link, useLocation, useSearchParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { isBrowser } from 'react-device-detect'
+import { Link, useSearchParams } from 'react-router'
 import { useCustomRoutes } from '../../hooks'
-import { isBrowser, isMobile } from 'react-device-detect';
 
 
-import { IoMdAdd } from "react-icons/io";
+import { IoMdAdd } from "react-icons/io"
 import Breadcrumbs from '../Breadcrumbs'
-import { TbFilterSearch } from "react-icons/tb";
 import FormikFormModal from '../form-components/FormikFormModal'
 
 import { useFormModal } from '../../contexts/FormModalProvider'

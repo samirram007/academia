@@ -5,10 +5,9 @@ import {
     getPaginationRowModel,
     getSortedRowModel,
     useReactTable,
-} from '@tanstack/react-table'
-import { useEffect } from 'react'
-import { useState } from 'react'
-import { Link,  useSearchParams } from 'react-router-dom'
+} from '@tanstack/react-table';
+import { useState } from 'react';
+import { Link, useSearchParams } from 'react-router';
 
 
 
@@ -18,9 +17,9 @@ import { IoMdAdd } from "react-icons/io";
 import { TbFilterSearch } from "react-icons/tb";
 
 import Breadcrumbs from '../../../components/Breadcrumbs';
+import { usePromotionContext } from '../context/usePromotionContext';
 import PreviousClassFilter from './PreviousClassFilter.jsx';
 import Promote from './Promote';
-import { usePromotionContext } from '../context/usePromotionContext';
 
 
 export default function PromotionTable({   columns, pageSize = 100, createRoute,
@@ -85,182 +84,140 @@ export default function PromotionTable({   columns, pageSize = 100, createRoute,
     // }, [pagination]);
 
     return (
-        <div className='container-flex md-container'>
-            <div className='row   flex flex-col md:flex-row justify-between gap-2 border-b-2 border-blue-300/10 pb-2 '>
-                <div className='flex flex-col gap-2 flex-1 text-3xl'>
-                    {/* {thisRoute} */}
+        <div className='flex flex-col gap-2'>
+            {/* Header row */}
+            <div className='flex flex-col md:flex-row justify-between gap-2 border-b border-slate-200 dark:border-blue-300/10 pb-2'>
+                <div className='flex flex-col gap-2 flex-1'>
                     <Breadcrumbs />
-
                 </div>
-                <div className='flex flex-row gap-2 flex-1'>
-
-                </div>
-                <div className='flex flex-row gap-2 justify-center flex-1 items-start'>
-                    <div className='flex flex-row gap-2 justify-center flex-1 items-center'>
-                        <input
-                            type='text'
-                            value={filtering}
-                            onChange={e => setFiltering(e.target.value)}
-                            className='rounded-full py-0 text-sm px-4 m-0 border-blue-300/10  bg-transparent'
-                            placeholder='Enter our search'
-                        />
-                        {
-                            createRoute &&
-                            <Link to={createRoute} title='Create new'
-                                className="btn btn-primary btn-sm text-xl     btn-rounded-symbol border-blue-300/10    "><IoMdAdd /></Link>
-
-
-                        }
-
-                    </div>
-
+                <div className='flex flex-row gap-2 justify-center flex-1 items-center'>
+                    <input
+                        type='text'
+                        value={filtering}
+                        onChange={e => setFiltering(e.target.value)}
+                        className='rounded-full py-1.5 text-sm px-4 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/40 w-full max-w-xs'
+                        placeholder='Enter your search'
+                    />
+                    {createRoute &&
+                        <Link to={createRoute} title='Create new'
+                            className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-lg transition-colors">
+                            <IoMdAdd />
+                        </Link>
+                    }
                 </div>
             </div>
-            <div className='flex flex-col  '>
+
+            {/* Filters + Promotion setup */}
+            <div className='flex flex-col gap-2'>
                 <PreviousClassFilter />
-                {
-                    <Promote table={table}  />
-
-                }
+                <Promote table={table} />
             </div>
 
-
-            {
-                isErrorPreviousClassData
-                    ? <div>{'No Data Found'}</div>
-                    :
-                       (
-                        <div className="table-responsive overflow-y-auto  max-h-[42vh] 2xl:max-h-[60vh]">
-                        <table className="table table-zebra overflow-y-scroll  bg-slate-800  scroll">
-                            <thead className='sticky top-0 z-10'>
-                                    {table.getHeaderGroups().map(headerGroup => (
-                                        <tr key={headerGroup.id}>
-                                            {headerGroup.headers.map(header => (
-                                                <th
-                                                    key={header.id}
-                                                    onClick={header.column.getToggleSortingHandler()}
-                                                    className={header.column.columnDef.visible==false? 'hidden': 'py-0'}
-                                                >
-                                                    {header.isPlaceholder ? null : (
-                                                        <div>
-                                                            {flexRender(
-                                                                header.column.columnDef.header,
-                                                                header.getContext()
-                                                            )}
-                                                            {
-                                                                { asc: '🔼', desc: '🔽' }[
-                                                                header.column.getIsSorted() ?? null
-                                                                ]
-                                                            }
-                                                        </div>
-                                                    )}
-                                                </th>
-                                            ))}
-                                        </tr>
-                                    ))}
-                                </thead>
-
-                                <tbody>
-                                {isFetchingPreviousClassData || isReFetchingPreviousClassData ?
-                                <tr>
-                                    <td colSpan={6} className="text-center bg-slate-600/30 ">
-                                        <div className="flex justify-center items-center ">
-                                            <div className="spinner  animate-spin border-violet-500 transition-colors rounded-full h-6 w-6 border-t-2 "></div>
-                                        </div>
-                                    </td>
-                                </tr> : <></>
-                            }
-                                    {table.getRowModel().rows.map(row => (
-
-                                        <tr key={row.id}>
-                                            {row.getVisibleCells().map(cell => (
-
-                                                <td key={cell.id} className={cell.column.columnDef.visible==false? 'hidden': ''}>
-
-                                                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                                </td>
-                                            ))}
-                                        </tr>
-                                    ))}
-                                </tbody>
-
-                            </table>
-                        </div>)
-
-
+            {/* Table */}
+            {isErrorPreviousClassData
+                ? <div className='text-slate-500 dark:text-slate-400 text-center py-6'>No Data Found</div>
+                : (
+                    <div className="overflow-y-auto max-h-[42vh] 2xl:max-h-[60vh] rounded-lg border border-slate-200 dark:border-slate-700">
+                        <table className="w-full text-sm border-collapse">
+                            <thead className='sticky top-0 z-10 bg-slate-100 dark:bg-slate-800'>
+                                {table.getHeaderGroups().map(headerGroup => (
+                                    <tr key={headerGroup.id} className='border-b border-slate-200 dark:border-slate-700'>
+                                        {headerGroup.headers.map(header => (
+                                            <th
+                                                key={header.id}
+                                                onClick={header.column.getToggleSortingHandler()}
+                                                className={`${header.column.columnDef.visible === false ? 'hidden' : ''} px-3 py-2.5 text-left text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wide cursor-pointer select-none`}
+                                            >
+                                                {header.isPlaceholder ? null : (
+                                                    <div className='flex items-center gap-1'>
+                                                        {flexRender(header.column.columnDef.header, header.getContext())}
+                                                        {({ asc: '↑', desc: '↓' })[header.column.getIsSorted() ?? null]}
+                                                    </div>
+                                                )}
+                                            </th>
+                                        ))}
+                                    </tr>
+                                ))}
+                            </thead>
+                            <tbody className='bg-white dark:bg-slate-900 divide-y divide-slate-100 dark:divide-slate-800'>
+                                {(isFetchingPreviousClassData || isReFetchingPreviousClassData) && (
+                                    <tr>
+                                        <td colSpan={6} className="text-center py-6">
+                                            <div className="flex justify-center items-center gap-2 text-slate-500 dark:text-slate-400">
+                                                <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-blue-500"></div>
+                                                <span className='text-xs'>Loading...</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )}
+                                {table.getRowModel().rows.map(row => (
+                                    <tr key={row.id} className='hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors'>
+                                        {row.getVisibleCells().map(cell => (
+                                            <td key={cell.id} className={`${cell.column.columnDef.visible === false ? 'hidden' : ''} px-3 py-2.5 text-slate-700 dark:text-slate-200`}>
+                                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                            </td>
+                                        ))}
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )
             }
-        </div >
-
+        </div>
     )
 }
 
 export const FilterButton = ({ filter, showFilter, setShowFilter }) => {
-    const handleSwitchFilter = () => {
-
-        setShowFilter(prev => !prev)
-    }
+    if (!filter) return null;
     return (
-        <button onClick={handleSwitchFilter}
-            className={`${filter ? '' : 'hidden'} btn btn-primary btn-sm text-xl     btn-rounded-symbol border-blue-300/10    `}>
+        <button onClick={() => setShowFilter(prev => !prev)}
+            className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-lg transition-colors">
             <TbFilterSearch />
         </button>
-
-
-    )
+    );
 }
 
 export const MobileRow = ({ row, index, mobileHeaders }) => {
     const [checked, setChecked] = useState(false);
-    if (index === 0) {
-        setChecked(true)
-    }
     return (
-
-        <div key={row.id} className="collapse collapse-arrow bg-slate-800/0 border-b border-slate-600/70 rounded-none ">
-            <input type="radio" name={`my-accordion-${index}`} checked={checked ? 'checked' : ''}
-                onChange={() => setChecked(!checked)} className="accordion-checkbox  " />
-            <div className="table-row-title collapse-title text-lg">
-                {
-                    row.getVisibleCells().map((cell, index) => (
-
+        <div key={row.id} className="border-b border-slate-200 dark:border-slate-700">
+            <button
+                type="button"
+                onClick={() => setChecked(prev => !prev)}
+                className="w-full text-left px-3 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 flex items-center justify-between"
+            >
+                <div className="flex items-center gap-2">
+                    {row.getVisibleCells().map((cell, i) =>
                         mobileHeaders.includes(cell.column.columnDef.accessorKey)
-                            ?
-                            <MobileCell cell={cell} header={true} k={index} key={cell.id} mobileHeaders={mobileHeaders} />
-                            :
-                            null
-
-                    ))}
-
-            </div>
-            <div className="collapse-content  ">
-                {row.getVisibleCells().map((cell, index) => (
-                    !mobileHeaders.includes(cell.column.columnDef.accessorKey)
-                        ?
-                        <MobileCell cell={cell} header={false} k={index} key={cell.id} />
-                        :
-                        null
-                ))}
-            </div>
+                            ? <MobileCell cell={cell} header={true} k={i} key={cell.id} mobileHeaders={mobileHeaders} />
+                            : null
+                    )}
+                </div>
+                <span className="text-slate-400">{checked ? '↑' : '↓'}</span>
+            </button>
+            {checked && (
+                <div className="px-3 pb-3 flex flex-col gap-1">
+                    {row.getVisibleCells().map((cell, i) =>
+                        !mobileHeaders.includes(cell.column.columnDef.accessorKey)
+                            ? <MobileCell cell={cell} header={false} k={i} key={cell.id} />
+                            : null
+                    )}
+                </div>
+            )}
         </div>
-
-
-
-    )
+    );
 }
+
 export const MobileCell = ({ cell, header, k }) => {
-
     return (
-
-        <div className={`flex ${k == 0 ? 'flex-col' : 'flex-row'} gap-2   `} key={k}  >
-            <div className={` ${!header ? 'w-100 py-3 ' : 'w-100 py-1 '}`}>
-                {cell.column.columnDef.header}  {':'}
+        <div className={`flex ${k === 0 ? 'flex-col' : 'flex-row'} gap-1`} key={k}>
+            <div className={`text-xs text-slate-500 dark:text-slate-400 ${!header ? 'py-1' : ''}`}>
+                {cell.column.columnDef.header}:
             </div>
-            <div className={`flex-1 ${!header ? 'py-3  border-b border-slate-800/50' : 'py-0 text-lg border-b border-slate-800/50'}`}>
+            <div className={`flex-1 text-sm ${!header ? 'py-1 border-b border-slate-100 dark:border-slate-800' : ''}`}>
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
             </div>
-
         </div>
-
-    )
-
+    );
 }

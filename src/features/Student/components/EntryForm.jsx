@@ -41,7 +41,6 @@ const EntryForm = ({ initialValues, entryMode }) => {
 
     const studentStoreMutation = useStoreStudentMutation()
     const studentUpdateMutation = useUpdateStudentMutation()
-    const [checked, setChecked] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
 
     const handleFormSubmit = (values) => {
@@ -76,154 +75,106 @@ const EntryForm = ({ initialValues, entryMode }) => {
     // }
     return (
         <form onSubmit={formik.handleSubmit}>
-            <div className='grid grid-cols-1  '>
-                <div className='grid grid-flow-row md:grid-flow-col grid-cols-6 gap-5'>
-                    <div className='overflow-y-scroll    scroll grid gap-4 col-span-6 md:col-span-4 border-b-2 md:border-r-2 md:border-b-0 border-blue-300/30 pb-2 px-4 mb-2 '>
-                        <div className='grid gap-4 grid-cols-6  border-b-2 border-blue-300/30 pb-2  mb-2'>
-                            <div className='col-span-6 md:col-span-6'>
+            <div className='grid grid-cols-1 gap-4 lg:grid-cols-3'>
+                <div className='lg:col-span-2 rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900'>
+                    <div className='mb-3 text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400'>
+                        Basic Information
+                    </div>
 
-                                <FormikInputBox formik={formik} name="name" label="Name" />
-
-                            </div>
-                            <div className='col-span-6 md:col-span-3'>
-                                <FormikInputBox formik={formik} name="dob" type={'date'} label="Date of Birth" />
-                            </div>
-
-                            <div className=' col-span-6 md:col-span-3'>
-
-                                {genderData.data &&
-                                    <FormikSelect formik={formik} name="gender" label="Gender"
-                                        options={
-                                            genderData.data.data && Object.entries(genderData.data.data).map(([key, value], index) => (
-                                                <option key={index} value={key}>{value}</option>
-                                            ))
-                                        } />
-                                }
-
-                            </div>
+                    <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                        <div className='md:col-span-2'>
+                            <FormikInputBox formik={formik} name="name" label="Name" />
                         </div>
-                        <div className='grid gap-4 grid-cols-6 border-b-2 border-blue-300/30 pb-2  mb-2'>
-                            <div className='  col-span-6 md:col-span-3 '>
-                                <FormikInputBox formik={formik} name="birth_mark" type={'text'} label="Birth Mark" />
-
-                            </div>
-                            <div className='  col-span-6 md:col-span-3 '>
-                                <FormikInputBox formik={formik} name="aadhaar_no" type={'text'} label="Aadhaar Number" />
-
-                            </div>
-
+                        <FormikInputBox formik={formik} name="dob" type={'date'} label="Date of Birth" />
+                        <div>
+                            {genderData.data &&
+                                <FormikSelect formik={formik} name="gender" label="Gender"
+                                    options={
+                                        genderData.data.data && Object.entries(genderData.data.data).map(([key, value], index) => (
+                                            <option key={index} value={key}>{value}</option>
+                                        ))
+                                    } />
+                            }
                         </div>
-                        <div className='grid gap-4 grid-cols-6 border-b-2 border-blue-300/30 pb-2  mb-2'>
-                            <div className='  col-span-6 md:col-span-3 '>
-                                <FormikInputBox formik={formik} name="email" type={'email'} label="Email" />
+                        <FormikInputBox formik={formik} name="birth_mark" type={'text'} label="Birth Mark" />
+                        <FormikInputBox formik={formik} name="aadhaar_no" type={'text'} label="Aadhaar Number" />
+                        <FormikInputBox formik={formik} name="email" type={'email'} label="Email" />
+                        <FormikInputBox formik={formik} name="contact_no" type={'text'} label="Contact Number" />
 
-
-                            </div>
-                            <div className='  col-span-6 md:col-span-3 '>
-                                <FormikInputBox formik={formik} name="contact_no" type={'text'} label="Contact Number" />
-
-                            </div>
-
+                        <div>
+                            {nationalityData.data &&
+                                <FormikSelect formik={formik} name="nationality" label="Nationality"
+                                    options={
+                                        nationalityData.data.data && Object.entries(nationalityData.data.data).map(([key, value], index) => (
+                                            <option key={index} value={key}>{value}</option>
+                                        ))
+                                    } />
+                            }
                         </div>
-                        <div className='grid gap-4 grid-cols-6'>
-                            <div className='  col-span-6 md:col-span-3 '>
-                                {nationalityData.data &&
-                                    <FormikSelect formik={formik} name="nationality" label="Nationality"
-                                        options={
-                                            nationalityData.data.data && Object.entries(nationalityData.data.data).map(([key, value], index) => (
-                                                <option key={index} value={key}>{value}</option>
-                                            ))
-                                        } />
-                                }
-                            </div>
-                            <div className='  col-span-6 md:col-span-3 '>
-                                {languageData.data &&
-                                    <FormikSelect formik={formik} name="language" label="Language"
-                                        options={
-                                            languageData.data.data && Object.entries(languageData.data.data).map(([key, value], index) => (
-                                                <option key={index} value={key}>{value}</option>
-                                            ))
-                                        } />
-                                }
-
-                            </div>
-                            <div className='  col-span-6 md:col-span-3 '>
-                                {religionData.data &&
-                                    <FormikSelect formik={formik} name="religion" label="Religion"
-                                        options={
-                                            religionData.data.data && Object.entries(religionData.data.data).map(([key, value], index) => (
-                                                <option key={index} value={key}    >{value}</option>
-                                            ))
-                                        } />
-                                }
-                            </div>
-                            <div className=' col-span-6 md:col-span-3 '>
-
-                                {casteData.data &&
-                                    <FormikSelect formik={formik} name="caste" label="Caste"
-                                        options={
-                                            casteData.data.data && Object.entries(casteData.data.data).map(([key, value], index) => (
-                                                <option key={index} value={key}    >{value}</option>
-                                            ))
-                                        } />
-                                }
-                            </div>
+                        <div>
+                            {languageData.data &&
+                                <FormikSelect formik={formik} name="language" label="Language"
+                                    options={
+                                        languageData.data.data && Object.entries(languageData.data.data).map(([key, value], index) => (
+                                            <option key={index} value={key}>{value}</option>
+                                        ))
+                                    } />
+                            }
                         </div>
-                        {entryMode == 'edit' &&
-                            <>
+                        <div>
+                            {religionData.data &&
+                                <FormikSelect formik={formik} name="religion" label="Religion"
+                                    options={
+                                        religionData.data.data && Object.entries(religionData.data.data).map(([key, value], index) => (
+                                            <option key={index} value={key}>{value}</option>
+                                        ))
+                                    } />
+                            }
+                        </div>
+                        <div>
+                            {casteData.data &&
+                                <FormikSelect formik={formik} name="caste" label="Caste"
+                                    options={
+                                        casteData.data.data && Object.entries(casteData.data.data).map(([key, value], index) => (
+                                            <option key={index} value={key}>{value}</option>
+                                        ))
+                                    } />
+                            }
+                        </div>
+                    </div>
+
+                    {entryMode == 'edit' &&
+                        <>
+                        <div className='mt-6 border-t border-slate-200 pt-4 dark:border-slate-700'>
                                 <Guardians formik={formik} name="guardians" label="Guardian" />
+                        </div>
+                        <div className='mt-4 border-t border-slate-200 pt-4 dark:border-slate-700'>
                             <Addresses formik={formik} name="addresses" label="Address" />
-                            </>
-                        }
-
-
-
-                    </div>
-                    <div className='overflow-y-scroll    scroll col-span-6 md:col-span-2  '>
-                            <div className='col-span-6 md:col-span-4'>
-                                <ImageBox formik={formik} name="profile_document_id" editable={true} resource="profile_document" />
-                            </div>
-                        <div className='  grid grid-cols-4 gap-4'>
-                            <div className='col-span-6 md:col-span-2'>
-                                <CampusSelect formik={formik} auto={false} isLoading={isLoading} setIsLoading={setIsLoading} />
-
-                            </div>
-                            <div className='col-span-6 md:col-span-2'>
-
-                                <AcademicSessionSelect formik={formik}   label={'Admission Session'} />
-
-                            </div>
-                            <div className='col-span-6 md:col-span-2'>
-
-                                <AcademicClassSelect formik={formik} campus_id={formik.values.campus_id} label={'Admission Class'} />
-
-                            </div>
-                            <div className='col-span-6 md:col-span-2 '>
-                                <FormikInputBox formik={formik} name="admission_no" label="Admission No" />
-                            </div>
-                            <div className='col-span-6 md:col-span-2'>
-                                <FormikInputBox formik={formik} name="admission_date" type={"date"} label="Admission Date" />
-                            </div>
                         </div>
-
-                        <div className='mx-auto flex justify-center items-center border-t-2 border-blue-300/10 mt-2 pt-6'>
-                            <FormikSubmit formik={formik} label="Save" />
-
-                        </div>
-
-                    </div>
-
-
+                        </>
+                    }
                 </div>
 
-                <div className='order-first'>
-
-                    <div className="form-control ">
-                        {/* <FormikCheckBox formik={formik} name="is_current" type={"checkbox"} label="Is Current?" /> */}
-
+                <div className='rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900'>
+                    <div className='mb-3 text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400'>
+                        Admission
                     </div>
 
+                    <div className='mb-4'>
+                        <ImageBox formik={formik} name="profile_document_id" editable={true} resource="profile_document" />
+                    </div>
 
+                    <div className='grid grid-cols-1 gap-4'>
+                        <CampusSelect formik={formik} auto={false} isLoading={isLoading} setIsLoading={setIsLoading} />
+                        <AcademicSessionSelect formik={formik} label={'Admission Session'} />
+                        <AcademicClassSelect formik={formik} campus_id={formik.values.campus_id} label={'Admission Class'} />
+                        <FormikInputBox formik={formik} name="admission_no" label="Admission No" />
+                        <FormikInputBox formik={formik} name="admission_date" type={"date"} label="Admission Date" />
+                    </div>
+
+                    <div className='mt-6 border-t border-slate-200 pt-4 dark:border-slate-700'>
+                        <FormikSubmit formik={formik} label="Save" />
+                    </div>
                 </div>
             </div>
 
